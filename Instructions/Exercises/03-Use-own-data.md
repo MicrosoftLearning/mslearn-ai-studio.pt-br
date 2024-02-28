@@ -31,15 +31,16 @@ Sua solução de copiloto integrará dados personalizados em um prompt flow. Par
 Agora você está pronto para criar um projeto do Estúdio de IA do Azure e os recursos de IA do Azure para dar suporte a ele.
 
 1. Em um navegador da Web, abra o [Estúdio de IA do Azure](https://ai.azure.com) em `https://ai.azure.com` e entre usando suas credenciais do Azure.
-1. na página **Compilar**, selecione **+ Novo projeto**. Em seguida, no assistente **Criar um novo projeto**, crie um projeto com as seguintes configurações:
+1. Na página **Compilar**, selecione **+ Novo projeto de IA**. Em seguida, no assistente **Introdução**, crie um projeto com as seguintes configurações:
     - **Nome do projeto**: *Um nome exclusivo para seu projeto*
     - **Hub de IA**: *Crie um novo recurso com as seguintes configurações:*
         - **Nome do Hub de IA**: *Um nome exclusivo*
         - **Assinatura do Azure**: *sua assinatura do Azure*
-        - **Grupo de recursos**: *Selecione o grupo de recursos que contém o recurso de Pesquisa de IA do Azure*
+        - **Grupo de recursos**: *Selecione o grupo de recursos que contém o recurso Pesquisa de IA do Azure*
         - **Localização**: *O mesmo local que o recurso de Pesquisa de IA do Azure (ou um local geograficamente próximo a ele)*
-        - **OpenAI do Azure**: (Novo) *hub_name*
+        - **OpenAI do Azure**: (Novo) *Preenchimentos automáticos com o nome do hub selecionado*
         - **Pesquisa de IA do Azure**: *Selecione o recurso de Pesquisa de IA do Azure*
+
 1. Aguarde até que seu projeto seja criado.
 
 ## Implantar modelos
@@ -50,10 +51,15 @@ Você precisará de dois modelos para implementar sua solução:
 - Um modelo que pode gerar respostas em linguagem natural para perguntas com base em seus dados.
 
 1. No Estúdio de IA do Azure, em seu projeto, no painel de navegação à esquerda, em **Componentes**, selecione a página **Implantações**.
-1. Crie uma nova implantação (usando um ponto de extremidade em tempo real) do modelo **text-embedding-ada-002** com o nome `text-embedding-ada-002`. Defina as opções **Avançadas** para usar o filtro de conteúdo padrão e restringir o TPM (tokens por minuto) a **5 mil**.
-1. Crie uma nova implantação do modelo **gpt-35-turbo** com o nome `gpt-35-turbo`. Defina as opções **Avançadas** para usar o filtro de conteúdo padrão e restringir o TPM (tokens por minuto) a **5 mil**.
+1. Crie uma nova implantação (usando um **ponto de extremidade em tempo real**) do modelo **text-embedding-ada-002** com as seguintes configurações:
 
-> **Observação**: A redução do TPM ajuda a evitar o uso excessivo da cota disponível na assinatura que você está usando. 5.000 TPM são suficientes para os dados usados neste exercício.
+    - **Nome da implantação**: `text-embedding-ada-002`
+    - **Versão do modelo**: *Padrão*
+    - **Opções avançadas**:
+        - **Filtro de conteúdo**: *Padrão*
+        - **Limite de taxa de tokens por minuto**: `5K`
+
+> **Observação**: A redução dos Tokens por Minuto (TPM) ajuda a evitar o uso excessivo da cota disponível na assinatura que você estiver usando. 5.000 TPM são suficientes para os dados usados neste exercício.
 
 ## Adicionar dados ao seu projeto
 
@@ -61,7 +67,10 @@ Os dados para o seu copiloto consistem em um conjunto de folhetos de viagem em f
 
 1. Baixe o [arquivo compactado de folhetos](https://github.com/MicrosoftLearning/mslearn-ai-studio/raw/main/data/brochures.zip) de `https://github.com/MicrosoftLearning/mslearn-ai-studio/raw/main/data/brochures.zip` e extraia-o para uma pasta chamada **folhetos** em seu sistema de arquivos local.
 1. No Estúdio de IA do Azure, em seu projeto, no painel de navegação à esquerda, em **Componentes**, selecione a página **Dados**.
-1. Selecione **+ Novos dados** e adicione uma nova conexão de fonte de dados carregando a pasta **folhetos** (escolha a opção para carregar uma *pasta*, não um *arquivo*). Nomeie os novos **folhetos** da fonte de dados.
+1. Selecione **+ Novos dados**.
+1. No assistente **Adicionar dados**, expanda o menu suspenso para selecionar **Carregar arquivos/pastas**.
+1. Selecione **Carregar pasta** e selecione a pasta **folhetos**.
+1. Defina o nome dos dados como **folhetos**.
 
 ## Crie um índice para seus dados
 
@@ -82,9 +91,10 @@ Agora que você adicionou uma fonte de dados ao seu projeto, pode usá-la para c
         - **Nome do índice**: folhetos-índice
         - **Máquina virtual**: Selecionar automaticamente
 1. Aguarde até que seu índice esteja pronto, o que pode levar vários minutos. A operação de criação de índice consiste nos seguintes trabalhos:
-    - Extrair, segmentar e inserir os tokens de texto nos dados de seus folhetos
-    - Atualizar o índice
-    - Registrar o ativo do índice
+
+    - Extraia, particione e insira os tokens de texto nos dados de folhetos.
+    - Atualize o índice.
+    - Registrar o ativo de índice.
 
 ## Testar o índice
 
@@ -200,4 +210,3 @@ Para evitar custos desnecessários do Azure e utilização de recursos, você de
 
 1. No Estúdio de IA do Azure, exiba a página **Compilar**. Em seguida, selecione o projeto criado neste exercício e use o botão **Excluir projeto** para removê-lo. Pode levar alguns minutos para excluir todos os componentes.
 1. Se você terminou de explorar o Estúdio de IA do Azure, retorne ao [portal do Azure](https://portal.azure.com) em `https://portal.azure.com` e entre usando suas credenciais do Azure, se necessário. Em seguida, exclua o grupo de recursos que você criou para seus recursos de Pesquisa de IA do Azure e IA do Azure.
-
