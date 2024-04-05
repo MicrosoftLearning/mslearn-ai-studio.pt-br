@@ -62,8 +62,9 @@ Você precisará de dois modelos para implementar sua solução:
     - **Opções avançadas**:
         - **Filtro de conteúdo**: *Padrão*
         - **Limite de taxa de tokens por minuto**: `5K`
+1. Repita as etapas anteriores para implantar um modelo **gpt-35-turbo** com o nome de implantação `gpt-35-turbo`.
 
-> **Observação**: A redução dos Tokens por Minuto (TPM) ajuda a evitar o uso excessivo da cota disponível na assinatura que você estiver usando. 5.000 TPM são suficientes para os dados usados neste exercício.
+    > **Observação**: A redução dos Tokens por Minuto (TPM) ajuda a evitar o uso excessivo da cota disponível na assinatura que você estiver usando. 5.000 TPM são suficientes para os dados usados neste exercício.
 
 ## Adicionar dados ao seu projeto
 
@@ -90,14 +91,14 @@ Agora que você adicionou uma fonte de dados ao seu projeto, pode usá-la para c
     - **Configurações de pesquisa**:
         - **Configurações de vetor**: Adicione busca em vetores a este recurso de pesquisa
         - **Recursos do OpenAI do Azure**: Default_AzureOpenAI
-        - *Reconheça que um modelo de inserção será implantado*
+        - *Reconheça que um modelo de inserção será implantado se ainda não estiver presente*
     - **Configurações de índice**:
         - **Nome do índice**: folhetos-índice
         - **Máquina virtual**: Selecionar automaticamente
-1. Aguarde até que seu índice esteja pronto, o que pode levar vários minutos. A operação de criação de índice consiste nos seguintes trabalhos:
+1. Aguarde até que o processo de indexação seja concluído, o que pode levar vários minutos. A operação de criação de índice consiste nos seguintes trabalhos:
 
     - Extraia, particione e insira os tokens de texto nos dados de folhetos.
-    - Atualize o índice.
+    - Atualize a Pesquisa de IA do Azure com o novo índice.
     - Registrar o ativo de índice.
 
 ## Testar o índice
@@ -105,37 +106,17 @@ Agora que você adicionou uma fonte de dados ao seu projeto, pode usá-la para c
 Antes de usar seu índice em um prompt flow baseado em RAG, vamos verificar se ele pode ser usado para afetar respostas de IA generativa.
 
 1. No painel de navegação à esquerda, em **Ferramentas**, selecione a página **Playground**.
-1. Na página Playground, no painel **Configuração**, verifique se a implantação do modelo **gpt-35-turbo** está selecionada. Em seguida, no painel **Sessão de chat**, envie o prompt `Where can I stay in New York?`
+1. Na página Playground, no painel Opções, certifique-se de que a implantação do modelo **gpt-35-turbo** esteja selecionada. Em seguida, no painel de sessão de chat principal, envie o prompt `Where can I stay in New York?`
 1. Revise a resposta, que deve ser uma resposta genérica do modelo sem dados do índice.
-1. No painel **Configuração do assistente**, selecione **Adicionar seus dados** e adicione uma fonte de dados com as seguintes configurações:
-
-    - **Fonte de dados**:
-        - **Selecionar fonte de dados**: Pesquisa de IA do Azure
-        - **Assinatura**: *sua assinatura do Azure*
-        - **Serviço Pesquisa de IA do Azure**: *Seu recurso de Pesquisa de IA do Azure*
-        - **Índice de Pesquisa de IA do Azure**: folhetos-índice
-        - **Adicionar a busca em vetores**: <u>Não</u> selecionado
-        - **Usar o mapeamento de campo personalizado**: Selecionado
-        - Marque a caixa para confirmar o uso incorrido.
-    - **Mapeamento de campo de dados**:
-        - **Dados de conteúdo**: conteúdo
-        - **Nome do arquivo**: filepath
-        - **Título**: título
-        - **URL**: url
-    - **Gerenciamento de dados**:
-        - **tipo de pesquisa**: Palavra-chave
-
-1. Depois que a fonte de dados tiver sido adicionada e a sessão de chat for reiniciada, reenvie o prompt `Where can I stay in New York?`
+1. No painel de instalação, selecione a guia **Adicionar seus dados** e, em seguida, adicione o índice de projeto **brochures-index** e selecione o tipo de pesquisa **híbrido (vetor + palavra-chave)**.
+1. Depois que o índice tiver sido adicionado e a sessão de chat for reiniciada, reenvie o prompt `Where can I stay in New York?`
 1. Revise a resposta, que deve ser baseada nos dados do índice.
 
 ## Use o índice em um prompt flow
 
 Seu índice de vetor foi salvo em seu projeto do Estúdio de IA do Azure, permitindo que você o use facilmente em um prompt flow.
 
-1. No Estúdio de IA do Azure, em seu projeto, no painel de navegação à esquerda, em **Componentes**, selecione **Dados**.
-1. Selecione a pasta **brochures-index** que contém o índice que você criou anteriormente.
-1. Na seção **Links de dados** do seu índice, copie o valor do **URI de conexão de dados** para a área de transferência (ele deve ser semelhante a `azureml://subscriptions/xxx/resourcegroups/xxx/workspaces/xxx/datastores/workspaceblobstore/paths/azureml/xxx/index/`). Você precisará desse URI para se conectar ao seu índice no prompt flow.
-1. No seu projeto, no painel de navegação à esquerda, em **Ferramentas**, selecione a página **Prompt flow**.
+1. No Estúdio de IA do Azure, em seu projeto, no painel de navegação à esquerda, em **Ferramentas**, selecione a página **Prompt flow**.
 1. Crie um novo prompt flow clonando a amostra **Perguntas e respostas em várias rodadas sobre seus dados** na galeria. Salve seu clone desta amostra em uma pasta chamada `brochure-flow`.
 1. Quando a página do designer do prompt flow for aberta, revise **folheto-fluxo**. O grafo deve ser semelhante à seguinte imagem:
 
@@ -151,7 +132,7 @@ Seu índice de vetor foi salvo em seu projeto do Estúdio de IA do Azure, permit
 
 1. Na lista **Runtime**, selecione **Iniciar** para iniciar o runtime automático.
 
-    Então aguarde até que inicie. Isso fornece um contexto de computação para o prompt flow. Enquanto aguarda, na guia **Fluxo**, revise as seções das ferramentas no fluxo.
+    Aguarde o runtime ser iniciado. Isso fornece um contexto de computação para o prompt flow. Enquanto aguarda, na guia **Fluxo**, revise as seções das ferramentas no fluxo.
 
 1. Na seção **Entradas**, verifique se as entradas incluem:
     - **chat_history**
@@ -173,15 +154,15 @@ Seu índice de vetor foi salvo em seu projeto do Estúdio de IA do Azure, permit
 1. Na seção de **pesquisa**, defina os seguintes valores de parâmetro:
 
     - **mlindex_content**: *Selecione o campo vazio para abrir o painel Gerar*
-        - **index_type**: `MLIndex file from path`
-        - **mlindex_path**: *Cole o URI do índice do seu vetor*
+        - **index_type**: Índice registrado
+        - **mlindex_asset_id**: brochures-index:1
     - **consultas**: `${modify_query_with_history.output}`
     - **query_type**: `Hybrid (vector + keyword)`
     - **top_k**: 2
 
 1. Na seção **generate_prompt_context**, revise o script Python e verifique se as **entradas** para esta ferramenta incluem o seguinte parâmetro:
 
-    - **search_result** *(objeto)*: ${search_question_from_indexed_docs.output}
+    - **search_result** *(object)*: ${lookup.output}
 
 1. Na seção **Prompt_variants**, revise o script Python e verifique se as **entradas** para esta ferramenta incluem os seguintes parâmetros:
 
@@ -216,16 +197,15 @@ Agora que você tem um fluxo de trabalho que usa seus dados indexados, pode impl
 1. Crie uma implantação com as seguintes configurações:
     - **Configurações básicas**:
         - **Ponto de extremidade**: Novo
-        - **Nome do ponto de extremidade**: folheto-ponto de extremidade
+        - **Nome do ponto de extremidade**: `brochure-endpoint`
         - **Nome da implantação**: folheto-ponto de extremidade-1
         - **Máquina virtual**: Standard_DS3_v2
         - **Contagem de instâncias**: 3
         - **Coleta de dados de inferência**: Selecionado
-        - **Diagnóstico do Application Insights**: Selecionado
     - **Configurações avançadas**:
         - *Usar as configurações padrão*
 1. No Estúdio de IA do Azure, em seu projeto, no painel de navegação à esquerda, em **Componentes**, selecione a página **Implantações**.
-1. Continue atualizando a exibição até que a implantação**folheto-ponto de extremidade-1** seja mostrada como *bem-sucedida* no ponto de extremidade **folheto-ponto de extremidade** (isso pode levar algum tempo).
+1. Continue atualizando a exibição até que a implantação de **brochure-endpoint-1** seja mostrada como *bem-sucedida* no ponto de extremidade **brochure-endpoint** (isso pode levar uma quantia significativa de tempo).
 1. Quando a implantação for bem-sucedida, selecione-a. Em seguida, na página **Teste**, insira o prompt `What is there to do in San Francisco?` e revise a resposta.
 1. Insira o prompt `Where else could I go?` e revise a resposta.
 1. Exiba a página **Consumir** para o ponto de extremidade e observe que ele contém informações de conexão e código de exemplo que você pode usar para compilar um aplicativo cliente para o ponto de extremidade, permitindo que você integre a solução de prompt flow a um aplicativo como um copiloto personalizado.
