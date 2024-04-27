@@ -23,8 +23,19 @@ Sua solução de copiloto integrará dados personalizados em um prompt flow. Par
     - **Assinatura**: *Selecione sua assinatura do Azure*
     - **Grupo de recursos**: *selecione ou crie um grupo de recursos*.
     - **Nome do serviço**: *Insira um nome de serviço exclusivo*
-    - **Localização**: *Selecione qualquer local disponível*
+    - **Localização**: *faça uma escolha **aleatória** de uma das regiões a seguir*\*
+        - Leste da Austrália
+        - Leste do Canadá
+        - Leste dos EUA
+        - Leste dos EUA 2
+        - França Central
+        - Leste do Japão
+        - Centro-Norte dos EUA
+        - Suécia Central
+        - Suíça 
     - **Tipo de preço**: padrão
+
+    > \* Posteriormente, você criará um Hub de IA do Azure (que inclui um serviço do OpenAI do Azure) na mesma região que o recurso da Pesquisa de IA do Azure. Os recursos do OpenAI do Azure são restringidos no nível do locatário por cotas regionais. As regiões listadas incluem a cota padrão para os tipos de modelos usados neste exercício. Escolher aleatoriamente uma região reduz o risco de uma única região atingir o seu limite de cota em cenários em que você está compartilhando um locatário com outros usuários. No caso de um limite de cota ser atingido posteriormente no exercício, talvez seja necessário criar outro hub de IA do Azure em uma região diferente.
 
 1. Aguarde a conclusão da implantação do recurso de Pesquisa de IA do Azure.
 
@@ -41,7 +52,7 @@ Agora você está pronto para criar um projeto do Estúdio de IA do Azure e os r
         - **Nome do Hub de IA**: *Um nome exclusivo*
         - **Assinatura do Azure**: *sua assinatura do Azure*
         - **Grupo de recursos**: *Selecione o grupo de recursos que contém o recurso Pesquisa de IA do Azure*
-        - **Localização**: *O mesmo local que o recurso de Pesquisa de IA do Azure (ou um local geograficamente próximo a ele)*
+        - **Localização**: *O mesmo local que o recurso da Pesquisa de IA do Azure*
         - **OpenAI do Azure**: (Novo) *Preenchimentos automáticos com o nome do hub selecionado*
         - **Pesquisa de IA do Azure**: *Selecione o recurso de Pesquisa de IA do Azure*
 

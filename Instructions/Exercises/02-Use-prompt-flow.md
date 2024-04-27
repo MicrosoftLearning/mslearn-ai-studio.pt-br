@@ -29,7 +29,20 @@ Comece criando um projeto do Estúdio de IA do Azure e um Hub de IA do Azure par
         - **Nome do Hub de IA**: *Um nome exclusivo*
         - **Assinatura**: *sua assinatura do Azure*
         - **Grupo de recursos**: *Um novo grupo de recursos*
-        - **Localização**: *Escolha uma localização perto de você*
+        - **Localização**: *faça uma escolha **aleatória** de uma das regiões a seguir*\*
+        - Leste da Austrália
+        - Leste do Canadá
+        - Leste dos EUA
+        - Leste dos EUA 2
+        - França Central
+        - Leste do Japão
+        - Centro-Norte dos EUA
+        - Suécia Central
+        - Norte da Suíça
+        - Sul do Reino Unido
+
+    > \* Os recursos do OpenAI do Azure são restringidos no nível do locatário por cotas regionais. As regiões listadas incluem a cota padrão para os tipos de modelos usados neste exercício. Escolher aleatoriamente uma região reduz o risco de uma única região atingir o seu limite de cota em cenários em que você está compartilhando um locatário com outros usuários. No caso de um limite de cota ser atingido mais adiante no exercício, há a possibilidade de você precisar criar outro recurso em uma região diferente.
+
 1. Revise a configuração e crie o projeto.
 1. Aguarde de 5 a 10 minutos para que o projeto seja criado.
 

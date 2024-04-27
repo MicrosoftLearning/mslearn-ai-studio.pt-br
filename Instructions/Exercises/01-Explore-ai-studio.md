@@ -31,9 +31,21 @@ Você precisa de um Hub de IA do Azure na sua assinatura do Azure para hospedar 
     - **Nome do Hub de IA do Azure**: *Um nome exclusivo*
     - **Assinatura**: *sua assinatura do Azure*
     - **Grupo de recursos**: *Criar um novo grupo de recursos com um nome exclusivo ou selecionar um já criado*
-    - **Localização**: *Escolher qualquer localização com suporte do serviço Azure OpenAI*
+    - **Localização**: *faça uma escolha **aleatória** de uma das regiões a seguir*\*
+        - Leste da Austrália
+        - Leste do Canadá
+        - Leste dos EUA
+        - Leste dos EUA 2
+        - França Central
+        - Leste do Japão
+        - Centro-Norte dos EUA
+        - Suécia Central
+        - Norte da Suíça
+        - Sul do Reino Unido
     - **OpenAI do Azure**: (Novo) ai-*hub_name*
     - **Pesquisa de IA**: (Nenhuma)
+
+    > \* Os recursos do OpenAI do Azure são restringidos no nível do locatário por cotas regionais. As regiões listadas incluem a cota padrão para os tipos de modelos usados neste exercício. Escolher aleatoriamente uma região reduz o risco de uma única região atingir o seu limite de cota em cenários em que você está compartilhando um locatário com outros usuários. No caso de um limite de cota ser atingido mais adiante no exercício, há a possibilidade de você precisar criar outro recurso em uma região diferente.
 
     Depois que o Hub de IA do Azure for criado, ele deverá ter uma aparência semelhante à da imagem a seguir:
 
