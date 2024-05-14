@@ -221,7 +221,19 @@ Agora que você tem um fluxo de trabalho que usa seus dados indexados, pode impl
 1. Insira o prompt `Where else could I go?` e revise a resposta.
 1. Exiba a página **Consumir** para o ponto de extremidade e observe que ele contém informações de conexão e código de exemplo que você pode usar para compilar um aplicativo cliente para o ponto de extremidade, permitindo que você integre a solução de prompt flow a um aplicativo como um copiloto personalizado.
 
-## Limpeza
+## Desafio 
+
+Agora que você experimentou como integrar seus próprios dados em um copiloto criado com o Estúdio de IA do Azure, vamos explorar mais!
+
+Tente adicionar uma nova fonte de dados por meio do Estúdio de IA do Azure, indexá-la e integrar os dados indexados em um prompt flow. Estes são alguns conjuntos de dados que você pode tentar:
+
+- Uma coleção de artigos (de pesquisa) que você tem em seu computador.
+- Um conjunto de apresentações de conferências anteriores.
+- Qualquer um dos conjuntos de dados disponíveis no repositório de [dados de amostra do Azure Search](https://github.com/Azure-Samples/azure-search-sample-data).
+
+Use o máximo de recursos que puder para criar sua fonte de dados e integrá-la ao prompt flow. Experimente o novo prompt flow e envie prompts que só poderiam ser respondidos pelo conjunto de dados que você escolheu!
+
+## Limpar
 
 Para evitar custos desnecessários do Azure e utilização de recursos, você deve remover os recursos implantados neste exercício.
 
