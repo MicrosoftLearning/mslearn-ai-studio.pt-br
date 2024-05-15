@@ -95,17 +95,17 @@ Agora que você adicionou uma fonte de dados ao seu projeto, pode usá-la para c
 1. No Estúdio de IA do Azure, em seu projeto, no painel de navegação à esquerda, em **Componentes**, selecione a página **Índices**.
 1. Adicione um novo índice com as seguintes configurações:
     - **Dados de origem**:
-        - **Fonte de dados**: Usar dados de projeto existentes
+        - **Fonte de dados**: Dados no Azure AI Studio
             - *Selecione a fonte de dados dos **folhetos***
-    - **Armazenamento de índice**:
-        - *Selecione a conexão do **AzureAISearch** com seu recurso de Pesquisa de IA do Azure*
+    - **Configurações de índice**:
+        - **Selecione o serviço Azure AI Search**: *Selecione a conexão do **AzureAISearch** com seu recurso de Pesquisa de IA do Azure*
+        - **Nome do índice**: folhetos-índice
+        - **Máquina virtual**: Selecionar automaticamente
     - **Configurações de pesquisa**:
         - **Configurações de vetor**: Adicione busca em vetores a este recurso de pesquisa
         - **Recursos do OpenAI do Azure**: Default_AzureOpenAI
-        - *Reconheça que um modelo de inserção será implantado se ainda não estiver presente*
-    - **Configurações de índice**:
-        - **Nome do índice**: folhetos-índice
-        - **Máquina virtual**: Selecionar automaticamente
+        - *Se solicitado, reconheça que um modelo de inserção será implantado se ainda não estiver lá*
+        
 1. Aguarde até que o processo de indexação seja concluído, o que pode levar vários minutos. A operação de criação de índice consiste nos seguintes trabalhos:
 
     - Extraia, particione e insira os tokens de texto nos dados de folhetos.
