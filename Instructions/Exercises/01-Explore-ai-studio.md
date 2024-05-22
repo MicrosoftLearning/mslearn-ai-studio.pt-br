@@ -27,8 +27,8 @@ Vamos começar exibindo o Estúdio de IA do Azure.
 
 Você precisa de um Hub de IA do Azure na sua assinatura do Azure para hospedar projetos. É possível criar esse recurso ao criar um projeto ou provisioná-lo com antecedência (que é o que faremos neste exercício).
 
-1. Na página **Gerenciar**, selecione **+ Novo Hub de IA do Azure**. Em seguida, no assistente **Criar um novo Hub de IA do Azure**, crie um novo recurso com as seguintes configurações:
-    - **Nome do Hub de IA do Azure**: *Um nome exclusivo*
+1. Na seção **Gerenciamento**, selecione **Todos os hubs**, e selecione **+ Novo hub**. Crie um novo hub com as seguintes configurações:
+    - **Nome do hub**: *Um nome exclusivo*
     - **Assinatura**: *sua assinatura do Azure*
     - **Grupo de recursos**: *Criar um novo grupo de recursos com um nome exclusivo ou selecionar um já criado*
     - **Localização**: *faça uma escolha **aleatória** de uma das regiões a seguir*\*
@@ -42,8 +42,8 @@ Você precisa de um Hub de IA do Azure na sua assinatura do Azure para hospedar 
         - Suécia Central
         - Norte da Suíça
         - Sul do Reino Unido
-    - **OpenAI do Azure**: (Novo) ai-*hub_name*
-    - **Pesquisa de IA**: (Nenhuma)
+    - **Conecte os Serviços de IA do Azure ou do OpenAI do Azure**: Selecione para criar um novo Serviço de IA ou usar um existente
+    - **Conectar-se à Pesquisa de IA do Azure**: Ignorar a conexão
 
     > \* Os recursos do OpenAI do Azure são restringidos no nível do locatário por cotas regionais. As regiões listadas incluem a cota padrão para os tipos de modelos usados neste exercício. Escolher aleatoriamente uma região reduz o risco de uma única região atingir o seu limite de cota em cenários em que você está compartilhando um locatário com outros usuários. No caso de um limite de cota ser atingido mais adiante no exercício, há a possibilidade de você precisar criar outro recurso em uma região diferente.
 
@@ -65,7 +65,7 @@ Um Hub de IA do Azure fornece um espaço de trabalho colaborativo no qual você 
 
 1. No Estúdio de IA do Azure, na página **Compilar**, selecione **+ Novo projeto**. Em seguida, no assistente **Criar um novo projeto**, crie um projeto com as seguintes configurações:
     - **Nome do projeto**: *Um nome exclusivo para seu projeto*
-    - **Hub de IA**: *Seu Hub de AI*
+    - **Hub**: *Seu Hub de AI*
 1. Aguarde até que seu projeto seja criado. O resultado deve ser similar à imagem a seguir:
 
     ![Captura de tela de uma página de detalhes do projeto no Estúdio de IA do Azure.](./media/azure-ai-project.png)
