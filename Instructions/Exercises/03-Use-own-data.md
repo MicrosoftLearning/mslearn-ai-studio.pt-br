@@ -73,7 +73,7 @@ Você precisará de dois modelos para implementar sua solução:
     - **Opções avançadas**:
         - **Filtro de conteúdo**: *Padrão*
         - **Limite de taxa de tokens por minuto**: `5K`
-1. Repita as etapas anteriores para implantar um modelo **gpt-35-turbo** com o nome de implantação `gpt-35-turbo`.
+1. Repita as etapas anteriores para implantar um modelo **gpt-35-turbo-16k** com o nome de implantação `gpt-35-turbo-16k`.
 
     > **Observação**: A redução dos Tokens por Minuto (TPM) ajuda a evitar o uso excessivo da cota disponível na assinatura que você estiver usando. 5.000 TPM são suficientes para os dados usados neste exercício.
 
@@ -117,7 +117,7 @@ Agora que você adicionou uma fonte de dados ao seu projeto, pode usá-la para c
 Antes de usar seu índice em um prompt flow baseado em RAG, vamos verificar se ele pode ser usado para afetar respostas de IA generativa.
 
 1. No painel de navegação à esquerda, em **Projeto playground**, selecione a página **Chat**.
-1. Na página Chat, no painel Opções, verifique se a implementação do modelo **gpt-35-turbo** está selecionada. Em seguida, no painel de sessão de chat principal, envie o prompt `Where can I stay in New York?`
+1. Na página Chat, no painel Opções, verifique se a implementação do modelo **gpt-35-turbo-16k** está selecionada. Em seguida, no painel de sessão de chat principal, envie o prompt `Where can I stay in New York?`
 1. Revise a resposta, que deve ser uma resposta genérica do modelo sem dados do índice.
 1. No painel de instalação, selecione a guia **Adicionar seus dados** e, em seguida, adicione o índice de projeto **brochures-index** e selecione o tipo de pesquisa **híbrido (vetor + palavra-chave)**.
 1. Depois que o índice tiver sido adicionado e a sessão de chat for reiniciada, reenvie o prompt `Where can I stay in New York?`
@@ -159,7 +159,7 @@ Seu índice de vetor foi salvo em seu projeto do Estúdio de IA do Azure, permit
 
     - **Conexão**: `Default_AzureOpenAI`
     - **Api**: `chat`
-    - **deployment_name**: `gpt-35-turbo`
+    - **deployment_name**: `gpt-35-turbo-16k`
     - **response_format**: `{"type":"text"}`
 
 1. Na seção de **pesquisa**, defina os seguintes valores de parâmetro:
@@ -185,7 +185,7 @@ Seu índice de vetor foi salvo em seu projeto do Estúdio de IA do Azure, permit
 
     - **Conexão**: Default_AzureOpenAI
     - **Api**: Chat
-    - **deployment_name**: gpt-35-turbo
+    - **deployment_name**: gpt-35-turbo-16k
     - **response_format**: {"type":"text"}
 
     Em seguida, verifique se as **entradas** para esta ferramenta incluem os seguintes parâmetros:
@@ -203,6 +203,8 @@ Seu índice de vetor foi salvo em seu projeto do Estúdio de IA do Azure, permit
 ## Implantar o fluxo
 
 Agora que você tem um fluxo de trabalho que usa seus dados indexados, pode implantá-lo como um serviço a ser consumido por um aplicativo copiloto.
+
+> **Observação**: Dependendo da carga da região e do datacenter, as implantações às vezes podem demorar um pouco. Fique à vontade para passar para a seção de desafio abaixo enquanto ela implanta ou ignora o teste de sua implantação se você tiver pouco tempo.
 
 1. Na barra de ferramentas, selecione **Implantar**.
 1. Crie uma implantação com as seguintes configurações:
