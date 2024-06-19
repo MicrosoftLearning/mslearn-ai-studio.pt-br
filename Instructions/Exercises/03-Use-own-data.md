@@ -66,7 +66,7 @@ Você precisará de dois modelos para implementar sua solução:
 - Um modelo que pode gerar respostas em linguagem natural para perguntas com base em seus dados.
 
 1. No Estúdio de IA do Azure, em seu projeto, no painel de navegação à esquerda, em **Componentes**, selecione a página **Implantações**.
-1. Crie uma nova implantação (usando um **ponto de extremidade em tempo real**) do modelo **text-embedding-ada-002** com as seguintes configurações:
+1. Crie uma nova implantação do modelo **text-embedding-ada-002** com as seguintes configurações:
 
     - **Nome da implantação**: `text-embedding-ada-002`
     - **Versão do modelo**: *Padrão*
@@ -141,7 +141,7 @@ Seu índice de vetor foi salvo em seu projeto do Estúdio de IA do Azure, permit
     - Criar variantes de prompt adicionando uma mensagem do sistema e estruturando o histórico de chat.
     - Enviar o prompt para um modelo de linguagem para gerar uma resposta de linguagem natural.
 
-1. Na lista **Runtime**, selecione **Iniciar** para iniciar o runtime automático.
+1. Use o botão **Iniciar a sessão de computação** para iniciar a computação do runtime no fluxo.
 
     Aguarde o runtime ser iniciado. Isso fornece um contexto de computação para o prompt flow. Enquanto aguarda, na guia **Fluxo**, revise as seções das ferramentas no fluxo.
 
@@ -153,22 +153,22 @@ Seu índice de vetor foi salvo em seu projeto do Estúdio de IA do Azure, permit
 
 1. Na seção **Saídas**, verifique se a saída inclui:
 
-    - **chat_output** com valor `${chat_with_context.output}`
+    - **chat_output** com o valor ${chat_with_context.output}
 
 1. Na seção **modify_query_with_history**, selecione as seguintes configurações (deixando as outras como estão):
 
-    - **Conexão**: `Default_AzureOpenAI`
-    - **Api**: `chat`
-    - **deployment_name**: `gpt-35-turbo-16k`
-    - **response_format**: `{"type":"text"}`
+    - **Conexão**: *O recurso OpenAI do Azure padrão no seu hub de IA*
+    - **Api**: chat
+    - **deployment_name**: gpt-35-turbo-16k
+    - **response_format**: {"type":"text"}
 
 1. Na seção de **pesquisa**, defina os seguintes valores de parâmetro:
 
     - **mlindex_content**: *Selecione o campo vazio para abrir o painel Gerar*
         - **index_type**: Índice registrado
         - **mlindex_asset_id**: brochures-index:1
-    - **consultas**: `${modify_query_with_history.output}`
-    - **query_type**: `Hybrid (vector + keyword)`
+    - **queries**: ${modify_query_with_history.output}
+    - **query_type**: Híbrido (vetor + palavra-chave)
     - **top_k**: 2
 
 1. Na seção **generate_prompt_context**, revise o script Python e verifique se as **entradas** para esta ferramenta incluem o seguinte parâmetro:
