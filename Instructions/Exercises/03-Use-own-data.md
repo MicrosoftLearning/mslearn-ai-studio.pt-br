@@ -86,7 +86,8 @@ Os dados para o seu copiloto consistem em um conjunto de folhetos de viagem em f
 1. Selecione **+ Novos dados**.
 1. No assistente **Adicionar dados**, expanda o menu suspenso para selecionar **Carregar arquivos/pastas**.
 1. Selecione **Carregar pasta** e selecione a pasta **folhetos**.
-1. Defina o nome dos dados como **folhetos**.
+1. Defina o nome dos dados como `brochures`.
+1. Aguarde o upload da pasta e observe que ela contém vários arquivos .pdf.
 
 ## Crie um índice para seus dados
 
@@ -99,17 +100,16 @@ Agora que você adicionou uma fonte de dados ao seu projeto, pode usá-la para c
             - *Selecione a fonte de dados dos **folhetos***
     - **Configurações de índice**:
         - **Selecione o serviço Azure AI Search**: *Selecione a conexão do **AzureAISearch** com seu recurso de Pesquisa de IA do Azure*
-        - **Nome do índice**: folhetos-índice
+        - **Nome do índice**: `brochures-index`
         - **Máquina virtual**: Selecionar automaticamente
     - **Configurações de pesquisa**:
         - **Configurações de vetor**: Adicione busca em vetores a este recurso de pesquisa
-        - **Recursos do OpenAI do Azure**: Default_AzureOpenAI
-        - *Se solicitado, reconheça que um modelo de inserção será implantado se ainda não estiver lá*
+        - **Selecione um modelo de incorporação**: *Selecione o recurso Azure OpenAI padrão para o seu hub.*
         
 1. Aguarde até que o processo de indexação seja concluído, o que pode levar vários minutos. A operação de criação de índice consiste nos seguintes trabalhos:
 
     - Extraia, particione e insira os tokens de texto nos dados de folhetos.
-    - Atualize a Pesquisa de IA do Azure com o novo índice.
+    - Crie o índice do IA do Azure Search.
     - Registrar o ativo de índice.
 
 ## Testar o índice
@@ -210,8 +210,8 @@ Agora que você tem um fluxo de trabalho que usa seus dados indexados, pode impl
 1. Crie uma implantação com as seguintes configurações:
     - **Configurações básicas**:
         - **Ponto de extremidade**: Novo
-        - **Nome do ponto de extremidade**: `brochure-endpoint`
-        - **Nome da implantação**: folheto-ponto de extremidade-1
+        - **Nome do ponto de extremidade**: *Use o nome de ponto de extremidade exclusivo padrão*
+        - **Nome da implantação**: *Use o nome do ponto de extremidade de implantação padrão*
         - **Máquina virtual**: Standard_DS3_v2
         - **Contagem de instâncias**: 3
         - **Coleta de dados de inferência**: Selecionado
@@ -239,5 +239,4 @@ Use o máximo de recursos que puder para criar sua fonte de dados e integrá-la 
 
 Para evitar custos desnecessários do Azure e utilização de recursos, você deve remover os recursos implantados neste exercício.
 
-1. No Estúdio de IA do Azure, exiba a página **Compilar**. Em seguida, selecione o projeto criado neste exercício e use o botão **Excluir projeto** para removê-lo. Pode levar alguns minutos para excluir todos os componentes.
-1. Se você terminou de explorar o Estúdio de IA do Azure, retorne ao [portal do Azure](https://portal.azure.com) em `https://portal.azure.com` e entre usando suas credenciais do Azure, se necessário. Em seguida, exclua o grupo de recursos que você criou para seus recursos de Pesquisa de IA do Azure e IA do Azure.
+1. Se você terminou de explorar o Estúdio de IA do Azure, retorne ao [portal do Azure](https://portal.azure.com) em `https://portal.azure.com` e entre usando suas credenciais do Azure, se necessário. Em seguida, elimine os recursos no grupo de recursos onde aprovisionou os seus recursos IA do Azure Search e IA do Azure.
