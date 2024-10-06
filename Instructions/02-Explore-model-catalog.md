@@ -15,7 +15,7 @@ Este exercício levará aproximadamente **25** minutos.
 
 Você precisa de um hub IA do Azure na sua assinatura do Azure para hospedar projetos. É possível criar esse recurso ao criar um projeto ou provisioná-lo com antecedência (que é o que faremos neste exercício).
 
-1. Na seção **Gerenciamento**, selecione **Todos os hubs** e selecione **+ Novo hub**. Crie um novo hub com as seguintes configurações:
+1. Na seção **Gerenciamento**, selecione **Todos os recursos** e **+ Novo hub**. Crie um novo hub com as seguintes configurações:
     - **Nome do hub**: *Um nome exclusivo*
     - **Assinatura**: *sua assinatura do Azure*
     - **Grupo de recursos**: *Criar um novo grupo de recursos com um nome exclusivo ou selecionar um já criado*

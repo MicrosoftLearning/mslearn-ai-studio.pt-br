@@ -17,7 +17,7 @@ Você precisa de um Hub de IA do Azure na sua assinatura do Azure para hospedar 
 
 1. Em um navegador da Web, abra [https://ai.azure.com](https://ai.azure.com) e entre usando suas credenciais do Azure.
 
-1. Na seção Gerenciamento, selecione "Todos os hubs" e, em seguida, selecione **+ Novo hub**. Crie um novo hub com as seguintes configurações:
+1. Na seção Gerenciamento, selecione "Todos os recursos" e, em seguida, **+ Novo hub**. Crie um novo hub com as seguintes configurações:
     - **Nome do hub**: *Um nome exclusivo*
     - **Assinatura**: *sua assinatura do Azure*
     - **Grupo de recursos**: *Criar um novo grupo de recursos com um nome exclusivo ou selecionar um já criado*
@@ -50,7 +50,7 @@ Você precisa de um Hub de IA do Azure na sua assinatura do Azure para hospedar 
 
 Um Hub de IA do Azure fornece um espaço de trabalho colaborativo no qual você pode definir um ou mais *projetos*. Vamos criar um projeto em seu Hub de IA do Azure.
 
-1. No Estúdio de IA do Azure, na página **Compilar**, selecione **+ Novo projeto**. Em seguida, no assistente **Criar um novo projeto**, crie um projeto com as seguintes configurações:
+1. No Estúdio de IA do Azure, na página **Visão geral do hub**, clique em **+ Novo projeto**. Em seguida, no assistente **Criar um novo projeto**, crie um projeto com as seguintes configurações:
 
     - **Nome do projeto**: *Um nome exclusivo para seu projeto*
     - **Hub**: *Seu Hub de AI*
@@ -82,7 +82,7 @@ Agora você está pronto para implantar um modelo a ser usado por meio do **Est�
 
 Os filtros de conteúdo são aplicados a solicitações e preenchimentos para evitar a geração de linguagem potencialmente prejudicial ou ofensiva.
 
-1. Na página **Compilar**, selecione **Filtros de conteúdo** na barra de navegação do lado esquerdo e, em seguida, selecione **+ Criar filtro de conteúdo**.
+1. Em **Compilar** na barra de navegação à esquerda, clique em **Filtros de conteúdo** e, em seguida, em **+ Criar filtro de conteúdo**.
 
 1. Na guia **Informações básicas**, forneça as seguintes informações: 
     - **Nome**: *Um nome exclusivo para seu filtro de conteúdo*
@@ -117,7 +117,7 @@ Os filtros de conteúdo são aplicados a solicitações e preenchimentos para ev
 
 Vamos ver como o modelo se comporta em uma interação de conversa.
 
-1. Navegue até o **Playground** no painel do lado esquerdo.
+1. Navegue até o **Playground do projeto** no painel à esquerda.
 
 1. No modo **Chat**, insira o prompt a seguir na seção **Sessão de Chat**.
 
