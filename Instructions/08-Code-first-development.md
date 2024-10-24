@@ -37,17 +37,18 @@ Neste exercício, você usará o [GitHub Codespaces](https://github.com/features
 
 Para inicializar seu ambiente de desenvolvimento, siga as etapas abaixo:
 
-1. **Bifurcar o repositório**: clique no botão **Bifurcar** no canto superior direito da página do repositório GitHub para criar uma cópia do repositório em sua conta do GitHub.
+1. Navegue até o repositório **contoso-chat**: `https://github.com/Azure-Samples/contoso-chat`
+1. Clique no botão **Bifurcar** no canto superior direito da página do repositório GitHub contoso-chat para criar uma cópia do repositório em sua conta do GitHub.
 1. Depois de que o repositório for bifurcado, clqiue no botão **Código** e selecione **Codespaces**.
 1. Clique no botão **+** para criar um novo codespace na ramificação principal do repositório bifurcado.
 
     ![Criar o GitHub Codespaces](./media/create_codespaces.png)
 
-1. Em alguns segundos, você será redirecionado para uma nova guia do navegador em que o ambiente do Codespaces é configurado com um [editor do Visual Studio Code anexado](https://code.visualstudio.com/docs/devcontainers/containers) por padrão. Você pode continuar trabalhando na guia do navegador ou se reconectar aos Codespaces em execução no editor local do Visual Studio Code clicando no botão **Abrir na Área de Trabalho do VS Code ** no menu superior esquerdo.
+1. Em alguns segundos, uma nova guia do navegador será aberta em que o ambiente do Codespaces é configurado com um [editor do Visual Studio Code anexado](https://code.visualstudio.com/docs/devcontainers/containers) por padrão.
 
 ## Conectar o ambiente do VS Code ao Azure
 
-A próxima etapa é conectar seu ambiente de desenvolvimento local à assinatura do Azure em que você quer implantar o projeto. Comece abrindo um novo terminal no IDE do Visual Studio Code.
+A próxima etapa é conectar seu ambiente de desenvolvimento à assinatura do Azure em que você quer implantar o projeto. Comece abrindo um novo terminal em seu ambiente VS Code em execução em Codespaces.
 
 1. Primeiro, verifique se a [versão mais recente](https://github.com/Azure/azure-dev/releases/tag/azure-dev-cli_1.9.3) do Azure Developer CLI está instalada.
     ```bash
