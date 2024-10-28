@@ -23,26 +23,19 @@ Vamos começar explorando o IA do Azure Studio.
 
 Você precisa de um hub IA do Azure na sua assinatura do Azure para hospedar projetos. É possível criar esse recurso ao criar um projeto ou provisioná-lo com antecedência (que é o que faremos neste exercício).
 
-1. Na seção **Gerenciamento**, selecione **Todos os hubs** e selecione **+ Novo hub**. Crie um novo hub com as seguintes configurações:
+1. Na seção **Gerenciamento**, selecione **Todos os recursos** e **+ Novo hub**. Crie um novo hub com as seguintes configurações:
     - **Nome do hub**: *Um nome exclusivo*
     - **Assinatura**: *sua assinatura do Azure*
     - **Grupo de recursos**: *Criar um novo grupo de recursos com um nome exclusivo ou selecionar um já criado*
-    - **Localização**: *faça uma escolha **aleatória** de uma das regiões a seguir*\*
-        - Leste da Austrália
-        - Leste do Canadá
-        - Leste dos EUA
-        - Leste dos EUA 2
-        - França Central
-        - Leste do Japão
-        - Centro-Norte dos EUA
-        - Suécia Central
-        - Norte da Suíça
-        - Sul do Reino Unido
+    - **Local**: Selecione **Ajude-me a escolher** e, em seguida, selecione **gpt-35-turbo** na janela Auxiliar de local e use a região recomendada\*
     - **Conecte os Serviços de IA do Azure ou do OpenAI do Azure**: *Selecione para criar um novo serviço de IA ou usar um existente*
     - **Conectar-se à Pesquisa de IA do Azure**: Ignorar a conexão
 
     > \* Os recursos do OpenAI do Azure são restringidos no nível do locatário por cotas regionais. As regiões listadas incluem a cota padrão para os tipos de modelos usados neste exercício. Escolher aleatoriamente uma região reduz o risco de uma única região atingir o seu limite de cota em cenários em que você está compartilhando um locatário com outros usuários. No caso de um limite de cota ser atingido mais adiante no exercício, há a possibilidade de você precisar criar outro recurso em uma região diferente.
 
+1. Clique em **Avançar** e revise a configuração.
+1. Clique em **Criar** e aguarde a conclusão do processo.
+   
     Após a criação do hub IA do Azure, ele deverá ser semelhante à imagem a seguir:
 
     ![Captura de tela dos detalhes de um hub de IA do Azure no Azure AI Studio.](./media/azure-ai-resource.png)
@@ -76,16 +69,17 @@ Um hub IA do Azure fornece um espaço de trabalho colaborativo no qual você pod
 Você pode usar um projeto para criar soluções complexas de IA baseadas em modelos de IA generativos. Explorar completamente todas as opções de desenvolvimento disponíveis no Estúdio de IA do Azure está além do escopo deste exercício, mas veremos algumas maneiras básicas de trabalhar com modelos em um projeto.
 
 1. No painel à esquerda do seu projeto, na seção **Componentes**, selecione a página **Implantações**.
-1. Na página **Implantações**, na guia **Implantações de modelo**, selecione **+ Criar implantação**.
+1. Na página **Implantações**, na guia **Implantações de modelo**, clique em **+ Implantar modelo**.
 1. Procure o modelo **gpt-35-turbo** na lista, selecione e confirme.
 1. Implante o modelo com as seguintes configurações:
     - **Nome da implantação**: *Um nome exclusivo para sua implantação de modelo*
-    - **Versão do modelo**: *Selecione a versão padrão*
     - **Tipo de implantação**: Padrão
-    - **Recurso conectado do OpenAI do Azure**: *Selecione a conexão padrão que foi criada quando você criou seu hub*
+    - **Versão do modelo**: *Selecione a versão padrão*
+    - **Recurso de IA**: *escolha o recurso criado anteriormente*
     - **Limite de taxa de fichas por minuto (milhares)**: 5 mil
-    - **Filtro de conteúdo**: Padrão
-
+    - **Filtro de conteúdo**: DefaultV2
+    - **Habilitar cota dinâmica**: Desabilitado
+      
     > **Observação**: A redução do TPM ajuda a evitar o uso excessivo da cota disponível na assinatura que você está usando. 5.000 TPM são suficientes para os dados usados neste exercício.
 
 1. Após a implantação do modelo, na página de visão geral da implantação, selecione **Abrir no playground**.

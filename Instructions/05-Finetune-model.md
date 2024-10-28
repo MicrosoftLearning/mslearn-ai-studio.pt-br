@@ -75,9 +75,9 @@ Agora que você implantou seu modelo ajustado, pode testar o modelo da mesma for
 1. Na janela de chat, insira a consulta `What can you do?` Observe que, embora você não tenha especificado a mensagem do sistema para instruir seu modelo a responder a perguntas relacionadas a viagens, o modelo já entende no que deve focar.
 1. Tente com outra consulta como `Where should I go on holiday for my 30th birthday?`
 
-## Excluir recursos do Azure
+## Limpar
 
-Quando terminar de explorar o Estúdio de IA do Azure, exclua os recursos criados para evitar custos desnecessários do Azure.
+Se tiver terminado de explorar o Estúdio de IA do Azure, exclua os recursos criados para evitar custos desnecessários do Azure.
 
 - Navegue até o [portal do Azure](https://portal.azure.com) em `https://portal.azure.com`.
 - No portal do Azure, na **Página Inicial**, selecione **Grupos de recursos**.

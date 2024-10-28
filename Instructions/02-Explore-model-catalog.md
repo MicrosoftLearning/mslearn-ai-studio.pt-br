@@ -18,22 +18,12 @@ Você precisa de um hub IA do Azure na sua assinatura do Azure para hospedar pro
 1. Na seção **Gerenciamento**, selecione **Todos os recursos** e **+ Novo hub**. Crie um novo hub com as seguintes configurações:
     - **Nome do hub**: *Um nome exclusivo*
     - **Assinatura**: *sua assinatura do Azure*
-    - **Grupo de recursos**: *Criar um novo grupo de recursos com um nome exclusivo ou selecionar um já criado*
-    - **Localização**: *faça uma escolha **aleatória** de uma das regiões a seguir*\*
-        - Leste da Austrália
-        - Leste do Canadá
-        - Leste dos EUA
-        - Leste dos EUA 2
-        - França Central
-        - Leste do Japão
-        - Centro-Norte dos EUA
-        - Suécia Central
-        - Norte da Suíça
-        - Sul do Reino Unido
-    - **Conecte os Serviços de IA do Azure ou do OpenAI do Azure**: *Selecione para criar um novo serviço de IA ou usar um existente*
+    - **Grupo de recursos**: *Um novo grupo de recursos*
+    - **Local**: Selecione **Ajude-me a escolher** e, em seguida, selecione **gpt-35-turbo** na janela Auxiliar de local e use a região recomendada\*
+    - **Conecte os Serviços de IA do Azure ou do OpenAI do Azure**: *Crie uma nova conexão*
     - **Conectar-se à Pesquisa de IA do Azure**: Ignorar a conexão
 
-    > \* Os recursos do OpenAI do Azure são restringidos no nível do locatário por cotas regionais. As regiões listadas incluem a cota padrão para os tipos de modelos usados neste exercício. Escolher aleatoriamente uma região reduz o risco de uma única região atingir o seu limite de cota em cenários em que você está compartilhando um locatário com outros usuários. No caso de um limite de cota ser atingido mais adiante no exercício, há a possibilidade de você precisar criar outro recurso em uma região diferente.
+    > \* Os recursos do OpenAI do Azure são restringidos no nível do locatário por cotas regionais. As regiões listadas no auxiliar de localização incluem a cota padrão para os tipos de modelos usados neste exercício. Escolher aleatoriamente uma região reduz o risco de uma única região atingir o seu limite de cota. No caso de um limite de cota ser atingido mais adiante no exercício, há a possibilidade de você precisar criar outro recurso em uma região diferente. Saiba mais sobre a [disponibilidade do modelo por região](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
 
     Após a criação do hub IA do Azure, ele deverá ser semelhante à imagem a seguir:
 
@@ -94,12 +84,13 @@ Vamos começar implantando um modelo do catálogo de modelos. Você pode preferi
 
 1. Navegue até a página **Catálogo de modelos** na seção **Introdução**, usando o menu à esquerda.
 1. Pesquise e implante o modelo `gpt-35-turbo`, selecionado pela IA do Azure, com as seguintes configurações:
-    - **Nome da implantação**: *um nome exclusivo para sua implantação de modelo, indicando que é um modelo GPT-3.5*
-    - **Versão do modelo**: *Selecione a versão padrão*
+    - **Nome da implantação**: *Um nome exclusivo para sua implantação de modelo*
     - **Tipo de implantação**: Padrão
-    - **Recurso conectado do OpenAI do Azure**: *Selecione a conexão padrão que foi criada quando você criou seu hub*
+    - **Versão do modelo**: *Selecione a versão padrão*
+    - **Recurso de IA**: *escolha o recurso criado anteriormente*
     - **Limite de taxa de fichas por minuto (milhares)**: 5 mil
-    - **Filtro de conteúdo**: Padrão
+    - **Filtro de conteúdo**: DefaultV2
+    - **Habilitar cota dinâmica**: Desabilitado
 
 ### Implantar um modelo por meio de Implantações
 
@@ -108,12 +99,13 @@ Se você já sabe exatamente qual modelo quer implantar, talvez prefira fazê-lo
 1. Navegue até a página **Implantações** na seção **Componentes** usando o menu à esquerda.
 1. Na guia **Implantações de modelo**, crie uma implantação com as seguintes configurações:
     - **Modelo**: gpt-4
-    - **Nome da implantação**: *um nome exclusivo para sua implantação de modelo, indicando que é um modelo GPT-4*
-    - **Versão do modelo**: *Selecione a versão padrão*
+    - **Nome da implantação**: *Um nome exclusivo para sua implantação de modelo*
     - **Tipo de implantação**: Padrão
-    - **Recurso conectado do OpenAI do Azure**: *Selecione a conexão padrão que foi criada quando você criou seu hub*
+    - **Versão do modelo**: *Selecione a versão padrão*
+    - **Recurso de IA**: *escolha o recurso criado anteriormente*
     - **Limite de taxa de fichas por minuto (milhares)**: 5 mil
-    - **Filtro de conteúdo**: Padrão
+    - **Filtro de conteúdo**: DefaultV2
+    - **Habilitar cota dinâmica**: Desabilitado
 
     > **Observação**: você deve ter notado alguns modelos mostrando os parâmetros de comparação de modelos, mas não como uma opção em seu catálogo de modelos. A disponibilidade do modelo difere de acordo com o local. Seu local é especificado no nível do hub de IA, onde você pode usar o **Auxiliar de local** para especificar o modelo que você quer implantar para obter uma lista de locais em que você pode implantá-lo.
 
@@ -132,11 +124,11 @@ Agora que temos dois modelos para comparar, vamos ver como os modelos se comport
    You are an AI travel assistant that helps people plan their trips. Your objective is to offer support for travel-related inquiries, such as visa requirements, weather forecasts, local attractions, and cultural norms.
    ```
 
-1. Selecione **Aplicar alterações** e **Limpar chat**.
+1. Clique em **Salvar** e **Limpar chat**.
 1. Na janela de chat, insira a consulta `What can you do?` e exiba a nova resposta. Observe como é diferente da resposta que você recebeu antes. A resposta é específica para viagem agora.
 1. Continue a conversa perguntando: `I'm planning a trip to London, what can I do there?` O copiloto oferece muitas informações relacionadas à viagem. Você pode querer melhorar a saída ainda. Por exemplo, você pode querer que a resposta seja mais sucinta.
 1. Atualize a mensagem do sistema adicionando `Answer with a maximum of two sentences.` ao final da mensagem. Aplique a alteração, limpe o chat e teste-o novamente perguntando: `I'm planning a trip to London, what can I do there?` Você também pode querer que seu copiloto continue a conversa em vez de simplesmente responder à pergunta.
-1. Atualize a mensagem do sistema adicionando `End your answer with a follow-up question.` ao final da mensagem. Aplique a alteração, limpe o chat e teste-o novamente perguntando: `I'm planning a trip to London, what can I do there?`
+1. Atualize a mensagem do sistema adicionando `End your answer with a follow-up question.` ao final da mensagem. Salve a alteração, limpe o chat e teste-o novamente perguntando: `I'm planning a trip to London, what can I do there?`
 1. Altere a **implantação** para seu modelo GPT-4 e repita todas as etapas desta seção. Observe como os modelos podem ter saídas diferentes.
 1. Por fim, teste os dois modelos na consulta `Who is the prime minister of the UK?`. O desempenho nesta questão está relacionado à fundamentação (se a resposta é factualmente precisa) dos modelos. O desempenho se correlaciona com suas conclusões dos parâmetros de comparação dos modelos?
 
