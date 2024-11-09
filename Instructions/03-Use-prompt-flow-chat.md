@@ -18,24 +18,14 @@ Você deve começar criando um projeto do Estúdio de IA do Azure em um hub de I
 1. No assistente **Criar um projeto**, crie um projeto com as seguintes configurações:
     - **Nome do projeto**: *Um nome exclusivo para seu projeto*
     - **Hub**: *Crie um novo hub com as seguintes configurações:*
-        - **Nome do hub**: *Um nome exclusivo*
-        - **Assinatura**: *sua assinatura do Azure*
-        - **Grupo de recursos**: *Um novo grupo de recursos*
-        - **Localização**: *faça uma escolha **aleatória** de uma das regiões a seguir*\*
-        - Leste da Austrália
-        - Leste do Canadá
-        - Leste dos EUA
-        - Leste dos EUA 2
-        - França Central
-        - Leste do Japão
-        - Centro-Norte dos EUA
-        - Suécia Central
-        - Norte da Suíça
-        - Sul do Reino Unido
+    - **Nome do hub**: *Um nome exclusivo*
+    - **Assinatura**: *sua assinatura do Azure*
+    - **Grupo de recursos**: *Um novo grupo de recursos*
+    - **Local**: Selecione **Ajude-me a escolher** e, em seguida, selecione **gpt-35-turbo** na janela Auxiliar de local e use a região recomendada\*
     - **Conecte os Serviços de IA do Azure ou do OpenAI do Azure**: *Crie uma nova conexão*
     - **Conectar-se à Pesquisa de IA do Azure**: Ignorar a conexão
 
-    > \* Os recursos do OpenAI do Azure são restringidos no nível do locatário por cotas regionais. As regiões listadas incluem a cota padrão para os tipos de modelos usados neste exercício. Escolher aleatoriamente uma região reduz o risco de uma única região atingir o seu limite de cota. No caso de um limite de cota ser atingido mais adiante no exercício, há a possibilidade de você precisar criar outro recurso em uma região diferente. Saiba mais sobre a [disponibilidade do modelo por região](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
+    > \* Os recursos do OpenAI do Azure são restringidos no nível do locatário por cotas regionais. As regiões listadas no auxiliar de localização incluem a cota padrão para os tipos de modelos usados neste exercício. Escolher aleatoriamente uma região reduz o risco de uma única região atingir o seu limite de cota. No caso de um limite de cota ser atingido mais adiante no exercício, há a possibilidade de você precisar criar outro recurso em uma região diferente. Saiba mais sobre a [disponibilidade do modelo por região](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
 
 1. Revise a configuração e crie o projeto.
 1. Aguarde até que seu projeto seja criado.
@@ -47,11 +37,12 @@ Para usar um modelo de linguagem no prompt flow, você precisa primeiro implanta
 1. No painel de navegação à esquerda, em **Componentes**, selecione a página **Implantações**.
 1. Crie uma implantação do modelo **gpt-35-turbo** com as seguintes configurações:
     - **Nome da implantação**: *Um nome exclusivo para sua implantação de modelo*
-    - **Versão do modelo**: *Selecione a versão padrão*
     - **Tipo de implantação**: Padrão
-    - **Recurso conectado do OpenAI do Azure**: *Selecione a conexão padrão*
+    - **Versão do modelo**: *Selecione a versão padrão*
+    - **Recurso de IA**: *escolha o recurso criado anteriormente*
     - **Limite de taxa de fichas por minuto (milhares)**: 5 mil
-    - **Filtro de conteúdo**: Padrão
+    - **Filtro de conteúdo**: DefaultV2
+    - **Habilitar cota dinâmica**: Desabilitado
 1. Aguarde até que o modelo seja implantado. Quando a implantação estiver pronta, selecione **Abrir no playground**.
 1. Na janela de chat, insira a consulta `What can you do?`.
 
@@ -77,7 +68,7 @@ Para usar um modelo de linguagem no prompt flow, você precisa primeiro implanta
    5. Encourage the user to ask follow-up questions for further assistance.
    ```
 
-1. Selecione **Aplicar alterações**.
+1. Selecione **Salvar**.
 1. Na janela de chat, insira a mesma consulta de antes: `What can you do?` Observe a alteração na resposta.
 
 Agora que você brincou com a mensagem do sistema para o modelo GPT implantado, você pode personalizar ainda mais o aplicativo trabalhando com o prompt flow.

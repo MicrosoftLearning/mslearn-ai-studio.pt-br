@@ -42,17 +42,17 @@ Sua solução de copiloto integrará dados personalizados em um prompt flow. Par
 Agora você está pronto para criar um projeto do Estúdio de IA do Azure e os recursos de IA do Azure para dar suporte a ele.
 
 1. Em um navegador da Web, abra o [Estúdio de IA do Azure](https://ai.azure.com) em `https://ai.azure.com` e entre usando suas credenciais do Azure.
-1. Na página **Inicial** do Estúdio de IA do Azure, selecione **+ Novo projeto**. Em seguida, no assistente **Criar um projeto**, crie um projeto com as seguintes configurações:
+1. Na página **Inicial** do Estúdio de IA do Azure, selecione **+ Novo projeto**.
+1. No assistente **Criar um projeto**, dê um nome exclusivo ao seu projeto, selecione **Personalizar** e crie um projeto com as seguintes configurações:
 
-    - **Nome do projeto**: *Um nome exclusivo para seu projeto*
-    - **Hub**: *Crie um novo recurso com as seguintes configurações:*
+    - **Criar um hub**: *crie um novo recurso com as seguintes configurações:*
 
         - **Nome do hub**: *Um nome exclusivo*
         - **Assinatura do Azure**: *sua assinatura do Azure*
         - **Grupo de recursos**: *Selecione o grupo de recursos que contém o recurso Pesquisa de IA do Azure*
         - **Localização**: *O mesmo local que o recurso da Pesquisa de IA do Azure*
-        - **OpenAI do Azure**: (Novo) *Preenchimentos automáticos com o nome do hub selecionado*
-        - **Pesquisa de IA do Azure**: *Selecione o recurso de Pesquisa de IA do Azure*
+        - **Conectar os Serviços de IA do Azure ou a OpenAI do Azure**: (novo) *Preenchimentos automáticos com o nome do hub selecionado*
+        - **Conectar a Pesquisa de IA do Azure**: *selecione o recurso de Pesquisa de IA do Azure*
 
 1. Aguarde até que seu projeto seja criado.
 
@@ -64,13 +64,16 @@ Você precisará de dois modelos para implementar sua solução:
 - Um modelo que pode gerar respostas em linguagem natural para perguntas com base em seus dados.
 
 1. No Estúdio de IA do Azure, em seu projeto, no painel de navegação à esquerda, em **Componentes**, selecione a página **Implantações**.
-1. Crie uma nova implantação do modelo **text-embedding-ada-002** com as seguintes configurações:
+1. Crie uma nova implantação do modelo **text-embedding-ada-002** com as seguintes configurações selecionando **Personalizar** no assistente do modelo de implantação:
 
     - **Nome da implantação**: `text-embedding-ada-002`
-    - **Versão do modelo**: *Padrão*
-    - **Opções avançadas**:
-        - **Filtro de conteúdo**: *Padrão*
-        - **Limite de taxa de tokens por minuto**: `5K`
+    - **Tipo de implantação**: Padrão
+    - **Versão do modelo**: *Selecione a versão padrão*
+    - **Recurso de IA**: *escolha o recurso criado anteriormente*
+    - **Limite de taxa de fichas por minuto (milhares)**: 5 mil
+    - **Filtro de conteúdo**: DefaultV2
+    - **Habilitar cota dinâmica**: Desabilitado
+      
 1. Repita as etapas anteriores para implantar um modelo **gpt-35-turbo-16k** com o nome de implantação `gpt-35-turbo-16k`.
 
     > **Observação**: A redução dos Tokens por Minuto (TPM) ajuda a evitar o uso excessivo da cota disponível na assinatura que você estiver usando. 5.000 TPM são suficientes para os dados usados neste exercício.
@@ -93,16 +96,16 @@ Agora que você adicionou uma fonte de dados ao seu projeto, pode usá-la para c
 
 1. No Estúdio de IA do Azure, em seu projeto, no painel de navegação à esquerda, em **Componentes**, selecione a página **Índices**.
 1. Adicione um novo índice com as seguintes configurações:
-    - **Dados de origem**:
+    - **Local de origem**:
         - **Fonte de dados**: Dados no Azure AI Studio
             - *Selecione a fonte de dados dos **folhetos***
-    - **Configurações de índice**:
+    - **Configuração de índice**:
         - **Selecione o serviço Azure AI Search**: *Selecione a conexão do **AzureAISearch** com seu recurso de Pesquisa de IA do Azure*
-        - **Nome do índice**: `brochures-index`
+        - **Índice de vetor**: `brochures-index`
         - **Máquina virtual**: Selecionar automaticamente
     - **Configurações de pesquisa**:
         - **Configurações de vetor**: Adicione busca em vetores a este recurso de pesquisa
-        - **Selecione um modelo de incorporação**: *Selecione o recurso Azure OpenAI padrão para o seu hub.*
+        - **Conexão OpenAI do Azure**: *selecione o recurso OpenAI do Azure padrão no seu hub.*
         
 1. Aguarde até que o processo de indexação seja concluído, o que pode levar vários minutos. A operação de criação de índice consiste nos seguintes trabalhos:
 
@@ -115,12 +118,12 @@ Agora que você adicionou uma fonte de dados ao seu projeto, pode usá-la para c
 Antes de usar seu índice em um prompt flow baseado em RAG, vamos verificar se ele pode ser usado para afetar respostas de IA generativa.
 
 1. No painel de navegação à esquerda, em **Projeto playground**, selecione a página **Chat**.
-1. Na página Chat, no painel Opções, verifique se a implementação do modelo **gpt-35-turbo-16k** está selecionada. Em seguida, no painel de sessão de chat principal, envie o prompt `Where can I stay in New York?`
+1. Na página Chat, no painel de instalação, verifique se a implantação de modelo **gpt-35-turbo-16k** está selecionada. Em seguida, no painel de sessão de chat principal, envie o prompt `Where can I stay in New York?`
 1. Revise a resposta, que deve ser uma resposta genérica do modelo sem dados do índice.
 1. No painel de instalação, selecione a guia **Adicionar seus dados** e, em seguida, adicione o índice de projeto **brochures-index** e selecione o tipo de pesquisa **híbrido (vetor + palavra-chave)**.
 
    > **Observação**: alguns usuários estão descobrindo que os índices recém-criados estão indisponíveis imediatamente. Atualizar o navegador geralmente ajuda, mas se você ainda estiver enfrentando o problema de não conseguir encontrar o índice, talvez seja necessário aguardar até que o índice seja reconhecido.
-   
+
 1. Depois que o índice tiver sido adicionado e a sessão de chat for reiniciada, reenvie o prompt `Where can I stay in New York?`
 1. Revise a resposta, que deve ser baseada nos dados do índice.
 
@@ -135,9 +138,9 @@ Seu índice de vetor foi salvo em seu projeto do Estúdio de IA do Azure, permit
         <p>Se você receber um erro de permissões ao criar um novo prompt flow, tente o seguinte para solucionar o problema:</p>
         <ul>
           <li>No portal do Azure, selecione o recurso Serviços de IA.</li>
-          <li>Na página do IAM, na guia Identidade, confirme se é uma identidade gerenciada atribuída pelo sistema.</li>
+          <li>Na guia Identidade, em Gerenciamento de recursos, confirme se é uma identidade gerenciada atribuída pelo sistema.</li>
           <li>Navegue até a conta de armazenamento associada. Na página do IAM, adicione a atribuição de função <em>Leitor de Dados do Blob de Armazenamento</em>.</li>
-          <li>Em <strong>Atribuir acesso a</strong>, escolha <strong>Identidade Gerenciada</strong>, <strong>+ Selecionar membros</strong> e selecione <strong>Todas as identidades gerenciadas atribuídas pelo sistema</strong>.</li>
+          <li>Em <strong>Atribuir acesso a</strong>, escolha <strong>Identidade Gerenciada</strong>, <strong>+ Selecionar membros</strong>, selecione <strong>Todas as identidades gerenciadas atribuídas pelo sistema</strong> e selecione o recurso dos Serviços de IA do Azure.</li>
           <li>Revise e atribua para salvar as novas configurações e repita a etapa anterior.</li>
         </ul>
     </details>
@@ -175,7 +178,7 @@ Seu índice de vetor foi salvo em seu projeto do Estúdio de IA do Azure, permit
     - **deployment_name**: gpt-35-turbo-16k
     - **response_format**: {"type":"text"}
 
-1. Na seção de **pesquisa**, defina os seguintes valores de parâmetro:
+1. Aguarde o início da sessão de computação e, na seção de **pesquisa**, defina os seguintes valores de parâmetro:
 
     - **mlindex_content**: *Selecione o campo vazio para abrir o painel Gerar*
         - **index_type**: Índice registrado
@@ -217,7 +220,7 @@ Seu índice de vetor foi salvo em seu projeto do Estúdio de IA do Azure, permit
 
 Agora que você tem um fluxo de trabalho que usa seus dados indexados, pode implantá-lo como um serviço a ser consumido por um aplicativo copiloto.
 
-> **Observação**: Dependendo da carga da região e do datacenter, as implantações às vezes podem demorar um pouco. Fique à vontade para passar para a seção de desafio abaixo enquanto ela implanta ou ignora o teste de sua implantação se você tiver pouco tempo.
+> **Observação**: dependendo da região e da carga do datacenter, as implantações às vezes podem demorar um pouco e, às vezes, gerar um erro ao interagir com a implantação. Fique à vontade para passar para a seção de desafio abaixo enquanto ela implanta ou ignora o teste de sua implantação se você tiver pouco tempo.
 
 1. Na barra de ferramentas, selecione **Implantar**.
 1. Crie uma implantação com as seguintes configurações:
