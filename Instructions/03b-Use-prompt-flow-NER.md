@@ -22,42 +22,36 @@ Primeiro, você precisa criar um projeto no Estúdio de IA do Azure para criar o
 Comece criando um projeto do Estúdio de IA do Azure e um Hub de IA do Azure para dar suporte a ele.
 
 1. Em um navegador da Web, abra [https://ai.azure.com](https://ai.azure.com) e entre usando suas credenciais do Azure.
-1. Selecione a página **Criar** e escolha **+ Novo projeto**.
+1. Selecione a **Página Inicial** e selecione **+ Novo projeto**.
 1. No assistente **Criar um projeto**, crie um projeto com as seguintes configurações:
     - **Nome do projeto**: *Um nome exclusivo para seu projeto*
-    - **Hub do Azure**: *Crie um recurso com as seguintes configurações:*
-        - **Nome do Hub de IA**: *Um nome exclusivo*
-        - **Assinatura**: *sua assinatura do Azure*
-        - **Grupo de recursos**: *Um novo grupo de recursos*
-        - **Localização**: *faça uma escolha **aleatória** de uma das regiões a seguir*\*
-        - Leste da Austrália
-        - Leste do Canadá
-        - Leste dos EUA
-        - Leste dos EUA 2
-        - França Central
-        - Leste do Japão
-        - Centro-Norte dos EUA
-        - Suécia Central
-        - Norte da Suíça
-        - Sul do Reino Unido
+    - **Hub**: *Crie um novo hub com as seguintes configurações:*
+    - **Nome do hub**: *Um nome exclusivo*
+    - **Assinatura**: *sua assinatura do Azure*
+    - **Grupo de recursos**: *Um novo grupo de recursos*
+    - **Local**: Selecione **Ajude-me a escolher** e, em seguida, selecione **gpt-35-turbo** na janela Auxiliar de local e use a região recomendada\*
+    - **Conecte os Serviços de IA do Azure ou do OpenAI do Azure**: *Crie uma nova conexão*
+    - **Conectar-se à Pesquisa de IA do Azure**: Ignorar a conexão
 
-    > \* Os recursos do OpenAI do Azure são restringidos no nível do locatário por cotas regionais. As regiões listadas incluem a cota padrão para os tipos de modelos usados neste exercício. Escolher aleatoriamente uma região reduz o risco de uma única região atingir o seu limite de cota em cenários em que você está compartilhando um locatário com outros usuários. No caso de um limite de cota ser atingido mais adiante no exercício, há a possibilidade de você precisar criar outro recurso em uma região diferente.
+    > \* Os recursos do OpenAI do Azure são restringidos no nível do locatário por cotas regionais. As regiões listadas no auxiliar de localização incluem a cota padrão para os tipos de modelos usados neste exercício. Escolher aleatoriamente uma região reduz o risco de uma única região atingir o seu limite de cota. No caso de um limite de cota ser atingido mais adiante no exercício, há a possibilidade de você precisar criar outro recurso em uma região diferente. Saiba mais sobre a [disponibilidade do modelo por região](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
 
 1. Revise a configuração e crie o projeto.
-1. Aguarde de 5 a 10 minutos para que o projeto seja criado.
+1. Aguarde até que seu projeto seja criado.
 
 ## Implantar um modelo GPT
 
 Para usar um modelo de LLM no prompt flow, primeiro, você precisa implantar um modelo. O Estúdio de IA do Azure permite implantar modelos do OpenAI que você pode usar nos seus fluxos.
 
 1. No painel de navegação à esquerda, em **Componentes**, selecione a página **Implantações**.
-1. No Estúdio do OpenAI do Azure, navegue até a página **Implantações**.
 1. Crie uma implantação do modelo **gpt-35-turbo** com as seguintes configurações:
-    - **Modelo**: `gpt-35-turbo`
-    - **Versão do modelo**: *Mantenha o valor padrão*
-    - **Nome da implantação**: `gpt-35-turbo`
-    - Defina as opções **Avançadas** para usar o filtro de conteúdo padrão e restringir o TPM (tokens por minuto) a **5 mil**.
-
+    - **Nome da implantação**: *Um nome exclusivo para sua implantação de modelo*
+    - **Tipo de implantação**: Padrão
+    - **Versão do modelo**: *Selecione a versão padrão*
+    - **Recurso de IA**: *escolha o recurso criado anteriormente*
+    - **Limite de taxa de fichas por minuto (milhares)**: 5 mil
+    - **Filtro de conteúdo**: DefaultV2
+    - **Habilitar cota dinâmica**: Desabilitado
+   
 Agora que você implantou seu modelo de LLM, crie um fluxo no Estúdio de IA do Azure que chama o modelo implantado.
 
 ## Criar e executar um fluxo no Estúdio de IA do Azure
@@ -72,6 +66,18 @@ Para criar um fluxo com um modelo, selecione um dos tipos de fluxos que deseja d
 1. Escolha **+ Criar** para criar um fluxo.
 1. Crie um **Fluxo padrão** e insira `entity-recognition` como o nome da pasta.
 
+<details>  
+    <summary><b>Dica de solução de problemas</b>: erro de permissões</summary>
+    <p>Se você receber um erro de permissões ao criar um novo prompt flow, tente o seguinte para solucionar o problema:</p>
+    <ul>
+        <li>No portal do Azure, selecione o recurso Serviços de IA.</li>
+        <li>Na página do IAM, na guia Identidade, confirme se é uma identidade gerenciada atribuída pelo sistema.</li>
+        <li>Navegue até a conta de armazenamento associada. Na página do IAM, adicione a atribuição de função <em>Leitor de Dados do Blob de Armazenamento</em>.</li>
+        <li>Em <strong>Atribuir acesso a</strong>, escolha <strong>Identidade Gerenciada</strong>, <strong>+ Selecionar membros</strong> e selecione <strong>Todas as identidades gerenciadas atribuídas pelo sistema</strong>.</li>
+        <li>Revise e atribua para salvar as novas configurações e repita a etapa anterior.</li>
+    </ul>
+</details>
+
 Um fluxo padrão com uma entrada, dois nós e uma saída será criado. Você atualizará o fluxo para receber duas entradas, extrair entidades, limpar a saída do nó do LLM e retornar as entidades como uma saída.
 
 ### Iniciar o runtime automático
@@ -79,9 +85,8 @@ Um fluxo padrão com uma entrada, dois nós e uma saída será criado. Você atu
 Para testar o fluxo, você precisa computá-lo. A computação necessária é disponibilizada para você por meio do runtime.
 
 1. Depois que você criar o fluxo nomeado como `entity-recognition`, o fluxo abrirá no estúdio.
-1. Escolha o campo **Selecionar runtime** na barra superior.
-1. Na lista **Runtime automático**, selecione **Iniciar** para iniciar o runtime automático.
-1. Aguarde o runtime ser iniciado.
+1. Selecione **Iniciar sessão de computação** na barra superior.
+1. A sessão de computação levará de 1 a 3 minutos para ser iniciada.
 
 ### Configurar as entradas
 

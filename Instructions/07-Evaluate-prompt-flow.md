@@ -20,7 +20,7 @@ Você deve começar criando um projeto do Estúdio de IA do Azure em um hub de I
     - **Assinatura**: *sua assinatura do Azure*
     - **Grupo de recursos**: *Um novo grupo de recursos*
     - **Local**: Selecione **Ajude-me a escolher** e, em seguida, selecione **gpt-35-turbo** na janela Auxiliar de local e use a região recomendada\*
-    - **Conecte os Serviços de IA do Azure ou do OpenAI do Azure**: *Crie uma nova conexão*
+    - **Conectar os Serviços de IA do Azure ou a OpenAI do Azure**: (novo) *Preenchimentos automáticos com o nome do hub selecionado*
     - **Conectar-se à Pesquisa de IA do Azure**: Ignorar a conexão
 
     > \* Os recursos do OpenAI do Azure são restringidos no nível do locatário por cotas regionais. As regiões listadas no auxiliar de localização incluem a cota padrão para os tipos de modelos usados neste exercício. Escolher aleatoriamente uma região reduz o risco de uma única região atingir o seu limite de cota. No caso de um limite de cota ser atingido mais adiante no exercício, há a possibilidade de você precisar criar outro recurso em uma região diferente. Saiba mais sobre a [disponibilidade do modelo por região](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
@@ -33,7 +33,7 @@ Você deve começar criando um projeto do Estúdio de IA do Azure em um hub de I
 Para usar um modelo de linguagem no prompt flow, você precisa primeiro implantar um modelo. O Estúdio de IA do Azure permite implantar modelos do OpenAI que você pode usar nos seus fluxos.
 
 1. No painel de navegação à esquerda, em **Componentes**, selecione a página **Implantações**.
-1. Crie uma implantação do modelo **gpt-35-turbo** com as seguintes configurações:
+1. Crie uma nova implantação do modelo **gpt-35-turbo** com as seguintes configurações selecionando **Personalizar** no assistente **Implantar modelo**:
     - **Nome da implantação**: *Um nome exclusivo para sua implantação de modelo*
     - **Tipo de implantação**: Padrão
     - **Versão do modelo**: *Selecione a versão padrão*
@@ -42,7 +42,7 @@ Para usar um modelo de linguagem no prompt flow, você precisa primeiro implanta
     - **Filtro de conteúdo**: DefaultV2
     - **Habilitar cota dinâmica**: Desabilitado
 1. Aguarde até que o modelo seja implantado. Quando a implantação estiver pronta, selecione **Abrir no playground**.
-1. Altere a **Mensagem do sistema** para o seguinte:
+1. Na caixa de texto **Fornecer instruções e contexto ao modelo**, altere o conteúdo para o seguinte:
 
    ```
    **Objective**: Assist users with travel-related inquiries, offering tips, advice, and recommendations as a knowledgeable travel agent.
@@ -128,14 +128,17 @@ Depois de criar um copiloto com um fluxo de chat, você pode avaliar o fluxo faz
 
     - **O que você quer avaliar?**: conjunto de dados
     - **Nome da avaliação**: *Insira um nome exclusivo*
-    - **Que tipo de cenário você está avaliando?**: Pergunta e resposta sem contexto
     - Selecione **Avançar**
     - **Selecione os dados que você quer avaliar**: Adiciona seu conjunto de dados
         - Baixe o arquivo JSONL https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/main/data/travel-qa.jsonl e carregue-o na interface do usuário.
+    - Selecione **Avançar**
     - **Selecionar métricas**: Coerência, Fluência
     - **Conexão**: *Sua conexão dos Serviços de IA*
     - **Nome/Modelo da implantação**: *Seu modelo GPT-3.5 implantado*
-1. Clique em **Avançar**, revise os dados e envie a nova avaliação.
+    - **consulta**: selecione **pergunta** como a fonte de dados
+    - **resposta**: selecione **resposta** como a fonte de dados
+      
+1. Selecione **Avançar**, revise os dados e **Envie** a nova avaliação.
 1. Aguarde até que as avaliações sejam concluídas, talvez você precise atualizar.
 1. Selecione a execução de avaliação que você acabou de criar.
 1. Explore o **Painel de métricas** e **Resultados detalhados das métricas**.

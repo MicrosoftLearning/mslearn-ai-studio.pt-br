@@ -20,22 +20,12 @@ Você precisa de um Hub de IA do Azure na sua assinatura do Azure para hospedar 
 1. Na seção Gerenciamento, selecione "Todos os recursos" e, em seguida, **+ Novo hub**. Crie um novo hub com as seguintes configurações:
     - **Nome do hub**: *Um nome exclusivo*
     - **Assinatura**: *sua assinatura do Azure*
-    - **Grupo de recursos**: *Criar um novo grupo de recursos com um nome exclusivo ou selecionar um já criado*
-    - **Localização**: *faça uma escolha **aleatória** de uma das regiões a seguir*\*
-        - Leste da Austrália
-        - Leste do Canadá
-        - Leste dos EUA
-        - Leste dos EUA 2
-        - França Central
-        - Leste do Japão
-        - Centro-Norte dos EUA
-        - Suécia Central
-        - Norte da Suíça
-        - Sul do Reino Unido
-    - **Conecte os Serviços de IA do Azure ou do OpenAI do Azure**: Selecione para criar um novo Serviço de IA ou usar um existente
+    - **Grupo de recursos**: *Um novo grupo de recursos*
+    - **Local**: Selecione **Ajude-me a escolher** e, em seguida, selecione **gpt-35-turbo** na janela Auxiliar de local e use a região recomendada\*
+    - **Conecte os Serviços de IA do Azure ou do OpenAI do Azure**: *Crie uma nova conexão*
     - **Conectar-se à Pesquisa de IA do Azure**: Ignorar a conexão
 
-    > \* Os recursos do OpenAI do Azure são restringidos no nível do locatário por cotas regionais. As regiões listadas incluem a cota padrão para os tipos de modelos usados neste exercício. Escolher aleatoriamente uma região reduz o risco de uma única região atingir o seu limite de cota em cenários em que você está compartilhando um locatário com outros usuários. No caso de um limite de cota ser atingido mais adiante no exercício, há a possibilidade de você precisar criar outro recurso em uma região diferente.
+    > \* Os recursos do OpenAI do Azure são restringidos no nível do locatário por cotas regionais. As regiões listadas no auxiliar de localização incluem a cota padrão para os tipos de modelos usados neste exercício. Escolher aleatoriamente uma região reduz o risco de uma única região atingir o seu limite de cota. No caso de um limite de cota ser atingido mais adiante no exercício, há a possibilidade de você precisar criar outro recurso em uma região diferente. Saiba mais sobre a [disponibilidade do modelo por região](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
 
 1. Selecione **Criar**. A criação do primeiro hub pode levar alguns minutos para ser concluída. Durante a criação do hub, os seguintes recursos de IA também serão criados para você: 
     - Serviços de IA
@@ -68,14 +58,14 @@ Agora você está pronto para implantar um modelo a ser usado por meio do **Est�
 1. No Estúdio de IA do Azure, crie uma nova implantação com as seguintes configurações:
 
     - **Modelo**: gpt-35-turbo
+    - **Nome da implantação**: *Um nome exclusivo para sua implantação de modelo*
     - **Tipo de implantação**: Padrão
-    - **Recurso conectado do OpenAI do Azure**: *Sua conexão com o OpenAI do Azure*
-    - **Versão do Modelo**: atualização automática para padrão
-    - **Nome de implantação**: *um nome exclusivo de sua preferência*
-    - **Opções avançadas**
-        - **Filtro de conteúdo**: Padrão
-        - **Limite de taxa de tokens por minuto**: 5 mil
-
+    - **Versão do modelo**: *Selecione a versão padrão*
+    - **Recurso de IA**: *escolha o recurso criado anteriormente*
+    - **Limite de taxa de fichas por minuto (milhares)**: 5 mil
+    - **Filtro de conteúdo**: DefaultV2
+    - **Habilitar cota dinâmica**: Desabilitado
+      
 > **Observação**: cada modelo do Estúdio de IA do Azure é otimizado para um equilíbrio diferente entre funcionalidades e desempenho. Usaremos o modelo **GPT 3.5 Turbo** neste exercício, que é altamente capaz para cenários de chat e geração de linguagem natural.
 
 ## Explorar filtros de conteúdo
