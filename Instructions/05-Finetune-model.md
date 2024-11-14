@@ -25,11 +25,11 @@ Você deve começar criando um projeto do Estúdio de IA do Azure em um hub de I
     - **Nome do hub**: *Um nome exclusivo*
     - **Assinatura**: *sua assinatura do Azure*
     - **Grupo de recursos**: *Um novo grupo de recursos*
-    - **Local**: Selecione **Ajude-me a escolher** e, em seguida, selecione **gpt-35-turbo** na janela Auxiliar de local e use a região recomendada\*
+    - **Localização**: escolha uma das seguintes regiões **Leste dos EUA2**, **Centro-Norte dos EUA**, **Suécia Central**, **Oeste da Suíça**\*
     - **Conectar os Serviços de IA do Azure ou a OpenAI do Azure**: (novo) *Preenchimentos automáticos com o nome do hub selecionado*
     - **Conectar-se à Pesquisa de IA do Azure**: Ignorar a conexão
 
-    > \* Os recursos do OpenAI do Azure são restringidos no nível do locatário por cotas regionais. As regiões listadas no auxiliar de localização incluem a cota padrão para os tipos de modelos usados neste exercício. Escolher aleatoriamente uma região reduz o risco de uma única região atingir o seu limite de cota. No caso de um limite de cota ser atingido mais adiante no exercício, há a possibilidade de você precisar criar outro recurso em uma região diferente. Saiba mais sobre a [disponibilidade do modelo por região](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
+    > \* Os recursos do OpenAI do Azure são restringidos no nível do locatário por cotas regionais. As regiões listadas no auxiliar de localização incluem a cota padrão para os tipos de modelos usados neste exercício. Escolher aleatoriamente uma região reduz o risco de uma única região atingir o seu limite de cota. No caso de um limite de cota ser atingido mais adiante no exercício, há a possibilidade de você precisar criar outro recurso em uma região diferente. Saiba mais sobre [Ajuste fino de regiões de modelo](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?tabs=python-secure%2Cglobal-standard%2Cstandard-chat-completions#fine-tuning-models)
 
 1. Revise a configuração e crie o projeto.
 1. Aguarde até que seu projeto seja criado.
