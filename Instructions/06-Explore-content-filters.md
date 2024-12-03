@@ -1,13 +1,13 @@
 ---
 lab:
-  title: Explore filtros de conteúdo para evitar a saída de conteúdo prejudicial no Estúdio de IA do Azure
+  title: Explorar filtros de conteúdo para evitar a saída de conteúdo prejudicial no Azure AI Foundry
 ---
 
-# Explore filtros de conteúdo para evitar a saída de conteúdo prejudicial no Estúdio de IA do Azure
+# Explorar filtros de conteúdo para evitar a saída de conteúdo prejudicial no Azure AI Foundry
 
-O Estúdio de IA do Azure inclui filtros de conteúdo padrão para ajudar a garantir que prompts e preenchimentos possivelmente prejudiciais sejam identificados e removidos das interações com o serviço. Além disso, você pode solicitar permissão para definir filtros de conteúdo personalizados para suas necessidades específicas, de modo a garantir que suas implantações de modelos implementem os princípios de IA responsável apropriados para seu cenário de IA generativa. A filtragem de conteúdo é um elemento de uma abordagem eficaz à IA responsável ao trabalhar com modelos de IA generativa.
+O Azure AI Foundry inclui filtros de conteúdo padrão para ajudar a garantir que prompts e conclusões possivelmente prejudiciais sejam identificados e removidos das interações com o serviço. Além disso, você pode solicitar permissão para definir filtros de conteúdo personalizados para suas necessidades específicas, de modo a garantir que suas implantações de modelos implementem os princípios de IA responsável apropriados para seu cenário de IA generativa. A filtragem de conteúdo é um elemento de uma abordagem eficaz à IA responsável ao trabalhar com modelos de IA generativa.
 
-Neste exercício, você vai explorar o efeito dos filtros de conteúdo padrão no Estúdio de IA do Azure.
+Neste exercício, você explorará o efeito dos filtros de conteúdo padrão no Azure AI Foundry.
 
 Este exercício levará aproximadamente **25** minutos.
 
@@ -34,28 +34,28 @@ Você precisa de um Hub de IA do Azure na sua assinatura do Azure para hospedar 
 
 1. Depois que o Hub de IA do Azure for criado, ele deverá ter uma aparência semelhante à da imagem a seguir:
 
-    ![Captura de tela dos detalhes do Hub de IA do Azure no Estúdio de IA do Azure.](./media/azure-ai-overview.png)
+    ![Captura de tela dos detalhes do hub de IA do Azure no portal do Azure AI Foundry.](./media/azure-ai-overview.png)
 
 ## Criar um projeto
 
 Um Hub de IA do Azure fornece um espaço de trabalho colaborativo no qual você pode definir um ou mais *projetos*. Vamos criar um projeto em seu Hub de IA do Azure.
 
-1. No Estúdio de IA do Azure, na página **Visão geral do hub**, clique em **+ Novo projeto**. Em seguida, no assistente **Criar um novo projeto**, crie um projeto com as seguintes configurações:
+1. No portal do Azure AI Foundry, na página **Visão geral do hub**, clique em **+ Novo projeto**. Em seguida, no assistente **Criar um novo projeto**, crie um projeto com as seguintes configurações:
 
     - **Nome do projeto**: *Um nome exclusivo para seu projeto*
     - **Hub**: *Seu Hub de AI*
 
 1. Aguarde até que seu projeto seja criado. O resultado deve ser similar à imagem a seguir:
 
-    ![Captura de tela de uma página de detalhes do projeto no Estúdio de IA do Azure.](./media/azure-ai-project.png)
+    ![Captura de tela da página de detalhes do projeto no portal do Azure AI Foundry.](./media/azure-ai-project.png)
 
 1. Exiba as páginas no painel do lado esquerdo, expandindo cada seção, e observe as tarefas que você pode executar e os recursos que você pode gerenciar em um projeto.
 
 ## Implantar um modelo
 
-Agora você está pronto para implantar um modelo a ser usado por meio do **Estúdio de IA do Azure**. Depois de implantado, você usará o modelo para gerar conteúdo em linguagem natural.
+Agora você está pronto para implantar um modelo a ser usado por meio do **portal do Azure AI Foundry**. Depois de implantado, você usará o modelo para gerar conteúdo em linguagem natural.
 
-1. No Estúdio de IA do Azure, crie uma nova implantação com as seguintes configurações:
+1. No portal do Azure AI Foundry, crie uma nova implantação com as seguintes configurações:
 
     - **Modelo**: gpt-35-turbo
     - **Nome da implantação**: *Um nome exclusivo para sua implantação de modelo*
@@ -66,7 +66,7 @@ Agora você está pronto para implantar um modelo a ser usado por meio do **Est�
     - **Filtro de conteúdo**: DefaultV2
     - **Habilitar cota dinâmica**: Desabilitado
       
-> **Observação**: cada modelo do Estúdio de IA do Azure é otimizado para um equilíbrio diferente entre funcionalidades e desempenho. Usaremos o modelo **GPT 3.5 Turbo** neste exercício, que é altamente capaz para cenários de chat e geração de linguagem natural.
+> **Observação**: cada modelo do Azure IA Foundry é otimizado para um equilíbrio diferente entre funcionalidades e desempenho. Usaremos o modelo **GPT 3.5 Turbo** neste exercício, que é altamente capaz para cenários de chat e geração de linguagem natural.
 
 ## Explorar filtros de conteúdo
 
@@ -101,7 +101,7 @@ Os filtros de conteúdo são aplicados a solicitações e preenchimentos para ev
 
 1. Retorne à página de implantações e observe que sua implantação agora menciona o filtro de conteúdo personalizado que você criou.
 
-    ![Captura de tela da página de implantação no Estúdio de IA do Azure.](./media/azure-ai-deployment.png)
+    ![Captura de tela da página de implantação no portal do Azure IA Foundry.](./media/azure-ai-deployment.png)
 
 ## Gerar saída de linguagem natural
 
@@ -131,9 +131,9 @@ Vamos ver como o modelo se comporta em uma interação de conversa.
    Describe characteristics of Scottish people.
     ```
 
-8. Observe a saída, que deve indicar que não há suporte para que a solicitação seja racista e depreciativa. Essa prevenção de saídas ofensivas é o resultado dos filtros de conteúdo padrão no Estúdio de IA do Azure.
+8. Observe a saída, que deve indicar que não há suporte para que a solicitação seja racista e depreciativa. Essa prevenção de saídas ofensivas é o resultado dos filtros de conteúdo padrão no portal do Azure IA Foundry.
 
-> **Dica**: Para obter mais detalhes sobre as categorias e os níveis de gravidade usados nos filtros de conteúdo, confira [Filtragem de conteúdo](https://learn.microsoft.com/azure/ai-studio/concepts/content-filtering) na documentação dos serviços do Estúdio de IA do Azure.
+> **Dica**: para obter mais detalhes sobre as categorias e os níveis de gravidade usados nos filtros de conteúdo, confira [Filtragem de conteúdo](https://learn.microsoft.com/azure/ai-studio/concepts/content-filtering) na documentação dos serviços do portal do Azure IA Foundry.
 
 ## Limpar
 

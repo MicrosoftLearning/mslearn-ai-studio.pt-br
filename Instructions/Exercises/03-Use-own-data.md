@@ -1,13 +1,10 @@
----
-lab:
-  title: Crie um copiloto personalizado que use seus próprios dados
----
-
 # Crie um copiloto personalizado que use seus próprios dados
 
 A Geração Aumentada de Recuperação (RAG) é uma técnica usada para compilar aplicativos que integram dados de fontes de dados personalizadas em um prompt para um modelo de IA generativa. O RAG é um padrão comumente usado para desenvolver *copilotos* personalizados – aplicativos baseados em chat que usam um modelo de linguagem para interpretar entradas e gerar respostas apropriadas.
 
-Neste exercício, você usará o portal do Azure IA Foundry para integrar dados personalizados em um prompt flow de IA generativa.
+Neste exercício, você usará o Estúdio de IA do Azure para integrar dados personalizados em um prompt flow de IA generativa.
+
+> **Observação**: O Estúdio de IA do Azure está em versão prévia no momento em que este artigo foi escrito e sob desenvolvimento ativo. Alguns elementos do serviço podem não ser exatamente como descritos, e alguns recursos podem não funcionar como esperado.
 
 Este exercício levará, aproximadamente, **45** minutos.
 
@@ -39,22 +36,23 @@ Sua solução de copiloto integrará dados personalizados em um prompt flow. Par
 
 ## Criar um projeto de IA do Azure
 
-Agora você está pronto para criar um projeto do Azure IA Foundry e os recursos de IA do Azure para dar suporte a ele.
+Agora você está pronto para criar um projeto do Estúdio de IA do Azure e os recursos de IA do Azure para dar suporte a ele.
 
-1. Em um navegador da Web, abra o [portal do Azure IA Foundry](https://ai.azure.com) em `https://ai.azure.com` e entre usando suas credenciais do Azure.
-1. Na home page, selecione **+Criar projeto**.
-1. No assistente **Criar um projeto**, você pode ver todos os recursos do Azure que serão criados automaticamente com seu projeto. Selecione **Personalizar** e conecte-se ao recurso de pesquisa de IA do Azure:
+1. Em um navegador da Web, abra o [Estúdio de IA do Azure](https://ai.azure.com) em `https://ai.azure.com` e entre usando suas credenciais do Azure.
+1. Na página **Inicial** do Estúdio de IA do Azure, selecione **+ Novo projeto**. Em seguida, no assistente **Criar um projeto**, crie um projeto com as seguintes configurações:
 
-    - **Nome do hub**: *Um nome exclusivo*
-    - **Assinatura do Azure**: *sua assinatura do Azure*
-    - **Grupo de recursos**: *Selecione o grupo de recursos que contém o recurso Pesquisa de IA do Azure*
-    - **Localização**: *O mesmo local que o recurso da Pesquisa de IA do Azure*
-    - **Conectar os Serviços de IA do Azure ou a OpenAI do Azure**: (novo) *Preenchimentos automáticos com o nome do hub selecionado*
-    - **Conectar a Pesquisa de IA do Azure**: *selecione o recurso de Pesquisa de IA do Azure*
+    - **Nome do projeto**: *Um nome exclusivo para seu projeto*
+    - **Hub**: *Crie um novo recurso com as seguintes configurações:*
 
-1. Clique em **Avançar** e revise a configuração.
-1. Clique em **Criar** e aguarde a conclusão do processo.
-   
+        - **Nome do hub**: *Um nome exclusivo*
+        - **Assinatura do Azure**: *sua assinatura do Azure*
+        - **Grupo de recursos**: *Selecione o grupo de recursos que contém o recurso Pesquisa de IA do Azure*
+        - **Localização**: *O mesmo local que o recurso da Pesquisa de IA do Azure*
+        - **OpenAI do Azure**: (Novo) *Preenchimentos automáticos com o nome do hub selecionado*
+        - **Pesquisa de IA do Azure**: *Selecione o recurso de Pesquisa de IA do Azure*
+
+1. Aguarde até que seu projeto seja criado.
+
 ## Implantar modelos
 
 Você precisará de dois modelos para implementar sua solução:
@@ -62,17 +60,14 @@ Você precisará de dois modelos para implementar sua solução:
 - Um modelo de *inserção* para vetorizar dados de texto para indexação e processamento eficientes.
 - Um modelo que pode gerar respostas em linguagem natural para perguntas com base em seus dados.
 
-1. No portal do Azure AI Foundry, em seu projeto, no painel de navegação à esquerda, em **Meus ativos**, selecione a página **Modelos + pontos de extremidade**.
-1. Crie uma nova implantação do modelo **text-embedding-ada-002** com as seguintes configurações selecionando **Personalizar** no assistente do modelo de implantação:
+1. No Estúdio de IA do Azure, em seu projeto, no painel de navegação à esquerda, em **Componentes**, selecione a página **Implantações**.
+1. Crie uma nova implantação do modelo **text-embedding-ada-002** com as seguintes configurações:
 
     - **Nome da implantação**: `text-embedding-ada-002`
-    - **Tipo de implantação**: Padrão
-    - **Versão do modelo**: *Selecione a versão padrão*
-    - **Recurso de IA**: *escolha o recurso criado anteriormente*
-    - **Limite de taxa de fichas por minuto (milhares)**: 5 mil
-    - **Filtro de conteúdo**: DefaultV2
-    - **Habilitar cota dinâmica**: Desabilitado
-      
+    - **Versão do modelo**: *Padrão*
+    - **Opções avançadas**:
+        - **Filtro de conteúdo**: *Padrão*
+        - **Limite de taxa de tokens por minuto**: `5K`
 1. Repita as etapas anteriores para implantar um modelo **gpt-35-turbo-16k** com o nome de implantação `gpt-35-turbo-16k`.
 
     > **Observação**: A redução dos Tokens por Minuto (TPM) ajuda a evitar o uso excessivo da cota disponível na assinatura que você estiver usando. 5.000 TPM são suficientes para os dados usados neste exercício.
@@ -82,29 +77,29 @@ Você precisará de dois modelos para implementar sua solução:
 Os dados para o seu copiloto consistem em um conjunto de folhetos de viagem em formato PDF da agência de viagens fictícia *Margie's Travel*. Vamos adicioná-los ao projeto.
 
 1. Baixe o [arquivo compactado de folhetos](https://github.com/MicrosoftLearning/mslearn-ai-studio/raw/main/data/brochures.zip) de `https://github.com/MicrosoftLearning/mslearn-ai-studio/raw/main/data/brochures.zip` e extraia-o para uma pasta chamada **folhetos** em seu sistema de arquivos local.
-1. No portal do Azure IA Foundry, em seu projeto, no painel de navegação à esquerda, em **Maus ativos**, selecione a página **Dados + índices**.
+1. No Estúdio de IA do Azure, em seu projeto, no painel de navegação à esquerda, em **Componentes**, selecione a página **Dados**.
 1. Selecione **+ Novos dados**.
 1. No assistente **Adicionar dados**, expanda o menu suspenso para selecionar **Carregar arquivos/pastas**.
 1. Selecione **Carregar pasta** e selecione a pasta **folhetos**.
-1. Selecione **Avançar** e defina o nome dos dados como `brochures`.
+1. Defina o nome dos dados como `brochures`.
 1. Aguarde o upload da pasta e observe que ela contém vários arquivos .pdf.
 
 ## Crie um índice para seus dados
 
 Agora que você adicionou uma fonte de dados ao seu projeto, pode usá-la para criar um índice em seu recurso de Pesquisa de IA do Azure.
 
-1. No portal do Azure IA Foundry, em seu projeto, no painel de navegação à esquerda, em **Maus ativos**, selecione a página **Dados + índices**.
-1. Na guia **Índices**, adicione um novo índice com as seguintes configurações:
-    - **Local de origem**:
-        - **Fonte de dados**: dados no portal do Azure AI Foundry
+1. No Estúdio de IA do Azure, em seu projeto, no painel de navegação à esquerda, em **Componentes**, selecione a página **Índices**.
+1. Adicione um novo índice com as seguintes configurações:
+    - **Dados de origem**:
+        - **Fonte de dados**: Dados no Azure AI Studio
             - *Selecione a fonte de dados dos **folhetos***
-    - **Configuração de índice**:
+    - **Configurações de índice**:
         - **Selecione o serviço Azure AI Search**: *Selecione a conexão do **AzureAISearch** com seu recurso de Pesquisa de IA do Azure*
-        - **Índice de vetor**: `brochures-index`
+        - **Nome do índice**: `brochures-index`
         - **Máquina virtual**: Selecionar automaticamente
     - **Configurações de pesquisa**:
         - **Configurações de vetor**: Adicione busca em vetores a este recurso de pesquisa
-        - **Conexão OpenAI do Azure**: *selecione o recurso OpenAI do Azure padrão no seu hub.*
+        - **Selecione um modelo de incorporação**: *Selecione o recurso Azure OpenAI padrão para o seu hub.*
         
 1. Aguarde até que o processo de indexação seja concluído, o que pode levar vários minutos. A operação de criação de índice consiste nos seguintes trabalhos:
 
@@ -116,34 +111,19 @@ Agora que você adicionou uma fonte de dados ao seu projeto, pode usá-la para c
 
 Antes de usar seu índice em um prompt flow baseado em RAG, vamos verificar se ele pode ser usado para afetar respostas de IA generativa.
 
-1. No painel de navegação à esquerda, selecione a página **Playground**.
-1. Na página Chat, no painel de instalação, verifique se a implantação de modelo **gpt-35-turbo-16k** está selecionada. Em seguida, no painel de sessão de chat principal, envie o prompt `Where can I stay in New York?`
+1. No painel de navegação à esquerda, em **Projeto playground**, selecione a página **Chat**.
+1. Na página Chat, no painel Opções, verifique se a implementação do modelo **gpt-35-turbo-16k** está selecionada. Em seguida, no painel de sessão de chat principal, envie o prompt `Where can I stay in New York?`
 1. Revise a resposta, que deve ser uma resposta genérica do modelo sem dados do índice.
-1. No painel de configurações, expanda o campo **Adicionar seus dados** e, em seguida, adicione o índice de projeto **brochures-index** e selecione o tipo de pesquisa **híbrido (vetor + palavra-chave)**.
-
-   > **Observação**: alguns usuários estão descobrindo que os índices recém-criados estão indisponíveis imediatamente. Atualizar o navegador geralmente ajuda, mas se você ainda estiver enfrentando o problema de não conseguir encontrar o índice, talvez seja necessário aguardar até que o índice seja reconhecido.
-
+1. No painel de instalação, selecione a guia **Adicionar seus dados** e, em seguida, adicione o índice de projeto **brochures-index** e selecione o tipo de pesquisa **híbrido (vetor + palavra-chave)**.
 1. Depois que o índice tiver sido adicionado e a sessão de chat for reiniciada, reenvie o prompt `Where can I stay in New York?`
 1. Revise a resposta, que deve ser baseada nos dados do índice.
 
 ## Use o índice em um prompt flow
 
-Seu índice de vetor foi salvo em seu projeto do Azure IA Foundry, permitindo que você o use facilmente em um prompt flow.
+Seu índice de vetor foi salvo em seu projeto do Estúdio de IA do Azure, permitindo que você o use facilmente em um prompt flow.
 
-1. No portal do Azure AI Foundry, em seu projeto, no painel de navegação à esquerda, em **Criar e personalizar**, selecione a página **Prompt flow**.
+1. No Estúdio de IA do Azure, em seu projeto, no painel de navegação à esquerda, em **Ferramentas**, selecione a página **Prompt flow**.
 1. Crie um novo prompt flow clonando a amostra **Perguntas e respostas em várias rodadas sobre seus dados** na galeria. Salve seu clone desta amostra em uma pasta chamada `brochure-flow`.
-    <details>  
-      <summary><b>Dica de solução de problemas</b>: erro de permissões</summary>
-        <p>Se você receber um erro de permissões ao criar um novo prompt flow, tente o seguinte para solucionar o problema:</p>
-        <ul>
-          <li>No portal do Azure, selecione o recurso Serviços de IA.</li>
-          <li>Na guia Identidade, em Gerenciamento de recursos, confirme se é uma identidade gerenciada atribuída pelo sistema.</li>
-          <li>Navegue até a conta de armazenamento associada. Na página do IAM, adicione a atribuição de função <em>Leitor de Dados do Blob de Armazenamento</em>.</li>
-          <li>Em <strong>Atribuir acesso a</strong>, escolha <strong>Identidade Gerenciada</strong>, <strong>+ Selecionar membros</strong>, selecione <strong>Todas as identidades gerenciadas atribuídas pelo sistema</strong> e selecione o recurso dos Serviços de IA do Azure.</li>
-          <li>Revise e atribua para salvar as novas configurações e repita a etapa anterior.</li>
-        </ul>
-    </details>
-
 1. Quando a página do designer do prompt flow for aberta, revise **folheto-fluxo**. O grafo deve ser semelhante à seguinte imagem:
 
     ![Uma captura de tela de um gráfico de prompt flow](./media/chat-flow.png)
@@ -177,7 +157,7 @@ Seu índice de vetor foi salvo em seu projeto do Azure IA Foundry, permitindo qu
     - **deployment_name**: gpt-35-turbo-16k
     - **response_format**: {"type":"text"}
 
-1. Aguarde o início da sessão de computação e, na seção de **pesquisa**, defina os seguintes valores de parâmetro:
+1. Na seção de **pesquisa**, defina os seguintes valores de parâmetro:
 
     - **mlindex_content**: *Selecione o campo vazio para abrir o painel Gerar*
         - **index_type**: Índice registrado
@@ -219,7 +199,7 @@ Seu índice de vetor foi salvo em seu projeto do Azure IA Foundry, permitindo qu
 
 Agora que você tem um fluxo de trabalho que usa seus dados indexados, pode implantá-lo como um serviço a ser consumido por um aplicativo copiloto.
 
-> **Observação**: dependendo da região e da carga do datacenter, as implantações às vezes podem demorar um pouco e, às vezes, gerar um erro ao interagir com a implantação. Fique à vontade para passar para a seção de desafio abaixo enquanto ela implanta ou ignora o teste de sua implantação se você tiver pouco tempo.
+> **Observação**: Dependendo da carga da região e do datacenter, as implantações às vezes podem demorar um pouco. Fique à vontade para passar para a seção de desafio abaixo enquanto ela implanta ou ignora o teste de sua implantação se você tiver pouco tempo.
 
 1. Na barra de ferramentas, selecione **Implantar**.
 1. Crie uma implantação com as seguintes configurações:
@@ -232,7 +212,7 @@ Agora que você tem um fluxo de trabalho que usa seus dados indexados, pode impl
         - **Coleta de dados de inferência**: Selecionado
     - **Configurações avançadas**:
         - *Usar as configurações padrão*
-1. No portal do Azure AI Foundry, em seu projeto, no painel de navegação à esquerda, em **Meus ativos**, selecione a página **Modelos + pontos de extremidade**.
+1. No Estúdio de IA do Azure, em seu projeto, no painel de navegação à esquerda, em **Componentes**, selecione a página **Implantações**.
 1. Continue atualizando a exibição até que a implantação de **brochure-endpoint-1** seja mostrada como *bem-sucedida* no ponto de extremidade **brochure-endpoint** (isso pode levar uma quantia significativa de tempo).
 1. Quando a implantação for bem-sucedida, selecione-a. Em seguida, na página **Teste**, insira o prompt `What is there to do in San Francisco?` e revise a resposta.
 1. Insira o prompt `Where else could I go?` e revise a resposta.
@@ -240,9 +220,9 @@ Agora que você tem um fluxo de trabalho que usa seus dados indexados, pode impl
 
 ## Desafio 
 
-Agora que você experimentou como integrar seus próprios dados em um copiloto criado com o portal do Azure IA Foundry, vamos explorar mais!
+Agora que você experimentou como integrar seus próprios dados em um copiloto criado com o Estúdio de IA do Azure, vamos explorar mais!
 
-Tente adicionar uma nova fonte de dados por meio do portal do Azure IA Foundry, indexá-la e integrar os dados indexados em um prompt flow. Estes são alguns conjuntos de dados que você pode tentar:
+Tente adicionar uma nova fonte de dados por meio do Estúdio de IA do Azure, indexá-la e integrar os dados indexados em um prompt flow. Estes são alguns conjuntos de dados que você pode tentar:
 
 - Uma coleção de artigos (de pesquisa) que você tem em seu computador.
 - Um conjunto de apresentações de conferências anteriores.
@@ -254,4 +234,4 @@ Use o máximo de recursos que puder para criar sua fonte de dados e integrá-la 
 
 Para evitar custos desnecessários do Azure e utilização de recursos, você deve remover os recursos implantados neste exercício.
 
-1. Se você terminou de explorar o Azure IA Foundry, retorne ao [portal do Azure](https://portal.azure.com) em `https://portal.azure.com` e entre usando suas credenciais do Azure, se necessário. Em seguida, elimine os recursos no grupo de recursos onde aprovisionou os seus recursos IA do Azure Search e IA do Azure.
+1. Se você terminou de explorar o Estúdio de IA do Azure, retorne ao [portal do Azure](https://portal.azure.com) em `https://portal.azure.com` e entre usando suas credenciais do Azure, se necessário. Em seguida, elimine os recursos no grupo de recursos onde aprovisionou os seus recursos IA do Azure Search e IA do Azure.

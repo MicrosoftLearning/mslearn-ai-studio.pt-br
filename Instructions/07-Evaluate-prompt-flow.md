@@ -1,17 +1,17 @@
 ---
 lab:
-  title: Avaliar o desempenho do copiloto personalizado no Estúdio de IA do Azure
+  title: Avaliar o desempenho do copiloto personalizado no Azure IA Foundry
 ---
 
-# Avaliar o desempenho do copiloto personalizado no Estúdio de IA do Azure
+# Avaliar o desempenho do copiloto personalizado no Azure IA Foundry
 
-Neste exercício, você explorará avaliações internas e personalizadas para avaliar e comparar o desempenho dos seus aplicativos de IA com o Estúdio de IA do Azure.
+Neste exercício, você explorará avaliações internas e personalizadas para avaliar e comparar o desempenho dos seus aplicativos de IA com o portal do Azure IA Foundry.
 
 Este exercício levará aproximadamente **30** minutos.
 
-## Crie um hub de IA e um projeto no Estúdio de IA do Azure
+## Crie um hub de IA e um projeto no Azure IA Foundry
 
-Você deve começar criando um projeto do Estúdio de IA do Azure em um hub de IA do Azure:
+Você deve começar criando um projeto do Azure IA Foundry em um hub de IA do Azure:
 
 1. Em um navegador da Web, abra [https://ai.azure.com](https://ai.azure.com) e entre usando suas credenciais do Azure.
 1. Selecione a **Página Inicial** e selecione **+ Novo projeto**.
@@ -30,9 +30,10 @@ Você deve começar criando um projeto do Estúdio de IA do Azure em um hub de I
 
 ## Implantar um modelo GPT
 
-Para usar um modelo de linguagem no prompt flow, você precisa primeiro implantar um modelo. O Estúdio de IA do Azure permite implantar modelos do OpenAI que você pode usar nos seus fluxos.
+Para usar um modelo de linguagem no prompt flow, você precisa primeiro implantar um modelo. O portal do Azure AI Foundry permite implantar modelos do OpenAI que você pode usar nos seus fluxos.
 
-1. No painel de navegação à esquerda, em **Componentes**, selecione a página **Implantações**.
+1. Navegue até a página **Modelos + pontos de extremidade** na seção **Meus ativos** usando o menu à esquerda.
+1. Selecione o botão **+ Implantar modelo** e selecione a opção **Implantar modelo base**.
 1. Crie uma nova implantação do modelo **gpt-35-turbo** com as seguintes configurações selecionando **Personalizar** no assistente **Implantar modelo**:
     - **Nome da implantação**: *Um nome exclusivo para sua implantação de modelo*
     - **Tipo de implantação**: Padrão
@@ -62,12 +63,12 @@ Para usar um modelo de linguagem no prompt flow, você precisa primeiro implanta
    5. Encourage the user to ask follow-up questions for further assistance.
    ```
 
-1. Selecione **Salvar**.
-1. Na janela de chat, insira a consulta: `What can you do?` para verificar se o modelo de idioma está se comportando conforme o esperado.
+1. Selecione **Aplicar alterações**.
+1. Na janela de chat (histórico), insira a consulta: `What can you do?` para verificar se o modelo de linguagem está se comportando conforme o esperado.
 
 Agora que você tem um modelo implantado com uma mensagem de sistema atualizada, você pode avaliar o modelo.
 
-## Avaliar manualmente um modelo de linguagem no Estúdio de IA do Azure
+## Avaliar manualmente um modelo de linguagem no portal do Azure IA Foundry
 
 Você pode revisar manualmente as respostas do modelo com base nos dados do teste. A revisão manual permite que você teste diferentes entradas, uma de cada vez, para avaliar se o modelo funciona conforme o esperado.
 
@@ -112,7 +113,13 @@ Você pode revisar manualmente as respostas do modelo com base nos dados do test
 
 ## Avaliar seu copiloto com métricas integradas
 
-Depois de criar um copiloto com um fluxo de chat, você pode avaliar o fluxo fazendo uma execução em lote e avaliando o desempenho do fluxo com métricas integradas.
+Depois de criar um aplicativo de chat com o prompt flow, é possível avaliar o fluxo fazendo uma execução em lote e avaliando o desempenho do fluxo com métricas integradas.
+
+![Diagrama de construção do conjunto de dados de entrada para avaliação.](./media/diagram-dataset-evaluation.png)
+
+Para avaliar um fluxo de chat, as consultas do usuário e as respostas do chat são fornecidas como entrada para uma avaliação.
+
+Para economizar tempo, criamos um conjunto de dados de saída em lote para você que contém os resultados de várias entradas sendo processadas por um prompt flow. Cada um dos resultados é armazenado no conjunto de dados que você avaliará na próxima etapa.
 
 1. Clique na guia **Avaliações automatizadas** e crie uma **Nova avaliação** com as seguintes configurações: <details>  
       <summary><b>Dica de solução de problemas</b>: erro de permissões</summary>
@@ -130,7 +137,7 @@ Depois de criar um copiloto com um fluxo de chat, você pode avaliar o fluxo faz
     - **Nome da avaliação**: *Insira um nome exclusivo*
     - Selecione **Avançar**
     - **Selecione os dados que você quer avaliar**: Adiciona seu conjunto de dados
-        - Baixe o arquivo JSONL https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/main/data/travel-qa.jsonl e carregue-o na interface do usuário.
+        - Faça o download do [conjunto de dados de validação](https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/main/data/travel-qa.jsonl) em `https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/main/data/travel-qa.jsonl`, salve-o como um arquivo JSONL e carregue-o na interface do usuário.
     - Selecione **Avançar**
     - **Selecionar métricas**: Coerência, Fluência
     - **Conexão**: *Sua conexão dos Serviços de IA*
@@ -145,7 +152,7 @@ Depois de criar um copiloto com um fluxo de chat, você pode avaliar o fluxo faz
 
 ## Excluir recursos do Azure
 
-Quando terminar de explorar o Estúdio de IA do Azure, exclua os recursos criados para evitar custos desnecessários do Azure.
+Quando terminar de explorar o Azure IA Foundry, exclua os recursos criados para evitar custos desnecessários do Azure.
 
 - Navegue até o [portal do Azure](https://portal.azure.com) em `https://portal.azure.com`.
 - No portal do Azure, na **Página Inicial**, selecione **Grupos de recursos**.

@@ -1,55 +1,72 @@
 ---
 lab:
-  title: Criar copilots personalizados com prompt flow no portal do Azure AI Foundry
+  title: Introdução à criação de copliotos personalizados com prompt flow no Estúdio de IA do Azure
 ---
 
-# Criar copilots personalizados com prompt flow no portal do Azure AI Foundry
+# Introdução à criação de copliotos personalizados com prompt flow no Estúdio de IA do Azure
 
-Neste exercício, você usará o prompt flow do portal do Azure AI Foundry para criar um Copilot personalizado que usa um prompt de usuário e o histórico de chat como entradas e usa um modelo GPT do OpenAI do Azure para gerar uma saída.
+Neste exercício, você usará o prompt flow do Estúdio de IA do Azure para criar um copilot personalizado que usa um prompt de usuário e o histórico de chat como entradas e usa um modelo GPT do Azure OpenAI para gerar uma saída.
 
-Este exercício levará aproximadamente **30** minutos.
+> Para concluir este exercício, sua assinatura do Azure deve ser aprovada para acesso ao serviço do OpenAI do Azure. Preencha o [formulário de registro](https://learn.microsoft.com/legal/cognitive-services/openai/limited-access) para solicitar acesso aos modelos Azure OpenAI.
 
-## Criar um projeto e hub de IA no portal do Azure AI Foundry
+Para criar um copilot com prompt flow, você precisa:
 
-Você deve começar criando um projeto do portal do Azure AI Foundry em um hub de IA do Azure:
+- Crie um hub de IA e um projeto no Estúdio de IA do Azure.
+- Implante um modelo GPT.
+- Crie um fluxo que use o modelo GPT implantado para gerar uma resposta com base na entrada do usuário.
+- Teste e implante o fluxo.
+
+## Criar um hub de IA e um projeto no Estúdio de IA do Azure
+
+Você deve começar criando um projeto do Estúdio de IA do Azure em um hub de IA do Azure:
 
 1. Em um navegador da Web, abra [https://ai.azure.com](https://ai.azure.com) e entre usando suas credenciais do Azure.
-1. Na home page, selecione **+Criar projeto**.
-1. No assistente **Criar um projeto**, você pode ver todos os recursos do Azure que serão criados automaticamente com seu projeto ou pode personalizar as seguintes configurações selecionando **Personalizar** antes de selecionar **Criar**:
-
-    - **Nome do hub**: *Um nome exclusivo*
-    - **Assinatura**: *sua assinatura do Azure*
-    - **Grupo de recursos**: *Um novo grupo de recursos*
-    - **Local**: Selecione **Ajude-me a escolher** e, em seguida, selecione **gpt-35-turbo** na janela Auxiliar de local e use a região recomendada\*
-    - **Conectar os Serviços de IA do Azure ou a OpenAI do Azure**: (novo) *Preenchimentos automáticos com o nome do hub selecionado*
+1. Selecione a **Página Inicial** e selecione **+ Novo projeto**.
+1. No assistente **Criar um projeto**, crie um projeto com as seguintes configurações:
+    - **Nome do projeto**: *Um nome exclusivo para seu projeto*
+    - **Hub**: *Crie um novo hub com as seguintes configurações:*
+        - **Nome do hub**: *Um nome exclusivo*
+        - **Assinatura**: *sua assinatura do Azure*
+        - **Grupo de recursos**: *Um novo grupo de recursos*
+        - **Localização**: *faça uma escolha **aleatória** de uma das regiões a seguir*\*
+        - Leste da Austrália
+        - Leste do Canadá
+        - Leste dos EUA
+        - Leste dos EUA 2
+        - França Central
+        - Leste do Japão
+        - Centro-Norte dos EUA
+        - Suécia Central
+        - Norte da Suíça
+        - Sul do Reino Unido
+    - **Conecte os Serviços de IA do Azure ou do OpenAI do Azure**: *Crie uma nova conexão*
     - **Conectar-se à Pesquisa de IA do Azure**: Ignorar a conexão
 
-    > \* Os recursos do OpenAI do Azure são restringidos no nível do locatário por cotas regionais. As regiões listadas no auxiliar de localização incluem a cota padrão para os tipos de modelos usados neste exercício. Escolher aleatoriamente uma região reduz o risco de uma única região atingir o seu limite de cota. No caso de um limite de cota ser atingido mais adiante no exercício, há a possibilidade de você precisar criar outro recurso em uma região diferente. Saiba mais sobre a [disponibilidade do modelo por região](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
+    > \* Os recursos do OpenAI do Azure são restringidos no nível do locatário por cotas regionais. As regiões listadas incluem a cota padrão para os tipos de modelos usados neste exercício. Escolher aleatoriamente uma região reduz o risco de uma única região atingir o seu limite de cota. No caso de um limite de cota ser atingido mais adiante no exercício, há a possibilidade de você precisar criar outro recurso em uma região diferente. Saiba mais sobre a [disponibilidade do modelo por região](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
 
-1. Se você selecionou **Personalizar**, selecione **Avançar** e revise sua configuração.
-1. Clique em **Criar** e aguarde a conclusão do processo.
+1. Revise a configuração e crie o projeto.
+1. Aguarde de 5 a 10 minutos para que o projeto seja criado.
 
 ## Implantar um modelo GPT
 
-Para usar um modelo de linguagem no prompt flow, você precisa primeiro implantar um modelo. O portal do Azure AI Foundry permite implantar modelos do OpenAI que você pode usar nos seus fluxos.
+Para usar um modelo de linguagem no prompt flow, você precisa primeiro implantar um modelo. O Estúdio de IA do Azure permite implantar modelos do OpenAI que você pode usar nos seus fluxos.
 
-1. No painel de navegação à esquerda, em **Meus ativos**, selecione a página **Modelos + pontos de extremidade**.
+1. No painel de navegação à esquerda, em **Componentes**, selecione a página **Implantações**.
 1. Crie uma implantação do modelo **gpt-35-turbo** com as seguintes configurações:
     - **Nome da implantação**: *Um nome exclusivo para sua implantação de modelo*
-    - **Tipo de implantação**: Padrão
     - **Versão do modelo**: *Selecione a versão padrão*
-    - **Recurso de IA**: *escolha o recurso criado anteriormente*
+    - **Tipo de implantação**: Padrão
+    - **Recurso conectado do OpenAI do Azure**: *Selecione a conexão padrão*
     - **Limite de taxa de fichas por minuto (milhares)**: 5 mil
-    - **Filtro de conteúdo**: DefaultV2
-    - **Habilitar cota dinâmica**: Desabilitado
+    - **Filtro de conteúdo**: Padrão
 1. Aguarde até que o modelo seja implantado. Quando a implantação estiver pronta, selecione **Abrir no playground**.
 1. Na janela de chat, insira a consulta `What can you do?`.
 
     Observe que a resposta é genérica porque não há instruções específicas para o assistente. Para torná-la focada em uma tarefa, você pode alterar o prompt do sistema.
 
-1. Altere a mensagem **Dê instruções e contexto ao modelo** para o seguinte:
+1. Altere a **mensagem do sistema** para o seguinte:
 
-   ```md
+   ```
    **Objective**: Assist users with travel-related inquiries, offering tips, advice, and recommendations as a knowledgeable travel agent.
 
    **Capabilities**:
@@ -72,21 +89,9 @@ Para usar um modelo de linguagem no prompt flow, você precisa primeiro implanta
 
 Agora que você brincou com a mensagem do sistema para o modelo GPT implantado, você pode personalizar ainda mais o aplicativo trabalhando com o prompt flow.
 
-## Criar e executar um fluxo de chat no portal do Azure AI Foundry
+## Criar e executar um fluxo de chat no Estúdio de IA do Azure
 
 Você pode criar um novo fluxo a partir de um modelo ou criar um fluxo com base em suas configurações no playground. Como você já estava experimentando no playground, você usará esta opção para criar um novo fluxo.
-
-<details>  
-    <summary><b>Dica de solução de problemas</b>: erro de permissões</summary>
-    <p>Se você receber um erro de permissões ao criar um novo prompt flow, tente o seguinte para solucionar o problema:</p>
-    <ul>
-        <li>No portal do Azure, selecione o recurso Serviços de IA.</li>
-        <li>Na guia Identidade, em Gerenciamento de recursos, confirme se é uma identidade gerenciada atribuída pelo sistema.</li>
-        <li>Navegue até a conta de armazenamento associada. Na página do IAM, adicione a atribuição de função <em>Leitor de Dados do Blob de Armazenamento</em>.</li>
-        <li>Em <strong>Atribuir acesso a</strong>, escolha <strong>Identidade Gerenciada</strong>, <strong>+ Selecionar membros</strong> e selecione <strong>Todas as identidades gerenciadas atribuídas pelo sistema</strong>.</li>
-        <li>Revise e atribua para salvar as novas configurações e repita a etapa anterior.</li>
-    </ul>
-</details>
 
 1. Em **Playground de chat**, selecione **Prompt flow** na barra superior.
 1. Insira `Travel-Chat` como o nome da pasta.
@@ -108,6 +113,7 @@ Você pode criar um novo fluxo a partir de um modelo ou criar um fluxo com base 
 1. Examine o campo de prompt e certifique-se de que ele se pareça com o seguinte:
 
    ```yml
+   {% raw %}
    system:
    **Objective**: Assist users with travel-related inquiries, offering tips, advice, and recommendations as a knowledgeable travel agent.
 
@@ -134,6 +140,7 @@ Você pode criar um novo fluxo a partir de um modelo ou criar um fluxo com base 
 
    user:
    {{question}}
+   {% endraw %}
    ```
 
 ### Testar e implantar o fluxo
@@ -157,15 +164,16 @@ Agora que você desenvolveu o fluxo, você pode usar a janela de chat para testa
         - **Coleta de dados de inferência**: Habilitado
     - **Configurações avançadas**:
         - *Usar as configurações padrão*
-1. No portal do Azure AI Foundry, em seu projeto, no painel de navegação à esquerda, em **Meus ativos**, selecione a página **Modelos + pontos de extremidade**.
-1. Observe que, por padrão, as **Implantações de modelo** são listadas, incluindo o fluxo e o modelo de linguagem implantados. Pode levar algum tempo até que a implantação seja listada e criada com sucesso.
+1. No Estúdio de IA do Azure, em seu projeto, no painel de navegação à esquerda, em **Componentes**, selecione a página **Implantações**.
+1. Observe que, por padrão, as **Implantações de modelo** estão listadas, incluindo o modelo de linguagem implantado.
+1. Selecione a guia **Implantações de aplicativo** para localizar o fluxo implantado. Pode levar algum tempo até que a implantação seja listada e criada com sucesso.
 1. Quando a implantação for bem-sucedida, selecione-a. Em seguida, na página **Teste**, insira o prompt `What is there to do in San Francisco?` e revise a resposta.
 1. Insira o prompt `Where else could I go?` e revise a resposta.
 1. Exiba a página **Consumir** para o ponto de extremidade e observe que ele contém informações de conexão e código de exemplo que você pode usar para compilar um aplicativo cliente para o ponto de extremidade, permitindo que você integre a solução de prompt flow a um aplicativo como um copiloto personalizado.
 
 ## Excluir recursos do Azure
 
-Quando terminar de explorar o portal do Azure AI Foundry, exclua os recursos criados para evitar custos desnecessários do Azure.
+Quando terminar de explorar o Estúdio de IA do Azure, exclua os recursos criados para evitar custos desnecessários do Azure.
 
 - Navegue até o [portal do Azure](https://portal.azure.com) em `https://portal.azure.com`.
 - No portal do Azure, na **Página Inicial**, selecione **Grupos de recursos**.
