@@ -1,9 +1,9 @@
 ---
 lab:
-  title: Usar o prompt flow para NER (Reconhecimento de Entidade Nomeada) no Estúdio de IA do Azure
+  title: Usar o prompt flow para NER (reconhecimento de entidade nomeada) no portal do Azure IA Foundry
 ---
 
-# Usar o prompt flow para NER (Reconhecimento de Entidade Nomeada) no Estúdio de IA do Azure
+# Usar o prompt flow para NER (reconhecimento de entidade nomeada) no portal do Azure IA Foundry
 
 A extração de informações valiosas de um texto é conhecida como NER (Reconhecimento de Entidade Nomeada). Entidades são palavras-chave que são de seu interesse em determinado texto.
 
@@ -11,39 +11,41 @@ A extração de informações valiosas de um texto é conhecida como NER (Reconh
 
 Os LLMs (modelos de linguagem grande) podem ser usados para executar o NER. Para criar um aplicativo que usa um texto como entidades de entrada e saída, crie um fluxo que usa um nó do LLM com o prompt flow.
 
-Neste exercício, você usará o prompt flow do Estúdio de IA do Azure para criar um aplicativo LLM que espera um tipo de entidade e texto como entrada. Ele chama um modelo GPT do OpenAI do Azure por meio de um nó do LLM para extrair a entidade necessária do texto fornecido, limpa o resultado e gera as entidades extraídas.
+Neste exercício, você usará o prompt flow do portal do Azure IA Foundry para criar um aplicativo LLM que espera um tipo de entidade e texto como entrada. Ele chama um modelo GPT do OpenAI do Azure por meio de um nó do LLM para extrair a entidade necessária do texto fornecido, limpa o resultado e gera as entidades extraídas.
 
 ![Visão geral do exercício](./media/get-started-lab.png)
 
-Primeiro, você precisa criar um projeto no Estúdio de IA do Azure para criar os recursos necessários do Azure. Em seguida, você pode implantar um modelo GPT com o Serviço OpenAI do Azure. Depois de obter os recursos necessários, você poderá criar o fluxo. Por fim, você vai executar o fluxo para testá-lo e visualizar a saída de exemplo.
+Primeiro, você precisa criar um projeto no portal do Azure IA Foundry para criar os recursos necessários do Azure. Em seguida, você pode implantar um modelo GPT com o Serviço OpenAI do Azure. Depois de obter os recursos necessários, você poderá criar o fluxo. Por fim, você vai executar o fluxo para testá-lo e visualizar a saída de exemplo.
 
-## Criar um projeto no Estúdio de IA do Azure
+## Criar um projeto no portal do Azure IA Foundry
 
-Comece criando um projeto do Estúdio de IA do Azure e um Hub de IA do Azure para dar suporte a ele.
+Comece criando um projeto do portal do Azure IA Foundry e um hub de IA do Azure para dar suporte a ele.
 
 1. Em um navegador da Web, abra [https://ai.azure.com](https://ai.azure.com) e entre usando suas credenciais do Azure.
-1. Selecione a **Página Inicial** e selecione **+ Novo projeto**.
-1. No assistente **Criar um projeto**, crie um projeto com as seguintes configurações:
+1. Na home page, selecione **+Criar projeto**.
+1. No assistente **Criar um projeto**, você pode ver todos os recursos do Azure que serão criados automaticamente com seu projeto ou pode personalizar as seguintes configurações selecionando **Personalizar** antes de selecionar **Criar**:
+
     - **Nome do projeto**: *Um nome exclusivo para seu projeto*
     - **Hub**: *Crie um novo hub com as seguintes configurações:*
     - **Nome do hub**: *Um nome exclusivo*
     - **Assinatura**: *sua assinatura do Azure*
     - **Grupo de recursos**: *Um novo grupo de recursos*
     - **Local**: Selecione **Ajude-me a escolher** e, em seguida, selecione **gpt-35-turbo** na janela Auxiliar de local e use a região recomendada\*
-    - **Conecte os Serviços de IA do Azure ou do OpenAI do Azure**: *Crie uma nova conexão*
+    - **Conectar os Serviços de IA do Azure ou a OpenAI do Azure**: (novo) *Preenchimentos automáticos com o nome do hub selecionado*
     - **Conectar-se à Pesquisa de IA do Azure**: Ignorar a conexão
 
     > \* Os recursos do OpenAI do Azure são restringidos no nível do locatário por cotas regionais. As regiões listadas no auxiliar de localização incluem a cota padrão para os tipos de modelos usados neste exercício. Escolher aleatoriamente uma região reduz o risco de uma única região atingir o seu limite de cota. No caso de um limite de cota ser atingido mais adiante no exercício, há a possibilidade de você precisar criar outro recurso em uma região diferente. Saiba mais sobre a [disponibilidade do modelo por região](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
 
-1. Revise a configuração e crie o projeto.
-1. Aguarde até que seu projeto seja criado.
+1. Se você selecionou **Personalizar**, selecione **Avançar** e revise sua configuração.
+1. Clique em **Criar** e aguarde a conclusão do processo.
 
 ## Implantar um modelo GPT
 
-Para usar um modelo de LLM no prompt flow, primeiro, você precisa implantar um modelo. O Estúdio de IA do Azure permite implantar modelos do OpenAI que você pode usar nos seus fluxos.
+Para usar um modelo de LLM no prompt flow, primeiro, você precisa implantar um modelo. O portal do Azure AI Foundry permite implantar modelos do OpenAI que você pode usar nos seus fluxos.
 
-1. No painel de navegação à esquerda, em **Componentes**, selecione a página **Implantações**.
-1. Crie uma implantação do modelo **gpt-35-turbo** com as seguintes configurações:
+1. No painel de navegação à esquerda, em **Meus ativos**, selecione a página **Modelos + pontos de extremidade**.
+1. Crie uma nova implantação do modelo **gpt-35-turbo** com as seguintes configurações selecionando **Personalizar** nos detalhes de implantação:
+   
     - **Nome da implantação**: *Um nome exclusivo para sua implantação de modelo*
     - **Tipo de implantação**: Padrão
     - **Versão do modelo**: *Selecione a versão padrão*
@@ -52,9 +54,9 @@ Para usar um modelo de LLM no prompt flow, primeiro, você precisa implantar um 
     - **Filtro de conteúdo**: DefaultV2
     - **Habilitar cota dinâmica**: Desabilitado
    
-Agora que você implantou seu modelo de LLM, crie um fluxo no Estúdio de IA do Azure que chama o modelo implantado.
+Agora que você implantou seu modelo de linguagem, crie um fluxo no portal do Azure IA Foundry que faz uma chamada para o modelo implantado.
 
-## Criar e executar um fluxo no Estúdio de IA do Azure
+## Criar e executar um fluxo no portal do Azure IA Foundry
 
 Agora que você provisionou todos os recursos necessários, crie um fluxo.
 
@@ -62,7 +64,7 @@ Agora que você provisionou todos os recursos necessários, crie um fluxo.
 
 Para criar um fluxo com um modelo, selecione um dos tipos de fluxos que deseja desenvolver.
 
-1. No painel de navegação à esquerda, em **Ferramentas**, selecione **Prompt flow**.
+1. No painel de navegação à esquerda, em **Criar e personalizar**, selecione **Prompt flow**.
 1. Escolha **+ Criar** para criar um fluxo.
 1. Crie um **Fluxo padrão** e insira `entity-recognition` como o nome da pasta.
 
@@ -71,7 +73,7 @@ Para criar um fluxo com um modelo, selecione um dos tipos de fluxos que deseja d
     <p>Se você receber um erro de permissões ao criar um novo prompt flow, tente o seguinte para solucionar o problema:</p>
     <ul>
         <li>No portal do Azure, selecione o recurso Serviços de IA.</li>
-        <li>Na página do IAM, na guia Identidade, confirme se é uma identidade gerenciada atribuída pelo sistema.</li>
+        <li>Na guia Identidade, em Gerenciamento de recursos, confirme se é uma identidade gerenciada atribuída pelo sistema.</li>
         <li>Navegue até a conta de armazenamento associada. Na página do IAM, adicione a atribuição de função <em>Leitor de Dados do Blob de Armazenamento</em>.</li>
         <li>Em <strong>Atribuir acesso a</strong>, escolha <strong>Identidade Gerenciada</strong>, <strong>+ Selecionar membros</strong> e selecione <strong>Todas as identidades gerenciadas atribuídas pelo sistema</strong>.</li>
         <li>Revise e atribua para salvar as novas configurações e repita a etapa anterior.</li>
@@ -108,12 +110,11 @@ O fluxo padrão já inclui um nó que usa a ferramenta LLM. Encontre o nó na vi
 
 1. Navegue até o **nó do LLM** chamado `joke`.
 1. Substitua o nome por `NER_LLM`
-1. Em **Conexão**, selecione a conexão `Default_AzureOpenAI`.
+1. Em **Conexão**, selecione a conexão que foi criada para você quando você criou o hub de IA.
 1. Em **deployment_name**, escolha o modelo `gpt-35-turbo` implantado.
 1. Substitua o campo do prompt pelo seguinte código:
 
    ```yml
-   {% raw %}
    system:
 
    Your task is to find entities of a certain type from the given text content.
@@ -126,7 +127,6 @@ O fluxo padrão já inclui um nó que usa a ferramenta LLM. Encontre o nó na vi
    Entity type: {{entity_type}}
    Text content: {{text}}
    Entities:
-   {% endraw %}
    ```
 
 1. Selecione **Validar e analisar entrada**.
@@ -180,7 +180,7 @@ Agora que você desenvolveu o fluxo, execute-o para testá-lo. Como você adicio
 
 ## Excluir recursos do Azure
 
-Quando terminar de explorar o Estúdio de IA do Azure, exclua os recursos criados para evitar custos desnecessários do Azure.
+Quando terminar de explorar o portal do Azure AI Foundry, exclua os recursos criados para evitar custos desnecessários do Azure.
 
 - Navegue até o [portal do Azure](https://portal.azure.com) em `https://portal.azure.com`.
 - No portal do Azure, na **Página Inicial**, selecione **Grupos de recursos**.

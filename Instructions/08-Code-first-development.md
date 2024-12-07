@@ -5,7 +5,7 @@ lab:
 
 # Criar um copiloto personalizado usando ferramentas de desenvolvimento que priorizam o código
 
-Neste exercício, você clonará e implantará um modelo do Azure Developer CLI que provisiona e [implanta seu projeto de IA em um ponto de extremidade online](https://learn.microsoft.com/azure/developer/azure-developer-cli/azure-ai-ml-endpoints?WT.mc_id=academic-140829-cacaste) no Estúdio de IA do Azure. Em seguida, você o usará como ponto de partida para criar seu próprio copiloto personalizado com a IA do Azure e uma experiência que prioriza o código.
+Neste exercício, você clonará e implantará um modelo do Azure Developer CLI que provisiona e [implanta seu projeto de IA em um ponto de extremidade online](https://learn.microsoft.com/azure/developer/azure-developer-cli/azure-ai-ml-endpoints?WT.mc_id=academic-140829-cacaste) no Azure IA Foundry. Em seguida, você o usará como ponto de partida para criar seu próprio copiloto personalizado com a IA do Azure e uma experiência que prioriza o código.
 
 Este exercício levará aproximadamente **90** minutos.
 
@@ -21,7 +21,7 @@ Para concluir este exercício, você precisa de:
 
 Para começar a usar o modelo de projeto de IA do Azure Developer CLI, navegue até a coleção [Modelos de IA do Azure com o Azure Developer CLI](https://learn.microsoft.com/collections/5pq0uompdgje8d/?WT.mc_id=academic-140829-cacaste). Ao explorar a coleção, você pode encontrar vários projetos agrupados por tecnologia e caso de uso, incluindo exemplos de projetos multimodais e multiagentes, projetos semelhantes a copilotos e exemplos que integram diferentes estruturas e serviços do Azure.
 
-Para este exercício, você usará o modelo de projeto **[Contoso Chat Retail com o Estúdio de IA do Azure e PromptFlow (Python)](https://aka.ms/contoso-retail-sample)** como ponto de partida. Esse modelo de projeto é uma experiência que prioriza o código que usa Prompty e PromptFlow para criar um copiloto personalizado (IA de chat) que pode ser integrado ao site de varejo (interface do usuário de chat) de uma empresa fictícia chamada Contoso Outdoors.
+Para este exercício, você usará o modelo de projeto **[Contoso Chat Retail com o Azure IA Foundry e PromptFlow (Python)](https://aka.ms/contoso-retail-sample)** como ponto de partida. Esse modelo de projeto é uma experiência que prioriza o código que usa Prompty e PromptFlow para criar um copiloto personalizado (IA de chat) que pode ser integrado ao site de varejo (interface do usuário de chat) de uma empresa fictícia chamada Contoso Outdoors.
 
 ![UI/UX do chat da Contoso](./media/contoso_outdoors_website.png)
 
@@ -83,7 +83,7 @@ Depois de fazer logon, estará tudo pronto para começar a provisionar os recurs
 O provisionamento e a implantação de um aplicativo de IA usando azd podem levar dez minutos ou mais para serem concluídos. Você pode acompanhar o progresso ao:
 
 - Visualizar o progresso detalhado no [portal do Azure](https://ms.portal.azure.com/). Pesquise o grupo de recursos correspondente ao nome do seu ambiente. Selecione a opção **Implantações** na barra lateral e monitore o status de implantação dos recursos que estão sendo criados.
-- Visitar o portal do [Estúdio de IA do Azure](https://ai.azure.com). Entre usando sua conta do Azure. Pesquise o hub de IA correspondente ao grupo de recursos acima (talvez seja necessário atualizar algumas vezes). Selecione o projeto de IA listado e, em seguida, selecione **Implantações** em sua barra lateral para acompanhar o status de modelos e implantações de aplicativos de chat.
+- Visitando o [portal do Azure AI Foundry](https://ai.azure.com). Entre usando sua conta do Azure. Pesquise o hub de IA correspondente ao grupo de recursos acima (talvez seja necessário atualizar algumas vezes). Selecione o projeto de IA listado e, em seguida, selecione **Implantações** em sua barra lateral para acompanhar o status de modelos e implantações de aplicativos de chat.
 
 Vamos explorar como validar o provisionamento de recursos usando o Portal do Azure.
 
@@ -92,13 +92,13 @@ Vamos explorar como validar o provisionamento de recursos usando o Portal do Azu
 
     ![Visão geal do grupo de recursos do portal do Azure](./media/azure-portal-resource-group.png)
 
-1. Vamos começar verificando se os principais recursos de [arquitetura do Estúdio de IA do Azure](https://learn.microsoft.com/azure/ai-studio/concepts/architecture) foram criados. A figura abaixo fornece mais detalhes sobre o que cada um desses recursos fornece ao nosso aplicativo de IA.
+1. Vamos começar verificando se os principais recursos de [arquitetura do Azure IA Foundry](https://learn.microsoft.com/azure/ai-studio/concepts/architecture) foram criados. A figura abaixo fornece mais detalhes sobre o que cada um desses recursos fornece ao nosso aplicativo de IA.
 
     - **Hub de IA do Azure**: recurso do Azure de nível superior. Fornece um ambiente de colaboração para equipes.
     - **Projeto de IA do Azure**: filho do hub. Agrupa componentes do aplicativo para orquestração e personalização.
     - **Serviços de IA do Azure**: gerencia os pontos de extremidade do modelo.
 
-    ![Arquitetura do Estúdio de IA do Azure](./media/resource-provider-connected-resources.svg)
+    ![Arquitetura do Azure AI Foundry](./media/resource-provider-connected-resources.svg)
 
 1. Em seguida, vamos verificar se provisionamos dois recursos importantes para implementar nosso padrão de design de [Geração Aumentada de Recuperação](https://learn.microsoft.com/azure/ai-studio/concepts/retrieval-augmented-generation) armazenando os dados do produto e do cliente para recuperação orientada à consulta.
 
@@ -115,11 +115,11 @@ Vamos explorar como validar o provisionamento de recursos usando o Portal do Azu
 
 1. Por último, mas não menos importante, você notará um novo recurso com o tipo **Implantação online de machine learning**. Esse é o recurso correspondente ao nosso ponto de extremidade do projeto de IA do Azure implantado (do copiloto de chat).
 
-## Validar a implantação usando o Estúdio de IA do Azure
+## Validar a implantação usando o Azure IA Foundry
 
-O Portal do Azure ajuda você a gerenciar os recursos subjacentes do Azure para seu projeto. O portal do Estúdio de IA do Azure ajuda você a *criar e gerenciar* os próprios projetos de IA, de ponta a ponta, desde a seleção do modelo até a implantação do aplicativo. O comando `azd up` concluirá todo o processo, desde o provisionamento dos modelos necessários até a implantação e hospedagem do ponto de extremidade de API do copiloto para uso. Vamos validar se o aplicativo está funcionando conforme o esperado.
+O Portal do Azure ajuda você a gerenciar os recursos subjacentes do Azure para seu projeto. O portal do Azure IA Foundry ajuda você a *criar e gerenciar* os próprios projetos de IA, de ponta a ponta, desde a seleção do modelo até a implantação do aplicativo. O comando `azd up` concluirá todo o processo, desde o provisionamento dos modelos necessários até a implantação e hospedagem do ponto de extremidade de API do copiloto para uso. Vamos validar se o aplicativo está funcionando conforme o esperado.
 
-1. Visite a página **Gerenciar** no [Estúdio de IA do Azure](https://ai.azure.com/manage) para exibir todos os hubs de IA do Azure em sua assinatura.
+1. Visite a página **Gerenciar** no [Azure IA Foundry](https://ai.azure.com/manage) para exibir todos os hubs de IA do Azure em sua assinatura.
 1. Selecione o hub do grupo de recursos para exibir todos os projetos de IA do Azure nele.
 1. Selecione o projeto de IA padrão no hub e, em seguida, selecione **Implantações** no menu à esquerda.
 1. Em **Implantações de modelo**, verifique se você tem uma Conexão do OpenAI do Azure, incluindo as implantações de:
@@ -131,13 +131,13 @@ O Portal do Azure ajuda você a gerenciar os recursos subjacentes do Azure para 
 
     ![Implantações do projeto de IA do Azure](./media/azure-ai-project-deployment.png)
 
-## Testar a implantação (na nuvem) usando o Estúdio de IA do Azure
+## Testar a implantação (na nuvem) usando o Azure IA Foundry
 
-Para validar se o copiloto implantado funciona, use o recurso de playground de teste interno no Estúdio de IA do Azure
+Para validar se o copiloto implantado funciona, use o recurso de playground de teste interno no portal do Azure IA Foundry
 
 ![Detalhes de implantação do chat](./media/chat-deployment-details.png)
 
-1. No Estúdio de IA do Azure, na lista **Implantações do aplicativo**, selecione a implantação **chat-deployment-xxxx**.
+1. No portal do Azure IA Foundry, na lista **Implantações do aplicativo**, selecione a implantação **chat-deployment-xxxx**.
 1. Na página **Detalhes** do aplicativo de chat implantado, clique na guia **Teste** para abrir a interface de teste.
 
     A guia **Detalhes** também tem valores `Target URI` e `Key` que você pode usar com outros aplicativos de front-end (por exemplo, o site da Contoso Outdoor) para integrar esse assistente de chat para interações do usuário do mundo real.
