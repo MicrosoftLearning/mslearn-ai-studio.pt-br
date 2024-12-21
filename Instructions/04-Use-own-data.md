@@ -1,11 +1,11 @@
 ---
 lab:
-  title: Crie um copiloto personalizado que use seus próprios dados
+  title: Crie um aplicativo de IA generativa que use seus próprios dados
 ---
 
-# Crie um copiloto personalizado que use seus próprios dados
+# Crie um aplicativo de IA generativa que use seus próprios dados
 
-A Geração Aumentada de Recuperação (RAG) é uma técnica usada para compilar aplicativos que integram dados de fontes de dados personalizadas em um prompt para um modelo de IA generativa. O RAG é um padrão comumente usado para desenvolver *copilotos* personalizados – aplicativos baseados em chat que usam um modelo de linguagem para interpretar entradas e gerar respostas apropriadas.
+A Geração Aumentada de Recuperação (RAG) é uma técnica usada para compilar aplicativos que integram dados de fontes de dados personalizadas em um prompt para um modelo de IA generativa. O RAG é um padrão comumente usado para desenvolver aplicativos de IA generativa – aplicativos baseados em chat que usam um modelo de linguagem para interpretar entradas e gerar respostas apropriadas.
 
 Neste exercício, você usará o portal do Azure IA Foundry para integrar dados personalizados em um prompt flow de IA generativa.
 
@@ -13,7 +13,7 @@ Este exercício levará, aproximadamente, **45** minutos.
 
 ## Criar um recurso do Azure AI Search
 
-Sua solução de copiloto integrará dados personalizados em um prompt flow. Para dar suporte a essa integração, você precisará de um recurso de Pesquisa de IA do Azure para indexar seus dados.
+Sua solução de aplicativo de IA generativa integrará dados personalizados em um prompt flow. Para dar suporte a essa integração, você precisará de um recurso de Pesquisa de IA do Azure para indexar seus dados.
 
 1. Em um navegador da Web, abra o [portal do Azure](https://portal.azure.com) em `https://portal.azure.com` e entre usando suas credenciais do Azure.
 1. Na página inicial, selecione **+ Criar um recurso** e pesquise por `Azure AI Search`. Em seguida, crie um novo recurso de Pesquisa de IA do Azure com as seguintes configurações:
@@ -67,7 +67,7 @@ Você precisará de dois modelos para implementar sua solução:
 
     - **Nome da implantação**: `text-embedding-ada-002`
     - **Tipo de implantação**: Padrão
-    - **Versão do modelo**: *Selecione a versão padrão*
+    - **Versão do modelo**: *selecione a versão padrão*
     - **Recurso de IA**: *escolha o recurso criado anteriormente*
     - **Limite de taxa de fichas por minuto (milhares)**: 5 mil
     - **Filtro de conteúdo**: DefaultV2
@@ -240,7 +240,7 @@ Agora que você tem um fluxo de trabalho que usa seus dados indexados, pode impl
 
 ## Desafio 
 
-Agora que você experimentou como integrar seus próprios dados em um copiloto criado com o portal do Azure IA Foundry, vamos explorar mais!
+Agora que você experimentou como integrar seus próprios dados em um aplicativo de IA generativa criado com o portal do Azure IA Foundry, vamos explorar mais!
 
 Tente adicionar uma nova fonte de dados por meio do portal do Azure IA Foundry, indexá-la e integrar os dados indexados em um prompt flow. Estes são alguns conjuntos de dados que você pode tentar:
 
