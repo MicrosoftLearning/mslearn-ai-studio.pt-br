@@ -4,7 +4,7 @@ permalink: index.html
 layout: home
 ---
 
-# Desenvolver aplicativos de IA gerativa com o Estúdio de IA do Azure
+# Desenvolver aplicativos de IA generativa no portal do Azure AI Foundry
 
 Os exercícios a seguir foram projetados para fornecer uma experiência de aprendizado prático na qual você explorará padrões e técnicas comuns que os desenvolvedores usam para criar aplicativos de IA generativa, como "copilotos" baseados em chat, e aprenderá a implementar esses padrões usando os Serviços de IA do Azure, em específico, o Serviço OpenAI do Azure e o Estúdio de IA do Azure.
 
