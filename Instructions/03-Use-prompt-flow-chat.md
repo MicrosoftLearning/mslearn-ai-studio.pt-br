@@ -37,11 +37,14 @@ Para usar um modelo de linguagem no prompt flow, você precisa primeiro implanta
 1. Crie uma implantação do modelo **gpt-35-turbo** com as seguintes configurações:
     - **Nome da implantação**: *Um nome exclusivo para sua implantação de modelo*
     - **Tipo de implantação**: Padrão
-    - **Versão do modelo**: *Selecione a versão padrão*
+    - **Versão do modelo**: *selecione a versão padrão*
     - **Recurso de IA**: *escolha o recurso criado anteriormente*
     - **Limite de taxa de fichas por minuto (milhares)**: 5 mil
     - **Filtro de conteúdo**: DefaultV2
     - **Habilitar cota dinâmica**: Desabilitado
+
+    > **Observação**: se o local atual do recurso de IA não tiver cota disponível para o modelo que você deseja implantar, será solicitado a escolher um local diferente onde um novo recurso de IA será criado e conectado ao seu projeto.
+
 1. Aguarde até que o modelo seja implantado. Quando a implantação estiver pronta, selecione **Abrir no playground**.
 1. Na janela de chat, insira a consulta `What can you do?`.
 
@@ -83,7 +86,7 @@ Você pode criar um novo fluxo a partir de um modelo ou criar um fluxo com base 
         <li>No portal do Azure, selecione o recurso Serviços de IA.</li>
         <li>Na guia Identidade, em Gerenciamento de recursos, confirme se é uma identidade gerenciada atribuída pelo sistema.</li>
         <li>Navegue até a conta de armazenamento associada. Na página do IAM, adicione a atribuição de função <em>Leitor de Dados do Blob de Armazenamento</em>.</li>
-        <li>Em <strong>Atribuir acesso a</strong>, escolha <strong>Identidade Gerenciada</strong>, <strong>+ Selecionar membros</strong> e selecione <strong>Todas as identidades gerenciadas atribuídas pelo sistema</strong>.</li>
+        <li>Em <strong>Atribuir acesso a</strong>, escolha <strong>Identidade Gerenciada</strong>, <strong>+ Selecionar membros</strong>, selecione <strong>Todas as identidades gerenciadas atribuídas pelo sistema</strong> e selecione o recurso dos Serviços de IA do Azure.</li>
         <li>Revise e atribua para salvar as novas configurações e repita a etapa anterior.</li>
     </ul>
 </details>

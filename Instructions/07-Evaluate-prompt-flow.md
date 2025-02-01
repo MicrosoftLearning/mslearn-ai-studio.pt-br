@@ -37,11 +37,14 @@ Para usar um modelo de linguagem no prompt flow, você precisa primeiro implanta
 1. Crie uma nova implantação do modelo **gpt-35-turbo** com as seguintes configurações selecionando **Personalizar** no assistente **Implantar modelo**:
     - **Nome da implantação**: *Um nome exclusivo para sua implantação de modelo*
     - **Tipo de implantação**: Padrão
-    - **Versão do modelo**: *Selecione a versão padrão*
+    - **Versão do modelo**: *selecione a versão padrão*
     - **Recurso de IA**: *escolha o recurso criado anteriormente*
     - **Limite de taxa de fichas por minuto (milhares)**: 5 mil
     - **Filtro de conteúdo**: DefaultV2
     - **Habilitar cota dinâmica**: Desabilitado
+
+    > **Observação**: se o local atual do recurso de IA não tiver cota disponível para o modelo que você deseja implantar, será solicitado a escolher um local diferente onde um novo recurso de IA será criado e conectado ao seu projeto.
+
 1. Aguarde até que o modelo seja implantado. Quando a implantação estiver pronta, selecione **Abrir no playground**.
 1. Na caixa de texto **Fornecer instruções e contexto ao modelo**, altere o conteúdo para o seguinte:
 
@@ -138,11 +141,14 @@ Para economizar tempo, criamos um conjunto de dados de saída em lote para você
     - Selecione **Avançar**
     - **Selecione os dados que você quer avaliar**: Adiciona seu conjunto de dados
         - Faça o download do [conjunto de dados de validação](https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/main/data/travel-qa.jsonl) em `https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/main/data/travel-qa.jsonl`, salve-o como um arquivo JSONL e carregue-o na interface do usuário.
+
+    > **Observação**: seu dispositivo pode salvar o arquivo como um arquivo .txt por padrão. Selecione todos os arquivos e remova o sufixo .txt para garantir que você esteja salvando o arquivo como JSONL.
+
     - Selecione **Avançar**
     - **Selecionar métricas**: Coerência, Fluência
     - **Conexão**: *Sua conexão dos Serviços de IA*
     - **Nome/Modelo da implantação**: *Seu modelo GPT-3.5 implantado*
-    - **consulta**: selecione **pergunta** como a fonte de dados
+    - **consulta**: selecione **consulta** como a fonte de dados
     - **resposta**: selecione **resposta** como a fonte de dados
       
 1. Selecione **Avançar**, revise os dados e **Envie** a nova avaliação.

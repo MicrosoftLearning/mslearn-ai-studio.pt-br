@@ -55,9 +55,9 @@ Como o ajuste fino de um modelo leva algum tempo para ser concluído, você inic
     <p>Se você receber um erro de permissões, tente o seguinte para solucionar o problema:</p>
     <ul>
         <li>No portal do Azure, selecione o recurso Serviços de IA.</li>
-        <li>Na página do IAM, na guia Identidade, confirme se é uma identidade gerenciada atribuída pelo sistema.</li>
-        <li>Navegue até a conta de armazenamento associada. Na página do IAM, adicione a atribuição de função <em>Leitor de Dados do Blob de Armazenamento</em>.</li>
-        <li>Em <strong>Atribuir acesso a</strong>, escolha <strong>Identidade gerenciada</strong>, <strong>+Selecionar membros</strong> e selecione <strong>Todas as identidades gerenciadas atribuídas pelo sistema</strong>.</li>
+        <li>Na guia Identidade, em Gerenciamento de recursos, confirme se é uma identidade gerenciada atribuída pelo sistema.</li>
+        <li>Navegue até a conta de armazenamento associada. Na página do IAM, adicione a atribuição de função <em>Proprietário de Dados do Blob de Armazenamento</em>.</li>
+        <li>Em <strong>Atribuir acesso a</strong>, escolha <strong>Identidade Gerenciada</strong>, <strong>+Selecionar membros</strong>, selecione <strong>Todas as identidades gerenciadas atribuídas pelo sistema</strong> e selecione o recurso dos Serviços de IA do Azure.</li>
         <li>Revise e atribua para salvar as novas configurações e repita a etapa anterior.</li>
     </ul>
     </details>
@@ -76,6 +76,9 @@ Enquanto você espera a conclusão do trabalho de ajuste, vamos conversar com um
 1. Navegue até a página **Modelos + pontos de extremidade** na seção **Meus ativos** usando o menu à esquerda.
 1. Selecione o botão **+ Implantar modelo** e selecione a opção **Implantar modelo base**.
 1. Implante um modelo `gpt-35-turbo`, que é o mesmo tipo de modelo que você usou ao ajustar.
+
+> **Observação**: se o local atual do recurso de IA não tiver cota disponível para o modelo que você deseja implantar, será solicitado a escolher um local diferente onde um novo recurso de IA será criado e conectado ao seu projeto.
+
 1. Quando a implantação estiver finalizada, selecione o botão **Abrir no playground**.
 1. Verifique se o modelo base implantado `gpt-35-model` está selecionado no painel de configuração.
 1. Na janela de chat, insira a consulta `What can you do?` e veja a resposta:
@@ -122,7 +125,7 @@ Quando o ajuste for concluído, você poderá implantar o modelo ajustado.
 
 ## Testar o modelo ajustado
 
-Agora que você implantou seu modelo ajustado, pode testar o modelo da mesma forma que pode testar seu modelo base implantado.
+Agora que você implantou seu modelo ajustado, pode testar o modelo da mesma forma que testou o modelo base implantado.
 
 1. Quando a implantação estiver pronta, navegue até o modelo ajustado e selecione **Abrir no playground**.
 1. Atualize a mensagem do sistema com as seguintes instruções:
