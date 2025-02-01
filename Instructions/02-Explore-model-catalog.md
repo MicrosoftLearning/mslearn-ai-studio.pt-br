@@ -15,6 +15,8 @@ Este exercício levará aproximadamente **25** minutos.
 
 Um hub IA do Azure fornece um espaço de trabalho colaborativo no qual você pode definir um ou mais *projetos*. Vamos criar um projeto e hub de IA do Azure.
 
+1. Em um navegador da Web, abra o [portal do Azure IA Foundry](https://ai.azure.com) em `https://ai.azure.com` e entre usando suas credenciais do Azure.
+
 1. Na home page, selecione **+Criar projeto**. No assistente **Criar um projeto**, você pode ver todos os recursos do Azure que serão criados automaticamente com seu projeto ou pode personalizar as seguintes configurações selecionando **Personalizar** antes de selecionar **Criar**:
 
     - **Nome do hub**: *Um nome exclusivo*
@@ -27,7 +29,7 @@ Um hub IA do Azure fornece um espaço de trabalho colaborativo no qual você pod
     > \* Os recursos do OpenAI do Azure são restringidos no nível do locatário por cotas regionais. As regiões listadas no auxiliar de localização incluem a cota padrão para os tipos de modelos usados neste exercício. Escolher aleatoriamente uma região reduz o risco de uma única região atingir o seu limite de cota. No caso de um limite de cota ser atingido mais adiante no exercício, há a possibilidade de você precisar criar outro recurso em uma região diferente. Saiba mais sobre a [disponibilidade do modelo por região](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
 
 1. Se você selecionou **Personalizar**, selecione **Avançar** e revise sua configuração.
-1. 1. Clique em **Criar** e aguarde a conclusão do processo.
+1. Clique em **Criar** e aguarde a conclusão do processo.
    
     Após a criação do projeto e hub de IA do Azure, você deverá ver algo semelhante à imagem a seguir:
 
@@ -50,16 +52,16 @@ Imagine que você quer criar um copiloto personalizado que serve como assistente
 
 Seu copiloto precisará fornecer informações factualmente precisas, portanto, o embasamento é importante. Além disso, você quer que as respostas do copiloto sejam fáceis de ler e entender. Portanto, você também deve escolher um modelo com alto índice de fluência e coerência.
 
-1. No portal de projeto do Azure AI Foundry, navegue até **Parâmetros de comparação de modelo** usando o menu à esquerda.
-    Na aba **Parâmetros de comparação de qualidade**, você pode encontrar alguns gráficos já visualizados para você, comparando diferentes modelos.
-1. Filtre os modelos mostrados:
-    - **Tarefas**: respostas às perguntas
-    - **Coleções**: OpenAI do Azure
-    - **Métricas**: coerência, fluência, embasamento
-1. Explore os gráficos resultantes e a tabela de comparação. Ao explorar, você pode tentar responder às seguintes perguntas:
+1. No portal do projeto da Fábrica de IA do Azure, navegue até **Catálogo de modelos** usando o menu à esquerda.
+    Na página do catálogo, selecione **Comparar com parâmetros de comparação**. Na página Modelo de parâmetro de comparação, você encontrará um gráfico já plotado para você, comparando diferentes modelos.
+1. Selecione **+ Modelo para comparar** e adicione **gpt-4-32k** e **gpt-4** ao gráfico de métricas. No menu suspenso **Eixo X**, em **Qualidade**, selecione as seguintes métricas e observe cada gráfico resultante antes de passar para o próximo:
+    - Coerência
+    - Fluência
+    - Fundamentação
+1. Ao explorar os resultados, você pode tentar responder às seguintes perguntas:
     - Você percebe uma diferença de desempenho entre os modelos GPT-3.5 e GPT-4?
     - Existe alguma diferença entre versões do mesmo modelo?
-    - Como as variantes de 32k diferem dos modelos básicos?
+    - Como a variante de 32k do GPT-4 difere do modelo básico?
 
 Na coleção OpenAI do Azure, você pode escolher entre os modelos GPT-3.5 e GPT-4. Vamos implantar esses dois modelos e explorar como eles se comparam para seu caso de uso.
 
@@ -76,11 +78,13 @@ Vamos começar implantando um modelo do catálogo de modelos. Você pode preferi
    
     - **Nome da implantação**: *Um nome exclusivo para sua implantação de modelo*
     - **Tipo de implantação**: Padrão
-    - **Versão do modelo**: *Selecione a versão padrão*
+    - **Versão do modelo**: *selecione a versão padrão*
     - **Recurso de IA**: *escolha o recurso criado anteriormente*
     - **Limite de taxa de fichas por minuto (milhares)**: 5 mil
     - **Filtro de conteúdo**: DefaultV2
     - **Habilitar cota dinâmica**: Desabilitado
+
+    > **Observação**: se o local atual do recurso de IA não tiver cota disponível para o modelo que você deseja implantar, será solicitado a escolher um local diferente onde um novo recurso de IA será criado e conectado ao seu projeto.
 
 ### Implantar um modelo por meio de Modelos + pontos de extremidade
 
@@ -91,13 +95,11 @@ Se você já sabe exatamente qual modelo quer implantar, talvez prefira fazê-lo
     - **Modelo**: gpt-4
     - **Nome da implantação**: *Um nome exclusivo para sua implantação de modelo*
     - **Tipo de implantação**: Padrão
-    - **Versão do modelo**: *Selecione a versão padrão*
+    - **Versão do modelo**: *selecione a versão padrão*
     - **Recurso de IA**: *escolha o recurso criado anteriormente*
     - **Limite de taxa de fichas por minuto (milhares)**: 5 mil
     - **Filtro de conteúdo**: DefaultV2
     - **Habilitar cota dinâmica**: Desabilitado
-
-    > **Observação**: se o local atual do recurso de IA não tiver cota disponível para o modelo que você deseja implantar, será solicitado a escolher um local diferente onde um novo recurso de IA será criado e conectado ao seu projeto.
 
 ## Testar modelos no playground de chat
 

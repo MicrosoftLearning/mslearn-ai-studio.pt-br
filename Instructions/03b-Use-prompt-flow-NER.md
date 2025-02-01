@@ -48,7 +48,7 @@ Para usar um modelo de LLM no prompt flow, primeiro, você precisa implantar um 
    
     - **Nome da implantação**: *Um nome exclusivo para sua implantação de modelo*
     - **Tipo de implantação**: Padrão
-    - **Versão do modelo**: *Selecione a versão padrão*
+    - **Versão do modelo**: *selecione a versão padrão*
     - **Recurso de IA**: *escolha o recurso criado anteriormente*
     - **Limite de taxa de fichas por minuto (milhares)**: 5 mil
     - **Filtro de conteúdo**: DefaultV2
@@ -124,8 +124,10 @@ O fluxo padrão já inclui um nó que usa a ferramenta LLM. Encontre o nó na vi
 
    user:
    
+   {% raw %}
    Entity type: {{entity_type}}
    Text content: {{text}}
+   {% endraw %}
    Entities:
    ```
 
