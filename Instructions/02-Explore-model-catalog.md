@@ -1,9 +1,10 @@
 ---
 lab:
-  title: 'Explorar, implantar e conversar com modelos de linguagem no Azure IA Foundry'
+  title: Escolher e implantar um modelo de linguagem
+  description: Os aplicativos de IA generativa são criados em um ou mais modelos de linguagem. Saiba como encontrar e selecionar modelos apropriados para seu projeto de IA generativa.
 ---
 
-# Explorar, implantar e conversar com modelos de linguagem no Azure IA Foundry
+# Escolher e implantar um modelo de linguagem
 
 O catálogo de modelos do Azure IA Foundry serve como um repositório central onde você pode explorar e usar uma variedade de modelos, facilitando a criação do cenário de IA generativa.
 

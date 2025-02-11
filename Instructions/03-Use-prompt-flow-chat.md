@@ -1,11 +1,12 @@
 ---
 lab:
-  title: Criar copilots personalizados com prompt flow no portal do Azure AI Foundry
+  title: Usar um prompt flow para gerenciar conversas em um aplicativo de chat
+  description: Saiba como usar prompt flows para gerenciar diálogos de conversa e garantir que os prompts sejam construídos e orquestrados para obter melhores resultados.
 ---
 
-# Criar copilots personalizados com prompt flow no portal do Azure AI Foundry
+# Usar um prompt flow para gerenciar conversas em um aplicativo de chat
 
-Neste exercício, você usará o prompt flow do portal do Azure AI Foundry para criar um Copilot personalizado que usa um prompt de usuário e o histórico de chat como entradas e usa um modelo GPT do OpenAI do Azure para gerar uma saída.
+Neste exercício, você usará o prompt flow do portal da Fábrica de IA do Azure para criar um aplicativo de chat personalizado que usa um prompt de usuário e um histórico de chat como entradas e usa um modelo GPT do OpenAI do Azure para gerar uma saída.
 
 Este exercício levará aproximadamente **30** minutos.
 
