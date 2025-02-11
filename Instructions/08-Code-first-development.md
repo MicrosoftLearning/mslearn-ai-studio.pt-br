@@ -1,9 +1,10 @@
 ---
 lab:
-  title: Criar um copiloto personalizado usando ferramentas de desenvolvimento que priorizam o código
+  title: Criar um aplicativo de IA generativa usando ferramentas de desenvolvimento code-first
+  description: Aprenda a usar código para criar e atualizar os elementos do seu aplicativo de IA generativa para dar suporte à criação e implantação automatizadas em um cenário de DevOps.
 ---
 
-# Criar um copiloto personalizado usando ferramentas de desenvolvimento que priorizam o código
+# Criar um aplicativo de IA generativa usando ferramentas de desenvolvimento code-first
 
 Neste exercício, você clonará e implantará um modelo do Azure Developer CLI que provisiona e [implanta seu projeto de IA em um ponto de extremidade online](https://learn.microsoft.com/azure/developer/azure-developer-cli/azure-ai-ml-endpoints?WT.mc_id=academic-140829-cacaste) no Azure IA Foundry. Em seguida, você o usará como ponto de partida para criar seu próprio copiloto personalizado com a IA do Azure e uma experiência que prioriza o código.
 

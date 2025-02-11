@@ -1,9 +1,10 @@
 ---
 lab:
-  title: Avaliar o desempenho do copiloto personalizado no Azure IA Foundry
+  title: Avalie o desempenho da IA generativa
+  description: Aprenda a avaliar modelos e fluxos de chat para otimizar o desempenho do seu aplicativo de chat e sua capacidade de responder adequadamente.
 ---
 
-# Avaliar o desempenho do copiloto personalizado no Azure IA Foundry
+# Avalie o desempenho da IA generativa
 
 Neste exercício, você explorará avaliações internas e personalizadas para avaliar e comparar o desempenho dos seus aplicativos de IA com o portal do Azure IA Foundry.
 
@@ -112,9 +113,9 @@ Você pode revisar manualmente as respostas do modelo com base nos dados do test
 1. Agora você pode examinar manualmente as saídas de cada pergunta selecionando o ícone de polegares para cima ou para baixo na parte inferior direita de uma resposta. Classifique cada resposta, garantindo que você inclua pelo menos um polegar para cima e um polegar para baixo na sua classificação.
 1. Selecione **Salvar resultados** na barra superior. Insira `manual_evaluation_results` como o nome dos resultados.
 1. Usando o menu à esquerda, navegue até **Avaliação**.
-1. Selecione a guia **Avaliações manuais** para localizar as avaliações manuais que você acabou de salvar. Observe que você pode explorar suas avaliações manuais criadas anteriormente, continuar de onde saiu e salvar as avaliações atualizadas.
+1. Selecione a guia **Avaliações manuais** para localizar as avaliações manuais que você acabou de salvar. Observe que você pode explorar suas avaliações manuais criadas anteriormente, continuar de onde parou e salvar as avaliações atualizadas.
 
-## Avaliar seu copiloto com métricas integradas
+## Avalie seu aplicativo de chat com as métricas integradas
 
 Depois de criar um aplicativo de chat com o prompt flow, é possível avaliar o fluxo fazendo uma execução em lote e avaliando o desempenho do fluxo com métricas integradas.
 

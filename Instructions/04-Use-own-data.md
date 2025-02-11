@@ -1,6 +1,7 @@
 ---
 lab:
   title: Crie um aplicativo de IA generativa que use seus próprios dados
+  description: Saiba como usar o modelo RAG (Geração Aumentada de Recuperação) para criar um aplicativo de chat que fundamenta prompts usando seus próprios dados.
 ---
 
 # Crie um aplicativo de IA generativa que use seus próprios dados
@@ -72,7 +73,9 @@ Você precisará de dois modelos para implementar sua solução:
     - **Limite de taxa de fichas por minuto (milhares)**: 5 mil
     - **Filtro de conteúdo**: DefaultV2
     - **Habilitar cota dinâmica**: Desabilitado
-      
+
+    > **Observação**: se o local atual do recurso de IA não tiver cota disponível para o modelo que você deseja implantar, será solicitado a escolher um local diferente onde um novo recurso de IA será criado e conectado ao seu projeto.
+
 1. Repita as etapas anteriores para implantar um modelo **gpt-35-turbo-16k** com o nome de implantação `gpt-35-turbo-16k`.
 
     > **Observação**: A redução dos Tokens por Minuto (TPM) ajuda a evitar o uso excessivo da cota disponível na assinatura que você estiver usando. 5.000 TPM são suficientes para os dados usados neste exercício.

@@ -1,9 +1,10 @@
 ---
 lab:
-  title: Usar o prompt flow para NER (reconhecimento de entidade nomeada) no portal do Azure IA Foundry
+  title: Use o prompt flow para NER (reconhecimento de entidade nomeada)
+  description: A IA generativa não serve apenas para aplicativos de chat – aprenda a usar o prompt flow em um cenário de análise de texto em que entidades nomeadas devem ser extraídas do texto.
 ---
 
-# Usar o prompt flow para NER (reconhecimento de entidade nomeada) no portal do Azure IA Foundry
+# Use o prompt flow para NER (reconhecimento de entidade nomeada)
 
 A extração de informações valiosas de um texto é conhecida como NER (Reconhecimento de Entidade Nomeada). Entidades são palavras-chave que são de seu interesse em determinado texto.
 

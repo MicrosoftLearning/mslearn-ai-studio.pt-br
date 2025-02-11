@@ -1,9 +1,10 @@
 ---
 lab:
-  title: Ajustar um modelo de linguagem para conclusão de chat no Azure AI Foundry
+  title: Ajustar um modelo de linguagem
+  description: Aprenda a usar seus próprios dados de treinamento adicionais para ajustar um modelo e personalizar seu comportamento.
 ---
 
-# Ajustar um modelo de linguagem para conclusão de chat no Azure AI Foundry
+# Ajustar um modelo de linguagem
 
 Quando você deseja que um modelo de linguagem se comporte de uma determinada maneira, pode usar a engenharia de prompt para definir o comportamento desejado. Quando você deseja melhorar a consistência do comportamento desejado, pode optar por ajustar um modelo, comparando-o com sua abordagem de engenharia de prompt para avaliar qual método melhor atende às suas necessidades.
 
