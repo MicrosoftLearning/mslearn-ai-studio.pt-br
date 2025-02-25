@@ -76,7 +76,7 @@ Você precisará de dois modelos para implementar sua solução:
 
     > **Observação**: se o local atual do recurso de IA não tiver cota disponível para o modelo que você deseja implantar, será solicitado a escolher um local diferente onde um novo recurso de IA será criado e conectado ao seu projeto.
 
-1. Repita as etapas anteriores para implantar um modelo **gpt-35-turbo-16k** com o nome de implantação `gpt-35-turbo-16k`.
+1. Repita as etapas anteriores para implantar um modelo **gpt-4** com o nome de implantação `gpt-4`.
 
     > **Observação**: A redução dos Tokens por Minuto (TPM) ajuda a evitar o uso excessivo da cota disponível na assinatura que você estiver usando. 5.000 TPM são suficientes para os dados usados neste exercício.
 
@@ -120,7 +120,7 @@ Agora que você adicionou uma fonte de dados ao seu projeto, pode usá-la para c
 Antes de usar seu índice em um prompt flow baseado em RAG, vamos verificar se ele pode ser usado para afetar respostas de IA generativa.
 
 1. No painel de navegação à esquerda, selecione a página **Playground**.
-1. Na página Chat, no painel de instalação, verifique se a implantação de modelo **gpt-35-turbo-16k** está selecionada. Em seguida, no painel de sessão de chat principal, envie o prompt `Where can I stay in New York?`
+1. Na página Chat, no painel Instalação, verifique se sua implantação do modelo **gpt-4** está selecionada. Em seguida, no painel de sessão de chat principal, envie o prompt `Where can I stay in New York?`
 1. Revise a resposta, que deve ser uma resposta genérica do modelo sem dados do índice.
 1. No painel de configurações, expanda o campo **Adicionar seus dados** e, em seguida, adicione o índice de projeto **brochures-index** e selecione o tipo de pesquisa **híbrido (vetor + palavra-chave)**.
 
@@ -177,7 +177,7 @@ Seu índice de vetor foi salvo em seu projeto do Azure IA Foundry, permitindo qu
 
     - **Conexão**: *O recurso OpenAI do Azure padrão no seu hub de IA*
     - **Api**: chat
-    - **deployment_name**: gpt-35-turbo-16k
+    - **deployment_name**: gpt-4
     - **response_format**: {"type":"text"}
 
 1. Aguarde o início da sessão de computação e, na seção de **pesquisa**, defina os seguintes valores de parâmetro:
@@ -201,9 +201,9 @@ Seu índice de vetor foi salvo em seu projeto do Azure IA Foundry, permitindo qu
 
 1. Na seção **chat_with_context**, selecione as seguintes configurações (deixando as outras como estão):
 
-    - **Conexão**: Default_AzureOpenAI
+    - **Conexão**: *O recurso OpenAI do Azure padrão no seu hub de IA*
     - **Api**: Chat
-    - **deployment_name**: gpt-35-turbo-16k
+    - **deployment_name**: gpt-4
     - **response_format**: {"type":"text"}
 
     Em seguida, verifique se as **entradas** para esta ferramenta incluem os seguintes parâmetros:

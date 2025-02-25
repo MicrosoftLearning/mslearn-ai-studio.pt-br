@@ -35,7 +35,7 @@ Você deve começar criando um projeto do portal do Azure AI Foundry em um hub d
 1. Revise a configuração e crie o projeto.
 1. Aguarde até que seu projeto seja criado.
 
-## Ajustar um modelo GPT-3.5
+## Ajustar um modelo GPT-4
 
 Como o ajuste fino de um modelo leva algum tempo para ser concluído, você iniciará o trabalho de ajuste fino primeiro. Antes de ajustar um modelo, você precisa de um conjunto de dados.
 
@@ -44,7 +44,7 @@ Como o ajuste fino de um modelo leva algum tempo para ser concluído, você inic
     > **Observação**: seu dispositivo pode salvar o arquivo como um arquivo .txt por padrão. Selecione todos os arquivos e remova o sufixo .txt para garantir que você esteja salvando o arquivo como JSONL.
 
 1. Navegue até a página **Ajustar** na seção **Criar e personalizar**, usando o menu à esquerda.
-1. Selecione o botão para adicionar um novo modelo de ajuste, selecione o modelo `gpt-35-turbo`, clique em **Avançar** e clique em **Confirmar**.
+1. Selecione o botão para adicionar um novo modelo de ajuste, selecione o modelo `gpt-4`, clique em **Avançar** e clique em **Confirmar**.
 1. **Ajuste** o modelo usando a seguinte configuração:
     - **Versão do modelo**: *selecione a versão padrão*
     - **Sufixo do modelo**: `ft-travel`
@@ -72,16 +72,16 @@ Como o ajuste fino de um modelo leva algum tempo para ser concluído, você inic
 
 ## Chat com um modelo básico
 
-Enquanto você espera a conclusão do trabalho de ajuste, vamos conversar com um modelo GPT 3.5 básico para avaliar o desempenho.
+Enquanto você espera a conclusão do trabalho de ajuste, vamos conversar com um modelo GPT-4 básico para avaliar o desempenho.
 
 1. Navegue até a página **Modelos + pontos de extremidade** na seção **Meus ativos** usando o menu à esquerda.
 1. Selecione o botão **+ Implantar modelo** e selecione a opção **Implantar modelo base**.
-1. Implante um modelo `gpt-35-turbo`, que é o mesmo tipo de modelo que você usou ao ajustar.
+1. Implante um modelo `gpt-4`, que é o mesmo tipo de modelo que você usou ao ajustar.
 
 > **Observação**: se o local atual do recurso de IA não tiver cota disponível para o modelo que você deseja implantar, será solicitado a escolher um local diferente onde um novo recurso de IA será criado e conectado ao seu projeto.
 
 1. Quando a implantação estiver finalizada, selecione o botão **Abrir no playground**.
-1. Verifique se o modelo base implantado `gpt-35-model` está selecionado no painel de configuração.
+1. Verifique se o modelo base implantado `gpt-4` está selecionado no painel de configuração.
 1. Na janela de chat, insira a consulta `What can you do?` e veja a resposta:
     As respostas são muito genéricas. Lembre-se de que queremos criar um aplicativo de chat que inspire as pessoas a viajar.
 1. Atualize a mensagem do sistema no painel de configuração com o seguinte prompt:
