@@ -44,7 +44,7 @@ Vamos começar criando um projeto da Fábrica de IA do Azure.
 
 ## Implantar um modelo de IA generativa
 
-Agora, você está pronto para implantar um modelo de linguagem de IA generativa para dar suporte ao seu aplicativo de chat. Neste exemplo, você usará o modelo Microsoft Phi-4; mas os princípios são os mesmos para qualquer modelo.
+Agora está tudo pronto para implantar um modelo de linguagem de IA generativa para dar suporte ao seu aplicativo de chat. Neste exemplo, você usará o modelo Microsoft Phi-4; mas os princípios são os mesmos para qualquer modelo.
 
 1. Na barra de ferramentas no canto superior direito da página do projeto da Fábrica de IA do Azure, use o ícone **Recursos de visualização** para ativar o recurso **Implantar modelos para o serviço de inferência de modelo de IA do Azure**. Esse recurso garante que a implantação do modelo esteja disponível para o serviço de inferência de IA do Azure, que você usará no código do aplicativo.
 1. No painel à esquerda do seu projeto, na seção **Meus ativos**, selecione a página **Modelos + pontos de extremidade**.

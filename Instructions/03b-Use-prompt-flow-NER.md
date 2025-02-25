@@ -31,11 +31,11 @@ Comece criando um projeto do portal do Azure IA Foundry e um hub de IA do Azure 
     - **Nome do hub**: *Um nome exclusivo*
     - **Assinatura**: *sua assinatura do Azure*
     - **Grupo de recursos**: *Um novo grupo de recursos*
-    - **Local**: Selecione **Ajude-me a escolher** e, em seguida, selecione **gpt-35-turbo** na janela Auxiliar de local e use a região recomendada\*
-    - **Conectar os Serviços de IA do Azure ou a OpenAI do Azure**: (novo) *Preenchimentos automáticos com o nome do hub selecionado*
+    - **Localização**: selecione **Ajude-me a escolher** e então selecione **gpt-4** na janela do auxiliar de localização e use a região recomendada\*
+    - **Conectar os Serviços de IA do Azure ou a OpenAI do Azure**: (novo) *preenchido automaticamente com o nome do hub selecionado*
     - **Conectar-se à Pesquisa de IA do Azure**: Ignorar a conexão
 
-    > \* Os recursos do OpenAI do Azure são restringidos no nível do locatário por cotas regionais. As regiões listadas no auxiliar de localização incluem a cota padrão para os tipos de modelos usados neste exercício. Escolher aleatoriamente uma região reduz o risco de uma única região atingir o seu limite de cota. No caso de um limite de cota ser atingido mais adiante no exercício, há a possibilidade de você precisar criar outro recurso em uma região diferente. Saiba mais sobre a [disponibilidade do modelo por região](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
+    > \* Os recursos do OpenAI do Azure são restringidos no nível do locatário por cotas regionais. As regiões listadas no auxiliar de localização incluem a cota padrão para os tipos de modelos usados neste exercício. Escolher aleatoriamente uma região reduz o risco de uma única região atingir o seu limite de cota. No caso de um limite de cota ser atingido mais adiante no exercício, há a possibilidade de você precisar criar outro recurso em uma região diferente. Saiba mais sobre a [disponibilidade do modelo por região](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#availability)
 
 1. Se você selecionou **Personalizar**, selecione **Avançar** e revise sua configuração.
 1. Clique em **Criar** e aguarde a conclusão do processo.
@@ -45,7 +45,8 @@ Comece criando um projeto do portal do Azure IA Foundry e um hub de IA do Azure 
 Para usar um modelo de LLM no prompt flow, primeiro, você precisa implantar um modelo. O portal do Azure AI Foundry permite implantar modelos do OpenAI que você pode usar nos seus fluxos.
 
 1. No painel de navegação à esquerda, em **Meus ativos**, selecione a página **Modelos + pontos de extremidade**.
-1. Crie uma nova implantação do modelo **gpt-35-turbo** com as seguintes configurações selecionando **Personalizar** nos detalhes de implantação:
+1. Selecione **+ Implantar modelo** e **Implantar modelo base**.
+1. Crie uma nova implantação do modelo **gpt-4** com as seguintes configurações selecionando **Personalizar** nos detalhes de implantação:
    
     - **Nome da implantação**: *Um nome exclusivo para sua implantação de modelo*
     - **Tipo de implantação**: Padrão
@@ -112,7 +113,7 @@ O fluxo padrão já inclui um nó que usa a ferramenta LLM. Encontre o nó na vi
 1. Navegue até o **nó do LLM** chamado `joke`.
 1. Substitua o nome por `NER_LLM`
 1. Em **Conexão**, selecione a conexão que foi criada para você quando você criou o hub de IA.
-1. Em **deployment_name**, escolha o modelo `gpt-35-turbo` implantado.
+1. Em **deployment_name**, escolha o modelo `gpt-4` implantado.
 1. Substitua o campo do prompt pelo seguinte código:
 
    ```yml
@@ -125,10 +126,9 @@ O fluxo padrão já inclui um nó que usa a ferramenta LLM. Encontre o nó na vi
 
    user:
    
-   {% raw %}
    Entity type: {{entity_type}}
    Text content: {{text}}
-   {% endraw %}
+
    Entities:
    ```
 
