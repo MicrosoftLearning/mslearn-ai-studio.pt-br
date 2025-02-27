@@ -1,9 +1,10 @@
 ---
 lab:
-  title: Explorar filtros de conteúdo para evitar a saída de conteúdo prejudicial no Azure AI Foundry
+  title: Aplique filtros de conteúdo para evitar a saída de conteúdo prejudicial
+  description: Aprenda a aplicar filtros de conteúdo que mitigam saídas potencialmente ofensivas ou prejudiciais em seu aplicativo de IA generativa.
 ---
 
-# Explorar filtros de conteúdo para evitar a saída de conteúdo prejudicial no Azure AI Foundry
+# Aplique filtros de conteúdo para evitar a saída de conteúdo prejudicial
 
 O Azure AI Foundry inclui filtros de conteúdo padrão para ajudar a garantir que prompts e conclusões possivelmente prejudiciais sejam identificados e removidos das interações com o serviço. Além disso, você pode solicitar permissão para definir filtros de conteúdo personalizados para suas necessidades específicas, de modo a garantir que suas implantações de modelos implementem os princípios de IA responsável apropriados para seu cenário de IA generativa. A filtragem de conteúdo é um elemento de uma abordagem eficaz à IA responsável ao trabalhar com modelos de IA generativa.
 
@@ -22,11 +23,11 @@ Você deve começar criando um projeto do portal do Azure AI Foundry em um hub d
     - **Nome do hub**: *Um nome exclusivo*
     - **Assinatura**: *sua assinatura do Azure*
     - **Grupo de recursos**: *Um novo grupo de recursos*
-    - **Local**: Selecione **Ajude-me a escolher** e, em seguida, selecione **gpt-35-turbo** na janela Auxiliar de local e use a região recomendada\*
-    - **Conectar os Serviços de IA do Azure ou a OpenAI do Azure**: (novo) *Preenchimentos automáticos com o nome do hub selecionado*
+    - **Localização**: selecione **Ajude-me a escolher** e então selecione **gpt-4** na janela do auxiliar de localização e use a região recomendada\*
+    - **Conectar os Serviços de IA do Azure ou a OpenAI do Azure**: (novo) *preenchido automaticamente com o nome do hub selecionado*
     - **Conectar-se à Pesquisa de IA do Azure**: Ignorar a conexão
 
-    > \* Os recursos do OpenAI do Azure são restringidos no nível do locatário por cotas regionais. As regiões listadas no auxiliar de localização incluem a cota padrão para os tipos de modelos usados neste exercício. Escolher aleatoriamente uma região reduz o risco de uma única região atingir o seu limite de cota. No caso de um limite de cota ser atingido mais adiante no exercício, há a possibilidade de você precisar criar outro recurso em uma região diferente. Saiba mais sobre a [disponibilidade do modelo por região](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
+    > \* Os recursos do OpenAI do Azure são restringidos no nível do locatário por cotas regionais. As regiões listadas no auxiliar de localização incluem a cota padrão para os tipos de modelos usados neste exercício. Escolher aleatoriamente uma região reduz o risco de uma única região atingir o seu limite de cota. No caso de um limite de cota ser atingido mais adiante no exercício, há a possibilidade de você precisar criar outro recurso em uma região diferente. Saiba mais sobre a [disponibilidade do modelo por região](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#availability)
 
 1. Se você selecionou **Personalizar**, selecione **Avançar** e revise sua configuração.
 1. Clique em **Criar** e aguarde a conclusão do processo.
@@ -36,7 +37,7 @@ Você deve começar criando um projeto do portal do Azure AI Foundry em um hub d
 Agora você está pronto para implantar um modelo a ser usado por meio do **portal do Azure AI Foundry**. Depois de implantado, você usará o modelo para gerar conteúdo em linguagem natural.
 
 1. No painel de navegação à esquerda, em **Meus ativos**, selecione a página **Modelos + pontos de extremidade**.
-1. Crie uma nova implantação do modelo **gpt-35-turbo** com as seguintes configurações selecionando **Personalizar** no assistente Implantar modelo:
+1. Crie uma nova implantação do modelo **gpt-4** com as seguintes configurações selecionando **Personalizar** no assistente Implantar modelo:
    
     - **Nome da implantação**: *Um nome exclusivo para sua implantação de modelo*
     - **Tipo de implantação**: Padrão
@@ -46,7 +47,7 @@ Agora você está pronto para implantar um modelo a ser usado por meio do **port
     - **Filtro de conteúdo**: DefaultV2
     - **Habilitar cota dinâmica**: Desabilitado
       
-> **Observação**: cada modelo do Azure IA Foundry é otimizado para um equilíbrio diferente entre funcionalidades e desempenho. Usaremos o modelo **GPT 3.5 Turbo** neste exercício, que é altamente capaz para cenários de chat e geração de linguagem natural.
+> **Observação**: cada modelo do Azure IA Foundry é otimizado para um equilíbrio diferente entre funcionalidades e desempenho. Usaremos o modelo **GPT-4** neste exercício, que é altamente capaz para cenários de chat e geração de linguagem natural.
 
 ## Explorar filtros de conteúdo
 
@@ -83,7 +84,7 @@ Os filtros de conteúdo são aplicados a solicitações e preenchimentos para ev
 
 1. Retorne à página **Modelos + pontos de extremidade** e observe que sua implantação agora menciona o filtro de conteúdo personalizado que você criou.
 
-    ![Captura de tela da página de implantação no portal do Azure IA Foundry.](./media/azure-ai-deployment.png)
+    ![Captura de tela da página de implantação no portal do Azure IA Foundry.](./media/model-gpt-4-custom-filter.png)
 
 ## Gerar saída de linguagem natural
 
