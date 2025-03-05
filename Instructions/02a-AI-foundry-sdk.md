@@ -24,18 +24,11 @@ Vamos começar criando um projeto da Fábrica de IA do Azure.
     - **Nome do hub**: *um nome exclusivo – por exemplo `my-ai-hub`*
     - **Assinatura**: *sua assinatura do Azure*
     - **Grupo de recursos**: *crie um novo grupo de recursos com um nome exclusivo (por exemplo, `my-ai-resources`) ou selecione um existente*
-    - **Localização**: escolha uma região aleatória na seguinte lista\*:
-        - Leste dos EUA
-        - Leste dos EUA 2
-        - Centro-Norte dos EUA
-        - Centro-Sul dos Estados Unidos
-        - Suécia Central
-        - Oeste dos EUA
-        - Oeste dos EUA 3
+    - **Localização**: selecione **Ajude-me a escolher** e então selecione **gpt-4** na janela do auxiliar de localização e use a região recomendada\*
     - **Conectar os Serviços de IA do Azure ou o OpenAI do Azure:*** crie um novo recurso de Serviços de IA com um nome apropriado (por exemplo, `my-ai-services`) ou use um existente*
     - **Conectar-se à Pesquisa de IA do Azure**: Ignorar a conexão
 
-    > \* As cotas do modelo são restritas no nível do locatário por cotas regionais. Escolher uma região aleatória ajuda a distribuir a disponibilidade da cota quando vários usuários estão trabalhando no mesmo locatário. No caso de um limite de cota ser atingido mais adiante no exercício, há a possibilidade de você precisar criar outro recurso em uma região diferente.
+    > \* Os recursos do OpenAI do Azure são restringidos no nível do locatário por cotas regionais. No caso de um limite de cota ser atingido mais adiante no exercício, há a possibilidade de você precisar criar outro recurso em uma região diferente.
 
 1. Clique em **Avançar** e revise a configuração. Em seguida, selecione **Criar** e aguarde a conclusão do processo.
 1. Quando o projeto for criado, feche todas as dicas exibidas e examine a página do projeto no Portal da Fábrica de IA do Azure, que deve ser semelhante à imagem a seguir:
@@ -60,7 +53,9 @@ Agora está tudo pronto para implantar um modelo de linguagem de IA generativa p
 
 Agora que você implantou um modelo, pode usar o SDK da Fábrica de IA do Azure para desenvolver um aplicativo que se comunica com ele.
 
-### Preparar a configuração de aplicativo
+> **Dica**: você pode optar por desenvolver sua solução usando Python ou Microsoft C#. Siga as instruções na seção apropriada para o idioma escolhido.
+
+### Clonar o repositório de aplicativos
 
 1. No Portal da Fábrica de IA do Azure, visualize a página **Visão geral** do seu projeto.
 1. Na área **Detalhes do projeto**, observe a **Cadeia de conexão do projeto**. Você usará essa cadeia de conexão para se conectar ao seu projeto em um aplicativo cliente.
@@ -71,6 +66,8 @@ Agora que você implantou um modelo, pode usar o SDK da Fábrica de IA do Azure 
 
 1. Na barra de ferramentas do Cloud Shell, no menu **Configurações**, selecione **Ir para a versão clássica** (isso é necessário para usar o editor de código).
 
+    > **Dica**: conforme você colar comandos no cloudshell, a saída pode ocupar uma grande quantidade do espaço da tela. Você pode limpar a tela digitando o comando `cls` para facilitar o foco em cada tarefa.
+
 1. No painel do PowerShell, insira os seguintes comandos para clonar o repositório GitHub para este exercício:
 
     ```
@@ -78,26 +75,53 @@ Agora que você implantou um modelo, pode usar o SDK da Fábrica de IA do Azure 
     git clone https://github.com/microsoftlearning/mslearn-ai-studio mslearn-ai-foundry
     ```
 
-1. Após o repositório ser clonado, navegue até a pasta que contém os arquivos de código do aplicativo de chat:
+### Preparar a configuração de aplicativo
+
+> **Observação**: siga as etapas para a linguagem de programação escolhida.
+
+1. Após o repositório ser clonado, navegue até a pasta que contém os arquivos de código do aplicativo de chat:  
+
+    **Python**
 
     ```
-    cd mslearn-ai-foundry/labfiles/chat-app/python
+   cd mslearn-ai-foundry/labfiles/chat-app/python
     ```
 
-1. No painel de linha de comando do Cloud Shell, digite o seguinte comando para instalar as bibliotecas Python que você usará, que são:
-    - **python-dotenv** : usado para carregar configurações de um arquivo de configuração do aplicativo.
-    - **azure-identity**: usado para autenticar com credenciais do Entra ID.
-    - **azure-ai-projects**: usado para trabalhar com um projeto da Fábrica de IA do Azure.
-    - **azure-ai-inference**: usado para conversar com um modelo de IA generativa.
+    **C#**
+
+    ```
+   cd mslearn-ai-foundry/labfiles/chat-app/c-sharp
+    ```
+
+1. No painel de linha de comando do Cloud Shell, digite o seguinte comando para instalar as bibliotecas que você usará:
+
+    **Python**
 
     ```
    pip install python-dotenv azure-identity azure-ai-projects azure-ai-inference
     ```
 
-1. Digite o seguinte comando para editar o arquivo de configuração do Python **.env** que foi fornecido:
+    **C#**
+
+    ```
+   dotnet add package Azure.AI.Inference
+   dotnet add package Azure.AI.Projects --prerelease
+   dotnet add package Azure.Identity
+    ```
+    
+
+1. Digite o seguinte comando para editar o arquivo de configuração que foi fornecido:
+
+    **Python**
 
     ```
    code .env
+    ```
+
+    **C#**
+
+    ```
+   code appsettings.json
     ```
 
     O arquivo é aberto em um editor de código.
@@ -107,37 +131,75 @@ Agora que você implantou um modelo, pode usar o SDK da Fábrica de IA do Azure 
 
 ### Escrever código para se conectar ao seu projeto e conversar com seu modelo
 
-> **Dica**: ao adicionar código ao arquivo de código Python, certifique-se de manter o recuo correto.
+> **Dica**: ao adicionar código, certifique-se de manter o recuo correto.
 
-1. Digite o seguinte comando para editar o arquivo de código Python **chat-app.py** que foi fornecido:
+1. Digite o seguinte comando para editar o arquivo de código que foi fornecido:
+
+    **Python**
 
     ```
    code chat-app.py
     ```
 
-1. No arquivo de código, observe as instruções **import** existentes que foram adicionadas no topo do arquivo. Em seguida, no comentário **# Add AI Projects reference**, adicione o seguinte código para referenciar a biblioteca de Projetos de IA do Azure:
+    **C#**
 
-    ```python
+    ```
+   code Program.cs
+    ```
+
+1. No arquivo de código, observe as instruções existentes que foram adicionadas na parte superior do arquivo para importar os namespaces do SDK necessários. Em seguida, no comentário **Adicionar referências**, adicione o seguinte código para referenciar os namespaces nas bibliotecas que você instalou anteriormente:
+
+    **Python**
+
+    ```
+   from dotenv import load_dotenv
+   from azure.identity import DefaultAzureCredential
    from azure.ai.projects import AIProjectClient
     ```
 
-1. Na função **main**, no comentário **# Get configuration settings**, observe que o código carrega a cadeia de conexão do projeto e os valores do nome de implantação do modelo que você definiu no arquivo **.env**.
-1. No comentário **# Initialize the project client**, adicione o seguinte código para se conectar ao seu projeto da Fábrica de IA do Azure usando as credenciais do Azure com as quais você está conectado no momento:
+    **C#**
 
-    ```python
-   project = AIProjectClient.from_connection_string(
-        conn_str=project_connection,
-        credential=DefaultAzureCredential()
-        )
     ```
-    
+   using Azure.Identity;
+   using Azure.AI.Projects;
+   using Azure.AI.Inference;
+    ```
+
+1. Na função **main**, no comentário **Get configuration settings**, observe que o código carrega a cadeia de conexão do projeto e os valores do nome de implantação do modelo que você definiu no arquivo de configuração.
+1. No comentário **Initialize the project client**, adicione o seguinte código para se conectar ao seu projeto da Fábrica de IA do Azure usando as credenciais do Azure com as quais você está conectado no momento:
+
+    **Python**
+
+    ```
+   projectClient = AIProjectClient.from_connection_string(
+        conn_str=project_connection,
+        credential=DefaultAzureCredential())
+    ```
+
+    **C#**
+
+    ```
+   var projectClient = new AIProjectClient(project_connection,
+                        new DefaultAzureCredential());
+    ```
+
 1. No comentário **# Get a chat client**, adicione o seguinte código para criar um objeto cliente para conversar com um modelo:
 
-    ```python
-   chat = project.inference.get_chat_completions_client()
+    **Python**
+
+    ```
+   chat = projectClient.inference.get_chat_completions_client()
+    ```
+
+    **C#**
+
+    ```
+   ChatCompletionsClient chat = projectClient.GetChatCompletionsClient();
     ```
 
 1. Observe que o código inclui um loop para permitir que o usuário insira um prompt até digitar "quit". Em seguida, na seção de loop, sob o comentário **# Get a chat completion**, adicione o seguinte código para enviar o prompt e recuperar a conclusão do seu modelo:
+
+    **Python**
 
     ```python
    response = chat.complete(
@@ -150,14 +212,39 @@ Agora que você implantou um modelo, pode usar o SDK da Fábrica de IA do Azure 
    print(response.choices[0].message.content)
     ```
 
+    **C#**
+
+    ```
+   var requestOptions = new ChatCompletionsOptions()
+   {
+       Model = model_deployment,
+       Messages =
+           {
+               new ChatRequestSystemMessage("You are a helpful AI assistant that answers questions."),
+               new ChatRequestUserMessage(input_text),
+           }
+   };
+    
+   Response<ChatCompletions> response = chat.Complete(requestOptions);
+   Console.WriteLine(response.Value.Content);
+    ```
+
 1. Use o comando **CTRL+S** para salvar suas alterações no arquivo de código e, em seguida, use o comando **CTRL+Q** para fechar o editor de código, mantendo a linha de comando do Cloud Shell aberta.
 
 ### Executar o aplicativo de chat
 
-1. No painel de linha de comando do Cloud Shell, insira o seguinte comando para executar o código Python:
+1. No painel de linha de comando do Cloud Shell, insira o seguinte comando para executar o aplicativo:
+
+    **Python**
 
     ```
    python chat-app.py
+    ```
+
+    **C#**
+
+    ```
+   dotnet run
     ```
 
 1. Quando solicitado, insira uma pergunta, como `What is the fastest animal on Earth?` e analise a resposta do seu modelo de IA generativa.
