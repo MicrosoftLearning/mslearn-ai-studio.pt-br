@@ -27,7 +27,7 @@ Você deve começar criando um projeto do portal do Azure AI Foundry em um hub d
     - **Conectar os Serviços de IA do Azure ou a OpenAI do Azure**: (novo) *preenchido automaticamente com o nome do hub selecionado*
     - **Conectar-se à Pesquisa de IA do Azure**: Ignorar a conexão
 
-    > \* Os recursos do OpenAI do Azure são restringidos no nível do locatário por cotas regionais. As regiões listadas no auxiliar de localização incluem a cota padrão para os tipos de modelos usados neste exercício. Escolher aleatoriamente uma região reduz o risco de uma única região atingir o seu limite de cota. No caso de um limite de cota ser atingido mais adiante no exercício, há a possibilidade de você precisar criar outro recurso em uma região diferente. Saiba mais sobre a [disponibilidade do modelo por região](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#availability)
+    > \* Os recursos do OpenAI do Azure são restringidos no nível do locatário por cotas regionais. As regiões listadas no auxiliar de localização incluem a cota padrão para os tipos de modelos usados neste exercício. No caso de um limite de cota ser atingido mais adiante no exercício, há a possibilidade de você precisar criar outro recurso em uma região diferente. Saiba mais sobre a [disponibilidade do modelo por região](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#availability)
 
 1. Se você selecionou **Personalizar**, selecione **Avançar** e revise sua configuração.
 1. Clique em **Criar** e aguarde a conclusão do processo.
@@ -92,7 +92,7 @@ Vamos ver como o modelo se comporta em uma interação de conversa.
 
 1. Navegue até **Playgrounds** no painel do lado esquerdo.
 
-1. No modo **Chat**, insira o prompt a seguir na seção **Histórico de chats**.
+1. Abra o **Playground Chat** e insira o prompt a seguir na seção **Histórico de chats**.
 
     ```
    Describe characteristics of Scottish people.
@@ -108,13 +108,13 @@ Vamos ver como o modelo se comporta em uma interação de conversa.
 
 1. Aplique as alterações na mensagem do sistema.
 
-1. Na seção **Sessão de chat**, insira novamente a solicitação a seguir.
+1. Na seção **Histórico de chats**, insira o seguinte prompt novamente.
 
     ```
    Describe characteristics of Scottish people.
     ```
 
-8. Observe a saída, que deve indicar que não há suporte para que a solicitação seja racista e depreciativa. Essa prevenção de saídas ofensivas é o resultado dos filtros de conteúdo padrão no portal do Azure IA Foundry.
+8. Observe a saída, que deve indicar que não há suporte para que a solicitação seja racista e depreciativa. Essa prevenção de saída ofensiva é o resultado dos filtros de conteúdo.
 
 > **Dica**: para obter mais detalhes sobre as categorias e os níveis de gravidade usados nos filtros de conteúdo, confira [Filtragem de conteúdo](https://learn.microsoft.com/azure/ai-studio/concepts/content-filtering) na documentação dos serviços do portal do Azure IA Foundry.
 
