@@ -55,7 +55,7 @@ Agora que você implantou um modelo, pode usar o SDK da Fábrica de IA do Azure 
 
 > **Dica**: você pode optar por desenvolver sua solução usando Python ou Microsoft C#. Siga as instruções na seção apropriada para o idioma escolhido.
 
-### Clonar o repositório de aplicativos
+### Preparar a configuração de aplicativo
 
 1. No Portal da Fábrica de IA do Azure, visualize a página **Visão geral** do seu projeto.
 1. Na área **Detalhes do projeto**, observe a **Cadeia de conexão do projeto**. Você usará essa cadeia de conexão para se conectar ao seu projeto em um aplicativo cliente.
@@ -74,8 +74,6 @@ Agora que você implantou um modelo, pode usar o SDK da Fábrica de IA do Azure 
     rm -r mslearn-ai-foundry -f
     git clone https://github.com/microsoftlearning/mslearn-ai-studio mslearn-ai-foundry
     ```
-
-### Preparar a configuração de aplicativo
 
 > **Observação**: siga as etapas para a linguagem de programação escolhida.
 
