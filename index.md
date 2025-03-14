@@ -1,5 +1,5 @@
 ---
-title: Exercícios do Azure OpenAI
+title: Desenvolver soluções de IA generativas
 permalink: index.html
 layout: home
 ---
