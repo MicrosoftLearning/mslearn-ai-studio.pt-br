@@ -8,7 +8,7 @@ lab:
 
 A Geração Aumentada de Recuperação (RAG) é uma técnica usada para compilar aplicativos que integram dados de fontes de dados personalizadas em um prompt para um modelo de IA generativa. O RAG é um padrão comumente usado para desenvolver aplicativos de IA generativa – aplicativos baseados em chat que usam um modelo de linguagem para interpretar entradas e gerar respostas apropriadas.
 
-Neste exercício, você usará o portal do Azure IA Foundry para integrar dados personalizados em um prompt flow de IA generativa. Você também explorará como implementar o padrão RAG em um aplicativo cliente usando os SDKs da Fábrica de IA do Azure e do OpenAI do Azure.
+Neste exercício, você usará o portal da Fábrica de IA do Azure e os SDKs da Fábrica de IA do Azure e o OpenAI do Azure para integrar dados personalizados em um aplicativo de IA generativa.
 
 Este exercício levará, aproximadamente, **45** minutos.
 
@@ -21,7 +21,7 @@ Vamos começar criando um projeto da Fábrica de IA do Azure e os recursos de se
     ![Captura de tela do portal do Azure AI Foundry.](./media/ai-foundry-home.png)
 
 1. Na home page, selecione **+Criar projeto**.
-1. No assistente **Criar um projeto**, insira um nome de projeto adequado (por exemplo, `my-ai-project`) e revise os recursos do Azure que serão criados automaticamente para dar suporte ao seu projeto.
+1. No assistente **Criar um projeto**, insira um nome de projeto adequado para (por exemplo, `my-ai-project`) e, se um hub existente for sugerido, escolha a opção de criar um novo. Em seguida, examine os recursos do Azure que serão criados automaticamente para dar suporte ao hub e ao projeto.
 1. Selecione **Personalizar** e especifique as seguintes configurações para o hub:
     - **Nome do hub**: *um nome exclusivo – por exemplo `my-ai-hub`*
     - **Assinatura**: *sua assinatura do Azure*
@@ -90,125 +90,29 @@ Agora que você adicionou uma fonte de dados ao seu projeto, pode usá-la para c
         - **Configurações de vetor**: Adicione busca em vetores a este recurso de pesquisa
         - **Conexão OpenAI do Azure**: *selecione o recurso OpenAI do Azure padrão no seu hub.*
 
-1. Aguarde até que o processo de indexação seja concluído, o que pode levar vários minutos. A operação de criação de índice consiste nos seguintes trabalhos:
+1. Aguarde a conclusão do processo de indexação, o que pode demorar um pouco, dependendo dos recursos de computação disponíveis em sua assinatura. A operação de criação de índice consiste nos seguintes trabalhos:
 
     - Extraia, particione e insira os tokens de texto nos dados de folhetos.
     - Crie o índice do IA do Azure Search.
     - Registrar o ativo de índice.
 
-## Testar o índice
+## Testar o índice no playground
 
 Antes de usar seu índice em um prompt flow baseado em RAG, vamos verificar se ele pode ser usado para afetar respostas de IA generativa.
 
-1. No painel de navegação à esquerda, selecione a página **Playground**.
-1. Na página Chat, no painel Instalação, verifique se sua implantação do modelo **gpt-4** está selecionada. Em seguida, no painel de sessão de chat principal, envie o prompt `Where can I stay in New York?`
+1. No painel de navegação à esquerda, selecione a página **Playgrounds** e abra o playground **Chat**.
+1. Na página do playground Chat, no painel Configuração, verifique se a implantação do modelo **gpt-4** está selecionada. Em seguida, no painel de sessão de chat principal, envie o prompt `Where can I stay in New York?`
 1. Revise a resposta, que deve ser uma resposta genérica do modelo sem dados do índice.
 1. No painel de configurações, expanda o campo **Adicionar seus dados** e, em seguida, adicione o índice de projeto **brochures-index** e selecione o tipo de pesquisa **híbrido (vetor + palavra-chave)**.
 
-   > **Observação**: alguns usuários estão descobrindo que os índices recém-criados estão indisponíveis imediatamente. Atualizar o navegador geralmente ajuda, mas se você ainda estiver enfrentando o problema de não conseguir encontrar o índice, talvez seja necessário aguardar até que o índice seja reconhecido.
+   > **Dica**: em alguns casos, os índices recém-criados podem não estar disponíveis imediatamente. Atualizar o navegador geralmente ajuda, mas se você ainda estiver enfrentando o problema de não conseguir encontrar o índice, talvez seja necessário aguardar até que o índice seja reconhecido.
 
 1. Depois que o índice tiver sido adicionado e a sessão de chat for reiniciada, reenvie o prompt `Where can I stay in New York?`
 1. Revise a resposta, que deve ser baseada nos dados do índice.
 
-## Use o índice em um prompt flow
-
-Seu índice de vetor foi salvo em seu projeto do Azure IA Foundry, permitindo que você o use facilmente em um prompt flow.
-
-1. No portal do Azure AI Foundry, em seu projeto, no painel de navegação à esquerda, em **Criar e personalizar**, selecione a página **Prompt flow**.
-1. Crie um novo prompt flow clonando a amostra **Perguntas e respostas em várias rodadas sobre seus dados** na galeria. Salve seu clone desta amostra em uma pasta chamada `brochure-flow`.
-
-    <details> 
-        <summary><font color="red"><b>Dica de solução de problemas</b>: Erro de permissões</font></summary>
-        <p>Se você receber um erro de permissões ao criar um novo prompt flow, tente o seguinte para solucionar o problema:</p>
-        <ul>
-            <li>No portal do Azure, no grupo de recursos do hub da Fábrica de IA do Azure, selecione o recurso Serviços de IA.</li>
-            <li>Na guia <b>Identidade</b>, em <b>Gerenciamento de recursos</b>, confirme se o status da identidade gerenciada <b>Atribuída pelo sistema</b> é <b>Ativado</b>.</li>
-            <li>No grupo de recursos do hub da Fábrica de IA do Azure, selecione a Conta de Armazenamento</li>
-            <li>Na página <b>Controle de acesso (IAM),</b> adicione uma atribuição de função para atribuir a função de <b>Leitor de dados do blob de armazenamento</b> à Identidade gerenciada do recurso serviços de IA do Azure.</li>
-            <li>Aguarde até que a função seja atribuída e repita a etapa anterior.</li>
-        </ul>
-    </details>
-
-1. Quando a página do designer do prompt flow for aberta, revise **folheto-fluxo**. O grafo deve ser semelhante à seguinte imagem:
-
-    ![Uma captura de tela de um gráfico de prompt flow.](./media/chat-flow.png)
-
-    O prompt flow de amostra que você está usando implementa a lógica de prompt para um aplicativo de chat no qual o usuário pode enviar iterativamente entrada de texto para a interface de chat. O histórico de conversação é retido e incluído no contexto de cada iteração. O prompt flow orquestra uma sequência de *ferramentas* para:
-
-    - Anexar o histórico à entrada do bate-papo para definir um prompt na forma de uma pergunta contextualizada.
-    - Recupere o contexto usando seu índice e um tipo de consulta de sua escolha com base na pergunta.
-    - Gerar contexto de prompt usando os dados recuperados do índice para complementar a pergunta.
-    - Criar variantes de prompt adicionando uma mensagem do sistema e estruturando o histórico de chat.
-    - Enviar o prompt para um modelo de linguagem para gerar uma resposta de linguagem natural.
-
-1. Use o botão **Iniciar a sessão de computação** para iniciar a computação do runtime no fluxo.
-
-    Aguarde o início da sessão de computação. Isso fornece um contexto de computação para o prompt flow. Enquanto aguarda, na guia **Fluxo**, revise as seções das ferramentas no fluxo.
-
-    >**Observação**: devido a limitações de infraestrutura e capacidade, a sessão de computação pode falhar ao iniciar durante períodos de alta demanda. Se isso acontecer, você poderá ignorar o uso do prompt flow e iniciar a tarefa **Criar um aplicativo cliente RAG com os SDKs da Fábrica de IA do Azure e do OpenAI do Azure**.
-
-    Depois, quando a sessão de computação for iniciada...
-
-1. Na seção **Entradas**, verifique se as entradas incluem:
-    - **chat_history**
-    - **chat_input**
-
-    O histórico de chat padrão nesta amostra inclui algumas conversas sobre IA.
-
-1. Na seção **Saídas**, verifique se a saída inclui:
-
-    - **chat_output** com o valor ${chat_with_context.output}
-
-1. Na seção **modify_query_with_history**, selecione as seguintes configurações (deixando as outras como estão):
-
-    - **Conexão**: *O recurso OpenAI do Azure padrão no seu hub de IA*
-    - **Api**: chat
-    - **deployment_name**: gpt-4
-    - **response_format**: {"type":"text"}
-
-1. Na seção de **pesquisa**, defina os seguintes valores de parâmetro:
-
-    - **mlindex_content**: *Selecione o campo vazio para abrir o painel Gerar*
-        - **index_type**: Índice registrado
-        - **mlindex_asset_id**: brochures-index:1
-    - **queries**: ${modify_query_with_history.output}
-    - **query_type**: Híbrido (vetor + palavra-chave)
-    - **top_k**: 2
-
-1. Na seção **generate_prompt_context**, revise o script Python e verifique se as **entradas** para esta ferramenta incluem o seguinte parâmetro:
-
-    - **search_result** *(object)*: ${lookup.output}
-
-1. Na seção **Prompt_variants**, revise o script Python e verifique se as **entradas** para esta ferramenta incluem os seguintes parâmetros:
-
-    - **contextos** *(cadeia de caracteres)*: ${generate_prompt_context.output}
-    - **chat_history** *(cadeia de caracteres)*: ${inputs.chat_history}
-    - **chat_input** *(cadeia de caracteres)*: ${inputs.chat_input}
-
-1. Na seção **chat_with_context**, selecione as seguintes configurações (deixando as outras como estão):
-
-    - **Conexão**: *O recurso OpenAI do Azure padrão no seu hub de IA*
-    - **Api**: Chat
-    - **deployment_name**: gpt-4
-    - **response_format**: {"type":"text"}
-
-    Em seguida, verifique se as **entradas** para esta ferramenta incluem os seguintes parâmetros:
-    - **prompt_text** *(cadeia de caracteres)*: ${Prompt_variants.output}
-
-1. Na barra de ferramentas, use o botão **Salvar** para salvar as alterações feitas nas ferramentas no prompt flow.
-1. Na barra de ferramentas, selecione **Chat**. Um painel de chat é aberto com o histórico de conversa de amostra e a entrada já preenchida com base nos valores de amostra. Você pode ignorá-los.
-1. No painel de chat, substitua a entrada padrão pela pergunta `Where can I stay in London?` e envie-a.
-1. Revise a resposta, que deve ser baseada nos dados do índice.
-1. Revise as saídas para cada ferramenta no fluxo.
-1. No painel de chat, insira a pergunta `What can I do there?`
-1. Revise a resposta, que deve ser baseada em dados no índice e levar em conta o histórico de chat (para que "lá" seja entendido como "em Londres").
-1. Revise as saídas para cada ferramenta no fluxo, observando como cada ferramenta no fluxo operou em suas entradas para preparar um prompt contextualizado e obter uma resposta apropriada.
-
-    Agora você tem um prompt flow em funcionamento que usa o índice da Pesquisa de IA do Azure para implementar o padrão RAG. Para saber mais sobre como implantar e consumir seu prompt flow, consulte a [documentação da Fábrica de IA do Azure](https://learn.microsoft.com/azure/ai-foundry/how-to/flow-deploy).
-
 ## Criar um aplicativo cliente RAG com os SDKs da Fábrica de IA do Azure e do OpenAI do Azure
 
-Embora um prompt flow seja uma ótima maneira de encapsular seu modelo e dados em um aplicativo baseado em RAG, você também pode usar os SDKs da Fábrica de IA do Azure e do OpenAI do Azure para implementar o padrão RAG em um aplicativo cliente. Vamos explorar o código para fazer isso em um exemplo simples.
+Agora que você tem um índice em funcionamento, pode usar os SDKs da Fábrica de IA do Azure e do OpenAI do Azure para implementar o padrão RAG em um aplicativo cliente. Vamos explorar o código para fazer isso em um exemplo simples.
 
 > **Dica**: você pode optar por desenvolver sua solução RAG usando Python ou Microsoft C#. Siga as instruções na seção apropriada para o idioma escolhido.
 
@@ -341,13 +245,13 @@ Embora um prompt flow seja uma ótima maneira de encapsular seu modelo e dados e
 
 Agora que você experimentou como integrar seus próprios dados em um aplicativo de IA generativa criado com o portal do Azure IA Foundry, vamos explorar mais!
 
-Tente adicionar uma nova fonte de dados por meio do portal do Azure IA Foundry, indexá-la e integrar os dados indexados em um prompt flow. Estes são alguns conjuntos de dados que você pode tentar:
+Tente adicionar uma nova fonte de dados por meio do portal da Fábrica de IA do Azure, indexá-la e integrar os dados indexados em um aplicativo cliente. Estes são alguns conjuntos de dados que você pode tentar:
 
 - Uma coleção de artigos (de pesquisa) que você tem em seu computador.
 - Um conjunto de apresentações de conferências anteriores.
 - Qualquer um dos conjuntos de dados disponíveis no repositório de [dados de amostra do Azure Search](https://github.com/Azure-Samples/azure-search-sample-data).
 
-Use o máximo de recursos que puder para criar sua fonte de dados e integrá-la a um prompt flow ou aplicativo cliente. Teste sua solução enviando prompts que só poderiam ser respondidos pelo conjunto de dados que você escolheu!
+Teste sua solução enviando prompts que só poderiam ser respondidos pelo conjunto de dados que você escolheu!
 
 ## Limpar
 
