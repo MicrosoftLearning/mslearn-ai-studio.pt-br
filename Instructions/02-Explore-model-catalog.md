@@ -39,8 +39,8 @@ Um hub IA do Azure fornece um espaço de trabalho colaborativo no qual você pod
 
 Há várias opções para implantar modelos no portal da Fábrica de IA do Azure. Neste exercício, você usará a opção de implantação **inferência de modelo da IA do Azure**, que dá suporte aos modelos do *OpenAI do Azure* e *modelo como serviço* do catálogo de modelos da Fábrica de IA do Azure. Como todos os modelos são implantados em um ponto de extremidade comum hospedado pelo recurso Serviços de IA do Azure, é fácil alternar entre os modelos ao testá-los para comparar o comportamento e o desempenho.
 
-1. Na barra de ferramentas no canto superior direito da página do projeto da Fábrica de IA do Azure, use o ícone **Recursos de visualização** para exibir os recursos de visualização.
-1. Habilite o recurso **Implantar modelos no serviço de inferência de modelo da IA do Azure**. Em seguida, feche o painel **Recursos de visualização**.
+1. Na barra de ferramentas no canto superior direito da página do projeto da Fábrica de IA do Azure, use o ícone **Recursos de visualização** (📣) para exibir os recursos de visualização.
+1. Verifique se o recurso **Implantar modelos no serviço de inferência de modelo da IA do Azure** está habilitado. Em seguida, feche o painel **Recursos de visualização**.
 
 ## Revisar detalhes e parâmetros do modelo
 
@@ -101,7 +101,6 @@ Vamos começar implantando um modelo do catálogo de modelos. Você pode preferi
     - **Recurso de IA conectado**: *sua conexão de recursos do OpenAI do Azure*
     - **Limite de taxa de fichas por minuto (milhares)**: 5 mil
     - **Filtro de conteúdo**: DefaultV2
-    - **Habilitar cota dinâmica**: Desabilitado
       
     > **Observação**: A redução do TPM ajuda a evitar o uso excessivo da cota disponível na assinatura que você está usando. 5.000 TPM são suficientes para os dados usados neste exercício.
 

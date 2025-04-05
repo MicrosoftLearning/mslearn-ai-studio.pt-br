@@ -10,24 +10,28 @@ Neste exercício, você explorará avaliações internas e personalizadas para a
 
 Este exercício levará aproximadamente **30** minutos.
 
-## Crie um hub de IA e um projeto no Azure IA Foundry
+## Criar um projeto e hub de IA do Azure
 
-Você deve começar criando um projeto do Azure IA Foundry em um hub de IA do Azure:
+Um hub IA do Azure fornece um espaço de trabalho colaborativo no qual você pode definir um ou mais *projetos*. Vamos criar um projeto e hub de IA do Azure.
 
-1. Em um navegador da Web, abra [https://ai.azure.com](https://ai.azure.com) e entre usando suas credenciais do Azure.
-1. Selecione a **Página Inicial** e selecione **+ Novo projeto**.
-1. No assistente **Criar um projeto**, dê um nome exclusivo ao seu projeto, selecione **Personalizar** e defina as seguintes configurações:
-    - **Nome do hub**: *Um nome exclusivo*
+1. Em um navegador da Web, abra o [portal do Azure IA Foundry](https://ai.azure.com) em `https://ai.azure.com` e entre usando suas credenciais do Azure.
+
+1. Na home page, selecione **+Criar projeto**.
+1. No assistente **Criar um projeto**, insira um nome de projeto adequado (por exemplo, `my-ai-project`) e revise os recursos do Azure que serão criados automaticamente para dar suporte ao seu projeto.
+1. Selecione **Personalizar** e especifique as seguintes configurações para o hub:
+    - **Nome do hub**: *um nome exclusivo – por exemplo `my-ai-hub`*
     - **Assinatura**: *sua assinatura do Azure*
-    - **Grupo de recursos**: *Um novo grupo de recursos*
+    - **Grupo de recursos**: *crie um novo grupo de recursos com um nome exclusivo (por exemplo, `my-ai-resources`) ou selecione um existente*
     - **Localização**: selecione **Ajude-me a escolher** e então selecione **gpt-4** na janela do auxiliar de localização e use a região recomendada\*
-    - **Conectar os Serviços de IA do Azure ou a OpenAI do Azure**: (novo) *preenchido automaticamente com o nome do hub selecionado*
+    - **Conectar os Serviços de IA do Azure ou o OpenAI do Azure:*** crie um novo recurso de Serviços de IA com um nome apropriado (por exemplo, `my-ai-services`) ou use um existente*
     - **Conectar-se à Pesquisa de IA do Azure**: Ignorar a conexão
 
-    > \* Os recursos do OpenAI do Azure são restringidos no nível do locatário por cotas regionais. As regiões listadas no auxiliar de localização incluem a cota padrão para os tipos de modelos usados neste exercício. No caso de um limite de cota ser atingido mais adiante no exercício, há a possibilidade de você precisar criar outro recurso em uma região diferente. Saiba mais sobre a [disponibilidade do modelo por região](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#availability)
+    > \* As cotas do modelo são restritas no nível do locatário por cotas regionais. No caso de um limite de cota ser atingido mais adiante no exercício, há a possibilidade de você precisar criar outro recurso em uma região diferente.
 
-1. Clique em **Avançar** e revise a configuração.
-1. Clique em **Criar um projeto** e aguarde a conclusão do processo.
+1. Clique em **Avançar** e revise a configuração. Em seguida, selecione **Criar** e aguarde a conclusão do processo.
+1. Quando o projeto for criado, feche todas as dicas exibidas e examine a página do projeto no Portal da Fábrica de IA do Azure, que deve ser semelhante à imagem a seguir:
+
+    ![Captura de tela dos detalhes de um projeto IA do Azure no Portal da Fábrica de IA do Azure.](./media/ai-foundry-project.png)
 
 ## Implantar um modelo GPT
 
@@ -155,7 +159,7 @@ Para economizar tempo, criamos um conjunto de dados de saída em lote para você
 1. Selecione **Avançar**, revise os dados e **Envie** a nova avaliação.
 1. Aguarde até que as avaliações sejam concluídas, talvez você precise atualizar.
 1. Selecione a execução de avaliação que você acabou de criar.
-1. Explore o **Painel de métricas** e **Resultados detalhados das métricas**.
+1. Explore o **painel Métrica** na guia **Relatório** e o **Resultado de métricas detalhadas** na guia **Dados**.
 
 ## Excluir recursos do Azure
 

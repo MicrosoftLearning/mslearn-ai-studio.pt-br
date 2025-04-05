@@ -12,6 +12,8 @@ Neste exercício, você usará o portal da Fábrica de IA do Azure e os SDKs da 
 
 Este exercício levará, aproximadamente, **45** minutos.
 
+> **Observação**: este exercício é baseado em SDKs de pré-lançamento, que podem estar sujeitos a alterações. Quando necessário, usamos versões específicas de pacotes que podem não refletir as versões mais recentes disponíveis.
+
 ## Criar um projeto do Azure AI Foundry
 
 Vamos começar criando um projeto da Fábrica de IA do Azure e os recursos de serviço necessários para dar suporte ao uso de seus próprios dados, incluindo um recurso da Pesquisa de IA do Azure.
@@ -30,7 +32,7 @@ Vamos começar criando um projeto da Fábrica de IA do Azure e os recursos de se
     - **Conectar os Serviços de IA do Azure ou o OpenAI do Azure:*** crie um novo recurso de Serviços de IA com um nome apropriado (por exemplo, `my-ai-services`) ou use um existente*
     - **Conectar a Pesquisa de IA do Azure**: *crie um novo recurso da Pesquisa de IA do Azure com um nome exclusivo*
 
-    > \* Os recursos do OpenAI do Azure são restringidos no nível do locatário por cotas regionais. No caso de um limite de cota ser atingido mais adiante no exercício, há a possibilidade de você precisar criar outro recurso em uma região diferente.
+    > \* Os recursos do OpenAI do Azure são restringidos no nível do locatário por cotas regionais. Caso um limite de cota seja atingido e nenhuma região seja recomendada para ambos os modelos, selecione apenas um deles e use sua região recomendada. Você criará outro recurso em uma região diferente para o segundo modelo posteriormente no exercício.
 
 1. Clique em **Avançar** e revise a configuração. Em seguida, selecione **Criar** e aguarde a conclusão do processo.
 1. Quando o projeto for criado, feche todas as dicas exibidas e examine a página do projeto **Visão geral** no Portal da Fábrica de IA do Azure, que deve ser semelhante à imagem a seguir:
@@ -189,7 +191,7 @@ Agora que você tem um índice em funcionamento, pode usar os SDKs da Fábrica d
     - **your_project_endpoint**: substitua pela cadeia de conexão do projeto (copiada da página **Visão geral** do projeto no Portal da Fábrica de IA do Azure)
     - **your_model_deployment**: substitua pelo nome que você atribuiu à implantação de modelo (que deve ser `gpt-4`)
     - **your_index**: substitua pelo nome do índice (que deve ser `brochures-index`)
-1. Depois de substituir os espaços reservados, use o comando **CTRL+S** para salvar suas alterações e, em seguida, use o comando **CTRL+Q** para fechar o editor de código, mantendo a linha de comando do Cloud Shell aberta.
+1. Depois de substituir os espaços reservados, use o comando **CTRL+S** ou **botão direito do mouse > Salvar** para salvar as suas alterações e, em seguida, use o comando **CTRL+Q** ou **botão direito do mouse > Sair** para fechar o editor de código, mantendo a linha de comando do Cloud Shell aberta.
 
 ### Explorar o código para implementar o padrão RAG
 
