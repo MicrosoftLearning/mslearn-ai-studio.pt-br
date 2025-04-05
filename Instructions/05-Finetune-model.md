@@ -20,7 +20,7 @@ Este exercício levará aproximadamente **60** minutos\*.
 
 Você deve começar criando um projeto do portal do Azure AI Foundry em um hub de IA do Azure:
 
-1. Em um navegador da Web, abra [https://ai.azure.com](https://ai.azure.com) e entre usando suas credenciais do Azure.
+1. Em um navegador da Web, abra o [Portal da Fábrica de IA do Azure](https://ai.azure.com) em `https://ai.azure.com` e entre usando suas credenciais do Azure.
 1. Na home page, selecione **+ Criar um projeto**.
 1. No assistente **Criar um projeto**, crie um projeto com as seguintes configurações:
     - **Nome do projeto**: *Um nome exclusivo para seu projeto*
@@ -46,7 +46,7 @@ Como o ajuste fino de um modelo leva algum tempo para ser concluído, você inic
     > **Observação**: seu dispositivo pode salvar o arquivo como um arquivo .txt por padrão. Selecione todos os arquivos e remova o sufixo .txt para garantir que você esteja salvando o arquivo como JSONL.
 
 1. Navegue até a página **Ajustar** na seção **Criar e personalizar**, usando o menu à esquerda.
-1. Selecione o botão para adicionar um novo modelo de ajuste, selecione o modelo `gpt-4`, clique em **Avançar** e clique em **Confirmar**.
+1. Selecione o botão para adicionar um novo modelo de ajuste, selecione o modelo `gpt-4` e clique em **Avançar**.
 1. **Ajuste** o modelo usando a seguinte configuração:
     - **Versão do modelo**: *selecione a versão padrão*
     - **Sufixo do modelo**: `ft-travel`

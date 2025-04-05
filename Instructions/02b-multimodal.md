@@ -10,6 +10,8 @@ Neste exercício, você usará o modelo de IA generativa *Phi-4-multimodal-instr
 
 Este exercício levará aproximadamente **30** minutos.
 
+> **Observação**: este exercício é baseado em SDKs de pré-lançamento, que podem estar sujeitos a alterações. Quando necessário, usamos versões específicas de pacotes que podem não refletir as versões mais recentes disponíveis.
+
 ## Criar um projeto do Azure AI Foundry
 
 Vamos começar criando um projeto da Fábrica de IA do Azure.
@@ -129,7 +131,7 @@ Agora que você implantou o modelo, pode usar a implantação em um aplicativo c
     O arquivo é aberto em um editor de código.
 
 10. No arquivo de código, substitua o espaço reservado **your_project_endpoint** pela cadeia de conexão do seu projeto (copiada da página **Visão Geral** do projeto no portal da Fábrica de IA do Azure) e o espaço reservado **your_model_deployment** pelo nome que você atribuiu à implantação do modelo Phi-4-multimodal-instruct.
-11. Depois de substituir os espaços reservados, use o comando **CTRL+S** para salvar suas alterações e, em seguida, use o comando **CTRL+Q** para fechar o editor de código, mantendo a linha de comando do Cloud Shell aberta.
+11. Depois de substituir os espaços reservados, use o comando **CTRL+S** ou **botão direito do mouse > Salvar** para salvar as suas alterações e, em seguida, use o comando **CTRL+Q** ou **botão direito do mouse > Sair** para fechar o editor de código, mantendo a linha de comando do Cloud Shell aberta.
 
 ### Escrever código para se conectar ao projeto e obter um cliente de chat para o modelo
 
