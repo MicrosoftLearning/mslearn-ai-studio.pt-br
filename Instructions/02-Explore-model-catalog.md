@@ -16,10 +16,12 @@ Este exercício levará aproximadamente **25** minutos.
 
 Um hub IA do Azure fornece um espaço de trabalho colaborativo no qual você pode definir um ou mais *projetos*. Vamos criar um projeto e hub de IA do Azure.
 
-1. Em um navegador da Web, abra o [portal do Azure IA Foundry](https://ai.azure.com) em `https://ai.azure.com` e entre usando suas credenciais do Azure.
+1. Em um navegador da Web, abra o [Portal da Fábrica de IA do Azure](https://ai.azure.com) em `https://ai.azure.com` e entre usando suas credenciais do Azure. Feche todas as dicas ou painéis de início rápido abertos na primeira vez que você entrar e, se necessário, use o logotipo da **Fábrica de IA do Azure** no canto superior esquerdo para navegar até a home page, que é semelhante à imagem a seguir:
+
+    ![Captura de tela do portal do Azure AI Foundry.](./media/ai-foundry-home.png)
 
 1. Na home page, selecione **+Criar projeto**.
-1. No assistente **Criar um projeto**, insira um nome de projeto adequado (por exemplo, `my-ai-project`) e revise os recursos do Azure que serão criados automaticamente para dar suporte ao seu projeto.
+1. No assistente **Criar um projeto**, insira um nome de projeto adequado (por exemplo, `my-ai-project`) e, se um hub existente for sugerido, escolha a opção de criar um novo. Em seguida, examine os recursos do Azure que serão criados automaticamente para dar suporte ao hub e ao projeto.
 1. Selecione **Personalizar** e especifique as seguintes configurações para o hub:
     - **Nome do hub**: *um nome exclusivo – por exemplo `my-ai-hub`*
     - **Assinatura**: *sua assinatura do Azure*
@@ -95,16 +97,18 @@ Vamos começar implantando um modelo do catálogo de modelos. Você pode preferi
 1. Retorne à home page do **Catálogo de modelos**.
 1. Pesquise e selecione o modelo `gpt-4`, assim como você fez anteriormente.
 1. Na página **gpt-4**, selecione **Implantar** e implante o modelo com as seguintes configurações selecionando **Personalizar** nos detalhes da implantação:
-    - **Nome da implantação**: *um nome exclusivo para a implantação do seu modelo — por exemplo `gpt-4-model`*
-    - **Tipo de implantação**: padrão global
-    - **Versão do modelo**: *selecione a versão padrão*
-    - **Recurso de IA conectado**: *sua conexão de recursos do OpenAI do Azure*
+1. Crie uma nova implantação do modelo com as seguintes configurações selecionando **Personalizar** nos detalhes de implantação:
+    - **Nome da implantação**: *um nome exclusivo para a implantação do seu modelo — por exemplo `gpt-4`*
+    - **Tipo de implantação**: Padrão
+    - **Versão do modelo**: 0613
+    - **Recurso de IA conectado**: *selecione a sua conexão de recursos do OpenAI do Azure*
     - **Limite de taxa de fichas por minuto (milhares)**: 5 mil
     - **Filtro de conteúdo**: DefaultV2
+    - **Habilitar cota dinâmica**: Desabilitado
       
     > **Observação**: A redução do TPM ajuda a evitar o uso excessivo da cota disponível na assinatura que você está usando. 5.000 TPM são suficientes para os dados usados neste exercício.
 
-1. Aguarde até que o **Estado de provisionamento** da implantação seja **Concluído**.
+1. Aguarde até que a implantação seja concluída.
 
 ### Implantar um modelo por meio de *Modelos + pontos de extremidade*
 
@@ -114,11 +118,11 @@ Se você já sabe exatamente qual modelo quer implantar, talvez prefira fazê-lo
 1. Na guia **Implantações de modelo**, na lista suspensa **+ Implantar modelo**, selecione **Implantar modelo base**. Pesquise por `Phi-3.5-mini-instruct` e confirme a selação.
 1. Concorde com a licença do modelo.
 1. Implante um modelo **Phi-3.5-mini-instruct** com as seguintes configurações:
-    - **Nome da implantação**: *um nome exclusivo para a implantação do seu modelo — por exemplo, `phi-35-model`*
+    - **Nome da implantação**: *um nome exclusivo para a implantação do seu modelo — por exemplo, `Phi-3.5-mini-instruct`*
     - **Tipo de implantação**: padrão global
     - **Detalhes da implantação**: *use as configurações padrão*
 
-1. Aguarde até que o **Estado de provisionamento** da implantação seja **Concluído**.
+1. Aguarde até que a implantação seja concluída.
 
 ## Testar modelos no playground de chat
 
