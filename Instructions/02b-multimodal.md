@@ -21,7 +21,7 @@ Vamos começar criando um projeto da Fábrica de IA do Azure.
     ![Captura de tela do portal do Azure AI Foundry.](./media/ai-foundry-home.png)
 
 2. Na home page, selecione **+Criar projeto**.
-3. No assistente **Criar um projeto**, insira um nome de projeto adequado (por exemplo, `my-ai-project`) e revise os recursos do Azure que serão criados automaticamente para dar suporte ao seu projeto.
+3. No assistente **Criar um projeto**, insira um nome de projeto adequado (por exemplo, `my-ai-project`) e, se um hub existente for sugerido, escolha a opção de criar um novo. Em seguida, examine os recursos do Azure que serão criados automaticamente para dar suporte ao hub e ao projeto.
 4. Selecione **Personalizar** e especifique as seguintes configurações para o hub:
     - **Nome do hub**: *um nome exclusivo – por exemplo `my-ai-hub`*
     - **Assinatura**: *sua assinatura do Azure*
@@ -75,14 +75,14 @@ Agora que você implantou o modelo, pode usar a implantação em um aplicativo c
 
 5. Na barra de ferramentas do Cloud Shell, no menu **Configurações**, selecione **Ir para a versão clássica** (isso é necessário para usar o editor de código).
 
-6. No painel do PowerShell, insira os seguintes comandos para clonar o repositório GitHub para este exercício:
+6. No painel do PowerShell, insira os seguintes comandos para clonar o repositório GitHub que contém os arquivos de código deste exercício:
 
     ```
     rm -r mslearn-ai-foundry -f
     git clone https://github.com/microsoftlearning/mslearn-ai-studio mslearn-ai-foundry
     ```
 
-    > **Dica**: conforme você colar comandos no cloudshell, a saída pode ocupar uma grande quantidade do espaço da tela. Você pode limpar a tela digitando o comando `cls` para facilitar o foco em cada tarefa.
+    > **Dica**: ao colar comandos no Cloud Shell, a saída poderá ocupar uma grande quantidade do espaço da tela. Você pode limpar a tela digitando o comando `cls` para facilitar o foco em cada tarefa.
 
 7. Após o repositório ser clonado, navegue até a pasta que contém os arquivos de código do aplicativo:  
 
@@ -130,7 +130,7 @@ Agora que você implantou o modelo, pode usar a implantação em um aplicativo c
 
     O arquivo é aberto em um editor de código.
 
-10. No arquivo de código, substitua o espaço reservado **your_project_endpoint** pela cadeia de conexão do seu projeto (copiada da página **Visão Geral** do projeto no portal da Fábrica de IA do Azure) e o espaço reservado **your_model_deployment** pelo nome que você atribuiu à implantação do modelo Phi-4-multimodal-instruct.
+10. No arquivo de código, substitua o espaço reservado **your_project_connection_string** pela cadeia de conexão do seu projeto (copiada da página **Visão Geral** do projeto no portal da Fábrica de IA do Azure) e o espaço reservado **your_model_deployment** pelo nome que você atribuiu à implantação do modelo Phi-4-multimodal-instruct.
 11. Depois de substituir os espaços reservados, use o comando **CTRL+S** ou **botão direito do mouse > Salvar** para salvar as suas alterações e, em seguida, use o comando **CTRL+Q** ou **botão direito do mouse > Sair** para fechar o editor de código, mantendo a linha de comando do Cloud Shell aberta.
 
 ### Escrever código para se conectar ao projeto e obter um cliente de chat para o modelo
