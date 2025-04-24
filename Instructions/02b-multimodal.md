@@ -10,7 +10,7 @@ Neste exercício, você usará o modelo de IA generativa *Phi-4-multimodal-instr
 
 Este exercício levará aproximadamente **30** minutos.
 
-> **Observação**: este exercício é baseado em SDKs de pré-lançamento, que podem estar sujeitos a alterações. Quando necessário, usamos versões específicas de pacotes que podem não refletir as versões mais recentes disponíveis. Você pode experimentar comportamento inesperado, avisos ou erros.
+> **Observação**: este exercício é baseado em SDKs de pré-lançamento, que podem estar sujeitos a alterações. Quando necessário, usamos versões específicas de pacotes que podem não refletir as versões mais recentes disponíveis.
 
 ## Criar um projeto do Azure AI Foundry
 
@@ -21,9 +21,9 @@ Vamos começar criando um projeto da Fábrica de IA do Azure.
     ![Captura de tela do portal do Azure AI Foundry.](./media/ai-foundry-home.png)
 
 2. Na home page, selecione **+Criar projeto**.
-3. No assistente **Criar um projeto**, insira um nome de projeto adequado e, se um hub existente for sugerido, escolha a opção de criar um novo. Em seguida, examine os recursos do Azure que serão criados automaticamente para dar suporte ao hub e ao projeto.
+3. No assistente **Criar um projeto**, insira um nome de projeto adequado (por exemplo, ) e, se um hub existente for sugerido, escolha a opção de criar um novo. Em seguida, examine os recursos do Azure que serão criados automaticamente para dar suporte ao hub e ao projeto.
 4. Selecione **Personalizar** e especifique as seguintes configurações para o hub:
-    - **Nome do hub**: *um nome para o hub*
+    - **Nome do hub**: *um nome válido para o seu hub*
     - **Assinatura**: *sua assinatura do Azure*
     - **Grupo de recursos**: *criar ou selecionar um grupo de recursos*
     - **Região**: selecione uma das seguintes regiões\*:
@@ -34,7 +34,7 @@ Vamos começar criando um projeto da Fábrica de IA do Azure.
         - Suécia Central
         - Oeste dos EUA
         - Oeste dos EUA 3
-    - **Conectar os Serviços de IA do Azure ou o OpenAI do Azure** – *Criar um novo recurso de Serviços de IA*
+    - **Conectar os Serviços de IA do Azure ou o OpenAI do Azure**: *Criar um novo recurso de Serviços de IA*
     - **Conectar-se à Pesquisa de IA do Azure**: Ignorar a conexão
 
     > \* No momento em que este artigo foi escrito, o modelo *Phi-4-multimodal-instruct* da Microsoft que usaremos neste exercício está disponível nessas regiões. Você pode verificar a disponibilidade regional mais recente para modelos específicos na [documentação da Fábrica de IA do Azure](https://learn.microsoft.com/azure/ai-foundry/how-to/deploy-models-serverless-availability#region-availability). No caso de um limite de cota regional ser atingido mais adiante no exercício, há a possibilidade de você precisar criar outro recurso em uma região diferente.
@@ -48,7 +48,7 @@ Vamos começar criando um projeto da Fábrica de IA do Azure.
 
 Agora você já pode implantar um modelo *Phi-4-multimodal-instruct* para aceitar prompts multimodais.
 
-1. Na barra de ferramentas no canto superior direito da página do projeto da Fábrica de IA do Azure, use o ícone **Visualizar recursos** (**&#9215;**) para garantir que o recurso **Implantar modelos no serviço de inferência de modelos da IA do Azure** esteja habilitado. Esse recurso garante que a implantação do modelo esteja disponível para o serviço de inferência de IA do Azure, que você usará no código do aplicativo.
+1. Na barra de ferramentas no canto superior direito da página do projeto do Azure AI Foundry, use o ícone **Preview features** (**&#9215;**) para garantir que o recurso **Implantar modelos no serviço de inferência de modelos de IA do Azure** seja habilitado. Esse recurso garante que a implantação do modelo esteja disponível para o serviço de inferência de IA do Azure, que você usará no código do aplicativo.
 2. No painel à esquerda do seu projeto, na seção **Meus ativos**, selecione a página **Modelos + pontos de extremidade**.
 3. Na página **Modelos + pontos extremidades**, na guia **Implantações de modelo**, no menu **+ Implantar modelo**, selecione **Implantar modelo base**.
 4. Procure o modelo **Phi-4-multimodal-instruct** na lista e, em seguida, selecione-o e confirme-o.
@@ -140,7 +140,7 @@ Agora que você implantou o modelo, pode usar a implantação em um aplicativo c
     O arquivo é aberto em um editor de código.
 
 10. No arquivo de código, substitua o espaço reservado **your_project_connection_string** pela cadeia de conexão do seu projeto (copiada da página **Visão Geral** do projeto no portal da Fábrica de IA do Azure) e o espaço reservado **your_model_deployment** pelo nome que você atribuiu à implantação do modelo Phi-4-multimodal-instruct.
-11. Após substituir os espaços reservados, no editor de código, use o comando **CTRL+S** ou **Clique com o botão direito > Salvar** para salvar as alterações e, em seguida, use o comando **CTRL+Q** ou **Clique com o botão direito > Sair** para fechar o editor de código, mantendo a linha de comando do Cloud Shell aberta.
+11. Depois de substituir os espaços reservados, no editor de código use o comando **CTRL+S** ou **botão direito do mouse > Salvar** para salvar as suas alterações e, em seguida, use o comando **CTRL+Q** ou **botão direito do mouse > Sair** para fechar o editor de código, mantendo a linha de comando do Cloud Shell aberta.
 
 ### Escrever código para se conectar ao projeto e obter um cliente de chat para o modelo
 
@@ -164,8 +164,7 @@ Agora que você implantou o modelo, pode usar a implantação em um aplicativo c
 
     **Python**
 
-    ```python
-   # Add references
+    ```
    from dotenv import load_dotenv
    from azure.identity import DefaultAzureCredential
    from azure.ai.projects import AIProjectClient
@@ -183,20 +182,18 @@ Agora que você implantou o modelo, pode usar a implantação em um aplicativo c
 
     **C#**
 
-    ```csharp
-   // Add references
+    ```
    using Azure.Identity;
    using Azure.AI.Projects;
    using Azure.AI.Inference;
     ```
 
 3. Na função **main**, no comentário **Get configuration settings**, observe que o código carrega a cadeia de conexão do projeto e os valores do nome de implantação do modelo que você definiu no arquivo de configuração.
-4. No comentário **Initialize the project client**, adicione o seguinte código para se conectar ao seu projeto da Fábrica de IA do Azure usando as credenciais do Azure com as quais você se conectou:
+4. No comentário **Initialize the project**, adicione o seguinte código para se conectar ao seu projeto da Fábrica de IA do Azure usando as credenciais do Azure com as quais você está conectado no momento:
 
     **Python**
 
-    ```python
-   # Get configuration settings
+    ```
    project_client = AIProjectClient.from_connection_string(
         conn_str=project_connection,
         credential=DefaultAzureCredential())
@@ -204,8 +201,7 @@ Agora que você implantou o modelo, pode usar a implantação em um aplicativo c
 
     **C#**
 
-    ```csharp
-   // Get configuration settings
+    ```
    var projectClient = new AIProjectClient(project_connection,
                         new DefaultAzureCredential());
     ```
@@ -214,15 +210,13 @@ Agora que você implantou o modelo, pode usar a implantação em um aplicativo c
 
     **Python**
 
-    ```python
-   # Get a chat client
+    ```
    chat_client = project_client.inference.get_chat_completions_client(model=model_deployment)
     ```
 
     **C#**
 
-    ```csharp
-   // Get a chat client
+    ```
    ChatCompletionsClient chat = projectClient.GetChatCompletionsClient();
     ```
 
@@ -234,7 +228,6 @@ Agora que você implantou o modelo, pode usar a implantação em um aplicativo c
     **Python**
 
     ```python
-   # Get a response to text input
    response = chat_client.complete(
        messages=[
            SystemMessage(system_message),
@@ -245,8 +238,7 @@ Agora que você implantou o modelo, pode usar a implantação em um aplicativo c
 
     **C#**
 
-    ```csharp
-   // Get a response to text input
+    ```
    var requestOptions = new ChatCompletionsOptions()
    {
    Model = model_deployment,
@@ -289,7 +281,6 @@ Agora que você implantou o modelo, pode usar a implantação em um aplicativo c
     **Python**
 
     ```python
-   # Get a response to image input
    image_url = "https://github.com/microsoftlearning/mslearn-ai-studio/raw/refs/heads/main/labfiles/multimodal/orange.jpg"
    image_format = "jpeg"
    request = Request(image_url, headers={"User-Agent": "Mozilla/5.0"})
@@ -311,8 +302,7 @@ Agora que você implantou o modelo, pode usar a implantação em um aplicativo c
     **C#**
 
     ```csharp
-  // Get a response to image input
-   string imageUrl = "https://github.com/microsoftlearning/mslearn-ai-studio/raw/refs/heads/main/labfiles/multimodal/orange.jpg";
+  string imageUrl = "https://github.com/microsoftlearning/mslearn-ai-studio/raw/refs/heads/main/labfiles/multimodal/orange.jpg";
    ChatCompletionsOptions requestOptions = new ChatCompletionsOptions()
    {
        Messages = {
@@ -356,7 +346,6 @@ Agora que você implantou o modelo, pode usar a implantação em um aplicativo c
     **Python**
 
     ```python
-   # Get a response to audio input
    file_path="https://github.com/microsoftlearning/mslearn-ai-studio/raw/refs/heads/main/labfiles/multimodal/manzanas.mp3"
    response = chat_client.complete(
            messages=[
@@ -378,7 +367,6 @@ Agora que você implantou o modelo, pode usar a implantação em um aplicativo c
     **C#**
 
     ```csharp
-   // Get a response to audio input
    string audioUrl="https://github.com/microsoftlearning/mslearn-ai-studio/raw/refs/heads/main/labfiles/multimodal/manzanas.mp3";
    var requestOptions = new ChatCompletionsOptions()
    {
@@ -394,6 +382,7 @@ Agora que você implantou o modelo, pode usar a implantação em um aplicativo c
    var response = chat.Complete(requestOptions);
    Console.WriteLine(response.Value.Content);
     ```
+
 
 2. Use o comando **CTRL+S** para salvar suas alterações no arquivo de código. Você também pode fechar o editor de código (**CTRL+Q**), se desejar.
 
