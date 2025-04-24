@@ -16,21 +16,21 @@ Este exercício leva aproximadamente **40** minutos.
 
 Vamos começar criando um projeto da Fábrica de IA do Azure.
 
-1. Em um navegador da Web, abra o [Portal da Fábrica de IA do Azure](https://ai.azure.com) em `https://ai.azure.com` e entre usando suas credenciais do Azure. Feche todas as dicas ou painéis de início rápido abertos na primeira vez que você entrar e, se necessário, use o logotipo da **Fábrica de IA do Azure** no canto superior esquerdo para navegar até a home page, que é semelhante à imagem a seguir:
+1. Em um navegador da Web, abra o [Portal da Fábrica de IA do Azure](https://ai.azure.com) em `https://ai.azure.com` e entre usando suas credenciais do Azure. Feche todas as dicas ou painéis de início rápido abertos na primeira vez que você entrar e, se necessário, use o logotipo da **Fábrica de IA do Azure** no canto superior esquerdo para navegar até a home page, que é semelhante à imagem a seguir (feche o painel **Ajuda** se estiver aberto):
 
     ![Captura de tela do portal do Azure AI Foundry.](./media/ai-foundry-home.png)
 
 1. Na home page, selecione **+Criar projeto**.
-1. No assistente **Criar um projeto**, insira um nome de projeto adequado (por exemplo, `my-ai-project`) e, se um hub existente for sugerido, escolha a opção de criar um novo. Em seguida, examine os recursos do Azure que serão criados automaticamente para dar suporte ao hub e ao projeto.
+1. No assistente **Criar um projeto**, insira um nome de projeto adequado (por exemplo, ) e, se um hub existente for sugerido, escolha a opção de criar um novo. Em seguida, examine os recursos do Azure que serão criados automaticamente para dar suporte ao hub e ao projeto.
 1. Selecione **Personalizar** e especifique as seguintes configurações para o hub:
-    - **Nome do hub**: *um nome exclusivo – por exemplo `my-ai-hub`*
+    - **Nome do hub**: *um nome válido para o seu hub*
     - **Assinatura**: *sua assinatura do Azure*
-    - **Grupo de recursos**: *crie um novo grupo de recursos com um nome exclusivo (por exemplo, `my-ai-resources`) ou selecione um existente*
-    - **Localização**: selecione **Ajude-me a escolher** e então selecione **gpt-4** na janela do auxiliar de localização e use a região recomendada\*
-    - **Conectar os Serviços de IA do Azure ou o OpenAI do Azure:*** crie um novo recurso de Serviços de IA com um nome apropriado (por exemplo, `my-ai-services`) ou use um existente*
+    - **Grupo de recursos**: *criar ou selecionar um grupo de recursos*
+    - **Localização**: selecione **Ajude-me a escolher** e então selecione **gpt-4o** na janela do auxiliar de localização e use a região recomendada\*
+    - **Conectar os Serviços de IA do Azure ou o OpenAI do Azure**: *Criar um novo recurso de Serviços de IA*
     - **Conectar-se à Pesquisa de IA do Azure**: Ignorar a conexão
 
-    > \* As cotas do modelo são restritas no nível do locatário por cotas regionais. No caso de um limite de cota ser atingido mais adiante no exercício, há a possibilidade de você precisar criar outro recurso em uma região diferente.
+    > \* Os recursos do OpenAI do Azure são restritos por cotas regionais. Caso um limite de cota seja excedido posteriormente no exercício, é possível que você precise criar outro recurso em uma região diferente.
 
 1. Clique em **Avançar** e revise a configuração. Em seguida, selecione **Criar** e aguarde a conclusão do processo.
 1. Quando o projeto for criado, feche todas as dicas exibidas e examine a página do projeto no Portal da Fábrica de IA do Azure, que deve ser semelhante à imagem a seguir:
@@ -41,20 +41,20 @@ Vamos começar criando um projeto da Fábrica de IA do Azure.
 
 Agora está tudo pronto para implantar um modelo de linguagem de IA generativa para dar suporte ao seu aplicativo de chat. Neste exemplo, você usará o modelo OpenAI gpt-4; mas os princípios são os mesmos para qualquer modelo.
 
-1. Na barra de ferramentas no canto superior direito da página do projeto da Fábrica de IA do Azure, use o ícone **Recursos de visualização** para ativar o recurso **Implantar modelos para o serviço de inferência de modelo de IA do Azure**. Esse recurso garante que a implantação do modelo esteja disponível para o serviço de inferência de IA do Azure, que você usará no código do aplicativo.
+1. Na barra de ferramentas no canto superior direito da página do projeto do Azure AI Foundry, use o ícone **Preview features** (**&#9215;**) para garantir que o recurso **Implantar modelos no serviço de inferência de modelos de IA do Azure** seja habilitado. Esse recurso garante que a implantação do modelo esteja disponível para o serviço de inferência de IA do Azure, que você usará no código do aplicativo.
 1. No painel à esquerda do seu projeto, na seção **Meus ativos**, selecione a página **Modelos + pontos de extremidade**.
 1. Na página **Modelos + pontos extremidades**, na guia **Implantações de modelo**, no menu **+ Implantar modelo**, selecione **Implantar modelo base**.
 1. Procure o modelo **gpt-4** na lista, selecione-o e confirme-o.
 1. Crie uma nova implantação do modelo com as seguintes configurações selecionando **Personalizar** nos detalhes de implantação:
-    - **Nome de implantação**: *um nome exclusivo para sua implantação de modelo – por exemplo `gpt-4` (lembre-se do nome que você escolher, você precisará dele mais tarde*)
-    - **Tipo de implantação**: Padrão
-    - **Versão do modelo**: 0613
+    - **Nome da implantação**: *Um nome válido para sua implantação de modelo*
+    - **Tipo de implantação**: padrão global
+    - **Atualização automática de versão**: Ativado
+    - **Versão do modelo**: *selecione a versão mais recente disponivel*
     - **Recurso de IA conectado**: *selecione a sua conexão de recursos do OpenAI do Azure*
-    - **Limite de taxa de fichas por minuto (milhares)**: 5 mil
+    - **Limite de taxa de tokens por minuto (milhares):** 50 mil *(ou o máximo disponível em sua assinatura, se inferior a 50 mil)*
     - **Filtro de conteúdo**: DefaultV2
-    - **Habilitar cota dinâmica**: Desabilitado
 
-    > **Observação**: A redução do TPM ajuda a evitar o uso excessivo da cota disponível na assinatura que você está usando. 5.000 TPM são suficientes para os dados usados neste exercício.
+    > **Observação**: A redução do TPM ajuda a evitar o uso excessivo da cota disponível na assinatura que você está usando. 50.000 TPM são suficientes para os dados usados neste exercício. Se a sua cota disponível for menor do que isso, você poderá concluir o exercício, mas poderá ocorrer erros se o limite de taxa for excedido.
 
 1. Aguarde até que a implantação seja concluída.
 
@@ -82,14 +82,14 @@ Agora que você implantou um modelo, pode usar o SDK da Fábrica de IA do Azure 
 
     **<font color="red">Verifique se você mudou para a versão clássica do Cloud Shell antes de continuar.</font>**
 
-1. No painel do PowerShell, insira os seguintes comandos para clonar o repositório GitHub que contém os arquivos de código deste exercício:
+1. No painel do Cloud Shell, insira os seguintes comandos para clonar o repositório GitHub que contém os arquivos de código para este exercício (digite o comando ou copie-o para a área de transferência e clique com o botão direito do mouse na linha de comando e cole como texto sem formatação):
 
     ```
     rm -r mslearn-ai-foundry -f
     git clone https://github.com/microsoftlearning/mslearn-ai-studio mslearn-ai-foundry
     ```
 
-    > **Dica**: ao colar comandos no Cloud Shell, a saída poderá ocupar uma grande quantidade do espaço da tela. Você pode limpar a tela digitando o comando `cls` para facilitar o foco em cada tarefa.
+    > **Dica**: ao colar comandos no Cloud Shell, a saída poderá ocupar uma grande quantidade do buffer da tela. Você pode limpar a tela digitando o comando `cls` para facilitar o foco em cada tarefa.
 
 1. Após o repositório ser clonado, navegue até a pasta que contém os arquivos de código do aplicativo de chat:
 
@@ -112,6 +112,8 @@ Agora que você implantou um modelo, pode usar o SDK da Fábrica de IA do Azure 
     **Python**
 
     ```
+   python -m venv labenv
+   ./labenv/bin/Activate.ps1
    pip install python-dotenv azure-identity azure-ai-projects azure-ai-inference
     ```
 
@@ -296,6 +298,8 @@ Agora que você implantou um modelo, pode usar o SDK da Fábrica de IA do Azure 
 1. Tente algumas perguntas de acompanhamento, como `Where can I see one?` ou `Are they endangered?`. A conversa deve continuar, usando o histórico de bate-papo como contexto para cada iteração.
 1. Quando terminar, digite `quit` para sair do programa.
 
+> **Dica**: se o aplicativo falhar porque o limite de taxa foi excedido. Aguarde alguns segundos e tente novamente. Se não houver cota suficiente disponível em sua assinatura, o modelo poderá não ser capaz de responder.
+
 ## Use o SDK do OpenAI do Azure
 
 Seu aplicativo cliente é criado usando a SDK da Inferência de Modelos de IA do Azure, o que significa que ele pode ser usado com qualquer modelo implantado no serviço Inferência de Modelos de IA do Azure. O modelo implantado é um modelo OpenAI GPT, que você também pode consumir usando o OpenAI SDK.
@@ -319,7 +323,7 @@ Vamos fazer algumas modificações de código para ver como implementar um aplic
 
 > **Observação**: uma versão de pré-lançamento diferente do pacote Azure.AI.Projects é necessária como solução provisória de algumas incompatibilidades com o SDK da Inferência de Modelo de IA do Azure.
 
-1. Se o seu arquivo de código (*chat-app.py* ou *Program.cs*) ainda não estiver aberto, duse o seguinte comando para abri-lo no editor de código:
+1. Se o seu arqivo de código (*chat-app.py* ou *Program.cs*) ainda não estiver aberto, digite o seguinte comando para abri-lo no editor de código:
 
     **Python**
 
@@ -386,7 +390,7 @@ Vamos fazer algumas modificações de código para ver como implementar um aplic
     };
     ```
 
-1. Localize o comentário **Get a chat completion** e altere o código, adicionando a entrada de usuário ao prompt, obtenha a conclusão do seu modelo e adicione a conclusão ao prompt da seguinte maneira:
+1. Localize o comentário **Get a chat completion** e altere o código, adicionando a entrada de usuário ao prompt, obtenha a conclusão do seu modelo e adicione-a ao prompt da seguinte maneira:
 
     **Python**
 
