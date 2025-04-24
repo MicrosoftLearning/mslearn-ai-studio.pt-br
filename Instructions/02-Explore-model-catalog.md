@@ -16,21 +16,21 @@ Este exercício levará aproximadamente **25** minutos.
 
 Um hub IA do Azure fornece um espaço de trabalho colaborativo no qual você pode definir um ou mais *projetos*. Vamos criar um projeto e hub de IA do Azure.
 
-1. Em um navegador da Web, abra o [Portal da Fábrica de IA do Azure](https://ai.azure.com) em `https://ai.azure.com` e entre usando suas credenciais do Azure. Feche todas as dicas ou painéis de início rápido abertos na primeira vez que você entrar e, se necessário, use o logotipo da **Fábrica de IA do Azure** no canto superior esquerdo para navegar até a home page, que é semelhante à imagem a seguir:
+1. Em um navegador da Web, abra o [Portal da Fábrica de IA do Azure](https://ai.azure.com) em `https://ai.azure.com` e entre usando suas credenciais do Azure. Feche todas as dicas ou painéis de início rápido abertos na primeira vez que você entrar e, se necessário, use o logotipo da **Fábrica de IA do Azure** no canto superior esquerdo para navegar até a home page, que é semelhante à imagem a seguir (feche o painel **Ajuda** se estiver aberto):
 
     ![Captura de tela do portal do Azure AI Foundry.](./media/ai-foundry-home.png)
 
 1. Na home page, selecione **+Criar projeto**.
-1. No assistente **Criar um projeto**, insira um nome de projeto adequado (por exemplo, `my-ai-project`) e, se um hub existente for sugerido, escolha a opção de criar um novo. Em seguida, examine os recursos do Azure que serão criados automaticamente para dar suporte ao hub e ao projeto.
+1. No assistente **Criar um projeto**, insira um nome de projeto adequado (por exemplo, ) e, se um hub existente for sugerido, escolha a opção de criar um novo. Em seguida, examine os recursos do Azure que serão criados automaticamente para dar suporte ao hub e ao projeto.
 1. Selecione **Personalizar** e especifique as seguintes configurações para o hub:
-    - **Nome do hub**: *um nome exclusivo – por exemplo `my-ai-hub`*
+    - **Nome do hub**: *um nome válido para o seu hub*
     - **Assinatura**: *sua assinatura do Azure*
-    - **Grupo de recursos**: *crie um novo grupo de recursos com um nome exclusivo (por exemplo, `my-ai-resources`) ou selecione um existente*
-    - **Localização**: selecione **Ajude-me a escolher** e então selecione **gpt-4** na janela do auxiliar de localização e use a região recomendada\*
-    - **Conectar os Serviços de IA do Azure ou o OpenAI do Azure:*** crie um novo recurso de Serviços de IA com um nome apropriado (por exemplo, `my-ai-services`) ou use um existente*
+    - **Grupo de recursos**: *criar ou selecionar um grupo de recursos*
+    - **Localização**: selecione **Ajude-me a escolher** e então selecione **gpt-4o** na janela do auxiliar de localização e use a região recomendada\*
+    - **Conectar os Serviços de IA do Azure ou o OpenAI do Azure**: *Criar um novo recurso de Serviços de IA*
     - **Conectar-se à Pesquisa de IA do Azure**: Ignorar a conexão
 
-    > \* As cotas do modelo são restritas no nível do locatário por cotas regionais. No caso de um limite de cota ser atingido mais adiante no exercício, há a possibilidade de você precisar criar outro recurso em uma região diferente.
+    > \* Os recursos do OpenAI do Azure são restritos por cotas regionais. Caso um limite de cota seja excedido posteriormente no exercício, é possível que você precise criar outro recurso em uma região diferente.
 
 1. Clique em **Avançar** e revise a configuração. Em seguida, selecione **Criar** e aguarde a conclusão do processo.
 1. Quando o projeto for criado, feche todas as dicas exibidas e examine a página do projeto no Portal da Fábrica de IA do Azure, que deve ser semelhante à imagem a seguir:
@@ -41,7 +41,7 @@ Um hub IA do Azure fornece um espaço de trabalho colaborativo no qual você pod
 
 Há várias opções para implantar modelos no portal da Fábrica de IA do Azure. Neste exercício, você usará a opção de implantação **inferência de modelo da IA do Azure**, que dá suporte aos modelos do *OpenAI do Azure* e *modelo como serviço* do catálogo de modelos da Fábrica de IA do Azure. Como todos os modelos são implantados em um ponto de extremidade comum hospedado pelo recurso Serviços de IA do Azure, é fácil alternar entre os modelos ao testá-los para comparar o comportamento e o desempenho.
 
-1. Na barra de ferramentas no canto superior direito da página do projeto da Fábrica de IA do Azure, use o ícone **Recursos de visualização** (📣) para exibir os recursos de visualização.
+1. Na barra de ferramentas no canto superior direito da página do projeto da Fábrica de IA do Azure, use o ícone **Recursos de visualização** (**&#9215;** para exibir os recursos de visualização.
 1. Verifique se o recurso **Implantar modelos no serviço de inferência de modelo da IA do Azure** está habilitado. Em seguida, feche o painel **Recursos de visualização**.
 
 ## Revisar detalhes e parâmetros do modelo
@@ -49,19 +49,19 @@ Há várias opções para implantar modelos no portal da Fábrica de IA do Azure
 Para ajudar a escolher um modelo, você pode explorar descrições e parâmetros de modelo para determinar qual modelo melhor atende às suas necessidades.
 
 1. No portal do projeto da Fábrica de IA do Azure, no painel de navegação à esquerda, selecione **Catálogo de modelos**.
-1. Na home page do catálogo de modelos, pesquise `gpt-4` para encontrar o modelo de conclusão do chat **gpt-4**.
+1. Na home page do catálogo de modelos, pesquise `gpt-4o` para encontrar o modelo de conclusão do chat **gpt-4o**.
 
-    ![Captura de tela de uma pesquisa por "gpt-4" no catálogo de modelos.](./media/model-catalog-search-gpt4.png)
+    ![Captura de tela de uma pesquisa por "gpt-4o" no catálogo de modelos.](./media/model-catalog-search-gpt4.png)
 
-1. Selecione o modelo **gpt-4** para ver os detalhes. Leia a descrição e revise as demais informações disponíveis na página.
+1. Selecione o modelo **gpt-4o** para ver os detalhes. Leia a descrição e revise as demais informações disponíveis na página.
 
-    ![Captura de tela da página de detalhes do modelo gpt-4.](./media/gpt4-details.png)
+    ![Captura de tela da página de detalhes do modelo gpt-4o.](./media/gpt4-details.png)
 
-1. Na página **gpt-4**, exiba a guia **Parâmetros** para ver como o modelo se compara em alguns parâmetros de desempenho padrão com outros modelos usados em cenários semelhantes.
+1. Na página **gpt-4o**, exiba a guia **Benchmarks** para ver como o modelo se compara em alguns parâmetros de desempenho padrão com outros modelos usados em cenários semelhantes.
 
-    ![Captura de tela da página do modelo de parâmetro de comparação gpt-4.](./media/gpt4-benchmarks.png)
+    ![Captura de tela da página do modelo de parâmetro de comparação gpt-4o.](./media/gpt4-benchmarks.png)
 
-1. Use a seta de voltar (**&larr;**) ao lado do título da página **gpt-4** para retornar à home page do catálogo de modelos.
+1. Use a seta de voltar (**&larr;**) ao lado do título da página **gpt-4o** para retornar à home page do catálogo de modelos.
 1. No catálogo de modelos, pesquise `Phi-3.5-mini-instruct` e visualize os detalhes e parâmetros do modelo **Phi-3.5-mini-instruct**.
 
 ## Comparar modelos
@@ -75,10 +75,10 @@ Você analisou dois modelos diferentes, ambos os quais poderiam ser usados para 
 
 1. No painel **Modelos a serem comparados** à esquerda, você pode selecionar tarefas populares, como *respostas às perguntas*, para selecionar automaticamente modelos comumente usados para tarefas específicas.
 1. Use o ícone **Limpar todos os modelos** (&#128465;) para remover todos os modelos pré-selecionados.
-1. Use o botão **+ Modelo a ser comparado** para adicionar o modelo **gpt-4** à lista. Em seguida, use o mesmo botão para adicionar o modelo **Phi-3.5-mini-instruct** à lista.
+1. Use o botão **+ Modelo a ser comparado** para adicionar o modelo **gpt-4o** à lista. Em seguida, use o mesmo botão para adicionar o modelo **Phi-3.5-mini-instruct** à lista.
 1. Examine o gráfico, que compara os modelos com base no **Índice de qualidade** (uma pontuação padronizada que indica a qualidade do modelo) e no **Custo**. Você pode ver os valores específicos de um modelo mantendo o mouse sobre o ponto que o representa no gráfico.
 
-    ![Captura de tela do gráfico de comparação de modelos dos modelos gpt-4 e Phi-3.5-mini-instruct.](./media/comparison-chart.png)
+    ![Captura de tela do gráfico de comparação de modelos dos modelos gpt-4o e Phi-3.5-mini-instruct.](./media/comparison-chart.png)
 
 1. No menu suspenso **Eixo X**, em **Qualidade**, selecione as seguintes métricas e observe cada gráfico resultante antes de passar para o próximo:
     - Precisão
@@ -95,18 +95,18 @@ Agora que explorou suas opções usando parâmetros de comparação de modelo, v
 Vamos começar implantando um modelo do catálogo de modelos. Você pode preferir essa opção quando quiser revisar diversos modelos disponíveis.
 
 1. Retorne à home page do **Catálogo de modelos**.
-1. Pesquise e selecione o modelo `gpt-4`, assim como você fez anteriormente.
-1. Na página **gpt-4**, selecione **Implantar** e implante o modelo com as seguintes configurações selecionando **Personalizar** nos detalhes da implantação:
+1. Pesquise e selecione o modelo `gpt-4o`, assim como você fez anteriormente.
+1. Na página **gpt-4o**, selecione **Implantar** e implante o modelo com as seguintes configurações selecionando **Personalizar** nos detalhes da implantação:
 1. Crie uma nova implantação do modelo com as seguintes configurações selecionando **Personalizar** nos detalhes de implantação:
-    - **Nome da implantação**: *um nome exclusivo para a implantação do seu modelo — por exemplo `gpt-4`*
-    - **Tipo de implantação**: Padrão
-    - **Versão do modelo**: 0613
+    - **Nome da implantação**: *Um nome válido para sua implantação de modelo*
+    - **Tipo de implantação**: padrão global
+    - **Atualização automática de versão**: Ativado
+    - **Versão do modelo**: *selecione a versão mais recente disponivel*
     - **Recurso de IA conectado**: *selecione a sua conexão de recursos do OpenAI do Azure*
-    - **Limite de taxa de fichas por minuto (milhares)**: 5 mil
+    - **Limite de taxa de tokens por minuto (milhares):** 50 mil *(ou o máximo disponível em sua assinatura, se inferior a 50 mil)*
     - **Filtro de conteúdo**: DefaultV2
-    - **Habilitar cota dinâmica**: Desabilitado
-      
-    > **Observação**: A redução do TPM ajuda a evitar o uso excessivo da cota disponível na assinatura que você está usando. 5.000 TPM são suficientes para os dados usados neste exercício.
+
+    > **Observação**: A redução do TPM ajuda a evitar o uso excessivo da cota disponível na assinatura que você está usando. 50.000 TPM são suficientes para os dados usados neste exercício. Se a sua cota disponível for menor que isso, você poderá concluir o exercício, mas talvez seja necessário aguardar e reenviar as solicitações se o limite de taxa for excedido.
 
 1. Aguarde até que a implantação seja concluída.
 
@@ -118,7 +118,7 @@ Se você já sabe exatamente qual modelo quer implantar, talvez prefira fazê-lo
 1. Na guia **Implantações de modelo**, na lista suspensa **+ Implantar modelo**, selecione **Implantar modelo base**. Pesquise por `Phi-3.5-mini-instruct` e confirme a selação.
 1. Concorde com a licença do modelo.
 1. Implante um modelo **Phi-3.5-mini-instruct** com as seguintes configurações:
-    - **Nome da implantação**: *um nome exclusivo para a implantação do seu modelo — por exemplo, `Phi-3.5-mini-instruct`*
+    - **Nome da implantação**: *Um nome válido para sua implantação de modelo*
     - **Tipo de implantação**: padrão global
     - **Detalhes da implantação**: *use as configurações padrão*
 
@@ -134,9 +134,9 @@ Agora que você tem dois modelos para comparar, vamos ver como os modelos se com
 1. No painel **Configuração**, no campo **Fornecer instruções e contexto ao modelo**, defina o prompt do sistema como `You are an AI assistant that helps solve problems.`
 1. Selecione **Aplicar alterações**.
 
-### Converse com o modelo *gpt-4*
+### Converse com o modelo *gpt-4o*
 
-No painel **Configuração**, selecione o modelo *gpt-4*.
+No painel **Configuração**, selecione o modelo *gpt-4o*.
 1. Na janela de chat, insira a seguinte consulta
 
     ```

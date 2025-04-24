@@ -14,7 +14,7 @@ Este exercício levará aproximadamente **30** minutos.
 
 Vamos começar entrando no portal da Fábrica de IA do Azure.
 
-1. Em um navegador da Web, abra o [Portal da Fábrica de IA do Azure](https://ai.azure.com) em `https://ai.azure.com` e entre usando suas credenciais do Azure. Feche todas as dicas ou painéis de início rápido abertos na primeira vez que você entrar e, se necessário, use o logotipo da **Fábrica de IA do Azure** no canto superior esquerdo para navegar até a home page, que é semelhante à imagem a seguir:
+1. Em um navegador da Web, abra o [Portal da Fábrica de IA do Azure](https://ai.azure.com) em `https://ai.azure.com` e entre usando suas credenciais do Azure. Feche todas as dicas ou painéis de início rápido abertos na primeira vez que você entrar e, se necessário, use o logotipo da **Fábrica de IA do Azure** no canto superior esquerdo para navegar até a home page, que é semelhante à imagem a seguir (feche o painel **Ajuda** se estiver aberto):
 
     ![Captura de tela do portal do Azure AI Foundry.](./media/ai-foundry-home.png)
 
@@ -25,16 +25,16 @@ Vamos começar entrando no portal da Fábrica de IA do Azure.
 Um *hub* de IA do Azure fornece um espaço de trabalho colaborativo no qual você pode definir um ou mais *projetos*. Vamos criar um projeto e um hub de IA do Azure e examinar os recursos do Azure criados para dar suporte a eles.
 
 1. Na home page, selecione **+Criar projeto**.
-1. No assistente **Criar um projeto**, insira um nome de projeto adequado (por exemplo, `my-ai-project`) e revise os recursos do Azure que serão criados automaticamente para dar suporte ao seu projeto.
+1. No assistente **Criar um projeto**, insira um nome de projeto adequado (por exemplo, ) e, se um hub existente for sugerido, escolha a opção de criar um novo. Em seguida, examine os recursos do Azure que serão criados automaticamente para dar suporte ao hub e ao projeto.
 1. Selecione **Personalizar** e especifique as seguintes configurações para o hub:
-    - **Nome do hub**: *um nome exclusivo – por exemplo `my-ai-hub`*
+    - **Nome do hub**: *um nome válido para o seu hub*
     - **Assinatura**: *sua assinatura do Azure*
-    - **Grupo de recursos**: *crie um novo grupo de recursos com um nome exclusivo (por exemplo, `my-ai-resources`) ou selecione um existente*
-    - **Localização**: selecione **Ajude-me a escolher** e então selecione **gpt-4** na janela do auxiliar de localização e use a região recomendada\*
-    - **Conectar os Serviços de IA do Azure ou o OpenAI do Azure:*** crie um novo recurso de Serviços de IA com um nome apropriado (por exemplo, `my-ai-services`) ou use um existente*
+    - **Grupo de recursos**: *criar ou selecionar um grupo de recursos*
+    - **Localização**: selecione **Ajude-me a escolher** e então selecione **gpt-4o** na janela do auxiliar de localização e use a região recomendada\*
+    - **Conectar os Serviços de IA do Azure ou o OpenAI do Azure**: *Criar um novo recurso de Serviços de IA*
     - **Conectar-se à Pesquisa de IA do Azure**: Ignorar a conexão
 
-    > \* Os recursos do OpenAI do Azure são restringidos no nível do locatário por cotas regionais. No caso de um limite de cota ser atingido mais adiante no exercício, há a possibilidade de você precisar criar outro recurso em uma região diferente.
+    > \* Os recursos do OpenAI do Azure são restritos por cotas regionais. Caso um limite de cota seja excedido posteriormente no exercício, é possível que você precise criar outro recurso em uma região diferente.
 
 1. Clique em **Avançar** e revise a configuração. Em seguida, selecione **Criar** e aguarde a conclusão do processo.
 1. Quando o projeto for criado, feche todas as dicas exibidas e examine a página do projeto no Portal da Fábrica de IA do Azure, que deve ser semelhante à imagem a seguir:
@@ -75,7 +75,7 @@ Suponha que seu projeto precise de acesso a um segundo recurso dos **Serviços d
     - **Assinatura**: *sua assinatura do Azure*
     - **Grupo de recursos**: *o grupo de recursos que contém seus recursos existentes da Fábrica de IA do Azure*
     - **Região**: *selecione qualquer região disponível diferente daquela que contém seus recursos existentes*
-    - **Nome**: *um nome exclusivo*
+    - **Nome**: *um nome adequado para o segundo recurso dos Serviços de IA do Azure*
     - **Tipo de preço**: Standard S0
 1. Aguarde a criação do recurso Serviços de AI.
 1. Retorne à guia do navegador do Portal da Fábrica de IA do Azure e, na exibição **Centro de gerenciamento**, no painel de navegação, na seção do seu *<u>projeto</u>*, visualize a página **Recursos conectados**. Os recursos conectados existentes em seu projeto são listados.
@@ -108,25 +108,34 @@ Seu projeto da Fábrica de IA do Azure tem acesso aos Serviços de IA do Azure. 
 
 ## Implantar e testar um modelo de IA generativa
 
-Seu projeto também contém recursos conectados para o OpenAI do Azure, o que permite que você use modelos de linguagem do OpenAI do Azure para implementar soluções de IA generativa.
+Seu projeto também contém recursos conectados para o OpenAI do Azure, o que permite que você use modelos de linguagem do OpenAI do Azure para implementar soluções de IA generativa. Você também pode encontrar e usar modelos de IA generativa de outros fornecedores no catálogo de modelos.
 
 1. No painel à esquerda do seu projeto, na seção **Meus ativos**, selecione a página **Modelos + pontos de extremidade**.
 1. Na página **Modelos + pontos extremidades**, na guia **Implantações de modelo**, no menu **+ Implantar modelo**, selecione **Implantar modelo base**.
 1. Procure o modelo **gpt-4** na lista, selecione-o e confirme-o.
 1. Crie uma nova implantação do modelo com as seguintes configurações selecionando **Personalizar** nos detalhes de implantação:
-    - **Nome da implantação**: *um nome exclusivo para a implantação do seu modelo — por exemplo `gpt-4-model`*
-    - **Tipo de implantação**: Padrão
-    - **Versão do modelo**: *selecione a versão padrão*
-    - **Recurso de IA conectado**: *selecione uma das suas conexões de recursos do OpenAI do Azure*
-    - **Limite de taxa de fichas por minuto (milhares)**: 5 mil
+    - **Nome da implantação**: *Um nome válido para sua implantação de modelo*
+    - **Tipo de implantação**: padrão global
+    - **Atualização automática de versão**: Ativado
+    - **Versão do modelo**: *selecione a versão mais recente disponivel*
+    - **Recurso de IA conectado**: *selecione a sua conexão de recursos do OpenAI do Azure*
+    - **Limite de taxa de tokens por minuto (milhares):** 50 mil *(ou o máximo disponível em sua assinatura, se inferior a 50 mil)*
     - **Filtro de conteúdo**: DefaultV2
-    - **Habilitar cota dinâmica**: Desabilitado
-      
-    > **Observação**: A redução do TPM ajuda a evitar o uso excessivo da cota disponível na assinatura que você está usando. 5.000 TPM são suficientes para os dados usados neste exercício.
+
+    > **Observação**: A redução do TPM ajuda a evitar o uso excessivo da cota disponível na assinatura que você está usando. 50.000 TPM são suficientes para os dados usados neste exercício. Se a sua cota disponível for menor do que isso, você poderá concluir o exercício, mas poderá ocorrer erros se o limite de taxa for excedido.
+
+1. Aguarde até que a implantação seja concluída.
 
 1. Após a implantação do modelo, na página de visão geral da implantação, selecione **Abrir no playground**.
 1. Na página **Chat playground**, certifique-se de que a implantação do seu modelo esteja selecionada na seção **Implantação**.
-1. Na janela de chat, insira uma consulta como `How can I use Azure AI Services in a software development project?` e visualize a resposta:
+1. No painel **Configuração**, na caixa **Dê instruções e contexto ao modelo**, digite as seguintes instruções:
+
+    ```
+    You are a history teacher who can answer questions about past events all around the world.
+    ```
+
+1. Aplique as alterações para atualizar a mensagem do sistema.
+1. Na janela de chat, insira uma consulta como `What are the key events in the history of Scotland?` e visualize a resposta:
 
     ![Captura de tela do playground no portal do Azure AI Foundry.](./media/ai-foundry-playground.png)
 
