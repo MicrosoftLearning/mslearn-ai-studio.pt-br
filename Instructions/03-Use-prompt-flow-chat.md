@@ -10,6 +10,8 @@ Neste exercício, você usará o prompt flow do portal da Fábrica de IA do Azur
 
 Este exercício levará aproximadamente **30** minutos.
 
+> **Observação**: algumas das tecnologias usadas neste exercício estão em versão prévia ou em desenvolvimento ativo. Você pode observar algum comportamento, avisos ou erros inesperados.
+
 ## Criar um projeto do Azure AI Foundry
 
 Vamos começar criando um projeto da Fábrica de IA do Azure.
@@ -19,16 +21,16 @@ Vamos começar criando um projeto da Fábrica de IA do Azure.
     ![Captura de tela do portal do Azure AI Foundry.](./media/ai-foundry-home.png)
 
 1. Na home page, selecione **+Criar projeto**.
-1. No assistente **Criar um projeto**, insira um nome de projeto adequado (por exemplo, ) e, se um hub existente for sugerido, escolha a opção de criar um novo. Em seguida, examine os recursos do Azure que serão criados automaticamente para dar suporte ao hub e ao projeto.
+1. No assistente **Criar um projeto**, insira um nome de projeto adequado e, se um hub existente for sugerido, escolha a opção de criar um novo. Em seguida, examine os recursos do Azure que serão criados automaticamente para dar suporte ao hub e ao projeto.
 1. Selecione **Personalizar** e especifique as seguintes configurações para o hub:
-    - **Nome do hub**: *um nome válido para o seu hub*
+    - **Nome do hub**: *um nome para o hub*
     - **Assinatura**: *sua assinatura do Azure*
     - **Grupo de recursos**: *criar ou selecionar um grupo de recursos*
-    - **Localização**: selecione **Ajude-me a escolher** e então selecione **gpt-4o** na janela do auxiliar de localização e use a região recomendada\*
-    - **Conectar os Serviços de IA do Azure ou o OpenAI do Azure**: *Criar um novo recurso de Serviços de IA*
+    - **Localização**: selecione **Ajude-me a escolher** e então selecione **gpt-4** na janela do auxiliar de localização e use a região recomendada \*
+    - **Conectar os Serviços de IA do Azure ou o OpenAI do Azure** – *Criar um novo recurso de Serviços de IA*
     - **Conectar-se à Pesquisa de IA do Azure**: Ignorar a conexão
 
-    > \* Os recursos do OpenAI do Azure são restritos por cotas regionais. Caso um limite de cota seja excedido posteriormente no exercício, é possível que você precise criar outro recurso em uma região diferente.
+    > Os recursos \* da OpenAI do Azure são restritos por cotas regionais. No caso de um limite de cota ser atingido mais adiante no exercício, há a possibilidade de você precisar criar outro recurso em uma região diferente.
 
 1. Clique em **Avançar** e revise a configuração. Em seguida, selecione **Criar** e aguarde a conclusão do processo.
 1. Quando o projeto for criado, feche todas as dicas exibidas e examine a página do projeto no Portal da Fábrica de IA do Azure, que deve ser semelhante à imagem a seguir:
@@ -56,7 +58,7 @@ As ferramentas de fluxo de prompt na Fábrica de IA do Azure criam ativos basead
 
     ![Captura de tela da página de controle de acesso à conta de armazenamento no portal do Azure.](./media/storage-access-control.png)
 
-1. Adicione uma atribuição de função à `Storage blob data reader`função para a identidade gerenciada usada pelo recurso dos Serviços de IA do Azure:
+1. Adicione uma atribuição de função à função `Storage blob data reader` para a identidade gerenciada usada pelo recurso dos Serviços de IA do Azure:
 
     ![Captura de tela da página de controle de acesso à conta de armazenamento no portal do Azure.](./media/assign-role-access.png)
 
@@ -71,7 +73,7 @@ Agora você está em condições de implantar um modelo de linguagem de IA gener
 1. Na página **Modelos + pontos extremidades**, na guia **Implantações de modelo**, no menu **+ Implantar modelo**, selecione **Implantar modelo base**.
 1. Procure o modelo **gpt-4** na lista, selecione-o e confirme-o.
 1. Crie uma nova implantação do modelo com as seguintes configurações selecionando **Personalizar** nos detalhes de implantação:
-    - **Nome da implantação**: *Um nome válido para sua implantação de modelo*
+    - **Nome da implantação**: *um nome válido para sua implantação de modelo*
     - **Tipo de implantação**: padrão global
     - **Atualização automática de versão**: Ativado
     - **Versão do modelo**: *selecione a versão mais recente disponivel*
@@ -83,18 +85,18 @@ Agora você está em condições de implantar um modelo de linguagem de IA gener
 
 1. Aguarde até que a implantação seja concluída.
 
-## Criar um prompt flow
+## Criar um fluxo de prompt
 
-Um prompt flow fornece uma maneira de orquestrar prompts e outras atividades para definir uma interação com um modelo de IA generativa. Neste exercício, você usará um modelo para criar um fluxo de chat básico para um assistente de IA em uma agência de viagens.
+Um fluxo de prompt fornece uma maneira de orquestrar prompts e outras atividades para definir uma interação com um modelo de IA generativa. Neste exercício, você usará um modelo para criar um fluxo de chat básico para um assistente de IA em uma agência de viagens.
 
 1. Na barra de navegação do Portal da Fábrica de IA do Azure, na seção **Criar e personalizar**, selecione **Fluxo de prompt**.
-1. Criar um novo fluxo com base no modelo de **Fluxo de chat**, especificando `Travel-Chat`como o nome da pasta.
+1. Criar um novo fluxo com base no modelo de **Fluxo de chat**, especificando `Travel-Chat` como o nome da pasta.
 
     Um fluxo de chat simples é criado para você.
 
-1. Para poder testar seu fluxo, você precisa de computação e pode demorar um pouco para iniciar; portanto, selecione **Iniciar sessão de computação** para iniciá-la enquanto explora e modifica o fluxo padrão.
+1. Para poder testar seu fluxo, você precisa de computação e pode demorar um pouco para iniciar, portanto, selecione **Iniciar sessão de computação** para iniciá-la enquanto explora e modifica o fluxo padrão.
 
-1. Visualize o fluxo do prompt, que consiste em uma série de *entradas*, *saídas*, e *ferramentas*. Você pode expandir e editar as propriedades desses objetos nos painéis de edição à esquerda e exibir o fluxo geral como um gráfico à direita:
+1. Visualize o fluxo de prompt, que consiste em uma série de *entradas*, *saídas*, e *ferramentas*. Você pode expandir e editar as propriedades desses objetos nos painéis de edição à esquerda e exibir o fluxo geral como um gráfico à direita:
 
     ![Captura de tela do editor de fluxo de prompt.](./media/prompt-flow.png)
 
@@ -103,7 +105,7 @@ Um prompt flow fornece uma maneira de orquestrar prompts e outras atividades par
 1. Exiba o painel de ferramentas LLM do **Chat**, que contém as informações necessárias para enviar um prompt ao modelo.
 1. No painel de ferramentas LLM do **Chat** , para **Conexão**, selecione a conexão para o recurso de Serviço OpenAI do Azure em seu Hub de IA. Em seguida, configure as propriedades a seguir:
     - **Api**: chat
-    - **deployment_name**: *O modelo gpt-4o que voê implantou*
+    - **deployment_name**: *o modelo gpt-4o que você implantou*
     - **response_format**: {"type":"text"}
 1. Modifique o campo **Prompt** da seguinte maneira:
 
@@ -139,8 +141,8 @@ Um prompt flow fornece uma maneira de orquestrar prompts e outras atividades par
     Leia o prompt que você adicionou para se familiarizar com ele. Consiste em uma mensagem do sistema (que inclui um objetivo, uma definição de seus recursos e algumas instruções) e o histórico de chat (ordenado para mostrar cada entrada de pergunta do usuário e cada saída de resposta do assistente anterior)
 
 1. Na seção **Entradas** para a ferramente LLM de **Chat** (em prompt), verifique se as seguintes variáveis estão definidas:
-    - **pergunta** (cadeia de caracteres): ${inputs.question}
-    - **chat_history** (cadeia de caracteres): ${inputs.chat_history}
+    - **question** (string): ${inputs.question}
+    - **chat_history** (string): ${inputs.chat_history}
 
 1. Salve as alterações ao fluxo.
 
@@ -150,7 +152,7 @@ Um prompt flow fornece uma maneira de orquestrar prompts e outras atividades par
 
 Agora que você desenvolveu o fluxo, você pode usar a janela de chat para testar o fluxo.
 
-1. Certifique-se de que a sessão de computação esteja em execução. Então aguarde até que inicie.
+1. Certifique-se de que a sessão de computação esteja em execução. Se não estiver, aguarde até iniciar.
 1. Na barra de ferramentas, selecione **Chat** para abrir o painel **Chat** e aguarde a inicialização do chat.
 1. Insira a consulta: `I have one day in London, what should I do?` e examine a saída. O painel do Chat deve ter uma aparência semelhante a esta:
 
@@ -172,27 +174,27 @@ Quando estiver satisfeito com o comportamento do fluxo criado, você poderá imp
         - **Coleta de dados de inferência**: desabilitada
     - **Configurações avançadas**:
         - *Usar as configurações padrão*
-1. No Portal da Fábrica de IA do Azure, em seu projeto, no painel de navegação à esquerda, em **My assets**, selecione a página **Models + endpoints**.
+1. No Portal da Fábrica de IA do Azure, em seu projeto, no painel de navegação à esquerda, em **Meus Ativos**, selecione a página **Modelos + pontos de extremidade**.
 
     Se a página for aberta para o modelo gpt-4o, use o botão **Voltar** para visualizar todos os modelos e pontos de extremidade.
 
 1. Inicialmente, a página pode mostrar apenas suas implantações de modelo. Pode levar algum tempo até que a implantação seja listada, e ainda mais antes de ser criado com sucesso.
-1. Quando a implantação for *bem-sucedida*, selecione-a. Em seguida, exiba sua página de **Teste** .
+1. Quando a implantação for *bem-sucedida*, selecione-a. Em seguida, exiba sua página de **Teste**.
 
-    > **Dica**: se a página de teste descrever o ponto de extremidade como não íntegro, retorne aos **modelos e pontos de extremidade** e aguarde cerca de um minuto antes de atualizar a exibição e selecionar o ponto de extremidade novamente.
+    > **Dica**: se a página de teste descrever o ponto de extremidade como não íntegro, retorne aos **modelos e pontos de** extremidade e aguarde cerca de um minuto antes de atualizar a exibição e selecionar o ponto de extremidade novamente.
 
 1. Insira o prompt `What is there to do in San Francisco?` e revise a resposta.
 1. Insira o prompt `Tell me something about the history of the city.` e revise a resposta.
 
-    O painel de teste deve ter uma aparência semelhante a:
+    O painel de teste deve ter uma aparência semelhante a esta:
 
     ![Captura de tela da página de teste de ponto de extremidade de fluxo de prompt implantada.](./media/deployed-flow.png)
 
-1. Exiba a página **Consumir** para o ponto de extremidade e observe que ele contém informações de conexão e código de exemplo que você pode usar para compilar um aplicativo cliente para o ponto de extremidade, permitindo que você integre a solução de prompt flow a um aplicativo como um copiloto personalizado.
+1. Exiba a página **Consumir** para o ponto de extremidade e observe que ela contém informações de conexão e código de exemplo que você pode usar para compilar um aplicativo cliente para o ponto de extremidade, permitindo que você integre a solução de prompt flow a um aplicativo como uma IA generativa personalizada.
 
 ## Limpar
 
-Ao terminar de explorar o fluxo do prompt, você deve excluir os recursos que criou para evitar custos desnecessários do Azure.
+Ao terminar de explorar o fluxo de prompt, você deve excluir os recursos que criou para evitar custos desnecessários do Azure.
 
 - Navegue até o [portal do Azure](https://portal.azure.com) em `https://portal.azure.com`.
 - No portal do Azure, na **Página Inicial**, selecione **Grupos de recursos**.
