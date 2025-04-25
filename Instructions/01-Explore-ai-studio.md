@@ -10,11 +10,13 @@ Neste exercício, você usa o portal da Fábrica de IA do Azure para criar um hu
 
 Este exercício levará aproximadamente **30** minutos.
 
+> **Observação**: algumas das tecnologias usadas neste exercício estão em versão prévia ou em desenvolvimento ativo. Você pode observar algum comportamento, avisos ou erros inesperados.
+
 ## Abra o portal do Azure AI Foundry
 
 Vamos começar entrando no portal da Fábrica de IA do Azure.
 
-1. Em um navegador da Web, abra o [Portal da Fábrica de IA do Azure](https://ai.azure.com) em `https://ai.azure.com` e entre usando suas credenciais do Azure. Feche todas as dicas ou painéis de início rápido abertos na primeira vez que você entrar e, se necessário, use o logotipo da **Fábrica de IA do Azure** no canto superior esquerdo para navegar até a home page, que é semelhante à imagem a seguir (feche o painel **Ajuda** se estiver aberto):
+1. Em um navegador da Web, abra o [Portal da Fábrica de IA do Azure](https://ai.azure.com) em `https://ai.azure.com` e entre usando suas credenciais do Azure. Feche quaisquer dicas ou painéis de início rápido que sejam abertos na primeira vez que você fizer login e, se necessário, use o logotipo **Fábrica de IA do Azure** no canto superior esquerdo para navegar até a página inicial, que se parece com a imagem a seguir (feche o painel **Ajuda** se estiver aberto):
 
     ![Captura de tela do portal do Azure AI Foundry.](./media/ai-foundry-home.png)
 
@@ -25,16 +27,16 @@ Vamos começar entrando no portal da Fábrica de IA do Azure.
 Um *hub* de IA do Azure fornece um espaço de trabalho colaborativo no qual você pode definir um ou mais *projetos*. Vamos criar um projeto e um hub de IA do Azure e examinar os recursos do Azure criados para dar suporte a eles.
 
 1. Na home page, selecione **+Criar projeto**.
-1. No assistente **Criar um projeto**, insira um nome de projeto adequado (por exemplo, ) e, se um hub existente for sugerido, escolha a opção de criar um novo. Em seguida, examine os recursos do Azure que serão criados automaticamente para dar suporte ao hub e ao projeto.
+1. No assistente **Criar um projeto**, insira um nome de projeto adequado e, se um hub existente for sugerido, escolha a opção de criar um novo. Em seguida, examine os recursos do Azure que serão criados automaticamente para dar suporte ao hub e ao projeto.
 1. Selecione **Personalizar** e especifique as seguintes configurações para o hub:
-    - **Nome do hub**: *um nome válido para o seu hub*
+    - **Nome do hub**: *um nome para o hub*
     - **Assinatura**: *sua assinatura do Azure*
     - **Grupo de recursos**: *criar ou selecionar um grupo de recursos*
-    - **Localização**: selecione **Ajude-me a escolher** e então selecione **gpt-4o** na janela do auxiliar de localização e use a região recomendada\*
-    - **Conectar os Serviços de IA do Azure ou o OpenAI do Azure**: *Criar um novo recurso de Serviços de IA*
+    - **Localização**: selecione **Ajude-me a escolher** e então selecione **gpt-4** na janela do auxiliar de localização e use a região recomendada \*
+    - **Conectar os Serviços de IA do Azure ou o OpenAI do Azure** – *Criar um novo recurso de Serviços de IA*
     - **Conectar-se à Pesquisa de IA do Azure**: Ignorar a conexão
 
-    > \* Os recursos do OpenAI do Azure são restritos por cotas regionais. Caso um limite de cota seja excedido posteriormente no exercício, é possível que você precise criar outro recurso em uma região diferente.
+    > Os recursos \* da OpenAI do Azure são restritos por cotas regionais. No caso de um limite de cota ser atingido mais adiante no exercício, há a possibilidade de você precisar criar outro recurso em uma região diferente.
 
 1. Clique em **Avançar** e revise a configuração. Em seguida, selecione **Criar** e aguarde a conclusão do processo.
 1. Quando o projeto for criado, feche todas as dicas exibidas e examine a página do projeto no Portal da Fábrica de IA do Azure, que deve ser semelhante à imagem a seguir:
@@ -114,7 +116,7 @@ Seu projeto também contém recursos conectados para o OpenAI do Azure, o que pe
 1. Na página **Modelos + pontos extremidades**, na guia **Implantações de modelo**, no menu **+ Implantar modelo**, selecione **Implantar modelo base**.
 1. Procure o modelo **gpt-4** na lista, selecione-o e confirme-o.
 1. Crie uma nova implantação do modelo com as seguintes configurações selecionando **Personalizar** nos detalhes de implantação:
-    - **Nome da implantação**: *Um nome válido para sua implantação de modelo*
+    - **Nome da implantação**: *um nome válido para sua implantação de modelo*
     - **Tipo de implantação**: padrão global
     - **Atualização automática de versão**: Ativado
     - **Versão do modelo**: *selecione a versão mais recente disponivel*
