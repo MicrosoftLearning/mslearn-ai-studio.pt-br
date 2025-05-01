@@ -10,7 +10,7 @@ Neste exercício, você usa o SDK da Fábrica de IA do Azure para criar um aplic
 
 Este exercício leva aproximadamente **40** minutos.
 
-> **Observação**: este exercício é baseado em SDKs de pré-lançamento, que podem estar sujeitos a alterações. Quando necessário, usamos versões específicas de pacotes que podem não refletir as versões mais recentes disponíveis.
+> **Observação**: este exercício é baseado em SDKs de pré-lançamento, que podem estar sujeitos a alterações. Quando necessário, usamos versões específicas de pacotes que podem não refletir as versões mais recentes disponíveis. Você pode experimentar algum comportamento inesperado, avisos ou erros.
 
 ## Criar um projeto do Azure AI Foundry
 
@@ -21,16 +21,16 @@ Vamos começar criando um projeto da Fábrica de IA do Azure.
     ![Captura de tela do portal do Azure AI Foundry.](./media/ai-foundry-home.png)
 
 1. Na home page, selecione **+Criar projeto**.
-1. No assistente **Criar um projeto**, insira um nome de projeto adequado (por exemplo, ) e, se um hub existente for sugerido, escolha a opção de criar um novo. Em seguida, examine os recursos do Azure que serão criados automaticamente para dar suporte ao hub e ao projeto.
+1. No assistente **Criar um projeto**, insira um nome de projeto adequado e, se um hub existente for sugerido, escolha a opção de criar um novo. Em seguida, examine os recursos do Azure que serão criados automaticamente para dar suporte ao hub e ao projeto.
 1. Selecione **Personalizar** e especifique as seguintes configurações para o hub:
-    - **Nome do hub**: *um nome válido para o seu hub*
+    - **Nome do hub**: *um nome para o hub*
     - **Assinatura**: *sua assinatura do Azure*
     - **Grupo de recursos**: *criar ou selecionar um grupo de recursos*
-    - **Localização**: selecione **Ajude-me a escolher** e então selecione **gpt-4o** na janela do auxiliar de localização e use a região recomendada\*
-    - **Conectar os Serviços de IA do Azure ou o OpenAI do Azure**: *Criar um novo recurso de Serviços de IA*
+    - **Localização**: selecione **Ajude-me a escolher** e **gpt-4o** na janela do Auxiliar de localização e use a região recomendada\*
+    - **Conectar os Serviços de IA do Azure ou o OpenAI do Azure** – *Criar um novo recurso de Serviços de IA*
     - **Conectar-se à Pesquisa de IA do Azure**: Ignorar a conexão
 
-    > \* Os recursos do OpenAI do Azure são restritos por cotas regionais. Caso um limite de cota seja excedido posteriormente no exercício, é possível que você precise criar outro recurso em uma região diferente.
+    > \* Os recursos do OpenAI do Azure são restritos por cotas de modelo regional. Caso um limite de cota seja excedido posteriormente no exercício, é possível que você precise criar outro recurso em uma região diferente.
 
 1. Clique em **Avançar** e revise a configuração. Em seguida, selecione **Criar** e aguarde a conclusão do processo.
 1. Quando o projeto for criado, feche todas as dicas exibidas e examine a página do projeto no Portal da Fábrica de IA do Azure, que deve ser semelhante à imagem a seguir:
@@ -39,14 +39,14 @@ Vamos começar criando um projeto da Fábrica de IA do Azure.
 
 ## Implantar um modelo de IA generativa
 
-Agora está tudo pronto para implantar um modelo de linguagem de IA generativa para dar suporte ao seu aplicativo de chat. Neste exemplo, você usará o modelo OpenAI gpt-4; mas os princípios são os mesmos para qualquer modelo.
+Agora está tudo pronto para implantar um modelo de linguagem de IA generativa para dar suporte ao seu aplicativo de chat. Neste exemplo, você usará o modelo gpt-4o do OpenAI, mas os princípios são os mesmos para qualquer modelo.
 
-1. Na barra de ferramentas no canto superior direito da página do projeto do Azure AI Foundry, use o ícone **Preview features** (**&#9215;**) para garantir que o recurso **Implantar modelos no serviço de inferência de modelos de IA do Azure** seja habilitado. Esse recurso garante que a implantação do modelo esteja disponível para o serviço de inferência de IA do Azure, que você usará no código do aplicativo.
+1. Na barra de ferramentas no canto superior direito da página do projeto da Fábrica de IA do Azure, use o ícone **Visualizar recursos** (**&#9215;**) para garantir que o recurso **Implantar modelos no serviço de inferência de modelo da IA do Azure** esteja habilitado. Esse recurso garante que a implantação do modelo esteja disponível para o serviço de inferência de IA do Azure, que você usará no código do aplicativo.
 1. No painel à esquerda do seu projeto, na seção **Meus ativos**, selecione a página **Modelos + pontos de extremidade**.
 1. Na página **Modelos + pontos extremidades**, na guia **Implantações de modelo**, no menu **+ Implantar modelo**, selecione **Implantar modelo base**.
-1. Procure o modelo **gpt-4** na lista, selecione-o e confirme-o.
+1. Procure o modelo **gpt-4o** na lista, selecione-o e confirme-o.
 1. Crie uma nova implantação do modelo com as seguintes configurações selecionando **Personalizar** nos detalhes de implantação:
-    - **Nome da implantação**: *Um nome válido para sua implantação de modelo*
+    - **Nome da implantação**: *Um nome válido para a implantação de modelo*
     - **Tipo de implantação**: padrão global
     - **Atualização automática de versão**: Ativado
     - **Versão do modelo**: *selecione a versão mais recente disponivel*
@@ -185,7 +185,7 @@ Agora que você implantou um modelo, pode usar o SDK da Fábrica de IA do Azure 
     ```
 
 1. Na função **main**, no comentário **Get configuration settings**, observe que o código carrega a cadeia de conexão do projeto e os valores do nome de implantação do modelo que você definiu no arquivo de configuração.
-1. No comentário **Initialize the project client**, adicione o seguinte código para se conectar ao seu projeto da Fábrica de IA do Azure usando as credenciais do Azure com as quais você está conectado no momento:
+1. No comentário **Initialize the project client**, adicione o seguinte código para se conectar ao seu projeto da Fábrica de IA do Azure usando as credenciais do Azure que você usou para entrar:
 
     > **Dica**: Tenha cuidado para manter o nível de recuo correto no seu código.
 
@@ -298,7 +298,7 @@ Agora que você implantou um modelo, pode usar o SDK da Fábrica de IA do Azure 
 1. Tente algumas perguntas de acompanhamento, como `Where can I see one?` ou `Are they endangered?`. A conversa deve continuar, usando o histórico de bate-papo como contexto para cada iteração.
 1. Quando terminar, digite `quit` para sair do programa.
 
-> **Dica**: se o aplicativo falhar porque o limite de taxa foi excedido. Aguarde alguns segundos e tente novamente. Se não houver cota suficiente disponível em sua assinatura, o modelo poderá não ser capaz de responder.
+> **Dica**: se o aplicativo falhar porque o limite de taxa foi excedido, aguarde alguns segundos e tente novamente. Se não houver cota suficiente disponível em sua assinatura, o modelo talvez não consiga responder.
 
 ## Use o SDK do OpenAI do Azure
 
@@ -390,7 +390,7 @@ Vamos fazer algumas modificações de código para ver como implementar um aplic
     };
     ```
 
-1. Localize o comentário **Get a chat completion** e altere o código, adicionando a entrada de usuário ao prompt, obtenha a conclusão do seu modelo e adicione-a ao prompt da seguinte maneira:
+1. Localize o comentário **Get a chat completion** e altere o código, adicionando a entrada de usuário ao prompt, obtenha a conclusão do seu modelo e adicione a conclusão ao prompt da seguinte maneira:
 
     **Python**
 

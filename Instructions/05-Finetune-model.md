@@ -10,31 +10,31 @@ Quando você deseja que um modelo de linguagem se comporte de uma determinada ma
 
 Neste exercício, você ajustará um modelo de linguagem com o Azure AI Foundry que você quer usar para um cenário de aplicativo de chat personalizado. Você comparará o modelo ajustado com um modelo base para avaliar se o modelo ajustado atende melhor às suas necessidades.
 
-Imagine que você trabalha para uma agência de viagens e está desenvolvendo um aplicativo de chat para ajudar as pessoas a planejar as férias. O objetivo é criar um bate-papo simples e inspirador que sugira destinos e atividades com um tom de conversa consistente e amigável.
+Imagine que você trabalha para uma agência de viagens e está desenvolvendo um aplicativo de chat para ajudar as pessoas a planejar as férias. O objetivo é criar um chat simples e inspirador que sugira destinos e atividades com um tom de conversa consistente e amigável.
 
 Este exercício levará aproximadamente **60** minutos\*.
 
-> \***Observação**: esse tempo é uma estimativa baseada na experiência média. O ajuste depende dos recursos de infraestrutura em nuvem, que podem levar um tempo variável para provisionar, dependendo da capacidade do data center e da demanda simultânea. Algumas atividades neste exercício podem levar <u>muito</u> tempo para serem concluídas e demandam paciência. Se as coisas estiverem demorando um pouco, considere revisar a [Documentação de ajuste fino da Fábrica de IA do Azure](https://learn.microsoft.com/azure/ai-studio/concepts/fine-tuning-overview) ou fazer uma pausa.
+> \***Observação**: esse tempo é uma estimativa baseada na experiência média. O ajuste depende dos recursos de infraestrutura em nuvem, que podem levar um tempo variável para provisionar, dependendo da capacidade do data center e da demanda simultânea. Algumas atividades neste exercício podem levar <u>muito</u> tempo para serem concluídas e demandam paciência. Se as coisas estiverem demorando um pouco, considere revisar a [Documentação de ajuste fino da Fábrica de IA do Azure](https://learn.microsoft.com/azure/ai-studio/concepts/fine-tuning-overview) ou fazer uma pausa. Algumas das tecnologias usadas neste exercício estão em versão prévia ou em desenvolvimento ativo. Você pode experimentar algum comportamento inesperado, avisos ou erros.
 
 ## Criar um projeto e hub de IA no portal do Azure AI Foundry
 
-Vamos começar criando um projeto do Portal da Fábrica de IA do Azure dentro de um hub da IA do Azure:
+Vamos começar criando um projeto do portal Fábrica de IA do Azure em um hub de IA do Azure:
 
 1. Em um navegador da Web, abra o [Portal da Fábrica de IA do Azure](https://ai.azure.com) em `https://ai.azure.com` e entre usando suas credenciais do Azure. Feche todas as dicas ou painéis de início rápido abertos na primeira vez que você entrar e, se necessário, use o logotipo da **Fábrica de IA do Azure** no canto superior esquerdo para navegar até a home page, que é semelhante à imagem a seguir:
 
     ![Captura de tela do portal do Azure AI Foundry.](./media/ai-foundry-home.png)
 
 1. Na home page, selecione **+Criar projeto**.
-1. No assistente **Criar um projeto**, digite um nome válido para o seu projeto e, se um hub existente for sugerido, escolha a opção para criar um novo. Em seguida, examine os recursos do Azure que serão criados automaticamente para dar suporte ao hub e ao projeto.
+1. No assistente **Criar um projeto**, insira um nome de projeto adequado e, se um hub existente for sugerido, escolha a opção de criar um novo. Em seguida, examine os recursos do Azure que serão criados automaticamente para dar suporte ao hub e ao projeto.
 1. Selecione **Personalizar** e especifique as seguintes configurações para o hub:
-    - **Nome do hub**: *um nome válido para o seu hub*
+    - **Nome do hub**: *um nome para o hub*
     - **Assinatura**: *sua assinatura do Azure*
     - **Grupo de recursos**: *criar ou selecionar um grupo de recursos*
     - **Localização**: selecione **Ajude-me a escolher** e então selecione **gpt-4-finetune** na janela do Auxiliar de localização e use a região recomendada\*
-    - **Conectar os Serviços de IA do Azure ou o OpenAI do Azure**: *Criar um novo recurso de Serviços de IA*
+    - **Conectar os Serviços de IA do Azure ou o OpenAI do Azure** – *Criar um novo recurso de Serviços de IA*
     - **Conectar a Pesquisa de IA do Azure**: *crie um novo recurso da Pesquisa de IA do Azure com um nome exclusivo*
 
-    > \* Os recursos do OpenAI do Azure são restritos por cotas regionais. Caso um limite de cota seja excedido posteriormente no exercício, é possível que você precise criar outro recurso em uma região diferente. 
+    > \* Os recursos do OpenAI do Azure são restritos por cotas de modelo regional. Caso um limite de cota seja excedido posteriormente no exercício, é possível que você precise criar outro recurso em uma região diferente. 
 
 1. Clique em **Avançar** e revise a configuração. Em seguida, selecione **Criar** e aguarde a conclusão do processo.
 1. Quando o projeto for criado, feche todas as dicas exibidas e examine a página do projeto no Portal da Fábrica de IA do Azure, que deve ser semelhante à imagem a seguir:
@@ -53,6 +53,7 @@ Como o ajuste fino de um modelo leva algum tempo para ser concluído, você inic
 1. Selecione o botão para adicionar um novo modelo de ajuste fino, selecione o modelo **gpt-4o** e, em seguida, selecione **Avançar**.
 1. **Ajuste** o modelo usando a seguinte configuração:
     - **Versão do modelo**: *selecione a versão padrão*
+    - **Método de personalização**: Supervisionado
     - **Sufixo do modelo**: `ft-travel`
     - **Recurso de IA conectado**: *selecione a conexão que foi criada quando você criou seu hub. Já deve estar selecionado por padrão.*
     - **Dados de treinamento**: carregar arquivos
@@ -74,7 +75,7 @@ Como o ajuste fino de um modelo leva algum tempo para ser concluído, você inic
     - **Parâmetros da tarefa**: *mantenha as configurações padrão*
 1. O ajuste será iniciado e pode levar algum tempo para ser concluído. Você pode continuar com a próxima seção do exercício enquanto espera.
 
-> **Observação**: o ajuste e a implantação podem levar um tempo considerável (30 minutos ou mais), portanto, talvez seja necessário verificar periodicamente. Você pode ver mais detalhes do progresso até agora selecionando o trabalho de modelo de ajuste fino e exibindo sua guia **Logs** .
+> **Observação**: o ajuste e a implantação podem levar um tempo considerável (30 minutos ou mais), portanto, talvez seja necessário verificar periodicamente. Você pode ver mais detalhes do progresso até agora selecionando o trabalho de modelo de ajuste fino e exibindo a guia **Logs**.
 
 ## Chat com um modelo básico
 
@@ -82,13 +83,13 @@ Enquanto você espera a conclusão do trabalho de ajuste, vamos conversar com um
 
 1. No painel à esquerda do seu projeto, na seção **Meus ativos**, selecione a página **Modelos + pontos de extremidade**.
 1. Na página **Modelos + pontos extremidades**, na guia **Implantações de modelo**, no menu **+ Implantar modelo**, selecione **Implantar modelo base**.
-1. Procure o modelo **gpt-4** na lista, selecione-o e confirme-o.
+1. Procure o modelo **gpt-4o** na lista, selecione-o e confirme-o.
 1. Crie uma nova implantação do modelo com as seguintes configurações selecionando **Personalizar** nos detalhes de implantação:
-    - **Nome da implantação**: *Um nome válido para sua implantação de modelo*
+    - **Nome da implantação**: *Um nome válido para a implantação de modelo*
     - **Tipo de implantação**: padrão global
     - **Atualização automática de versão**: Ativado
     - **Versão do modelo**: *selecione a versão mais recente disponivel*
-    - **Recurso de IA conectado**: *selecione sua conexão de recurso do Azure OpenAI (se o local atual do recurso de IA não tiver cota disponível para o modelo que você deseja implantar, será solicitado que você escolha um local diferente onde um novo recurso de IA será criado e conectado ao seu projeto)*
+    - **Recurso de IA conectado**: *selecione sua conexão de recurso do OpenAI do Azure (se o local atual do recurso de IA não tiver cota disponível para o modelo que você deseja implantar, será solicitado que você escolha um local diferente onde um novo recurso de IA será criado e conectado ao seu projeto)*
     - **Limite de taxa de tokens por minuto (milhares):** 50 mil *(ou o máximo disponível em sua assinatura, se inferior a 50 mil)*
     - **Filtro de conteúdo**: DefaultV2
 
@@ -155,11 +156,11 @@ Quando o ajuste for concluído, você poderá implantar o modelo ajustado.
 
 1. Navegue até a página **Ajustar** em **Criar e personalizar** para encontrar seu trabalho de ajuste e o status dele. Se ele ainda estiver em execução, você poderá optar por continuar conversando com seu modelo base implantado ou fazer uma pausa. Se estiver concluído, você pode continuar.
 
-    > **Dica**: Use o botão **Atualizar** na página de ajuste fino para atualizar a visualização. Se o trabalho de ajuste fino desaparecer completamente, atualize a página no navegador.
+    > **Dica**: use o botão **Atualizar** na página de ajuste fino para atualizar a visualização. Se o trabalho de ajuste fino desaparecer completamente, atualize a página no navegador.
 
-1. Selecione o link do trabalho de ajuste fino para abrir sua página de detalhes. Selecione a guia **Métricas** e explore as métricas de ajuste.
+1. Selecione o link do trabalho de ajuste fino para abrir sua página de detalhes. Depois, selecione a guia **Métricas** e explore as métricas de ajuste.
 1. Implante o modelo ajustado com as seguintes configurações:
-    - **Nome da implantação**: *Um nome válido para sua implantação de modelo*
+    - **Nome da implantação**: *Um nome válido para a implantação de modelo*
     - **Tipo de implantação**: Padrão
     - **Limite de taxa de tokens por minuto (milhares):** 50 mil *(ou o máximo disponível em sua assinatura, se inferior a 50 mil)*
     - **Filtro de conteúdo**: Padrão
