@@ -23,7 +23,7 @@ Vamos começar criando um projeto da Fábrica de IA do Azure.
 1. Na home page, selecione **+Criar projeto**.
 1. No assistente **Criar um projeto**, insira um nome de projeto adequado e, se um hub existente for sugerido, escolha a opção de criar um novo. Em seguida, examine os recursos do Azure que serão criados automaticamente para dar suporte ao hub e ao projeto.
 1. Selecione **Personalizar** e especifique as seguintes configurações para o hub:
-    - **Nome do hub**: *um nome para o hub*
+    - **Nome do hub**: *um nome válido para o seu hub*
     - **Assinatura**: *sua assinatura do Azure*
     - **Grupo de recursos**: *criar ou selecionar um grupo de recursos*
     - **Local**: selecione uma das seguintes regiões\*
@@ -31,7 +31,7 @@ Vamos começar criando um projeto da Fábrica de IA do Azure.
         - França Central
         - Sul do Reino Unido
         - Suécia Central
-    - **Conectar os Serviços de IA do Azure ou o OpenAI do Azure** – *Criar um novo recurso de Serviços de IA*
+    - **Conectar os Serviços de IA do Azure ou o OpenAI do Azure**: *Criar um novo recurso de Serviços de IA*
     - **Conectar-se à Pesquisa de IA do Azure**: Ignorar a conexão
 
     > \* No momento da redação deste artigo, essas regiões suportam a avaliação das métricas de segurança da IA. A disponibilidade do modelo é limitada por cotas regionais. No caso de um limite de cota ser atingido mais adiante no exercício, há a possibilidade de você precisar criar outro projeto em uma região diferente.
@@ -47,9 +47,9 @@ Neste exercício, você avaliará o desempenho de um modelo gpt-4o-mini. Você t
 
 1. No painel de navegação à esquerda do seu projeto, na seção **Meus ativos**, selecione a página **Modelos + pontos de extremidade**.
 1. Na página **Modelos + pontos extremidades**, na guia **Implantações de modelo**, no menu **+ Implantar modelo**, selecione **Implantar modelo base**.
-1. Procure o modelo **gpt-4** na lista, selecione-o e confirme-o.
+1. Procure o modelo **gpt-4o** na lista, selecione-o e confirme-o.
 1. Crie uma nova implantação do modelo com as seguintes configurações selecionando **Personalizar** nos detalhes de implantação:
-    - **Nome da implantação**: *um nome válido para sua implantação de modelo*
+    - **Nome da implantação**: *Um nome válido para a implantação de modelo*
     - **Tipo de implantação**: padrão global
     - **Atualização automática de versão**: Ativado
     - **Versão do modelo**: *selecione a versão mais recente disponivel*
@@ -66,31 +66,17 @@ Neste exercício, você avaliará o desempenho de um modelo gpt-4o-mini. Você t
 
 Você pode revisar manualmente as respostas do modelo com base nos dados do teste. A revisão manual permite testar diferentes entradas para avaliar se o modelo está funcionando conforme o esperado.
 
-1. Em uma nova guia do navegador, baixe o [travel_evaluation_data.csv](https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/refs/heads/main/data/travel_evaluation_data.csv) de `https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/refs/heads/main/data/travel_evaluation_data.csv` e salve-o em uma pasta local.
+1. Em uma nova guia do navegador, baixe [travel_evaluation_data.jsonl](https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/refs/heads/main/data/travel_evaluation_data.jsonl) em `https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/refs/heads/main/data/travel_evaluation_data.jsonl` e salve em uma pasta local como **travel_evaluation_data.jsonl** (salve como um arquivo .jsonl, não como um arquivo .txt).
 1. De volta à guia do Portal da Fábrica de IA do Azure, no painel de navegação, na seção **Avaliar e melhorar**, selecione **Avaliação**.
 1. Na página **Avaliação**, visualize a guia **Avaliações manuais** e selecione **+ Nova avaliação manual**.
+1. Na seção **Configurações**, na lista **Modelo**, selecione sua implantação de modelo **gpt-4o-mini**.
 1. Altere a **Mensagem do sistema** para as seguintes instruções de um assistente de viagens de IA:
 
    ```
-   Objective: Assist users with travel-related inquiries, offering tips, advice, and recommendations as a knowledgeable travel agent.
-
-   Capabilities:
-   - Provide up-to-date travel information, including destinations, accommodations, transportation, and local attractions.
-   - Offer personalized travel suggestions based on user preferences, budget, and travel dates.
-   - Share tips on packing, safety, and navigating travel disruptions.
-   - Help with itinerary planning, including optimal routes and must-see landmarks.
-   - Answer common travel questions and provide solutions to potential travel issues.
-    
-   Instructions:
-   1. Engage with the user in a friendly and professional manner, as a travel agent would.
-   2. Use available resources to provide accurate and relevant travel information.
-   3. Tailor responses to the user's specific travel needs and interests.
-   4. Ensure recommendations are practical and consider the user's safety and comfort.
-   5. Encourage the user to ask follow-up questions for further assistance.
+   Assist users with travel-related inquiries, offering tips, advice, and recommendations as a knowledgeable travel agent.
    ```
 
-1. Na seção **Configurações**, na lista **Modelo**, selecione sua implantação de modelo **gpt-4o-mini**.
-1. Na seção **Resultado de avaliação manual**, selecione **Importar dados de tests** e carregue o arquivo **travel_evaluation_data.csv** que você baixou anteriormente, mapeamndo os campos de conjunto da dos conforme a seguir:
+1. Na seção **Resultado de avaliação manual**, selecione **Importar dados de testes** e faça upload do arquivo **travel_evaluation_data.jsonl** que você baixou anteriormente, mapeando os campos de conjunto de dados conforme a seguir:
     - **Entrada**: Question
     - **Resposta esperada**: ExpectedResponse
 1. Examine as perguntas e as respostas esperadas no arquivo de teste — você as usará para avaliar as respostas geradas pelo modelo.
@@ -114,24 +100,10 @@ A avaliação automatizada é uma abordagem que tenta resolver essas deficiênci
 1. Altere a **Mensagem do sistema** para as mesmas instruções de um assistente de viagem de IA que você usou anteriormente:
 
    ```
-   Objective: Assist users with travel-related inquiries, offering tips, advice, and recommendations as a knowledgeable travel agent.
-
-   Capabilities:
-   - Provide up-to-date travel information, including destinations, accommodations, transportation, and local attractions.
-   - Offer personalized travel suggestions based on user preferences, budget, and travel dates.
-   - Share tips on packing, safety, and navigating travel disruptions.
-   - Help with itinerary planning, including optimal routes and must-see landmarks.
-   - Answer common travel questions and provide solutions to potential travel issues.
-    
-   Instructions:
-   1. Engage with the user in a friendly and professional manner, as a travel agent would.
-   2. Use available resources to provide accurate and relevant travel information.
-   3. Tailor responses to the user's specific travel needs and interests.
-   4. Ensure recommendations are practical and consider the user's safety and comfort.
-   5. Encourage the user to ask follow-up questions for further assistance.
+   Assist users with travel-related inquiries, offering tips, advice, and recommendations as a knowledgeable travel agent.
    ```
 
-1. Na seção **Configurar dados de teste**, observe que você pode usar um modelo GPT para gerar dados de teste para você (que você pode editar e complementar para corresponder às suas próprias expectativas), usar um conjunto de dados existente ou fazer upload de um arquivo. Neste exercício, selecione **Usar conjunto de dados existente** e, em seguida, selecione o conjunto de dados **travel_evaluation_data_csv_*xxxx...*** (que foi criado quando você carregou o arquivo .csv anteriormente).
+1. Na seção **Configurar dados de teste**, observe que você pode usar um modelo GPT para gerar dados de teste para você (que você pode editar e complementar para corresponder às suas próprias expectativas), usar um conjunto de dados existente ou fazer upload de um arquivo. Neste exercício, selecione **Usar conjunto de dados existente** e, em seguida, selecione o conjunto de dados **travel_evaluation_data_jsonl_*xxxx...*** (que foi criado quando você carregou o arquivo .jsonl anteriormente).
 1. Examine as linhas de exemplo do conjunto de dados e, na seção **Escolher sua coluna de dados**, selecione os seguintes mapeamentos de coluna:
     - **Consulta**: Question
     - **Contexto**: *deixe isso em branco. Ele é usado para avaliar a "fundamentação" ao associar uma fonte de dados contextual ao seu modelo.*
@@ -140,7 +112,7 @@ A avaliação automatizada é uma abordagem que tenta resolver essas deficiênci
     - Qualidade da IA (assistida por IA)
     - Risco e segurança (assistido por IA)
     - Qualidade da IA (NLP)
-1. Na lista **Escolha um modelo de implantação como juiz**, selecione seu modelo **gpt-4o**. Este modelo será usado para avaliar as respostas do modelo ***gpt-4o-mini** quanto à qualidade relacionada à linguagem e métricas de comparação de IA generativa padrão.
+1. Na lista **Escolha um modelo de implantação como juiz**, selecione seu modelo **gpt-4o**. Esse modelo será usado para avaliar as respostas do modelo **gpt-4o-mini** quanto à qualidade relacionada à linguagem e métricas de comparação de IA generativa padrão.
 1. Selecione **Criar** para iniciar o processo de avaliação e aguardar sua conclusão. Isso pode levar alguns minutos.
 
     > **Dica**: se um erro indicando que as permissões do projeto estão sendo definidas for cancelado, aguarde um minuto e selecione **Criar** novamente. Pode levar algum tempo para que as permissões de recursos de um projeto recém-criado sejam propagadas.
