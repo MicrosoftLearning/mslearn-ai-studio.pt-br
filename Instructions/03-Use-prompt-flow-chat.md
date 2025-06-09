@@ -4,7 +4,7 @@ lab:
   description: Saiba como usar prompt flows para gerenciar diálogos de conversa e garantir que os prompts sejam construídos e orquestrados para obter melhores resultados.
 ---
 
-# Usar um prompt flow para gerenciar conversas em um aplicativo de chat
+## Usar um prompt flow para gerenciar conversas em um aplicativo de chat
 
 Neste exercício, você usará o prompt flow do portal da Fábrica de IA do Azure para criar um aplicativo de chat personalizado que usa um prompt de usuário e um histórico de chat como entradas e usa um modelo GPT do OpenAI do Azure para gerar uma saída.
 
@@ -12,44 +12,31 @@ Este exercício levará aproximadamente **30** minutos.
 
 > **Observação**: algumas das tecnologias usadas neste exercício estão em versão prévia ou em desenvolvimento ativo. Você pode observar algum comportamento, avisos ou erros inesperados.
 
-## Criar um projeto do Azure AI Foundry
+## Crie um hub e projeto da Fábrica de IA do Azure
 
-Vamos começar criando um projeto da Fábrica de IA do Azure.
+Os recursos da Fábrica de IA do Azure que usaremos neste exercício requerem um projeto baseado em um recurso de *hub* da Fábrica de IA do Azure.
 
-1. Em um navegador da Web, abra o [Portal da Fábrica de IA do Azure](https://ai.azure.com) em `https://ai.azure.com` e entre usando suas credenciais do Azure. Feche todas as dicas ou painéis de início rápido abertos na primeira vez que você entrar e, se necessário, use o logotipo da **Fábrica de IA do Azure** no canto superior esquerdo para navegar até a home page, que é semelhante à imagem a seguir:
+1. Em um navegador da Web, abra o [Portal da Fábrica de IA do Azure](https://ai.azure.com) em `https://ai.azure.com` e entre usando suas credenciais do Azure. Feche todas as dicas ou painéis de início rápido abertos na primeira vez que você entrar e, se necessário, use o logotipo da **Fábrica de IA do Azure** no canto superior esquerdo para navegar até a home page, que é semelhante à imagem a seguir (feche o painel **Ajuda** se estiver aberto):
 
     ![Captura de tela do portal do Azure AI Foundry.](./media/ai-foundry-home.png)
 
-1. Na home page, selecione **+Criar projeto**.
-1. No assistente **Criar um projeto**, insira um nome de projeto adequado e, se um hub existente for sugerido, escolha a opção de criar um novo. Em seguida, examine os recursos do Azure que serão criados automaticamente para dar suporte ao hub e ao projeto.
-1. Selecione **Personalizar** e especifique as seguintes configurações para o hub:
-    - **Nome do hub**: *um nome para o hub*
+1. No navegador, navegue até `https://ai.azure.com/managementCenter/allResources` e clique em **Criar**. Em seguida, escolha a opção para criar um novo **Recurso do hub de IA**.
+1. No assistente **Criar um projeto**, insira um nome válido para o projeto e, se um hub existente for sugerido, clique na opção para criar um novo e expanda **Opções avançadas** para especificar as seguintes configurações para o projeto:
     - **Assinatura**: *sua assinatura do Azure*
     - **Grupo de recursos**: *criar ou selecionar um grupo de recursos*
-    - **Localização**: selecione **Ajude-me a escolher** e então selecione **gpt-4** na janela do auxiliar de localização e use a região recomendada \*
-    - **Conectar os Serviços de IA do Azure ou o OpenAI do Azure** – *Criar um novo recurso de Serviços de IA*
-    - **Conectar-se à Pesquisa de IA do Azure**: Ignorar a conexão
+    - **Nome do hub**: um nome válido para o hub
+    - **Localização**: Leste dos EUA 2 ou Suécia Central\*
 
-    > Os recursos \* da OpenAI do Azure são restritos por cotas regionais. No caso de um limite de cota ser atingido mais adiante no exercício, há a possibilidade de você precisar criar outro recurso em uma região diferente.
+    > \* Alguns recursos da IA do Azure são restritos por cotas de modelo regional. Caso um limite de cota seja excedido posteriormente no exercício, é possível que você precise criar outro recurso em uma região diferente.
 
-1. Clique em **Avançar** e revise a configuração. Em seguida, selecione **Criar** e aguarde a conclusão do processo.
-1. Quando o projeto for criado, feche todas as dicas exibidas e examine a página do projeto no Portal da Fábrica de IA do Azure, que deve ser semelhante à imagem a seguir:
-
-    ![Captura de tela dos detalhes de um projeto IA do Azure no Portal da Fábrica de IA do Azure.](./media/ai-foundry-project.png)
+1. Aguarde até que seu projeto seja criado.
 
 ## Configurar autorização de recursos
 
-As ferramentas de fluxo de prompt na Fábrica de IA do Azure criam ativos baseados em arquivo que definem o fluxo de prompt em uma pasta no armazenamento de blobs. Antes de explorar o fluxo de prompt, vamos garantir que o recurso dos Serviços de IA do Azure tenha o acesso necessário ao repositório de blobs para que ele possa lê-los.
+As ferramentas de fluxo de prompt na Fábrica de IA do Azure criam ativos baseados em arquivo que definem o fluxo de prompt em uma pasta no armazenamento de blobs. Antes de explorarmos o fluxo de prompt, vamos garantir que o recurso da Fábrica de IA do Azure tenha o acesso necessário ao repositório de blobs para que ele possa lê-los.
 
-1. No portal da Fábrica de IA do Azure, no painel de navegação, selecione o **Centro de gerenciamento** e exiba a página de detalhes do seu projeto, que é semelhante a esta imagem:
-
-    ![Captura de tela do centro de gerenciamento.](./media/ai-foundry-manage-project.png)
-
-1. Em **Grupo de Recursos**, selecione seu grupo de recursos para abri-lo no portal do Azure em uma nova guia do navegador; entrando com suas credenciais do Azure, se solicitado, e fechando todas as notificações de boas-vindas para ver a página do grupo de recursos.
-
-    O grupo de recursos contém todos os recursos do Azure para dar suporte ao hub e ao projeto.
-
-1. Selecione o recurso **Serviços de IA do Azure** para seu hub para abri-lo. Em seguida, expanda a seção **Em Gerenciamento de Recuros** e selecione a página **Identidade** :
+1. Em uma nova guia do navegador, abra o [portal do Azure](https://portal.azure.com) em `https://portal.azure.com`, entrando com as suas credenciais do Azure, se solicitado, e visualize o grupo de recursos que contém os recursos de hub da IA do Azure.
+1. Clique no recurso **Fábrica de IA do Azure** do hub para abri-lo. Em seguida, expanda a seção **Gerenciamento de Recuros** e clique na página **Identidade** :
 
     ![Captura de tela da página da identidade do Serviços de IA do Azure no portal do Azure.](./media/ai-services-identity.png)
 
@@ -58,12 +45,11 @@ As ferramentas de fluxo de prompt na Fábrica de IA do Azure criam ativos basead
 
     ![Captura de tela da página de controle de acesso à conta de armazenamento no portal do Azure.](./media/storage-access-control.png)
 
-1. Adicione uma atribuição de função à função `Storage blob data reader` para a identidade gerenciada usada pelo recurso dos Serviços de IA do Azure:
+1. Adicione uma atribuição de função à função `Storage blob data reader` para a identidade gerenciada usada pelo recurso da Fábrica de IA do Azure:
 
     ![Captura de tela da página de controle de acesso à conta de armazenamento no portal do Azure.](./media/assign-role-access.png)
 
-1. Depois de examinar e atribuir o acesso de função para permitir que a identidade gerenciada dos Serviços de IA do Azure leia blobs na conta de armazenamento, feche a guia do portal do Azure e retorne ao Portal da Fábrica de IA do Azure.
-1. No portal da Fábrica de IA do Azure, no painel de navegação, selecione **Ir para o projeto** para retornar à home page do projeto.
+1. Depois de revisar e atribuir o acesso de função para permitir que a identidade gerenciada da Fábrica de IA do Azure leia blobs na conta de armazenamento, feche a guia do portal do Azure e retorne ao portal da Fábrica de IA do Azure.
 
 ## Implantar um modelo de IA generativa
 
@@ -71,9 +57,9 @@ Agora você está em condições de implantar um modelo de linguagem de IA gener
 
 1. No painel à esquerda do seu projeto, na seção **Meus ativos**, selecione a página **Modelos + pontos de extremidade**.
 1. Na página **Modelos + pontos extremidades**, na guia **Implantações de modelo**, no menu **+ Implantar modelo**, selecione **Implantar modelo base**.
-1. Procure o modelo **gpt-4** na lista, selecione-o e confirme-o.
+1. Procure o modelo **gpt-4o** na lista, selecione-o e confirme-o.
 1. Crie uma nova implantação do modelo com as seguintes configurações selecionando **Personalizar** nos detalhes de implantação:
-    - **Nome da implantação**: *um nome válido para sua implantação de modelo*
+    - **Nome da implantação**: *Um nome válido para a implantação de modelo*
     - **Tipo de implantação**: padrão global
     - **Atualização automática de versão**: Ativado
     - **Versão do modelo**: *selecione a versão mais recente disponivel*
@@ -93,6 +79,8 @@ Um fluxo de prompt fornece uma maneira de orquestrar prompts e outras atividades
 1. Criar um novo fluxo com base no modelo de **Fluxo de chat**, especificando `Travel-Chat` como o nome da pasta.
 
     Um fluxo de chat simples é criado para você.
+
+    > **Dica**: se ocorrer um erro de permissões, aguarde alguns minutos e tente novamente, especificando um nome de fluxo diferente se necessário.
 
 1. Para poder testar seu fluxo, você precisa de computação e pode demorar um pouco para iniciar, portanto, selecione **Iniciar sessão de computação** para iniciá-la enquanto explora e modifica o fluxo padrão.
 

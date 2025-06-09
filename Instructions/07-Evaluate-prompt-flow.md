@@ -12,34 +12,28 @@ Este exercício levará aproximadamente **30** minutos.
 
 > **Observação**: algumas das tecnologias usadas neste exercício estão em versão prévia ou em desenvolvimento ativo. Você pode observar algum comportamento, avisos ou erros inesperados.
 
-## Criar um projeto do Azure AI Foundry
+## Crie um hub e projeto da Fábrica de IA do Azure
 
-Vamos começar criando um projeto da Fábrica de IA do Azure.
+Os recursos da Fábrica de IA do Azure que usaremos neste exercício requerem um projeto baseado em um recurso de *hub* da Fábrica de IA do Azure.
 
 1. Em um navegador da Web, abra o [Portal da Fábrica de IA do Azure](https://ai.azure.com) em `https://ai.azure.com` e entre usando suas credenciais do Azure. Feche todas as dicas ou painéis de início rápido abertos na primeira vez que você entrar e, se necessário, use o logotipo da **Fábrica de IA do Azure** no canto superior esquerdo para navegar até a home page, que é semelhante à imagem a seguir (feche o painel **Ajuda** se estiver aberto):
 
     ![Captura de tela do portal do Azure AI Foundry.](./media/ai-foundry-home.png)
 
-1. Na home page, selecione **+Criar projeto**.
-1. No assistente **Criar um projeto**, insira um nome de projeto adequado e, se um hub existente for sugerido, escolha a opção de criar um novo. Em seguida, examine os recursos do Azure que serão criados automaticamente para dar suporte ao hub e ao projeto.
-1. Selecione **Personalizar** e especifique as seguintes configurações para o hub:
-    - **Nome do hub**: *um nome válido para o seu hub*
+1. No navegador, navegue até `https://ai.azure.com/managementCenter/allResources` e clique em **Criar**. Em seguida, escolha a opção para criar um novo **Recurso do hub de IA**.
+1. No assistente **Criar um projeto**, insira um nome válido para o projeto e, se um hub existente for sugerido, clique na opção para criar um novo e expanda **Opções avançadas** para especificar as seguintes configurações para o projeto:
     - **Assinatura**: *sua assinatura do Azure*
     - **Grupo de recursos**: *criar ou selecionar um grupo de recursos*
-    - **Local**: selecione uma das seguintes regiões\*
+    - **Nome do hub**: um nome válido para o hub
+    - **Local**:  *selecione um local na lista a seguir*:\*
         - Leste dos EUA 2
         - França Central
         - Sul do Reino Unido
         - Suécia Central
-    - **Conectar os Serviços de IA do Azure ou o OpenAI do Azure**: *Criar um novo recurso de Serviços de IA*
-    - **Conectar-se à Pesquisa de IA do Azure**: Ignorar a conexão
 
     > \* No momento da redação deste artigo, essas regiões suportam a avaliação das métricas de segurança da IA. A disponibilidade do modelo é limitada por cotas regionais. No caso de um limite de cota ser atingido mais adiante no exercício, há a possibilidade de você precisar criar outro projeto em uma região diferente.
 
-1. Clique em **Avançar** e revise a configuração. Em seguida, selecione **Criar** e aguarde a conclusão do processo.
-1. Quando o projeto for criado, feche todas as dicas exibidas e examine a página do projeto no Portal da Fábrica de IA do Azure, que deve ser semelhante à imagem a seguir:
-
-    ![Captura de tela dos detalhes de um projeto IA do Azure no Portal da Fábrica de IA do Azure.](./media/ai-foundry-project.png)
+1. Aguarde até que seu projeto seja criado.
 
 ## Implantar modelos
 
@@ -67,16 +61,17 @@ Neste exercício, você avaliará o desempenho de um modelo gpt-4o-mini. Você t
 Você pode revisar manualmente as respostas do modelo com base nos dados do teste. A revisão manual permite testar diferentes entradas para avaliar se o modelo está funcionando conforme o esperado.
 
 1. Em uma nova guia do navegador, baixe [travel_evaluation_data.jsonl](https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/refs/heads/main/data/travel_evaluation_data.jsonl) em `https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/refs/heads/main/data/travel_evaluation_data.jsonl` e salve em uma pasta local como **travel_evaluation_data.jsonl** (salve como um arquivo .jsonl, não como um arquivo .txt).
-1. De volta à guia do Portal da Fábrica de IA do Azure, no painel de navegação, na seção **Avaliar e melhorar**, selecione **Avaliação**.
+1. De volta à guia do portal da Fábrica de IA do Azure, no painel de navegação, na seção **Proteger e controlar**, clique em **Avaliação**.
+1. Se o painel **Criar uma nova avaliação** abrir automaticamente, clique em **Cancelar** para fechá-lo.
 1. Na página **Avaliação**, visualize a guia **Avaliações manuais** e selecione **+ Nova avaliação manual**.
-1. Na seção **Configurações**, na lista **Modelo**, selecione sua implantação de modelo **gpt-4o-mini**.
+1. Na seção **Configurações**, na lista **Modelo**, selecione a sua implantação do modelo **gpt-4o**.
 1. Altere a **Mensagem do sistema** para as seguintes instruções de um assistente de viagens de IA:
 
    ```
    Assist users with travel-related inquiries, offering tips, advice, and recommendations as a knowledgeable travel agent.
    ```
 
-1. Na seção **Resultado de avaliação manual**, selecione **Importar dados de testes** e faça upload do arquivo **travel_evaluation_data.jsonl** que você baixou anteriormente, mapeando os campos de conjunto de dados conforme a seguir:
+1. Na seção **Resultado de avaliação manual**, clique em **Importar dados de testes** e faça upload do arquivo **travel_evaluation_data.jsonl** rolando para baixo para mapear os campos do conjunto de dados da seguinte maneira:
     - **Entrada**: Question
     - **Resposta esperada**: ExpectedResponse
 1. Examine as perguntas e as respostas esperadas no arquivo de teste — você as usará para avaliar as respostas geradas pelo modelo.
@@ -95,39 +90,48 @@ A avaliação automatizada é uma abordagem que tenta resolver essas deficiênci
 
 1. Use a seta para trás (**&larr;**) ao lado do título da página **Avaliação manual** para retornar à página **Avaliação**.
 1. Exiba a guia **Avaliações automatizadas**.
-1. Selecione **Criar uma nova avaliação** e, quando solicitado, selecione a opção para avaliar um **Modelo e prompt**
-1. Na página **Criar uma nova avaliação**, na seção **Informações básicas**, revise o nome de avaliação padrão gerado automaticamente (você pode alterá-lo se desejar) e selecione sua implantação de modelo **gpt-40-mini**.
-1. Altere a **Mensagem do sistema** para as mesmas instruções de um assistente de viagem de IA que você usou anteriormente:
+1. Clique em **Criar uma nova avaliação** e, quando solicitado, selecione a opção para **Avaliar um modelo** e clique em **Avançar**.
+1. Na página **Selecionar fonte de dados**, clique em **Usar seu conjunto de dados** e selecione o conjunto de dados **travel_evaluation_data_jsonl_*xxxx...*** com base no arquivo que você carregou anteriormente e clique em **Avançar**.
+1. Na página **Testar modelo**, selecione o modelo **gpt-4o-mini** e altere a **Mensagem do sistema** para as mesmas instruções de um assistente de viagem de IA que você usou anteriormente:
 
    ```
    Assist users with travel-related inquiries, offering tips, advice, and recommendations as a knowledgeable travel agent.
    ```
 
-1. Na seção **Configurar dados de teste**, observe que você pode usar um modelo GPT para gerar dados de teste para você (que você pode editar e complementar para corresponder às suas próprias expectativas), usar um conjunto de dados existente ou fazer upload de um arquivo. Neste exercício, selecione **Usar conjunto de dados existente** e, em seguida, selecione o conjunto de dados **travel_evaluation_data_jsonl_*xxxx...*** (que foi criado quando você carregou o arquivo .jsonl anteriormente).
-1. Examine as linhas de exemplo do conjunto de dados e, na seção **Escolher sua coluna de dados**, selecione os seguintes mapeamentos de coluna:
-    - **Consulta**: Question
-    - **Contexto**: *deixe isso em branco. Ele é usado para avaliar a "fundamentação" ao associar uma fonte de dados contextual ao seu modelo.*
-    - **Verdade básica**: ExpectedAnswer
-1. Na seção **Escolha o que gostaria de avaliar**, selecione <u>todas</u> as categorias de avaliação a seguir:
-    - Qualidade da IA (assistida por IA)
-    - Risco e segurança (assistido por IA)
-    - Qualidade da IA (NLP)
-1. Na lista **Escolha um modelo de implantação como juiz**, selecione seu modelo **gpt-4o**. Esse modelo será usado para avaliar as respostas do modelo **gpt-4o-mini** quanto à qualidade relacionada à linguagem e métricas de comparação de IA generativa padrão.
-1. Selecione **Criar** para iniciar o processo de avaliação e aguardar sua conclusão. Isso pode levar alguns minutos.
+1. No campo **consulta**, selecione **\{\{item.question\}\}**.
+1. Selecione **Próximo** para ir para a próxima página.
+1. Na página **Configurar avaliadores**, use o botão **+Adicionar** para adicionar os seguintes avaliadores, configurando cada um da seguinte maneira:
+    - **Marcador de modelo**:
+        - **Nome do critério**: Semantic_similarity
+        - **Classificar com**: *selecione o seu modelo **gpt-4o***
+        - Configurações de **usuário** (na parte inferior):
 
-    > **Dica**: se um erro indicando que as permissões do projeto estão sendo definidas for cancelado, aguarde um minuto e selecione **Criar** novamente. Pode levar algum tempo para que as permissões de recursos de um projeto recém-criado sejam propagadas.
 
-1. Quando a avaliação for concluída, role para baixo, se necessário, para ver a área do **painel de métrica** e visualizar as métricas de **qualidade da IA**:
+            Saída: \{\{sample.output_text\}\}<br>
+            Verdade básica: \{\{item.ExpectedResponse\}\}<br>
+            <br>
+        
+    - **Avaliador de escala Likert**:
+        - **Nome do critério**: Relevância
+        - **Classificar com**: *selecione o seu modelo **gpt-4o***
+        - **Consulta**: \{\{item.question\}\}
 
-    ![Captura de tela das métricas de qualidade de IA no Portal da Fábrica de IA do Azure.](./media/ai-quality-metrics.png)
+    - **Semelhança de texto**:
+        - **Nome do critério**: F1_Score
+        - **Verdade básica**: \{\{item.ExpectedResponse\}\}
 
-    Use os ícones **<sup>(i)</sup>** para visualizar as definições de métrica.
+    - **Conteúdo de ódio e injusto**:
+        - **Nome do critério**: Hate_and_unfairness
+        - **Consulta**: \{\{item.question\}\}
 
-1. Exiba a guia **Risco e segurança** para ver as métricas associadas a conteúdo potencialmente prejudicial.
-1. Exiba a guia **Qualidade da IA (NLP**) para ver métricas padrão para modelos de IA generativos.
-1. Role de volta para a parte superior da página, se necessário, e selecione a guia **Dados** para ver os dados brutos da avaliação. Os dados incluem as métricas para cada entrada, bem como explicações do raciocínio que o modelo gpt-4o aplicou ao avaliar as respostas.
+1. Clique em **Avançar** para revisar as configurações de avaliação. Você deve ter configurado a avaliação para usar o conjunto de dados de avaliação de viagens para avaliar o modelo **gpt-4o-mini** quanto à semelhança semântica, relevância, pontuação F1 e linguagem de ódio e injustiça.
+1. Dê um nome adequado à avaliação, clique em **Enviar** para iniciar o processo de avaliação e aguarde a conclusão. Isso pode levar alguns minutos. Você pode usar o botão da barra de ferramentas **Atualizar** para verificar o status.
 
-    ![Captura de tela dos dados de avaliação no Portal da Fábrica de IA do Azure.](./media/evaluation-data.png)
+1. Quando a avaliação for concluída, role para baixo, se necessário, para revisar os resultados.
+
+    ![Captura de tela das métricas de avaliação.](./media/ai-quality-metrics.png)
+
+1. Na parte superior da página, clique na guia **Dados** para ver os dados brutos da avaliação. Os dados incluem as métricas para cada entrada, bem como explicações do raciocínio que o modelo gpt-4o aplicou ao avaliar as respostas.
 
 ## Limpar
 

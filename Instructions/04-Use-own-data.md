@@ -8,36 +8,30 @@ lab:
 
 A Geração Aumentada de Recuperação (RAG) é uma técnica usada para compilar aplicativos que integram dados de fontes de dados personalizadas em um prompt para um modelo de IA generativa. O RAG é um padrão comumente usado para desenvolver aplicativos de IA generativa – aplicativos baseados em chat que usam um modelo de linguagem para interpretar entradas e gerar respostas apropriadas.
 
-Neste exercício, você usará o portal da Fábrica de IA do Azure e os SDKs da Fábrica de IA do Azure e o OpenAI do Azure para integrar dados personalizados em um aplicativo de IA generativa.
+Neste exercício, você usará a Fábrica de IA do Azure para integrar dados personalizados em uma solução de IA generativa.
 
 Este exercício levará, aproximadamente, **45** minutos.
 
-> **Observação**: este exercício é baseado em SDKs de pré-lançamento, que podem estar sujeitos a alterações. Quando necessário, usamos versões específicas de pacotes que podem não refletir as versões mais recentes disponíveis.
+> **Observação**: este exercício é baseado em serviços de pré-lançamento, que podem estar sujeitos a alterações.
 
-## Criar um projeto do Azure AI Foundry
+## Crie um hub e projeto da Fábrica de IA do Azure
 
-Vamos começar criando um projeto da Fábrica de IA do Azure e os recursos de serviço necessários para dar suporte ao uso de seus próprios dados, incluindo um recurso da Pesquisa de IA do Azure.
+Os recursos da Fábrica de IA do Azure que usaremos neste exercício requerem um projeto baseado em um recurso de *hub* da Fábrica de IA do Azure.
 
-1. Em um navegador da Web, abra o [Portal da Fábrica de IA do Azure](https://ai.azure.com) em `https://ai.azure.com` e entre usando suas credenciais do Azure. Feche todas as dicas ou painéis de início rápido abertos na primeira vez que você entrar e, se necessário, use o logotipo da **Fábrica de IA do Azure** no canto superior esquerdo para navegar até a home page, que é semelhante à imagem a seguir:
+1. Em um navegador da Web, abra o [Portal da Fábrica de IA do Azure](https://ai.azure.com) em `https://ai.azure.com` e entre usando suas credenciais do Azure. Feche todas as dicas ou painéis de início rápido abertos na primeira vez que você entrar e, se necessário, use o logotipo da **Fábrica de IA do Azure** no canto superior esquerdo para navegar até a home page, que é semelhante à imagem a seguir (feche o painel **Ajuda** se estiver aberto):
 
     ![Captura de tela do portal do Azure AI Foundry.](./media/ai-foundry-home.png)
 
-1. Na home page, selecione **+Criar projeto**.
-1. No assistente **Criar um projeto**, digite um nome válido para o seu projeto e, se um hub existente for sugerido, escolha a opção para criar um novo. Em seguida, examine os recursos do Azure que serão criados automaticamente para dar suporte ao hub e ao projeto.
-1. Selecione **Personalizar** e especifique as seguintes configurações para o hub:
-    - **Nome do hub**: *um nome válido para o seu hub*
+1. No navegador, navegue até `https://ai.azure.com/managementCenter/allResources` e clique em **Criar**. Em seguida, escolha a opção para criar um novo **Recurso do hub de IA**.
+1. No assistente **Criar um projeto**, insira um nome válido para o projeto e, se um hub existente for sugerido, clique na opção para criar um novo e expanda **Opções avançadas** para especificar as seguintes configurações para o projeto:
     - **Assinatura**: *sua assinatura do Azure*
     - **Grupo de recursos**: *criar ou selecionar um grupo de recursos*
-    - **Localização**: selecione **Ajude-me a escolher** e então selecione **gpt-4o** na janela do auxiliar de localização e use a região recomendada\*
-    - **Conectar os Serviços de IA do Azure ou o OpenAI do Azure**: *Criar um novo recurso de Serviços de IA*
-    - **Conectar a Pesquisa de IA do Azure**: *crie um novo recurso da Pesquisa de IA do Azure com um nome exclusivo*
+    - **Nome do hub**: um nome válido para o hub
+    - **Localização**: Leste dos EUA 2 ou Suécia Central\*
 
-    > \* Os recursos do OpenAI do Azure são restritos por cotas regionais. Caso um limite de cota seja excedido posteriormente no exercício, é possível que você precise criar outro recurso em uma região diferente.
+    > \* Alguns recursos da IA do Azure são restritos por cotas de modelo regional. Caso um limite de cota seja excedido posteriormente no exercício, é possível que você precise criar outro recurso em uma região diferente.
 
-1. Clique em **Avançar** e revise a configuração. Em seguida, selecione **Criar** e aguarde a conclusão do processo.
-1. Quando o projeto for criado, feche todas as dicas exibidas e examine a página do projeto no Portal da Fábrica de IA do Azure, que deve ser semelhante à imagem a seguir:
-
-    ![Captura de tela dos detalhes de um projeto IA do Azure no Portal da Fábrica de IA do Azure.](./media/ai-foundry-project.png)
+1. Aguarde até que seu projeto seja criado.
 
 ## Implantar modelos
 
@@ -58,19 +52,19 @@ Você precisará de dois modelos para implementar sua solução:
 
     > **Observação**: se o local atual do recurso de IA não tiver cota disponível para o modelo que você deseja implantar, será solicitado a escolher um local diferente onde um novo recurso de IA será criado e conectado ao seu projeto.
 
-1. Retorne à página **Modelos + pontos de extremidade** e repita as etapas anteriores para implantar um modelo **gpt-4o** usando uma implantação **Padrão global** da versão mais recente com um limite de taxa de TPM de **50 mil** (ou o máximo disponível em sua assinatura se for menor que 50 mil).
+1. Retorne à página **Modelos + pontos de extremidade** e repita as etapas anteriores para implantar um modelo **gpt-4o** usando uma implantação **Padrão Global** da versão mais recente com um limite de taxa de TPM de **50 mil** (ou o máximo disponível em sua assinatura, se for menor que 50 mil).
 
     > **Observação**: A redução dos Tokens por Minuto (TPM) ajuda a evitar o uso excessivo da cota disponível na assinatura que você estiver usando. 50.000 TPM são suficientes para os dados usados neste exercício.
 
 ## Adicionar dados ao seu projeto
 
-Os dados para o seu copiloto consistem em um conjunto de folhetos de viagem em formato PDF da agência de viagens fictícia *Margie's Travel*. Vamos adicioná-los ao projeto.
+Os dados para o seu aplicativo consistem em um conjunto de folhetos de viagem em formato PDF da agência de viagens fictícia *Margie's Travel*. Vamos adicioná-los ao projeto.
 
 1. Em uma nova guia do navegador, baixe o [arquivo compactado de folhetos](https://github.com/MicrosoftLearning/mslearn-ai-studio/raw/main/data/brochures.zip) em `https://github.com/MicrosoftLearning/mslearn-ai-studio/raw/main/data/brochures.zip` e extraia-o para uma pasta chamada **folhetos** em seu sistema de arquivos local.
 1. No portal do Azure IA Foundry, em seu projeto, no painel de navegação à esquerda, em **Maus ativos**, selecione a página **Dados + índices**.
 1. Selecione **+ Novos dados**.
 1. No assistente **Adicionar dados**, expanda o menu suspenso para selecionar **Carregar arquivos/pastas**.
-1. Selecione **Carregar pasta** e selecione a pasta **folhetos**.
+1. Selecione **Carregar pasta** e carregue a pasta **brochures**. Aguarde até que todos os arquivos da pasta sejam listados.
 1. Selecione **Avançar** e defina o nome dos dados como `brochures`.
 1. Aguarde o upload da pasta e observe que ela contém vários arquivos .pdf.
 
@@ -84,7 +78,15 @@ Agora que você adicionou uma fonte de dados ao seu projeto, pode usá-la para c
         - **Fonte de dados**: dados na Fábrica de IA do Azure
             - *Selecione a fonte de dados dos **folhetos***
     - **Configuração de índice**:
-        - **Selecione o serviço Azure AI Search**: *Selecione a conexão do **AzureAISearch** com seu recurso de Pesquisa de IA do Azure*
+        - **Selecione o serviço Pesquisa de IA do Azure**: *crie um novo recurso da Pesquisa de IA do Azure com as seguintes configurações*:
+            - **Assinatura**: *a sua assinatura do Azure*
+            - **Grupo de recursos**: *o mesmo grupo de recursos do Hub de IA*
+            - **Nome do serviço**: *um nome válido para o recurso da Pesquisa de IA*
+            - **Local**: *o mesmo local do Hub de IA*
+            - **Tipo de preço**: Básico
+            
+            Aguarde a criação do recurso da Pesquisa de IA Em seguida, retorne à Fábrica de IA do Azure e conclua a configuração do índice clicando em **Conectar outro recurso da Pesquisa de IA do Azure** e adicionando uma conexão ao recurso da Pesquisa de IA do Azure que você acabou de criar.
+ 
         - **Índice de vetor**: `brochures-index`
         - **Máquina virtual**: Selecionar automaticamente
     - **Configurações de pesquisa**:
@@ -108,7 +110,7 @@ Agora que você adicionou uma fonte de dados ao seu projeto, pode usá-la para c
 Antes de usar seu índice em um prompt flow baseado em RAG, vamos verificar se ele pode ser usado para afetar respostas de IA generativa.
 
 1. No painel de navegação à esquerda, selecione a página **Playgrounds** e abra o playground **Chat**.
-1. Na página do playground Chat, no painel Configuração, verifique se a implantação do modelo **gpt-4** está selecionada. Em seguida, no painel de sessão de chat principal, envie o prompt `Where can I stay in New York?`
+1. Na página do playground Chat, no painel Configuração, verifique se a implantação do modelo **gpt-4o** está selecionada. Em seguida, no painel de sessão de chat principal, envie o prompt `Where can I stay in New York?`
 1. Revise a resposta, que deve ser uma resposta genérica do modelo sem dados do índice.
 1. No painel de configurações, expanda o campo **Adicionar seus dados** e, em seguida, adicione o índice de projeto **brochures-index** e selecione o tipo de pesquisa **híbrido (vetor + palavra-chave)**.
 
@@ -117,42 +119,41 @@ Antes de usar seu índice em um prompt flow baseado em RAG, vamos verificar se e
 1. Depois que o índice tiver sido adicionado e a sessão de chat for reiniciada, reenvie o prompt `Where can I stay in New York?`
 1. Revise a resposta, que deve ser baseada nos dados do índice.
 
-## Criar um aplicativo cliente RAG com os SDKs da Fábrica de IA do Azure e do OpenAI do Azure
+<!-- DEPRECATED STEPS
 
-Agora que você tem um índice em funcionamento, pode usar os SDKs da Fábrica de IA do Azure e do OpenAI do Azure para implementar o padrão RAG em um aplicativo cliente. Vamos explorar o código para fazer isso em um exemplo simples.
+## Create a RAG client app with the Azure AI Foundry and Azure OpenAI SDKs
 
-> **Dica**: você pode optar por desenvolver sua solução RAG usando Python ou Microsoft C#. Siga as instruções na seção apropriada para o idioma escolhido.
+Now that you have a working index, you can use the Azure AI Foundry and Azure OpenAI SDKs to implement the RAG pattern in a client application. Let's explore the code to accomplish this in a simple example.
 
-### Preparar a configuração de aplicativo
+> **Tip**: You can choose to develop your RAG solution using Python or Microsoft C#. Follow the instructions in the appropriate section for your chosen language.
 
-1. No Portal da Fábrica de IA do Azure, visualize a página **Visão geral** do seu projeto.
-1. Na área **Detalhes do projeto**, observe a **Cadeia de conexão do projeto**. Você usará essa cadeia de conexão para se conectar ao seu projeto em um aplicativo cliente.
-1. Abra uma nova guia do navegador (mantendo o portal da Fábrica de IA do Azure aberto na guia existente). Em seguida, na nova guia, navegue até o [portal do Azure](https://portal.azure.com) em `https://portal.azure.com`; efetue login com suas credenciais do Azure, se solicitado.
+### Prepare the application configuration
 
-    Feche todas as notificações de boas-vindas para ver a home page do portal do Azure.
+1. In the Azure AI Foundry portal, view the **Overview** page for your project.
+1. In the **Project details** area, note the **Project connection string**. You'll use this connection string to connect to your project in a client application.
+1. Return to the browser tab containing the Azure portal (keeping the Azure AI Foundry portal open in the existing tab).
+1. Use the **[\>_]** button to the right of the search bar at the top of the page to create a new Cloud Shell in the Azure portal, selecting a ***PowerShell*** environment with no storage in your subscription.
 
-1. Use o botão **[\>_]** à direita da barra de pesquisa na parte superior da página para criar um Cloud Shell no portal do Azure selecionando um ambiente do ***PowerShell*** sem armazenamento em sua assinatura.
+    The cloud shell provides a command-line interface in a pane at the bottom of the Azure portal. You can resize or maximize this pane to make it easier to work in.
 
-    O Cloud Shell fornece uma interface de linha de comando em um painel na parte inferior do portal do Azure. Você pode redimensionar ou maximizar esse painel para facilitar o trabalho.
+    > **Note**: If you have previously created a cloud shell that uses a *Bash* environment, switch it to ***PowerShell***.
 
-    > **Observação**: se você já criou um Cloud Shell que usa um ambiente *Bash*, alterne-o para o ***PowerShell***.
+1. In the cloud shell toolbar, in the **Settings** menu, select **Go to Classic version** (this is required to use the code editor).
 
-1. Na barra de ferramentas do Cloud Shell, no menu **Configurações**, selecione **Ir para a versão clássica** (isso é necessário para usar o editor de código).
+    **<font color="red">Ensure you've switched to the classic version of the cloud shell before continuing.</font>**
 
-    **<font color="red">Verifique se você mudou para a versão clássica do Cloud Shell antes de continuar.</font>**
-
-1. No painel do Cloud Shell, insira os seguintes comandos para clonar o repositório GitHub que contém os arquivos de código para este exercício (digite o comando ou copie-o para a área de transferência e clique com o botão direito do mouse na linha de comando e cole como texto sem formatação):
+1. In the cloud shell pane, enter the following commands to clone the GitHub repo containing the code files for this exercise (type the command, or copy it to the clipboard and then right-click in the command line and paste as plain text):
 
     ```
     rm -r mslearn-ai-foundry -f
     git clone https://github.com/microsoftlearning/mslearn-ai-studio mslearn-ai-foundry
     ```
 
-    > **Dica**: ao colar comandos no Cloud Shell, a saída poderá ocupar uma grande quantidade do espaço da tela. Você pode limpar a tela digitando o comando `cls` para facilitar o foco em cada tarefa.
+    > **Tip**: As you paste commands into the cloudshell, the output may take up a large amount of the screen buffer. You can clear the screen by entering the `cls` command to make it easier to focus on each task.
 
-1. Após o repositório ser clonado, navegue até a pasta que contém os arquivos de código do aplicativo de chat:
+1. After the repo has been cloned, navigate to the folder containing the chat application code files:
 
-    > **Observação**: siga as etapas para a linguagem de programação escolhida.
+    > **Note**: Follow the steps for your chosen programming language.
 
     **Python**
 
@@ -166,7 +167,7 @@ Agora que você tem um índice em funcionamento, pode usar os SDKs da Fábrica d
    cd mslearn-ai-foundry/labfiles/rag-app/c-sharp
     ```
 
-1. No painel de linha de comando do Cloud Shell, digite o seguinte comando para instalar as bibliotecas que você usará:
+1. In the cloud shell command-line pane, enter the following command to install the libraries you'll use:
 
     **Python**
 
@@ -185,7 +186,7 @@ Agora que você tem um índice em funcionamento, pode usar os SDKs da Fábrica d
     ```
     
 
-1. Digite o seguinte comando para editar o arquivo de configuração que foi fornecido:
+1. Enter the following command to edit the configuration file that has been provided:
 
     **Python**
 
@@ -199,17 +200,18 @@ Agora que você tem um índice em funcionamento, pode usar os SDKs da Fábrica d
    code appsettings.json
     ```
 
-    O arquivo é aberto em um editor de código.
+    The file is opened in a code editor.
 
-1. No arquivo de código, substitua os seguintes espaços reservados: 
-    - **your_project_connection_string**: substitua pela cadeia de conexão do projeto (copiada da página **Visão geral** do projeto no Portal da Fábrica de IA do Azure)
-    - **your_model_deployment**: substitua pelo nome que você atribuiu à implantação de modelo **gpt-4o** 
-    - **your_index**: substitua pelo nome do índice (que deve ser `brochures-index`)
-1. Depois de substituir os espaços reservados, no editor de código use o comando **CTRL+S** ou **botão direito do mouse > Salvar** para salvar as suas alterações e, em seguida, use o comando **CTRL+Q** ou **botão direito do mouse > Sair** para fechar o editor de código, mantendo a linha de comando do Cloud Shell aberta.
+1. In the code file, replace the following placeholders: 
+    - **your_project_connection_string**: Replace with the connection string for your project (copied from the project **Overview** page in the Azure AI Foundry portal).
+    - **your_gpt_model_deployment** Replace with the name you assigned to your **gpt-4o** model deployment.
+    - **your_embedding_model_deployment**: Replace with the name you assigned to your **text-embedding-ada-002** model deployment.
+    - **your_index**: Replace with your index name (which should be `brochures-index`).
+1. After you've replaced the placeholders, in the code editor, use the **CTRL+S** command or **Right-click > Save** to save your changes and then use the **CTRL+Q** command or **Right-click > Quit** to close the code editor while keeping the cloud shell command line open.
 
-### Explorar o código para implementar o padrão RAG
+### Explore code to implement the RAG pattern
 
-1. Digite o seguinte comando para editar o arquivo de código que foi fornecido:
+1. Enter the following command to edit the code file that has been provided:
 
     **Python**
 
@@ -223,19 +225,24 @@ Agora que você tem um índice em funcionamento, pode usar os SDKs da Fábrica d
    code Program.cs
     ```
 
-1. Revise o código no arquivo, observando que:
-    - Usa o SDK da Fábrica de IA do Azure para se conectar ao seu projeto (usando a cadeia de conexão do projeto)
-    - Cria um cliente OpenAI do Azure autenticado com base na conexão do projeto.
-    - Recupera a conexão padrão da Pesquisa de IA do Azure do seu projeto para que ele possa determinar o ponto de extremidade e a chave do serviço da Pesquisa de IA do Azure.
-    - Cria uma mensagem de sistema adequada.
-    - Envia um prompt (incluindo uma mensagem do sistema e do usuário com base na entrada do usuário) para o cliente do OpenAI do Azure, adicionando informações adicionais sobre o índice da Pesquisa de IA do Azure a ser usado para fundamentar o prompt.
-    - Exibe a resposta do prompt fundamentado.
-    - Adiciona a resposta ao histórico de chats.
-1. Use o comando **CTRL+Q** para fechar o editor de código sem salvar alterações, enquanto mantém a linha de comando do Cloud Shell aberta.
+1. Review the code in the file, noting that it:
+    - Uses the Azure AI Foundry SDK to connect to your project (using the project connection string)
+    - Creates an authenticated Azure OpenAI client from your project connection.
+    - Retrieves the default Azure AI Search connection from your project so it can determine the endpoint and key for your Azure AI Search service.
+    - Creates a suitable system message.
+    - Submits a prompt (including the system and a user message based on the user input) to the Azure OpenAI client, adding:
+        - Connection details for the Azure AI Search index to be queried.
+        - Details of the embedding model to be used to vectorize the query\*.
+    - Displays the response from the grounded prompt.
+    - Adds the response to the chat history.
 
-### Executar o aplicativo de chat
+    \* *The query for the search index is based on the prompt, and is used to find relevant text in the indexed documents. You can use a keyword-based search that submits the query as text, but using a vector-based search can be more efficient - hence the use of an embedding model to vectorize the query text before submitting it.*
 
-1. No painel de linha de comando do Cloud Shell, insira o seguinte comando para executar o aplicativo:
+1. Use the **CTRL+Q** command to close the code editor without saving any changes, while keeping the cloud shell command line open.
+
+### Run the chat application
+
+1. In the cloud shell command-line pane, enter the following command to run the app:
 
     **Python**
 
@@ -249,13 +256,15 @@ Agora que você tem um índice em funcionamento, pode usar os SDKs da Fábrica d
    dotnet run
     ```
 
-1. Quando solicitado, insira uma pergunta, como `Where should I stay in London?` e analise a resposta do seu modelo de IA generativa.
+1. When prompted, enter a question, such as `Where should I go on vacation to see architecture?` and review the response from your generative AI model.
 
-    A resposta inclui referências de origem para indicar os dados indexados nos quais a resposta foi encontrada.
+    Note that the response includes source references to indicate the indexed data in which the answer was found.
 
-1. Tente uma pergunta de acompanhamento, por exemplo `What can I do there?`
+1. Try a follow-up question, for example `Where can I stay there?`
 
-1. Quando terminar, digite `quit` para sair do programa. Em seguida, feche o painel do Cloud Shell.
+1. When you're finished, enter `quit` to exit the program. Then close the cloud shell pane.
+
+-->
 
 ## Limpar
 
