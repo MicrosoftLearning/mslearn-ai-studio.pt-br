@@ -40,8 +40,9 @@ Vamos começar implantando um modelo em um projeto da Fábrica de IA do Azure.
 
     > \* No momento em que este artigo foi escrito, o modelo *Phi-4* da Microsoft que usaremos neste exercício está disponível nessas regiões. Você pode verificar a disponibilidade regional mais recente para modelos específicos na [documentação da Fábrica de IA do Azure](https://learn.microsoft.com/azure/ai-foundry/how-to/deploy-models-serverless-availability#region-availability). No caso de um limite de cota regional ser atingido mais adiante no exercício, há a possibilidade de você precisar criar outro recurso em uma região diferente.
 
-1. Clique em **Criar** e aguarde a criação do projeto, incluindo a implantação do modelo Phi-4 selecionado.
-1. Quando o projeto for criado, o playground chat abrirá automaticamente.
+1. Clique em **Criar** e aguarde a criação do projeto.
+1. Quando solicitado com informações do Phi-4, concorde com os termos de uso e implante o modelo.
+1. Quando o modelo for implantado, clique no botão azul na parte superior das informações de implantação para abrir o playground.
 1. No painel **Configuração**, anote o nome da implantação do modelo; que é **Phi-4**.
 
 ## Conversa usando o filtro de conteúdo
@@ -75,7 +76,7 @@ O modelo Phi-4 implantado tem um filtro de conteúdo padrão aplicado, que possu
 
 ## Remover o filtro de conteúdo padrão
 
-Agora, vamos ver o que acontece quando nenhum filtro de conteúdo é aplicado.
+Agora vamos ver o que acontece quando nenhum filtro de conteúdo é aplicado.
 
 1. No painel de navegação à esquerda, na seção **Meus ativos**, clique em **Modelos e pontos de extremidade**.
 1. Selecione o modelo **Phi-4** implantado anteriormente para visualizar os detalhes.
@@ -124,13 +125,13 @@ Quando o filtro de conteúdo padrão não atender às suas necessidades, você p
     - **Sexual**: Linguagem sexualmente explícita ou abusiva.
     - **Automutilação**: Linguagem que descreve ou incentiva a automutilação.
 
-    Os filtros são aplicados para cada uma dessas categorias em prompts e conclusões, com base em limites de bloqueio de **Bloqueio baixo**, **Bloqueio médio** e **Bloqueio alto** que são usados para determinar quais tipos específicos de linguagem são interceptados e impedidos pelo filtro.
+    Os filtros são aplicados para cada uma dessas categorias em solicitações e conclusões, com base em limites de bloqueio **Bloquear poucos**, **Bloquear alguns** e **Bloquear tudo** que são usados para determinar quais tipos específicos de linguagem são interceptados e impedidos pelo filtro.
 
     Além disso, as proteções de *prompt shield* são fornecidas para mitigar tentativas deliberadas de abuso de seu aplicativo de IA generativa.
 
-1. Altere o limite de cada categoria de filtro de entrada para **Bloqueio baixo, médio e alto**.
+1. Altere o limite de cada categoria de filtro de entrada para **Bloquear tudo**.
 
-1. Na página **Filtro de saída**, revise as configurações que podem ser aplicadas às respostas de saída e altere o limite de cada categoria para **Bloqueio baixo, médio e alto**.
+1. Na página **Filtro de saída**, revise as configurações que podem ser aplicadas às respostas de saída e altere o limite de cada categoria para **Bloquear tudo**.
 
 1. Na página **Implantação**, selecione a implantação do modelo **Phi-4** para aplicar o novo filtro de conteúdo a ele, confirmando que deseja substituir o filtro de conteúdo existente quando solicitado.
 
@@ -152,7 +153,7 @@ Vamos ter uma conversa final com o modelo para ver o efeito do filtro de conteú
 
     Desta vez, o filtro de conteúdo bloqueará o prompt com base no fato de que ele pode ser interpretado como incluindo uma referência à automutilação.
 
-    > **Importante**: se você tiver dúvidas sobre automutilação ou outros problemas de saúde mental, procure ajuda profissional. Tente inserir o prompt `Where can I get help or support related to self-harm?`.
+    > **Importante**: se você tiver dúvidas sobre automutilação ou outros problemas de saúde mental, procure ajuda profissional. Tente inserir o prompt `Where can I get help or support related to self-harm?`
 
 1. Agora tente este prompt:
 
