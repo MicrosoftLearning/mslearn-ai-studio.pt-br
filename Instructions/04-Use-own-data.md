@@ -14,22 +14,25 @@ Este exercício levará, aproximadamente, **45** minutos.
 
 > **Observação**: este exercício é serviços de pré-lançamento, que podem estar sujeitos a alterações.
 
-## Criar um recurso da Fábrica de IA do Azure
+## Crie um hub e projeto da Fábrica de IA do Azure
 
-Vamos começar criando um recurso da Fábrica de IA do Azure.
+Os recursos da Fábrica de IA do Azure que usaremos neste exercício requerem um projeto baseado em um recurso de *hub* da Fábrica de IA do Azure.
 
-1. Em um navegador da Web, abra o [portal do Azure](https://portal.azure.com) em `https://portal.azure` e entre usando suas credenciais do Azure. Feche todas as dicas ou painéis de início rápido abertos na primeira vez que você entrar.
-1. Crie um recurso `Azure AI Foundry` com as seguintes configurações:
+1. Em um navegador da Web, abra o [Portal da Fábrica de IA do Azure](https://ai.azure.com) em `https://ai.azure.com` e entre usando suas credenciais do Azure. Feche todas as dicas ou painéis de início rápido abertos na primeira vez que você entrar e, se necessário, use o logotipo da **Fábrica de IA do Azure** no canto superior esquerdo para navegar até a home page, que é semelhante à imagem a seguir (feche o painel **Ajuda** se estiver aberto):
+
+    ![Captura de tela do portal do Azure AI Foundry.](./media/ai-foundry-home.png)
+
+1. No navegador, navegue até `https://ai.azure.com/managementCenter/allResources` e clique em **Criar**. Em seguida, escolha a opção para criar um novo **Recurso do hub de IA**.
+1. No assistente **Criar um projeto**, insira um nome válido para o projeto e use o link **Renomear hub**, para especificar um nome válido para o novo hub. Expanda **Opções avançadas** e especifique as seguintes configurações para o seu projeto:
     - **Assinatura**: *sua assinatura do Azure*
     - **Grupo de recursos**: *criar ou selecionar um grupo de recursos*
-    - **Nome**: *um nome válido para o recurso da Fábrica de IA do Azure*
-    - **Região**: escolha uma das seguintes regiões:
-        - Leste dos EUA 2
-        - Suécia Central
-    - **Nome do projeto padrão**: *Um nome válido para o projeto*
+    - **Região**: Leste dos EUA 2 ou Suécia Central (*Caso um limite de cota seja excedido posteriormente no exercício, talvez você precise criar outro recurso em uma região diferente.*)
 
-1. Aguarde até que o recurso seja criado e vá para sua página no portal do Azure.
-1. Na página do recurso da Fábrica de IA do Azure, selecione **Ir para o portal Fábrica de IA do Azure**.
+    > **Observação**: se você estiver trabalhando em uma assinatura do Azure na qual as políticas são usadas para restringir nomes de recursos permitidos, talvez seja necessário usar o link na parte inferior da caixa de diálogo **Criar um novo projeto** para criar o hub usando o portal do Azure.
+
+    > **Dica**: se o botão **Criar** ainda estiver desativado, certifique-se de renomear seu hub para um valor alfanumérico exclusivo.
+
+1. Aguarde a criação do projeto e navegue até o projeto.
 
 ## Implantar modelos
 
@@ -59,40 +62,47 @@ Você precisará de dois modelos para implementar sua solução:
 Os dados para o seu aplicativo consistem em um conjunto de folhetos de viagem em formato PDF da agência de viagens fictícia *Margie's Travel*. Vamos adicioná-los ao projeto.
 
 1. Em uma nova guia do navegador, baixe o [arquivo compactado de folhetos](https://github.com/MicrosoftLearning/mslearn-ai-studio/raw/main/data/brochures.zip) em `https://github.com/MicrosoftLearning/mslearn-ai-studio/raw/main/data/brochures.zip` e extraia-o para uma pasta chamada **folhetos** em seu sistema de arquivos local.
-1. No portal da Portal da Fábrica de IA do Azure, em seu projeto, no painel de navegação à esquerda, selecione **Playgrounds** e, em seguida, selecione **Experimentar o playground de chat**.
-1. No painel **Configuração** do playground, expanda a seção **Adicionar seus dados** e selecione **Adicionar uma fonte de dados**.
-1. No assistente **Adicionar dados**, expanda o menu suspenso para selecionar **Carregar arquivos**.
-1. Crie um novo recurso do Armazenamento de Blobs do Azure com as seguintes configurações:
-    - **Assinatura**: *sua assinatura do Azure*
-    - **Grupo de recursos**: *o mesmo grupo de recursos do recurso da Fábrica de IA do Azure*
-    - **Nome da conta de armazenamento**: *um nome válido para o recurso da conta de armazenamento*
-    - **Região**: *a mesma região do recurso da Fábrica de IA do Azure*
-    - **Desempenho**: padrão
-    - **Redundância**: LRS
-1. Crie o recurso e aguarde até que a implantação seja concluída.
-1. Retorne à guia Fábrica de IA do Azure, atualize a lista de recursos do armazenamento de Blobs do Azure e selecione a conta recém-criada.
+1. No portal do Azure IA Foundry, em seu projeto, no painel de navegação à esquerda, em **Maus ativos**, selecione a página **Dados + índices**.
+1. Selecione **+ Novos dados**.
+1. No assistente **Adicionar dados**, expanda o menu suspenso para selecionar **Carregar arquivos/pastas**.
+1. Selecione **Carregar pasta** e carregue a pasta **brochures**. Aguarde até que todos os arquivos da pasta sejam listados.
+1. Selecione **Avançar** e defina o nome dos dados como `brochures`.
+1. Aguarde o upload da pasta e observe que ela contém vários arquivos .pdf.
 
-    > **Observação**: se você receber um aviso de que o OpenAI do Azure precisa de sua permissão para acessar o recurso, selecione **Ativar CORS**.
+## Crie um índice para seus dados
 
-1. Crie um novo recurso da Pesquisa de IA do Azure com as seguintes configurações:
-    - **Assinatura**: *sua assinatura do Azure*
-    - **Grupo de recursos**: *o mesmo grupo de recursos do recurso da Fábrica de IA do Azure*
-    - **Nome do serviço**: *um nome válido para o recurso da Pesquisa de IA do Azure*
-    - **Região**: *a mesma região do recurso da Fábrica de IA do Azure*
-    - **Tipo de preço**: Básico
+Agora que você adicionou uma fonte de dados ao seu projeto, pode usá-la para criar um índice em seu recurso de Pesquisa de IA do Azure.
 
-1. Crie o recurso e aguarde até que a implantação seja concluída.
-1. Retorne à guia Fábrica de IA do Azure, atualize a lista de recursos da Pesquisa de IA do Azure e selecione a conta recém-criada.
-1. Nomeie seu índice `brochures-index`.
-1. Habilite a opção **Adicionar busca em vetores a este recurso de pesquisa** e selecione o modelo de incorporação implantado anteriormente. Selecione **Avançar**.
+1. No portal do Azure IA Foundry, em seu projeto, no painel de navegação à esquerda, em **Maus ativos**, selecione a página **Dados + índices**.
+1. Na guia **Índices**, adicione um novo índice com as seguintes configurações:
+    - **Local de origem**:
+        - **Fonte de dados**: dados na Fábrica de IA do Azure
+            - *Selecione a fonte de dados dos **folhetos***
+    - **Configuração de índice**:
+        - **Selecione o serviço Pesquisa de IA do Azure**: *crie um novo recurso da Pesquisa de IA do Azure com as seguintes configurações*:
+            - **Assinatura**: *sua assinatura do Azure*
+            - **Grupo de recursos**: *o mesmo grupo de recursos do Hub de IA*
+            - **Nome do serviço**: *um nome válido para o recurso da Pesquisa de IA*
+            - **Local**: *o mesmo local do Hub de IA*
+            - **Tipo de preço**: Básico
+            
+            Aguarde a criação do recurso da Pesquisa de IA Em seguida, retorne à Fábrica de IA do Azure e conclua a configuração do índice clicando em **Conectar outro recurso da Pesquisa de IA do Azure** e adicionando uma conexão ao recurso da Pesquisa de IA do Azure que você acabou de criar.
+ 
+        - **Índice de vetor**: `brochures-index`
+        - **Máquina virtual**: Selecionar automaticamente
+    - **Configurações de pesquisa**:
+        - **Configurações de vetor**: Adicione busca em vetores a este recurso de pesquisa
+        - **Conexão OpenAI do Azure**: *selecione o recurso OpenAI do Azure padrão no seu hub.*
+        - **Modelo de incorporação**: text-embedding-ada-002
+        - **Implantação do modelo de incorporação**: *A sua implantação* do *modelo*text-embedding-ada-002
 
-   >**Observação**: pode demorar um pouco até que o assistente **Adicionar dados** reconheça seu modelo de incorporação implantado, portanto, se você não conseguir ativar a opção da busca em vetores, cancele o assistente, aguarde alguns minutos e tente novamente.
+1. Crie o índice de vetor e aguarde a conclusão do processo de indexação, o que pode demorar um pouco, dependendo dos recursos de computação disponíveis em sua assinatura.
 
-1. Carregue todos os arquivos .pdf da pasta **brochures** que você extraiu anteriormente e clique em **Avançar**.
-1. Na etapa **Gerenciamento de dados**, selecione o tipo de busca **Híbrido (vetor + palavra-chave)** e o tamanho da parte de **1024**. Selecione **Avançar**.
-1. Na etapa **Conexão de dados**, selecione **Chave de API** como o tipo de autenticação. Selecione **Avançar**.
-1. Revise todas as etapas de configuração e clique em **Salvar e fechar**.
-1. Aguarde a conclusão do processo de indexação, o que pode demorar um pouco, dependendo dos recursos de computação disponíveis em sua assinatura.
+    A operação de criação de índice consiste nos seguintes trabalhos:
+
+    - Extraia, particione e insira os tokens de texto nos dados de folhetos.
+    - Crie o índice do IA do Azure Search.
+    - Registrar o ativo de índice.
 
     > **Dica**: enquanto você espera a criação do índice, por que não dar uma olhada nos folhetos que você baixou para se familiarizar com o conteúdo?
 
@@ -100,7 +110,14 @@ Os dados para o seu aplicativo consistem em um conjunto de folhetos de viagem em
 
 Antes de usar seu índice em um prompt flow baseado em RAG, vamos verificar se ele pode ser usado para afetar respostas de IA generativa.
 
+1. No painel de navegação à esquerda, selecione a página **Playgrounds** e abra o playground **Chat**.
 1. Na página do playground Chat, no painel Configuração, verifique se a implantação do modelo **gpt-4o** está selecionada. Em seguida, no painel de sessão de chat principal, envie o prompt `Where can I stay in New York?`
+1. Revise a resposta, que deve ser uma resposta genérica do modelo sem dados do índice.
+1. No painel de configurações, expanda o campo **Adicionar seus dados** e, em seguida, adicione o índice de projeto **brochures-index** e selecione o tipo de pesquisa **híbrido (vetor + palavra-chave)**.
+
+   > **Dica**: em alguns casos, os índices recém-criados podem não estar disponíveis imediatamente. Atualizar o navegador geralmente ajuda, mas se você ainda estiver enfrentando o problema de não conseguir encontrar o índice, talvez seja necessário aguardar até que o índice seja reconhecido.
+
+1. Depois que o índice tiver sido adicionado e a sessão de chat for reiniciada, reenvie o prompt `Where can I stay in New York?`
 1. Revise a resposta, que deve ser baseada nos dados do índice.
 
 ## Criar um aplicativo cliente RAG
