@@ -31,7 +31,7 @@ Um *projeto* da IA do Azure fornecerá um workspace colaborativo para desenvolvi
 1. Na home page, na seção **Explorar modelos e recursos**, pesquise pelo modelo `gpt-4o`, que usaremos em nosso projeto.
 1. Nos resultados da pesquisa, selecione o modelo **gpt-4o** para ver os detalhes e, na parte superior da página do modelo, clique em **Usar este modelo**.
 1. Quando solicitado a criar um projeto, insira um nome válido para o projeto e expanda **Opções avançadas**.
-1. Selecione **Personalizar** e especifique as seguintes configurações para o hub:
+1. Selecione **Personalizar** e especifique as seguintes configurações para o seu projeto:
     - **Recurso da Fábrica de IA do Azure**: *um nome válido para o recurso da Fábrica de IA do Azure*
     - **Assinatura**: *sua assinatura do Azure*
     - **Grupo de recursos**: *criar ou selecionar um grupo de recursos*
@@ -72,7 +72,7 @@ Um *projeto* da IA do Azure fornecerá um workspace colaborativo para desenvolvi
 
 O projeto e o recurso da Fábrica de IA do Azure ao qual ele pertence incluem conexões com recursos que você pode usar em aplicativos de IA.
 
-1. Na página Central de gerenciamento, no painel de navegação, em seu projeto, selecione **Ir para o projeto**.
+1. Na página Centro de gerenciamento, no painel de navegação, em seu projeto, selecione **Ir para o recurso**.
 1. Na página **Visão geral** do projeto, visualize a seção **Pontos de extremidade e chaves**, que contém pontos de extremidade e chaves de autorização que você pode usar no código do aplicativo para acessar:
     - O projeto da Fábrica de IA do Azure e todos os modelos implantados nele.
     - O OpenAI do Azure nos modelos da Fábrica de IA do Azure.

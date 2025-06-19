@@ -69,7 +69,7 @@ Para usar um modelo, você precisa criar um *projeto* da Fábrica de IA do Azure
 
 1. Na parte superior da página de visão geral do modelo **gpt-4o**, clique em **Usar este modelo**.
 1. Quando solicitado a criar um projeto, insira um nome válido para o projeto e expanda **Opções avançadas**.
-1. Na seção **Opções avançadas**, especifique as seguintes configurações para o hub:
+1. Na seção **Opções avançadas**, especifique as seguintes configurações para o projeto:
     - **Recurso da Fábrica de IA do Azure**: *um nome válido para o recurso da Fábrica de IA do Azure*
     - **Assinatura**: *sua assinatura do Azure*
     - **Grupo de recursos**: *criar ou selecionar um grupo de recursos*
