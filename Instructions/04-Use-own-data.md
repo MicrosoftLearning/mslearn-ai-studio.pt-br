@@ -23,14 +23,15 @@ Os recursos da Fábrica de IA do Azure que usaremos neste exercício requerem um
     ![Captura de tela do portal do Azure AI Foundry.](./media/ai-foundry-home.png)
 
 1. No navegador, navegue até `https://ai.azure.com/managementCenter/allResources` e clique em **Criar**. Em seguida, escolha a opção para criar um novo **Recurso do hub de IA**.
-1. No assistente **Criar projeto**, insira um nome válido para o projeto e selecione a opção para criar um novo hub. Em seguida, use o link **Renomear hub** para especificar um nome válido para o novo hub, expanda **Opções avançadas** e especifique as seguintes configurações para o projeto:
+1. No assistente **Criar um projeto**, insira um nome válido para o projeto e, se um hub existente for sugerido, clique na opção para criar um novo e expanda **Opções avançadas** para especificar as seguintes configurações para o projeto:
     - **Assinatura**: *sua assinatura do Azure*
     - **Grupo de recursos**: *criar ou selecionar um grupo de recursos*
-    - **Região**: Leste dos EUA 2 ou Suécia Central (*Caso um limite de cota seja excedido posteriormente no exercício, talvez você precise criar outro recurso em uma região diferente.*)
+    - **Nome do hub**: um nome válido para o hub
+    - **Localização**: Leste dos EUA 2 ou Suécia Central (*Caso um limite de cota seja excedido posteriormente no exercício, talvez seja necessário criar outro recurso em uma região diferente.*)
 
     > **Observação**: se você estiver trabalhando em uma assinatura do Azure na qual as políticas são usadas para restringir nomes de recursos permitidos, talvez seja necessário usar o link na parte inferior da caixa de diálogo **Criar um novo projeto** para criar o hub usando o portal do Azure.
 
-    > **Dica**: se o botão **Criar** ainda estiver desativado, certifique-se de renomear seu hub para um valor alfanumérico exclusivo.
+    > **Dica**: se o botão **Criar** ainda estiver desativado, certifique-se de renomear o hub com um valor alfanumérico exclusivo.
 
 1. Aguarde a criação do projeto e navegue até o projeto.
 
