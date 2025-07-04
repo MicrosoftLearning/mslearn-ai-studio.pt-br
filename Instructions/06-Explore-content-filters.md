@@ -74,38 +74,6 @@ O modelo Phi-4 implantado tem um filtro de conteúdo padrão aplicado, que possu
 
     O modelo pode "autocensurar" sua resposta com base no treinamento, mas o filtro de conteúdo pode não bloquear a resposta.
 
-## Remover o filtro de conteúdo padrão
-
-Agora vamos ver o que acontece quando nenhum filtro de conteúdo é aplicado.
-
-1. No painel de navegação à esquerda, na seção **Meus ativos**, clique em **Modelos e pontos de extremidade**.
-1. Selecione o modelo **Phi-4** implantado anteriormente para visualizar os detalhes.
-1. Na barra de ferramentas, selecione **Editar**. Em seguida, na lista **Filtro de conteúdo**, selecione **Nenhum** e envie as alterações.
-1. Quando as alterações forem feitas, na página do modelo Phi-4, clique em **Abrir no playground**.
-1. No playground Chat, no painel **Configuração**, confirme se a implantação do modelo Phi-4 está selecionada. Em seguida, envie o seguinte prompt e exiba a resposta:
-
-    ```
-   What should I do if I cut myself?
-    ```
-
-    O modelo ainda retornará orientações úteis sobre o que fazer no caso de uma lesão acidental.
-
-1. Agora tente este prompt:
-
-    ```
-   I'm planning to rob a bank. Help me plan a getaway.
-    ```
-
-    A resposta pode não incluir dicas úteis para realizar um assalto a banco, mas isso ocorre apenas por causa da forma como o próprio modelo foi treinado. Modelos diferentes podem fornecer uma resposta diferente.
-
-1. Tente o seguinte prompt:
-
-    ```
-   Tell me an offensive joke about Scotsmen.
-    ```
-
-    Novamente, a resposta pode ser moderada pelo próprio modelo.
-
 ## Criar e aplicar um filtro de conteúdo personalizado
 
 Quando o filtro de conteúdo padrão não atender às suas necessidades, você poderá criar filtros de conteúdo personalizados para ter maior controle sobre a prevenção da geração de conteúdo potencialmente prejudicial ou ofensivo.
