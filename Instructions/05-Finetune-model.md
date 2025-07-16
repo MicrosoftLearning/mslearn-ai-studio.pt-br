@@ -14,36 +14,40 @@ Imagine que você trabalha para uma agência de viagens e está desenvolvendo um
 
 Este exercício levará aproximadamente **60** minutos\*.
 
-> \***Observação**: esse tempo é uma estimativa baseada na experiência média. O ajuste depende dos recursos de infraestrutura em nuvem, que podem levar um tempo variável para provisionar, dependendo da capacidade do data center e da demanda simultânea. Algumas atividades neste exercício podem levar <u>muito</u> tempo para serem concluídas e demandam paciência. Se as coisas estiverem demorando um pouco, considere revisar a [Documentação de ajuste fino da Fábrica de IA do Azure](https://learn.microsoft.com/azure/ai-studio/concepts/fine-tuning-overview) ou fazer uma pausa. Algumas das tecnologias usadas neste exercício estão em versão prévia ou em desenvolvimento ativo. Você pode experimentar algum comportamento inesperado, avisos ou erros.
+> \***Observação**: esse tempo é uma estimativa baseada na experiência média. O ajuste depende dos recursos de infraestrutura em nuvem, que podem levar um tempo variável para provisionar, dependendo da capacidade do data center e da demanda simultânea. Algumas atividades neste exercício podem levar <u>muito</u> tempo para serem concluídas e demandam paciência. Se as coisas estiverem demorando um pouco, considere revisar a [Documentação de ajuste fino da Fábrica de IA do Azure](https://learn.microsoft.com/azure/ai-studio/concepts/fine-tuning-overview) ou fazer uma pausa. É possível que alguns processos atinjam o tempo limite ou pareçam ser executados indefinidamente. Algumas das tecnologias usadas neste exercício estão em versão prévia ou em desenvolvimento ativo. Você pode experimentar algum comportamento inesperado, avisos ou erros.
 
-## Criar um projeto e hub de IA no portal do Azure AI Foundry
+## Implantar um modelo em um projeto da Fábrica de IA do Azure
 
-Vamos começar criando um projeto do portal Fábrica de IA do Azure em um hub de IA do Azure:
+Vamos começar implantando um modelo em um projeto da Fábrica de IA do Azure.
 
-1. Em um navegador da Web, abra o [Portal da Fábrica de IA do Azure](https://ai.azure.com) em `https://ai.azure.com` e entre usando suas credenciais do Azure. Feche todas as dicas ou painéis de início rápido abertos na primeira vez que você entrar e, se necessário, use o logotipo da **Fábrica de IA do Azure** no canto superior esquerdo para navegar até a home page, que é semelhante à imagem a seguir:
+1. Em um navegador da Web, abra o [Portal da Fábrica de IA do Azure](https://ai.azure.com) em `https://ai.azure.com` e entre usando suas credenciais do Azure. Feche todas as dicas ou painéis de início rápido abertos na primeira vez que você entrar e, se necessário, use o logotipo da **Fábrica de IA do Azure** no canto superior esquerdo para navegar até a home page, que é semelhante à imagem a seguir (feche o painel **Ajuda** se estiver aberto):
 
     ![Captura de tela do portal do Azure AI Foundry.](./media/ai-foundry-home.png)
 
-1. Na home page, selecione **+Criar projeto**.
-1. No assistente **Criar um projeto**, insira um nome de projeto adequado e, se um hub existente for sugerido, escolha a opção de criar um novo. Em seguida, examine os recursos do Azure que serão criados automaticamente para dar suporte ao hub e ao projeto.
-1. Selecione **Personalizar** e especifique as seguintes configurações para o hub:
-    - **Nome do hub**: *um nome para o hub*
+1. Na home page, na seção **Explorar modelos e recursos**, pesquise pelo modelo `gpt-4o`, que usaremos em nosso projeto.
+1. Nos resultados da pesquisa, selecione o modelo **gpt-4o** para ver os detalhes e, na parte superior da página do modelo, clique em **Usar este modelo**.
+1. Quando solicitado a criar um projeto, insira um nome válido para o projeto e expanda **Opções avançadas**.
+1. Selecione **Personalizar** e especifique as seguintes configurações para o seu projeto:
+    - **Recurso da Fábrica de IA do Azure**: *um nome válido para o recurso da Fábrica de IA do Azure*
     - **Assinatura**: *sua assinatura do Azure*
     - **Grupo de recursos**: *criar ou selecionar um grupo de recursos*
-    - **Localização**: selecione **Ajude-me a escolher** e então selecione **gpt-4-finetune** na janela do Auxiliar de localização e use a região recomendada\*
-    - **Conectar os Serviços de IA do Azure ou o OpenAI do Azure** – *Criar um novo recurso de Serviços de IA*
-    - **Conectar a Pesquisa de IA do Azure**: *crie um novo recurso da Pesquisa de IA do Azure com um nome exclusivo*
+    - **Região**: *selecione uma das seguintes regiões*:\*
+        - Leste dos EUA 2
+        - Centro-Norte dos EUA
+        - Suécia Central
 
-    > \* Os recursos do OpenAI do Azure são restritos por cotas de modelo regional. Caso um limite de cota seja excedido posteriormente no exercício, é possível que você precise criar outro recurso em uma região diferente. 
+    > \* No momento da redação deste documento, essas regiões oferecem suporte ao ajuste fino dos modelos gpt-4o.
 
-1. Clique em **Avançar** e revise a configuração. Em seguida, selecione **Criar** e aguarde a conclusão do processo.
-1. Quando o projeto for criado, feche todas as dicas exibidas e examine a página do projeto no Portal da Fábrica de IA do Azure, que deve ser semelhante à imagem a seguir:
+1. Clique em **Criar** e aguarde a criação do projeto, incluindo a implantação do modelo gpt-4 selecionado.
+1. Quando o projeto for criado, o playground chat abrirá automaticamente.
+1. No painel **Configuração**, anote o nome da implantação do modelo; que será **gpt-4o**. Você pode confirmar isso visualizando a implantação na página **Modelos e pontos de extremidade** (basta abrir essa página no painel de navegação à esquerda).
+1. No painel de navegação à esquerda, selecione **Visão geral** para ver a página principal do projeto, que será assim:
 
-    ![Captura de tela dos detalhes de um projeto IA do Azure no Portal da Fábrica de IA do Azure.](./media/ai-foundry-project.png)
+    ![Captura de tela de uma página de visão geral do projeto da Fábrica de IA do Azure.](./media/ai-foundry-project.png)
 
 ## Ajuste um modelo
 
-Como o ajuste fino de um modelo leva algum tempo para ser concluído, você iniciará o trabalho de ajuste fino agora e voltará a ele depois de explorar um modelo básico que não tenha sido ajustado para fins de comparação.
+Como o ajuste fino de um modelo leva algum tempo para ser concluído, você iniciará o trabalho de ajuste agora e o retomará depois de explorar um modelo gpt-4o básico que você já implantou.
 
 1. Baixe o [conjunto de dados de treinamento](https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/refs/heads/main/data/travel-finetune-hotel.jsonl) em `https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/refs/heads/main/data/travel-finetune-hotel.jsonl`e salve-o como um arquivo JSONL localmente.
 
@@ -52,28 +56,12 @@ Como o ajuste fino de um modelo leva algum tempo para ser concluído, você inic
 1. Navegue até a página **Ajustar** na seção **Criar e personalizar**, usando o menu à esquerda.
 1. Selecione o botão para adicionar um novo modelo de ajuste fino, selecione o modelo **gpt-4o** e, em seguida, selecione **Avançar**.
 1. **Ajuste** o modelo usando a seguinte configuração:
-    - **Versão do modelo**: *selecione a versão padrão*
     - **Método de personalização**: Supervisionado
+    - **Modelo básico**: *selecione a versão padrão do **gpt-4o***
+    - **Dados de treinamento**: *clique na opção **Adicionar dados de treinamento** e, em seguida, carregue e aplique o arquivo .jsonl que você baixou anteriormente*
     - **Sufixo do modelo**: `ft-travel`
-    - **Recurso de IA conectado**: *selecione a conexão que foi criada quando você criou seu hub. Já deve estar selecionado por padrão.*
-    - **Dados de treinamento**: carregar arquivos
-
-    <details>  
-    <summary><b>Dica de solução de problemas</b>: erro de permissões</summary>
-    <p>Se você receber um erro de permissões, tente o seguinte para solucionar o problema:</p>
-    <ul>
-        <li>No portal do Azure, selecione o recurso Serviços de IA.</li>
-        <li>Na guia Identidade, em Gerenciamento de recursos, confirme se é uma identidade gerenciada atribuída pelo sistema.</li>
-        <li>Navegue até a conta de armazenamento associada. Na página do IAM, adicione a atribuição de função <em>Proprietário de Dados do Blob de Armazenamento</em>.</li>
-        <li>Em <strong>Atribuir acesso a</strong>, escolha <strong>Identidade Gerenciada</strong>, <strong>+Selecionar membros</strong>, selecione <strong>Todas as identidades gerenciadas atribuídas pelo sistema</strong> e selecione o recurso dos Serviços de IA do Azure.</li>
-        <li>Revise e atribua para salvar as novas configurações e repita a etapa anterior.</li>
-    </ul>
-    </details>
-
-    - **Carregar arquivo**: escolha o arquivo JSONL que você baixou na etapa anterior.
-    - **Dados de validação**: nenhum
-    - **Parâmetros da tarefa**: *mantenha as configurações padrão*
-1. O ajuste será iniciado e pode levar algum tempo para ser concluído. Você pode continuar com a próxima seção do exercício enquanto espera.
+    - **Semente**: *Aleatória
+1. Envie os detalhes do ajuste fino e o trabalho será iniciado. Pode levar algum tempo para isso ser concluído. Você pode continuar com a próxima seção do exercício enquanto espera.
 
 > **Observação**: o ajuste e a implantação podem levar um tempo considerável (30 minutos ou mais), portanto, talvez seja necessário verificar periodicamente. Você pode ver mais detalhes do progresso até agora selecionando o trabalho de modelo de ajuste fino e exibindo a guia **Logs**.
 
@@ -81,37 +69,22 @@ Como o ajuste fino de um modelo leva algum tempo para ser concluído, você inic
 
 Enquanto você espera a conclusão do trabalho de ajuste, vamos conversar com um modelo GPT-4o básico para avaliar o desempenho.
 
-1. No painel à esquerda do seu projeto, na seção **Meus ativos**, selecione a página **Modelos + pontos de extremidade**.
-1. Na página **Modelos + pontos extremidades**, na guia **Implantações de modelo**, no menu **+ Implantar modelo**, selecione **Implantar modelo base**.
-1. Procure o modelo **gpt-4o** na lista, selecione-o e confirme-o.
-1. Crie uma nova implantação do modelo com as seguintes configurações selecionando **Personalizar** nos detalhes de implantação:
-    - **Nome da implantação**: *Um nome válido para a implantação de modelo*
-    - **Tipo de implantação**: padrão global
-    - **Atualização automática de versão**: Ativado
-    - **Versão do modelo**: *selecione a versão mais recente disponivel*
-    - **Recurso de IA conectado**: *selecione sua conexão de recurso do OpenAI do Azure (se o local atual do recurso de IA não tiver cota disponível para o modelo que você deseja implantar, será solicitado que você escolha um local diferente onde um novo recurso de IA será criado e conectado ao seu projeto)*
-    - **Limite de taxa de tokens por minuto (milhares):** 50 mil *(ou o máximo disponível em sua assinatura, se inferior a 50 mil)*
-    - **Filtro de conteúdo**: DefaultV2
-
-    > **Observação**: A redução do TPM ajuda a evitar o uso excessivo da cota disponível na assinatura que você está usando. 50.000 TPM são suficientes para os dados usados neste exercício. Se a sua cota disponível for menor do que isso, você poderá concluir o exercício, mas poderá ocorrer erros se o limite de taxa for excedido.
-
-1. Aguarde até que a implantação seja concluída.
-
-> **Observação**: se o local atual do recurso de IA não tiver cota disponível para o modelo que você deseja implantar, será solicitado a escolher um local diferente onde um novo recurso de IA será criado e conectado ao seu projeto.
-
-1. Quando a implantação estiver finalizada, selecione o botão **Abrir no playground**.
-1. Verifique se o modelo básico do gpt-4o implantado está selecionado no painel de configuração.
+1. No painel de navegação à esquerda, selecione **Playgrounds** e abra o **Playground de chat**.
+1. Verifique se o modelo básico **gpt-4o** implantado está selecionado no painel de configuração.
 1. Na janela de chat, insira a consulta `What can you do?` e veja a resposta:
 
     As respostas podem ser bastante genéricas. Lembre-se de que queremos criar um aplicativo de chat que inspire as pessoas a viajar.
 
 1. Atualize a mensagem do sistema no painel de configuração com o seguinte prompt:
 
-    ```md
-    You are an AI assistant that helps people plan their holidays.
+    ```
+    You are an AI assistant that helps people plan their travel.
     ```
 
-1. Selecione **Aplicar alterações**, selecione **Limpar chat** e pergunte novamente `What can you do?`. Como resposta, o assistente pode informar que pode ajudar você a reservar voos, hotéis e alugar carros para sua viagem. Você quer evitar esse comportamento.
+1. Clique em **Aplicar alterações** para atualizar a mensagem do sistema.
+1. Na janela de chat, insira a consulta `What can you do?` novamente e veja a resposta.
+1 Como resposta, o assistente pode informar que pode ajudar você a reservar voos, hotéis e alugar carros para sua viagem. Você quer evitar esse comportamento.
+
 1. Atualize a mensagem do sistema novamente com um novo prompt:
 
     ```
@@ -119,8 +92,7 @@ Enquanto você espera a conclusão do trabalho de ajuste, vamos conversar com um
     You should not provide any hotel, flight, rental car or restaurant recommendations.
     Ask engaging questions to help someone plan their trip and think about what they want to do on their holiday.
     ```
-
-1. Selecione **Aplicar alterações** e **Limpar chat**.
+.
 1. Continue testando seu aplicativo de chat para verificar se ele não fornece nenhuma informação que não esteja fundamentada nos dados recuperados. Por exemplo, faça as seguintes perguntas e revise as respostas do modelo, prestando atenção especial ao tom e ao estilo de escrita que o modelo usa para responder:
    
     `Where in Rome should I stay?`
