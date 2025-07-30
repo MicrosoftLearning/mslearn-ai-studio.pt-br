@@ -38,8 +38,11 @@ Vamos começar implantando um modelo em um projeto da Fábrica de IA do Azure.
 
     > \* No momento da redação deste documento, essas regiões oferecem suporte ao ajuste fino dos modelos gpt-4o.
 
-1. Clique em **Criar** e aguarde a criação do projeto, incluindo a implantação do modelo gpt-4 selecionado.
-1. Quando o projeto for criado, o playground chat abrirá automaticamente.
+1. Clique em **Criar** e aguarde a criação do projeto. Se solicitado, implante o modelo gpt-4o usando o tipo de implantação **Global padrão** e personalize os detalhes da implantação para definir um **limite de tokens por minuto** de 50 mil (ou o máximo disponível, se for inferior a 50 mil).
+
+    > **Observação**: A redução do TPM ajuda a evitar o uso excessivo da cota disponível na assinatura que você está usando. 50.000 TPM são suficientes para os dados usados neste exercício. Se a sua cota disponível for menor do que isso, você poderá concluir o exercício, mas poderá ocorrer erros se o limite de taxa for excedido.
+
+1. Quando o projeto for criado, o playground de chat abrirá automaticamente para que você possa testar o modelo:
 1. No painel **Configuração**, anote o nome da implantação do modelo; que será **gpt-4o**. Você pode confirmar isso visualizando a implantação na página **Modelos e pontos de extremidade** (basta abrir essa página no painel de navegação à esquerda).
 1. No painel de navegação à esquerda, selecione **Visão geral** para ver a página principal do projeto, que será assim:
 

@@ -34,7 +34,7 @@ Vamos começar entrando no portal da Fábrica de IA do Azure e explorando alguns
     ![Captura de tela da página do modelo de parâmetro de comparação gpt-4o.](./media/gpt4-benchmarks.png)
 
 1. Use a seta de voltar (**&larr;**) ao lado do título da página **gpt-4o** para retornar ao catálogo de modelos.
-1. Pesquise por `Phi-3.5-mini-instruct` e visualize os detalhes e parâmetros de comparação do modelo **Phi-3.5-mini-instruct**.
+1. Pesquise por `Phi-4-mini-instruct` e visualize os detalhes e parâmetros de comparação do modelo **Phi-4-mini-instruct**.
 
 ## Comparar modelos
 
@@ -47,23 +47,21 @@ Você analisou dois modelos diferentes, ambos os quais poderiam ser usados para 
 
 1. No painel **Modelos a serem comparados**, você pode selecionar tarefas populares, como *respostas às perguntas*, para selecionar automaticamente modelos comumente usados para tarefas específicas.
 1. Use o ícone **Limpar todos os modelos** (&#128465;) para remover todos os modelos pré-selecionados.
-1. Use o botão **+ Modelo a ser comparado** para adicionar o modelo **gpt-4o** à lista. Em seguida, use o mesmo botão para adicionar o modelo **Phi-3.5-mini-instruct** à lista.
+1. Use o botão **+ Modelo a ser comparado** para adicionar o modelo **gpt-4o** à lista. Em seguida, use o mesmo botão para adicionar o modelo **Phi-4-mini-instruct** à lista.
 1. Examine o gráfico, que compara os modelos com base no **Índice de qualidade** (uma pontuação padronizada que indica a qualidade do modelo) e no **Custo**. Você pode ver os valores específicos de um modelo mantendo o mouse sobre o ponto que o representa no gráfico.
 
-    ![Captura de tela do gráfico de comparação de modelos dos modelos gpt-4o e Phi-3.5-mini-instruct.](./media/comparison-chart.png)
+    ![Captura de tela do gráfico de comparação de modelos dos modelos gpt-4o e Phi-4-mini-instruct.](./media/comparison-chart.png)
 
 1. No menu suspenso **Eixo X**, em **Qualidade**, selecione as seguintes métricas e observe cada gráfico resultante antes de passar para o próximo:
     - Precisão
-    - Coerência
-    - Fluência
-    - Relevância
+    - Índice de qualidade
 
     Com base nos parâmetros de comparação, o modelo gpt-4o parece oferecer o melhor desempenho geral, mas a um custo mais alto.
 
 1. Na lista de modelos a serem comparados, selecione o modelo **gpt-4o** para reabrir a página de parâmetros de comparação.
 1. Na página do modelo **gpt-4o**, clique na guia **Visão geral** para exibir os detalhes do modelo.
 
-## Criar um projeto do Azure AI Foundry
+## Criar um projeto da Fábrica de IA do Azure
 
 Para usar um modelo, você precisa criar um *projeto* da Fábrica de IA do Azure.
 
@@ -77,7 +75,10 @@ Para usar um modelo, você precisa criar um *projeto* da Fábrica de IA do Azure
 
     > \* Alguns recursos da IA do Azure são restritos por cotas de modelo regional. Caso um limite de cota seja excedido posteriormente no exercício, é possível que você precise criar outro recurso em uma região diferente.
 
-1. Clique em **Criar** e aguarde a criação do projeto, incluindo a implantação do modelo gpt-4 selecionado.
+1. Clique em **Criar** e aguarde a criação do projeto. Se solicitado, implante o modelo gpt-4o usando o tipo de implantação **Global padrão** e personalize os detalhes da implantação para definir um **limite de tokens por minuto** de 50 mil (ou o máximo disponível, se for inferior a 50 mil).
+
+    > **Observação**: A redução do TPM ajuda a evitar o uso excessivo da cota disponível na assinatura que você está usando. 50.000 TPM são suficientes para os dados usados neste exercício. Se a sua cota disponível for menor do que isso, você poderá concluir o exercício, mas poderá ocorrer erros se o limite de taxa for excedido.
+
 1. Quando o projeto for criado, o playground de chat abrirá automaticamente para que você possa testar o modelo:
 
     ![Captura de tela do playground de chat de um projeto da Fábrica de IA do Azure](./media/ai-foundry-chat-playground.png)
@@ -103,27 +104,25 @@ Agora que você tem uma implantação de modelo, pode usar o playground para tes
 
 ## Implantar outro modelo
 
-Quando você criou o projeto, o modelo **gpt-4o** selecionado foi implantado automaticamente. Vamos implantar o modelo ***Phi-3.5-mini-instruct** que você também considerou.
+Quando você criou o projeto, o modelo **gpt-4o** selecionado foi implantado automaticamente. Vamos implantar o modelo ***Phi-4-mini-instruct** que você também considerou.
 
 1. Na barra de navegação à esquerda, na seção **Meus ativos**, selecione **Modelos + pontos de extremidade**.
-1. Na guia **Implantações de modelo**, na lista suspensa **+ Implantar modelo**, selecione **Implantar modelo base**. Pesquise por `Phi-3.5-mini-instruct` e confirme a selação.
+1. Na guia **Implantações de modelo**, na lista suspensa **+ Implantar modelo**, selecione **Implantar modelo base**. Pesquise por `Phi-4-mini-instruct` e confirme a selação.
 1. Concorde com a licença do modelo.
-1. Implante um modelo **Phi-3.5-mini-instruct** com as seguintes configurações:
-    - **Nome da implantação**: *um nome válido para sua implantação de modelo*
+1. Implante um modelo **Phi-4-mini-instruct** com as seguintes configurações:
+    - **Nome da implantação**: *Um nome válido para a implantação de modelo*
     - **Tipo de implantação**: padrão global
     - **Detalhes da implantação**: *use as configurações padrão*
 
 1. Aguarde até que a implantação seja concluída.
 
-## Converse com o modelo *Phi-3.5*
+## Converse com o modelo *Phi-4*
 
 Agora, vamos conversar com o novo modelo no playground.
 
 1. Na barra de navegação, selecione **Playgrounds**. Depois, selecione o **Playground Chat**.
-1. No playground de chat, no painel **Configuração**, confirme se o modelo **Phi-3.5-mini-instruct** está selecionado e, no campo **Fornecer instruções e contexto ao modelo**, defina o prompt do sistema como `You are an AI assistant that helps solve problems.` (o mesmo prompt do sistema que você usou para testar o modelo gpt-4o.).
-1. Clique em **Aplicar alterações** para atualizar o prompt do sistema.
-1. Certifique-se de que uma nova sessão de chat seja iniciada antes de repetir os mesmos prompts usados anteriormente para testar o modelo gpt-4.
-1. Na janela de chat, insira a seguinte consulta
+1. No playground de chat, no painel **Configuração**, verifique se o modelo **Phi-4-mini-instruct** está selecionado e, na caixa de chat, forneça a primeira linha como`System message: You are an AI assistant that helps solve problems.` (ao mesmo prompt do sistema que você usou para testar o modelo gpt-4o, mas como não há uma mensagem de sistema configurada, estamos fornecendo-a na primeira mensagem do chat para dar contexto.)
+1. Em uma nova linha na janela de chat (abaixo da mensagem do sistema), insira a consulta a seguir
 
     ```
    I have a fox, a chicken, and a bag of grain that I need to take over a river in a boat. I can only take one thing at a time. If I leave the chicken and the grain unattended, the chicken will eat the grain. If I leave the fox and the chicken unattended, the fox will eat the chicken. How can I get all three things across the river without anything being eaten?

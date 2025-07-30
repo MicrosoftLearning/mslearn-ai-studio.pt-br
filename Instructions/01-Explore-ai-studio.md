@@ -66,9 +66,9 @@ Um *projeto* da IA do Azure fornecerá um workspace colaborativo para desenvolvi
 
 1. Feche a guia do portal do Azure e retorne ao portal da Fábrica de IA do Azure.
 
-## Revisar as conexões do projeto
+## Examinar os pontos de extremidade do projeto
 
-O projeto e o recurso da Fábrica de IA do Azure ao qual ele pertence incluem conexões com recursos que você pode usar em aplicativos de IA.
+O projeto da Fábrica de IA do Azure inclui diversos *pontos de extremidade* que aplicativos clientes podem usar para se conectar ao projeto, aos modelos e aos serviços de IA incluídos.
 
 1. Na página Centro de gerenciamento, no painel de navegação, em seu projeto, selecione **Ir para o recurso**.
 1. Na página **Visão geral** do projeto, visualize a seção **Pontos de extremidade e chaves**, que contém pontos de extremidade e chaves de autorização que você pode usar no código do aplicativo para acessar:
