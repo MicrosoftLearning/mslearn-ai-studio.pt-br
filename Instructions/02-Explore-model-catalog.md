@@ -61,7 +61,7 @@ Você analisou dois modelos diferentes, ambos os quais poderiam ser usados para 
 1. Na lista de modelos a serem comparados, selecione o modelo **gpt-4o** para reabrir a página de parâmetros de comparação.
 1. Na página do modelo **gpt-4o**, clique na guia **Visão geral** para exibir os detalhes do modelo.
 
-## Criar um projeto da Fábrica de IA do Azure
+## Criar um projeto do Azure AI Foundry
 
 Para usar um modelo, você precisa criar um *projeto* da Fábrica de IA do Azure.
 
@@ -75,10 +75,7 @@ Para usar um modelo, você precisa criar um *projeto* da Fábrica de IA do Azure
 
     > \* Alguns recursos da IA do Azure são restritos por cotas de modelo regional. Caso um limite de cota seja excedido posteriormente no exercício, é possível que você precise criar outro recurso em uma região diferente.
 
-1. Clique em **Criar** e aguarde a criação do projeto. Se solicitado, implante o modelo gpt-4o usando o tipo de implantação **Global padrão** e personalize os detalhes da implantação para definir um **limite de tokens por minuto** de 50 mil (ou o máximo disponível, se for inferior a 50 mil).
-
-    > **Observação**: A redução do TPM ajuda a evitar o uso excessivo da cota disponível na assinatura que você está usando. 50.000 TPM são suficientes para os dados usados neste exercício. Se a sua cota disponível for menor do que isso, você poderá concluir o exercício, mas poderá ocorrer erros se o limite de taxa for excedido.
-
+1. Clique em **Criar** e aguarde a criação do projeto, incluindo a implantação do modelo gpt-4 selecionado.
 1. Quando o projeto for criado, o playground de chat abrirá automaticamente para que você possa testar o modelo:
 
     ![Captura de tela do playground de chat de um projeto da Fábrica de IA do Azure](./media/ai-foundry-chat-playground.png)
