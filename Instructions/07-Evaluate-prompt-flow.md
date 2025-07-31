@@ -21,11 +21,10 @@ Os recursos da Fábrica de IA do Azure que usaremos neste exercício requerem um
     ![Captura de tela do portal do Azure AI Foundry.](./media/ai-foundry-home.png)
 
 1. No navegador, navegue até `https://ai.azure.com/managementCenter/allResources` e clique em **Criar**. Em seguida, escolha a opção para criar um novo **Recurso do hub de IA**.
-1. No assistente **Criar um projeto**, insira um nome válido para o projeto e, se um hub existente for sugerido, clique na opção para criar um novo e expanda **Opções avançadas** para especificar as seguintes configurações para o projeto:
+1. No assistente **Criar projeto**, insira um nome válido para o projeto e selecione a opção para criar um novo hub. Em seguida, use o link **Renomear hub** para especificar um nome válido para o novo hub, expanda **Opções avançadas** e especifique as seguintes configurações para o projeto:
     - **Assinatura**: *sua assinatura do Azure*
     - **Grupo de recursos**: *criar ou selecionar um grupo de recursos*
-    - **Nome do hub**: um nome válido para o hub
-    - **Localização**: selecione uma das localizações a seguir (*caso um limite de cota seja excedido posteriormente no exercício, talvez seja necessário criar outro recurso em uma região diferente.*)
+    - **Região**: selecione um dos seguintes locais (*Caso um limite de cota seja excedido posteriormente no exercício, talvez você precise criar outro recurso em uma região diferente.*):
         - Leste dos EUA 2
         - França Central
         - Sul do Reino Unido
@@ -104,7 +103,7 @@ A avaliação automatizada é uma abordagem que tenta resolver essas deficiênci
 1. Selecione **Próximo** para ir para a próxima página.
 1. Na página **Configurar avaliadores**, use o botão **+Adicionar** para adicionar os seguintes avaliadores, configurando cada um da seguinte maneira:
     - **Marcador de modelo**:
-        - **Nome do critério**: Semantic_similarity
+        - **Nome dos critérios**: *Selecione a predefinição **Semantic_similarity***
         - **Classificar com**: *selecione o seu modelo **gpt-4o***
         - Configurações de **usuário** (na parte inferior):
 
@@ -114,12 +113,12 @@ A avaliação automatizada é uma abordagem que tenta resolver essas deficiênci
             <br>
         
     - **Avaliador de escala Likert**:
-        - **Nome do critério**: Relevância
+        - **Nome dos critérios**: *Selecione a predefinição **Relevance***
         - **Classificar com**: *selecione o seu modelo **gpt-4o***
         - **Consulta**: \{\{item.question\}\}
 
     - **Semelhança de texto**:
-        - **Nome do critério**: F1_Score
+        - **Nome dos critérios**: *Selecione a predefinição **F1_Score***
         - **Verdade básica**: \{\{item.ExpectedResponse\}\}
 
     - **Conteúdo de ódio e injusto**:
