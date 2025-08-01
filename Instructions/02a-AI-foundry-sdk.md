@@ -6,11 +6,17 @@ lab:
 
 # Criar um aplicativo de chat de IA generativa
 
-Neste exercício, você usa o SDK da Fábrica de IA do Azure para criar um aplicativo de chat simples que se conecta a um projeto e chat com um modelo de linguagem.
+Neste exercício, você usa o SDK do Python da Fábrica de IA do Azure para criar um aplicativo de chat simples que se conecta a um projeto e chat com um modelo de linguagem.
+
+> **Observação**: Este exercício é baseado em software de SDK pré-lançamento, que pode estar sujeito a alterações. Quando necessário, usamos versões específicas de pacotes que podem não refletir as versões mais recentes disponíveis. Você pode experimentar algum comportamento inesperado, avisos ou erros.
+
+Embora este exercício seja baseado no SDK do Python da Fábrica de IA do Azure, você pode desenvolver aplicativos de chat de IA usando vários SDKs específicos de linguagem; incluindo:
+
+- [Projetos de IA do Azure para Python](https://pypi.org/project/azure-ai-projects)
+- [Projetos de IA do Azure para Microsoft .NET](https://www.nuget.org/packages/Azure.AI.Projects)
+- [Projetos de IA do Azure para JavaScript](https://www.npmjs.com/package/@azure/ai-projects)
 
 Este exercício leva aproximadamente **40** minutos.
-
-> **Observação**: este exercício é baseado em SDKs de pré-lançamento, que podem estar sujeitos a alterações. Quando necessário, usamos versões específicas de pacotes que podem não refletir as versões mais recentes disponíveis. Você pode experimentar algum comportamento inesperado, avisos ou erros.
 
 ## Implantar um modelo em um projeto da Fábrica de IA do Azure
 
@@ -31,8 +37,11 @@ Vamos começar implantando um modelo em um projeto da Fábrica de IA do Azure.
 
     > \* Alguns recursos da IA do Azure são restritos por cotas de modelo regional. Caso um limite de cota seja excedido posteriormente no exercício, é possível que você precise criar outro recurso em uma região diferente.
 
-1. Clique em **Criar** e aguarde a criação do projeto, incluindo a implantação do modelo gpt-4 selecionado.
-1. Quando o projeto for criado, o playground chat abrirá automaticamente.
+1. Clique em **Criar** e aguarde a criação do projeto. Se solicitado, implante o modelo gpt-4o usando o tipo de implantação **Global padrão** e personalize os detalhes da implantação para definir um **limite de tokens por minuto** de 50 mil (ou o máximo disponível, se for inferior a 50 mil).
+
+    > **Observação**: A redução do TPM ajuda a evitar o uso excessivo da cota disponível na assinatura que você está usando. 50.000 TPM são suficientes para os dados usados neste exercício. Se a sua cota disponível for menor do que isso, você poderá concluir o exercício, mas poderá ocorrer erros se o limite de taxa for excedido.
+
+1. Quando o projeto for criado, o playground de chat abrirá automaticamente para que você possa testar o modelo:
 1. No painel **Configuração**, anote o nome da implantação do modelo; que será **gpt-4o**. Você pode confirmar isso visualizando a implantação na página **Modelos e pontos de extremidade** (basta abrir essa página no painel de navegação à esquerda).
 1. No painel de navegação à esquerda, selecione **Visão geral** para ver a página principal do projeto, que será assim:
 
@@ -40,14 +49,15 @@ Vamos começar implantando um modelo em um projeto da Fábrica de IA do Azure.
 
 ## Criar um aplicativo cliente para conversar com o modelo
 
-Agora que você implantou um modelo, pode usar o SDK da Fábrica de IA do Azure para desenvolver um aplicativo que se comunique com ele.
-
-> **Dica**: você pode optar por desenvolver sua solução usando Python ou Microsoft C#. Siga as instruções na seção apropriada para o idioma escolhido.
+Agora que você implantou um modelo, pode usar a Fábrica de IA do Azure e os SDKs do Azure OpenAI para desenvolver um aplicativo que converse com ele.
 
 ### Preparar a configuração de aplicativo
 
 1. No Portal da Fábrica de IA do Azure, visualize a página **Visão geral** do seu projeto.
-1. Na área **Detalhes do projeto**, observe o **ponto de extremidade do projeto da Fábrica de IA do Azure**. Você usará esse ponto de extremidade para se conectar ao projeto em um aplicativo cliente.
+1. Na área **Pontos de extremidade e chaves**, verifique se a biblioteca da **Fábrica de IA do Azure** está selecionada e visualize o **ponto de extremidade do projeto da Fábrica de IA do Azure**. Você usará esse ponto de extremidade para se conectar ao projeto e ao modelo em um aplicativo cliente.
+
+    > **Observação**: Você também pode usar o ponto de extremidade do Azure OpenAI.
+
 1. Abra uma nova guia do navegador (mantendo o portal da Fábrica de IA do Azure aberto na guia existente). Em seguida, na nova guia, navegue até o [portal do Azure](https://portal.azure.com) em `https://portal.azure.com`; efetue login com suas credenciais do Azure, se solicitado.
 
     Feche todas as notificações de boas-vindas para ver a home page do portal do Azure.
@@ -71,58 +81,31 @@ Agora que você implantou um modelo, pode usar o SDK da Fábrica de IA do Azure 
 
     > **Dica**: ao colar comandos no Cloud Shell, a saída poderá ocupar uma grande quantidade do buffer da tela. Você pode limpar a tela digitando o comando `cls` para facilitar o foco em cada tarefa.
 
-1. Após o repositório ser clonado, navegue até a pasta que contém os arquivos de código do aplicativo de chat:
-
-    Use o comando abaixo, dependendo da linguagem de programação de sua escolha.
-
-    **Python**
+1. Após a clonagem do repositório, navegue até a pasta contendo os arquivos de código do aplicativo de chat e exiba-os:
 
     ```
    cd mslearn-ai-foundry/labfiles/chat-app/python
+   ls -a -l
     ```
 
-    **C#**
-
-    ```
-   cd mslearn-ai-foundry/labfiles/chat-app/c-sharp
-    ```
+    A pasta contém um arquivo de código, bem como um arquivo de configuração para as configurações do aplicativo e um arquivo que define os requisitos de runtime e pacote do projeto.
 
 1. No painel de linha de comando do Cloud Shell, digite o seguinte comando para instalar as bibliotecas que você usará:
-
-    **Python**
 
     ```
    python -m venv labenv
    ./labenv/bin/Activate.ps1
-   pip install python-dotenv azure-identity azure-ai-projects azure-ai-inference
+   pip install -r requirements.txt azure-identity azure-ai-projects openai
     ```
-
-    **C#**
-
-    ```
-   dotnet add package Azure.Identity
-   dotnet add package Azure.AI.Projects --version 1.0.0-beta.9
-   dotnet add package Azure.AI.Inference --version 1.0.0-beta.5
-    ```
-    
-
 1. Digite o seguinte comando para editar o arquivo de configuração que foi fornecido:
-
-    **Python**
 
     ```
    code .env
     ```
 
-    **C#**
-
-    ```
-   code appsettings.json
-    ```
-
     O arquivo é aberto em um editor de código.
 
-1. No arquivo de código, substitua o espaço reservado **your_project_endpoint** pelo ponto de extremidade do projeto (copiado da página **Visão Geral** do projeto no portal da Fábrica de IA do Azure) e o espaço reservado **your_model_deployment** pelo nome do modelo de implantação gpt-4.
+1. No arquivo de código, substitua o espaço reservado **your_project_endpoint** pelo **ponto de extremidade do projeto da Fábrica de IA do Azure** para seu projeto (copiado da página **Visão geral** no portal da Fábrica de IA do Azure); e substitua o espaço reservado **your_model_deployment** pelo nome da implantação do modelo gpt-4.
 1. Depois de substituir os espaços reservados, use o comando **CTRL+S** ou **botão direito do mouse > Salvar** para salvar as suas alterações e, em seguida, use o comando **CTRL+Q** ou **botão direito do mouse > Sair** para fechar o editor de código, mantendo a linha de comando do Cloud Shell aberta.
 
 ### Escrever código para se conectar ao seu projeto e conversar com seu modelo
@@ -131,126 +114,62 @@ Agora que você implantou um modelo, pode usar o SDK da Fábrica de IA do Azure 
 
 1. Digite o seguinte comando para editar o arquivo de código que foi fornecido:
 
-    **Python**
-
     ```
    code chat-app.py
     ```
 
-    **C#**
-
-    ```
-   code Program.cs
-    ```
-
 1. No arquivo de código, observe as instruções existentes que foram adicionadas na parte superior do arquivo para importar os namespaces do SDK necessários. Em seguida, no comentário **Adicionar referências**, adicione o seguinte código para referenciar os namespaces nas bibliotecas que você instalou anteriormente:
-
-    **Python**
 
     ```python
    # Add references
-   from dotenv import load_dotenv
-   from urllib.parse import urlparse
    from azure.identity import DefaultAzureCredential
-   from azure.ai.inference import ChatCompletionsClient
-   from azure.ai.inference.models import SystemMessage, UserMessage, AssistantMessage
-    ```
-
-    **C#**
-
-    ```csharp
-   // Add references
-   using Azure.Identity;
-   using Azure.AI.Projects;
-   using Azure.AI.Inference;
+   from azure.ai.projects import AIProjectClient
+   from openai import AzureOpenAI
     ```
 
 1. Na função **main**, no comentário **Get configuration settings**, observe que o código carrega a cadeia de conexão do projeto e os valores do nome de implantação do modelo que você definiu no arquivo de configuração.
-1. No comentário **Get a chat client**, adicione o seguinte código para criar um objeto cliente para conversar com um modelo:
+1. Localize o comentário **Inicializar o cliente do projeto** e adicione o seguinte código para se conectar à Fábrica de IA do Azure:
 
     > **Dica**: Tenha cuidado para manter o nível de recuo correto no seu código.
 
-    **Python**
+    ```python
+   # Initialize the project client
+   project_client = AIProjectClient(            
+            credential=DefaultAzureCredential(
+                exclude_environment_credential=True,
+                exclude_managed_identity_credential=True
+            ),
+            endpoint=project_endpoint,
+        )
+    ```
+
+1. No comentário **Get a chat client**, adicione o seguinte código para criar um objeto cliente para conversar com um modelo:
 
     ```python
    # Get a chat client
-   inference_endpoint = f"https://{urlparse(project_endpoint).netloc}/models"
-
-   credential = DefaultAzureCredential(exclude_environment_credential=True,
-                                        exclude_managed_identity_credential=True,
-                                        exclude_interactive_browser_credential=False)
-
-   chat = ChatCompletionsClient(
-            endpoint=inference_endpoint,
-            credential=credential,
-            credential_scopes=["https://ai.azure.com/.default"])
+   openai_client = project_client.inference.get_azure_openai_client(api_version="2024-10-21")
     ```
-
-    **C#**
-
-    ```csharp
-   // Get a chat client
-   DefaultAzureCredentialOptions options = new()More actions
-           { ExcludeEnvironmentCredential = true,
-            ExcludeManagedIdentityCredential = true };
-   var projectClient = new AIProjectClient(
-            new Uri(project_connection),
-            new DefaultAzureCredential(options));
-   ChatCompletionsClient chat = projectClient.GetChatCompletionsClient();
-    ```
-
-    > **Observação**: esse código usa o cliente de projeto da Fábrica de IA do Azure para criar uma conexão segura com o ponto de extremidade de serviço padrão da Inferência de Modelo da IA do Azure associada ao seu projeto. Você também pode se conectar *diretamente* ao ponto de extremidade usando o SDK de Inferência de Modelo de IA do Azure, especificando o URI do ponto de extremidade exibido para a conexão de serviço no portal da Fábrica de IA do Azure ou na página de recursos dos Serviços de IA do Azure correspondente no portal do Azure e usando uma chave de autenticação ou token de credencial do Entra. Para obter mais informações sobre como se conectar ao serviço de Inferência de Modelos de IA do Azure, consulte [API da Inferência de Modelos de IA do Azure](https://learn.microsoft.com/azure/machine-learning/reference-model-inference-api).
 
 1. Localize o comentário **Initialize prompt with system message** e adicione o código a seguir para inicializar uma coleção de mensagens com um prompt do sistema.
 
-    **Python**
-
     ```python
    # Initialize prompt with system message
-   prompt=[
-            SystemMessage("You are a helpful AI assistant that answers questions.")
+   prompt = [
+            {"role": "system", "content": "You are a helpful AI assistant that answers questions."}
         ]
-    ```
-
-    **C#**
-
-    ```csharp
-   // Initialize prompt with system message
-   var prompt = new List<ChatRequestMessage>(){
-                    new ChatRequestSystemMessage("You are a helpful AI assistant that answers questions.")
-                };
     ```
 
 1. Observe que o código inclui um loop para permitir que o usuário insira um prompt até digitar "quit". Em seguida, na seção de loop, localize o comentário **Get a chat completion** e adicione o seguinte código para adicionar a entrada de usuário ao prompt, obter a conclusão do seu modelo e adicionar a conclusão ao prompt (para que você mantenha o histórico de chat em iterações futuras):
 
-    **Python**
-
     ```python
    # Get a chat completion
-   prompt.append(UserMessage(input_text))
-   response = chat.complete(
-        model=model_deployment,
-        messages=prompt)
+   prompt.append({"role": "user", "content": input_text})
+   response = openai_client.chat.completions.create(
+            model=model_deployment,
+            messages=prompt)
    completion = response.choices[0].message.content
    print(completion)
-   prompt.append(AssistantMessage(completion))
-    ```
-
-    **C#**
-
-    ```csharp
-   // Get a chat completion
-   prompt.Add(new ChatRequestUserMessage(input_text));
-   var requestOptions = new ChatCompletionsOptions()
-   {
-       Model = model_deployment,
-       Messages = prompt
-   };
-
-   Response<ChatCompletions> response = chat.Complete(requestOptions);
-   var completion = response.Value.Content;
-   Console.WriteLine(completion);
-   prompt.Add(new ChatRequestAssistantMessage(completion));
+   prompt.append({"role": "assistant", "content": completion})
     ```
 
 1. Use o comando **CTRL+S** para salvar suas alterações no arquivo de código.
@@ -270,19 +189,9 @@ Agora que você implantou um modelo, pode usar o SDK da Fábrica de IA do Azure 
 1. Quando solicitado, siga as instruções para abrir a página de entrada em uma nova guia e insira o código de autenticação fornecido e suas credenciais do Azure. Em seguida, conclua o processo de entrada na linha de comando, selecionando a assinatura que contém o hub da Fábrica de IA do Azure, se solicitado.
 1. Depois de entrar, insira o seguinte comando para executar o aplicativo:
 
-    **Python**
-
     ```
    python chat-app.py
     ```
-
-    **C#**
-
-    ```
-   dotnet run
-    ```
-
-    > **Dica**: Se ocorrer um erro de compilação porque a versão 9.0 do .NET não está instalada, use o comando `dotnet --version` para verificar a versão do .NET instalada em seu ambiente e, em seguida, edite o arquivo **chat_app.csproj** na pasta de código para atualizar a configuração **TargetFramework** de acordo.
 
 1. Quando solicitado, insira uma pergunta, como `What is the fastest animal on Earth?` e analise a resposta do seu modelo de IA generativa.
 1. Tente algumas perguntas de acompanhamento, como `Where can I see one?` ou `Are they endangered?`. A conversa deve continuar, usando o histórico de bate-papo como contexto para cada iteração.

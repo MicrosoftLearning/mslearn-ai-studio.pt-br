@@ -10,9 +10,15 @@ A Geração Aumentada de Recuperação (RAG) é uma técnica usada para compilar
 
 Neste exercício, você usará a Fábrica de IA do Azure para integrar dados personalizados em uma solução de IA generativa.
 
-Este exercício levará, aproximadamente, **45** minutos.
+> **Observação**: o código neste exercício se baseia no software SDK de pré-lançamento, que pode estar sujeito a alterações. Quando necessário, usamos versões específicas de pacotes que podem não refletir as versões mais recentes disponíveis. Você pode experimentar algum comportamento inesperado, avisos ou erros.
 
-> **Observação**: este exercício é serviços de pré-lançamento, que podem estar sujeitos a alterações.
+Embora este exercício seja baseado no SDK do Python do OpenAI do Azure, você pode desenvolver aplicativos de chat de IA usando vários SDKs específicos de linguagem; incluindo:
+
+- [OpenAI para Python](https://pypi.org/project/openai/)
+- [Open IA do Azure para Microsoft .NET](https://www.nuget.org/packages/Azure.AI.OpenAI)
+- [OpenAI do Azure para TypeScript](https://www.npmjs.com/package/@azure/openai)
+
+Este exercício levará, aproximadamente, **45** minutos.
 
 ## Crie um hub e projeto da Fábrica de IA do Azure
 
@@ -23,11 +29,10 @@ Os recursos da Fábrica de IA do Azure que usaremos neste exercício requerem um
     ![Captura de tela do portal do Azure AI Foundry.](./media/ai-foundry-home.png)
 
 1. No navegador, navegue até `https://ai.azure.com/managementCenter/allResources` e clique em **Criar**. Em seguida, escolha a opção para criar um novo **Recurso do hub de IA**.
-1. No assistente **Criar um projeto**, insira um nome válido para o projeto e, se um hub existente for sugerido, clique na opção para criar um novo e expanda **Opções avançadas** para especificar as seguintes configurações para o projeto:
+1. No assistente **Criar projeto**, insira um nome válido para o projeto e selecione a opção para criar um novo hub. Em seguida, use o link **Renomear hub** para especificar um nome válido para o novo hub, expanda **Opções avançadas** e especifique as seguintes configurações para o projeto:
     - **Assinatura**: *sua assinatura do Azure*
     - **Grupo de recursos**: *criar ou selecionar um grupo de recursos*
-    - **Nome do hub**: um nome válido para o hub
-    - **Localização**: Leste dos EUA 2 ou Suécia Central (*Caso um limite de cota seja excedido posteriormente no exercício, talvez seja necessário criar outro recurso em uma região diferente.*)
+    - **Região**: Leste dos EUA 2 ou Suécia Central (*Caso um limite de cota seja excedido posteriormente no exercício, talvez você precise criar outro recurso em uma região diferente.*)
 
     > **Observação**: se você estiver trabalhando em uma assinatura do Azure na qual as políticas são usadas para restringir nomes de recursos permitidos, talvez seja necessário usar o link na parte inferior da caixa de diálogo **Criar um novo projeto** para criar o hub usando o portal do Azure.
 
@@ -125,8 +130,6 @@ Antes de usar seu índice em um prompt flow baseado em RAG, vamos verificar se e
 
 Agora que você tem um índice em funcionamento, pode usar o SDK do OpenAI do Azure para implementar o padrão RAG em um aplicativo cliente. Vamos explorar o código para fazer isso em um exemplo simples.
 
-> **Dica**: você pode optar por desenvolver sua solução RAG usando Python ou Microsoft C#. Siga as instruções na seção apropriada para o idioma escolhido.
-
 ### Preparar a configuração de aplicativo
 
 1. Retorne à guia do navegador que contém o portal do Azure (mantendo o portal da Portal da Fábrica de IA do Azure aberto na guia existente).
@@ -151,23 +154,11 @@ Agora que você tem um índice em funcionamento, pode usar o SDK do OpenAI do Az
 
 1. Após o repositório ser clonado, navegue até a pasta que contém os arquivos de código do aplicativo de chat:
 
-    > **Observação**: siga as etapas para a linguagem de programação escolhida.
-
-    **Python**
-
     ```
    cd mslearn-ai-foundry/labfiles/rag-app/python
     ```
 
-    **C#**
-
-    ```
-   cd mslearn-ai-foundry/labfiles/rag-app/c-sharp
-    ```
-
 1. No painel de linha de comando do Cloud Shell, digite o seguinte comando para instalar a biblioteca do SDK do OpenAI:
-
-    **Python**
 
     ```
    python -m venv labenv
@@ -175,32 +166,17 @@ Agora que você tem um índice em funcionamento, pode usar o SDK do OpenAI do Az
    pip install -r requirements.txt openai
     ```
 
-    **C#**
-
-    ```
-   dotnet add package Azure.AI.OpenAI
-    ```
-    
-
 1. Digite o seguinte comando para editar o arquivo de configuração que foi fornecido:
-
-    **Python**
 
     ```
    code .env
     ```
 
-    **C#**
-
-    ```
-   code appsettings.json
-    ```
-
     O arquivo é aberto em um editor de código.
 
-1. No arquivo de código, substitua os seguintes espaços reservados: 
-    - **your_openai_endpoint**: o ponto de extremidade da OpenAI da página **Visão geral** do projeto no Portal da Fábrica de IA do Azure (selecione a guia da funcionalidade **OpenAI do Azure**, não a funcionalidade Inferência de IA do Azure ou Serviços de IA do Azure).
-    - **your_openai_api_key**: a chave de API do OpenAI da página **Visão geral** do seu projeto no portal da Fábrica de IA do Azure (selecione a guia da funcionalidade **OpenAI do Azure**, não da funcionalidade Inferência de IA do Azure ou Serviços de IA do Azure).
+1. No arquivo de configuração, substitua os seguintes espaços reservados: 
+    - **your_openai_endpoint**: O ponto de extremidade OpenAI da página **Visão Geral** do seu projeto no portal da Fábrica de IA do Azure (certifique-se de selecionar a guia de capacidade do **OpenAI do Azure**, e não a capacidade de Inferência de IA do Azure ou dos Serviços de IA do Azure).
+    - **your_openai_api_key** A chave de API Open AI da página **Visão Geral** do seu projeto no portal da Fábrica de IA do Azure (certifique-se de selecionar a guia de capacidade do **OpenAI do Azure**, e não a capacidade de Inferência de IA do Azure ou dos Serviços de IA do Azure).
     - **your_chat_model**: o nome que você atribuiu à implantação do modelo **gpt-4o** na página **Modelos + pontos de extremidade** no portal da Fábrica de IA do Azure (o nome padrão é `gpt-4o`).
     - **your_embedding_model**: o nome que você atribuiu à implantação do modelo **text-embedding-ada-002**, na página **Modelos + pontos de extremidade** no portal da Fábrica de IA do Azure (o nome padrão é `text-embedding-ada-002`).
     - **your_search_endpoint**: a URL do recurso Pesquisa de IA do Azure. Você a encontrará no **Centro de gerenciamento** no portal da Fábrica de IA do Azure.
@@ -212,16 +188,8 @@ Agora que você tem um índice em funcionamento, pode usar o SDK do OpenAI do Az
 
 1. Digite o seguinte comando para editar o arquivo de código que foi fornecido:
 
-    **Python**
-
     ```
    code rag-app.py
-    ```
-
-    **C#**
-
-    ```
-   code Program.cs
     ```
 
 1. Revise o código no arquivo, observando que:
@@ -241,16 +209,8 @@ Agora que você tem um índice em funcionamento, pode usar o SDK do OpenAI do Az
 
 1. No painel de linha de comando do Cloud Shell, insira o seguinte comando para executar o aplicativo:
 
-    **Python**
-
     ```
    python rag-app.py
-    ```
-
-    **C#**
-
-    ```
-   dotnet run
     ```
 
 1. Quando solicitado, insira uma pergunta, como `Where should I go on vacation to see architecture?` e analise a resposta do seu modelo de IA generativa.
