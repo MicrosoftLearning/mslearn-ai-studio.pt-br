@@ -147,7 +147,7 @@ Agora que você implantou um modelo, pode usar a Fábrica de IA do Azure e os SD
 
     ```python
    # Get a chat client
-   openai_client = project_client.inference.get_azure_openai_client(api_version="2024-10-21")
+   openai_client = project_client.get_openai_client(api_version="2024-10-21")
     ```
 
 1. Localize o comentário **Initialize prompt with system message** e adicione o código a seguir para inicializar uma coleção de mensagens com um prompt do sistema.
