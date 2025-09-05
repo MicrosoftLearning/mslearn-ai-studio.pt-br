@@ -22,34 +22,26 @@ Vamos começar implantando um modelo em um projeto da Fábrica de IA do Azure.
 
     ![Captura de tela do portal do Azure AI Foundry.](./media/ai-foundry-home.png)
 
-1. Na home page, na seção **Explorar modelos e recursos**, pesquise pelo modelo `Phi-4`, que usaremos em nosso projeto.
-1. Nos resultados da pesquisa, selecione o modelo **Phi-4** para ver os detalhes e, na parte superior da página do modelo, clique em **Usar este modelo**.
+1. Na home page, na seção **Explorar modelos e recursos**, pesquise pelo modelo `gpt-4o`, que usaremos em nosso projeto.
+1. Nos resultados da pesquisa, selecione o modelo **gpt-4o** para ver os detalhes e, na parte superior da página do modelo, clique em **Usar este modelo**.
 1. Quando solicitado a criar um projeto, insira um nome válido para o projeto e expanda **Opções avançadas**.
 1. Selecione **Personalizar** e especifique as seguintes configurações para o seu projeto:
     - **Recurso da Fábrica de IA do Azure**: *um nome válido para o recurso da Fábrica de IA do Azure*
     - **Assinatura**: *sua assinatura do Azure*
     - **Grupo de recursos**: *criar ou selecionar um grupo de recursos*
-    - **Região**: selecione uma das seguintes regiões\*:
-        - Leste dos EUA
-        - Leste dos EUA 2
-        - Centro-Norte dos EUA
-        - Centro-Sul dos Estados Unidos
-        - Suécia Central
-        - Oeste dos EUA
-        - Oeste dos EUA 3
+    - **Região**: *selecione qualquer **AI Foundry recomendado***\*
 
-    > \* No momento em que este artigo foi escrito, o modelo *Phi-4* da Microsoft que usaremos neste exercício está disponível nessas regiões. Você pode verificar a disponibilidade regional mais recente para modelos específicos na [documentação da Fábrica de IA do Azure](https://learn.microsoft.com/azure/ai-foundry/how-to/deploy-models-serverless-availability#region-availability). No caso de um limite de cota regional ser atingido mais adiante no exercício, há a possibilidade de você precisar criar outro recurso em uma região diferente.
+    > \* Alguns recursos da IA do Azure são restritos por cotas de modelo regional. Caso um limite de cota seja excedido posteriormente no exercício, é possível que você precise criar outro recurso em uma região diferente.
 
-1. Clique em **Criar** e aguarde a criação do projeto.
-1. Quando solicitado com informações do Phi-4, concorde com os termos de uso e implante o modelo.
-1. Quando o modelo for implantado, clique no botão azul na parte superior das informações de implantação para abrir o playground.
-1. No painel **Configuração**, anote o nome da implantação do modelo; que é **Phi-4**.
+1. Clique em **Criar** e aguarde a criação do projeto. Se necessário, implante o modelo gpt-4o usando o tipo de implantação **Padrão global**.
+1. Depois de implantado, seu modelo aparecerá no playground.
+1. No painel **Configuração**, anote o nome da implantação do modelo; que será **gpt-4o**.
 
 ## Conversa usando o filtro de conteúdo
 
-O modelo Phi-4 implantado tem um filtro de conteúdo padrão aplicado, que possui um conjunto equilibrado de filtros que não permitem a maioria dos conteúdos nocivos, permitindo a entrada e a saída de linguagem considerada razoavelmente segura.
+O modelo implantado tem um filtro de conteúdo padrão aplicado, que tem um conjunto equilibrado de filtros que não permitem a maioria dos conteúdos nocivos, permitindo a entrada e a saída de linguagem considerada razoavelmente segura.
 
-1. No playground de chat, confirme se o modelo Phi-4 está selecionado.
+1. No playground de chat, confirme se o modelo gpt-4o está selecionado.
 1. Envie o seguinte prompt e exiba a resposta:
 
     ```
@@ -93,15 +85,15 @@ Quando o filtro de conteúdo padrão não atender às suas necessidades, você p
     - **Sexual**: Linguagem sexualmente explícita ou abusiva.
     - **Automutilação**: Linguagem que descreve ou incentiva a automutilação.
 
-    Os filtros são aplicados para cada uma dessas categorias em solicitações e conclusões, com base em limites de bloqueio **Bloquear poucos**, **Bloquear alguns** e **Bloquear tudo** que são usados para determinar quais tipos específicos de linguagem são interceptados e impedidos pelo filtro.
+    Os filtros são aplicados para cada uma destas categorias em solicitações e conclusões, com base no limites de bloqueio, que são usados para determinar quais tipos específicos de linguagem são interceptados e impedidos pelo filtro.
 
     Além disso, as proteções de *prompt shield* são fornecidas para mitigar tentativas deliberadas de abuso de seu aplicativo de IA generativa.
 
-1. Altere o limite de cada categoria de filtro de entrada para **Bloquear tudo**.
+1. Altere o limite de cada categoria de filtro de entrada para ***mais alto***.
 
-1. Na página **Filtro de saída**, revise as configurações que podem ser aplicadas às respostas de saída e altere o limite de cada categoria para **Bloquear tudo**.
+1. Na página **Filtro de saída**, examine as configurações que podem ser aplicadas às respostas de saída e altere o limite de cada categoria para ***mais alto***.
 
-1. Na página **Implantação**, selecione a implantação do modelo **Phi-4** para aplicar o novo filtro de conteúdo a ele, confirmando que deseja substituir o filtro de conteúdo existente quando solicitado.
+1. Na página **Implantação**, selecione a implantação de modelo **gpt-4o** para aplicar o novo filtro de conteúdo a ele, confirmando que deseja substituir o filtro de conteúdo existente quando solicitado.
 
 1. Na página **Revisão**, clique em **Criar filtro** e aguarde a criação do filtro de conteúdo.
 
