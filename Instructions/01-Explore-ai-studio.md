@@ -1,7 +1,7 @@
 ---
 lab:
   title: Preparar-se para um projeto de desenvolvimento de IA
-  description: Aprenda a organizar recursos de nuvem em hubs e projetos para que os desenvolvedores estejam preparados para o sucesso ao criar soluções de IA.
+  description: Saiba como organizar recursos de nuvem em projetos da Fábrica de IA do Azure para que os desenvolvedores fiquem prontos para o sucesso ao criarem soluções de IA.
 ---
 
 # Preparar-se para um projeto de desenvolvimento de IA
@@ -35,11 +35,14 @@ Um *projeto* da IA do Azure fornecerá um workspace colaborativo para desenvolvi
     - **Recurso da Fábrica de IA do Azure**: *um nome válido para o recurso da Fábrica de IA do Azure*
     - **Assinatura**: *sua assinatura do Azure*
     - **Grupo de recursos**: *criar ou selecionar um grupo de recursos*
-    - **Região**: *Selecione qualquer **Local compatível com os Serviços de IA***\*
+    - **Região**: *selecione qualquer **AI Foundry recomendado***\*
 
     > \* Alguns recursos da IA do Azure são restritos por cotas de modelo regional. Caso um limite de cota seja excedido posteriormente no exercício, é possível que você precise criar outro recurso em uma região diferente.
 
-1. Clique em **Criar** e aguarde a criação do projeto, incluindo a implantação do modelo gpt-4 selecionado.
+1. Clique em **Criar** e aguarde a criação do projeto. Se solicitado, implante o modelo gpt-4o usando o tipo de implantação **Global padrão** e personalize os detalhes da implantação para definir um **limite de tokens por minuto** de 50 mil (ou o máximo disponível, se for inferior a 50 mil).
+
+    > **Observação**: A redução do TPM ajuda a evitar o uso excessivo da cota disponível na assinatura que você está usando. 50.000 TPM são suficientes para os dados usados neste exercício. Se a sua cota disponível for menor do que isso, você poderá concluir o exercício, mas poderá ocorrer erros se o limite de taxa for excedido.
+
 1. Quando o projeto for criado, o playground de chat abrirá automaticamente para que você possa testar o modelo:
 
     ![Captura de tela do playground de chat de um projeto da Fábrica de IA do Azure](./media/ai-foundry-chat-playground.png)
@@ -66,9 +69,9 @@ Um *projeto* da IA do Azure fornecerá um workspace colaborativo para desenvolvi
 
 1. Feche a guia do portal do Azure e retorne ao portal da Fábrica de IA do Azure.
 
-## Revisar as conexões do projeto
+## Examinar os pontos de extremidade do projeto
 
-O projeto e o recurso da Fábrica de IA do Azure ao qual ele pertence incluem conexões com recursos que você pode usar em aplicativos de IA.
+O projeto da Fábrica de IA do Azure inclui diversos *pontos de extremidade* que aplicativos clientes podem usar para se conectar ao projeto, aos modelos e aos serviços de IA incluídos.
 
 1. Na página Centro de gerenciamento, no painel de navegação, em seu projeto, selecione **Ir para o recurso**.
 1. Na página **Visão geral** do projeto, visualize a seção **Pontos de extremidade e chaves**, que contém pontos de extremidade e chaves de autorização que você pode usar no código do aplicativo para acessar:
