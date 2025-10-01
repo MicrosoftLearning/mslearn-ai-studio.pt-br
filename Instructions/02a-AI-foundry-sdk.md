@@ -37,15 +37,12 @@ Vamos começar implantando um modelo em um projeto da Fábrica de IA do Azure.
 
     > \* Alguns recursos da IA do Azure são restritos por cotas de modelo regional. Caso um limite de cota seja excedido posteriormente no exercício, é possível que você precise criar outro recurso em uma região diferente.
 
-1. Clique em **Criar** e aguarde a criação do projeto. Se solicitado, implante o modelo gpt-4o usando o tipo de implantação **Global padrão** e personalize os detalhes da implantação para definir um **limite de tokens por minuto** de 50 mil (ou o máximo disponível, se for inferior a 50 mil).
+1. Clique em **Criar** e aguarde a criação do projeto, incluindo a implantação do modelo gpt-4o selecionado.
 
-    > **Observação**: A redução do TPM ajuda a evitar o uso excessivo da cota disponível na assinatura que você está usando. 50.000 TPM são suficientes para os dados usados neste exercício. Se a sua cota disponível for menor do que isso, você poderá concluir o exercício, mas poderá ocorrer erros se o limite de taxa for excedido.
+    > <font color="red"><b>IMPORTANTE</b>:</font> Dependendo da sua cota disponível para modelos gpt-4o, você pode receber um prompt adicional para implantar o modelo em um recurso em uma região diferente. Se isso acontecer, faça isso usando as configurações padrão. Posteriormente no exercício, você <b><u>não</u></b> poderá usar o ponto de extremidade do projeto padrão – você deve usar o URI de destino específico do modelo.
 
-1. Quando o projeto for criado, o playground de chat abrirá automaticamente para que você possa testar o modelo:
+1. Quando o projeto for criado, o playground de chat será aberto automaticamente para que você possa testar seu modelo (caso contrário, no painel de tarefas à esquerda, selecione **Playgrounds** e, em seguida, abra o **Playground de chat**).
 1. No painel **Configuração**, anote o nome da implantação do modelo; que será **gpt-4o**. Você pode confirmar isso visualizando a implantação na página **Modelos e pontos de extremidade** (basta abrir essa página no painel de navegação à esquerda).
-1. No painel de navegação à esquerda, selecione **Visão geral** para ver a página principal do projeto, que será assim:
-
-    ![Captura de tela de uma página de visão geral do projeto da Fábrica de IA do Azure.](./media/ai-foundry-project.png)
 
 ## Criar um aplicativo cliente para conversar com o modelo
 
@@ -105,7 +102,9 @@ Agora que você implantou um modelo, pode usar a Fábrica de IA do Azure e os SD
 
     O arquivo é aberto em um editor de código.
 
-1. No arquivo de código, substitua o espaço reservado **your_project_endpoint** pelo **ponto de extremidade do projeto da Fábrica de IA do Azure** para seu projeto (copiado da página **Visão geral** no portal da Fábrica de IA do Azure); e substitua o espaço reservado **your_model_deployment** pelo nome da implantação do modelo gpt-4.
+    > <font color="red"><b>IMPORTANTE</b>:</font> se você implantou o modelo gpt-4o na região padrão do seu projeto, poderá usar o <b>Projeto da Fábrica de IA do Azure</b> ou o ponto de extremidade do <b>Azure OpenAI</b> na página <b>Visão geral</b> para que seu projeto se conecte ao seu modelo. Se você tiver cota insuficiente e implantou o modelo em outra região, na página <b>Modelos + Pontos de Extremidade</b>, selecione seu modelo e use o <b>URI de Destino</b> para seu modelo.
+
+1. No arquivo de código, substitua o espaço reservado **your_project_endpoint** pelo ponto de extremidade apropriado para seu modelo e o espaço reservado **your_model_deployment** pelo nome atribuído à implantação do modelo gpt-4o.
 1. Depois de substituir os espaços reservados, use o comando **CTRL+S** ou **botão direito do mouse > Salvar** para salvar as suas alterações e, em seguida, use o comando **CTRL+Q** ou **botão direito do mouse > Sair** para fechar o editor de código, mantendo a linha de comando do Cloud Shell aberta.
 
 ### Escrever código para se conectar ao seu projeto e conversar com seu modelo

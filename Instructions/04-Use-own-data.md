@@ -175,8 +175,8 @@ Agora que você tem um índice em funcionamento, pode usar o SDK do OpenAI do Az
     O arquivo é aberto em um editor de código.
 
 1. No arquivo de configuração, substitua os seguintes espaços reservados: 
-    - **your_openai_endpoint**: O ponto de extremidade OpenAI da página **Visão Geral** do seu projeto no portal da Fábrica de IA do Azure (certifique-se de selecionar a guia de capacidade do **OpenAI do Azure**, e não a capacidade de Inferência de IA do Azure ou dos Serviços de IA do Azure).
-    - **your_openai_api_key** A chave de API Open AI da página **Visão Geral** do seu projeto no portal da Fábrica de IA do Azure (certifique-se de selecionar a guia de capacidade do **OpenAI do Azure**, e não a capacidade de Inferência de IA do Azure ou dos Serviços de IA do Azure).
+    - **your_openai_endpoint**: O ponto de extremidade da OpenAI da página **Visão Geral** do seu projeto no portal da Fábrica de IA do Azure (certifique-se de selecionar a guia de capacidade do **OpenAI do Azure**).
+    - **your_openai_api_key** A chave de API de IA da OpenAI da página **Visão Geral** do seu projeto no portal da Fábrica de IA do Azure (certifique-se de selecionar a guia de capacidade do **OpenAI do Azure**).
     - **your_chat_model**: o nome que você atribuiu à implantação do modelo **gpt-4o** na página **Modelos + pontos de extremidade** no portal da Fábrica de IA do Azure (o nome padrão é `gpt-4o`).
     - **your_embedding_model**: o nome que você atribuiu à implantação do modelo **text-embedding-ada-002**, na página **Modelos + pontos de extremidade** no portal da Fábrica de IA do Azure (o nome padrão é `text-embedding-ada-002`).
     - **your_search_endpoint**: a URL do recurso Pesquisa de IA do Azure. Você a encontrará no **Centro de gerenciamento** no portal da Fábrica de IA do Azure.
