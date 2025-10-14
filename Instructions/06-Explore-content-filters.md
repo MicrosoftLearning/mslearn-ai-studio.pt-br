@@ -104,7 +104,7 @@ Quando o filtro de conteúdo padrão não atender às suas necessidades, você p
 Vamos ter uma conversa final com o modelo para ver o efeito do filtro de conteúdo personalizado.
 
 1. No painel de navegação, clique em **Playgrounds** e abra o **Playground de chat**.
-1. Confirme se uma nova sessão foi iniciada com o modelo Phi-4.
+1. Verifique se uma nova sessão foi iniciada com seu modelo GPT-4o.
 1. Envie o seguinte prompt e exiba a resposta:
 
     ```
