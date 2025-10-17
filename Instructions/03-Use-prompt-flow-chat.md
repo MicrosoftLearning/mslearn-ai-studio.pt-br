@@ -46,7 +46,7 @@ As ferramentas de fluxo de prompt na Fábrica de IA do Azure criam ativos basead
 
     ![Captura de tela da página de controle de acesso à conta de armazenamento no portal do Azure.](./media/storage-access-control.png)
 
-1. Adicione uma atribuição de função à função `Storage blob data reader` para a identidade gerenciada usada pelo recurso da Fábrica de IA do Azure:
+1. Adicione uma atribuição de função à função `Storage blob data reader` para a identidade gerenciada usada pelo recurso do seu projeto da Fábrica de IA do Azure:
 
     ![Captura de tela da página de controle de acesso à conta de armazenamento no portal do Azure.](./media/assign-role-access.png)
 
